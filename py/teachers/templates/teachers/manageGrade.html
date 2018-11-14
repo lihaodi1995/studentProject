@@ -1,0 +1,236 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+<title> 成绩管理 </title>
+{% endblock %}
+{% block grade_active %}
+active
+{% endblock %}
+
+{% block mainbody %}
+<article class="content items-list-page">
+    <div class="card">
+        <div class="card-block">
+            <div class="card-title-block">
+                <div class="card items">
+                    <div class="card-title-block">
+                        <h3 class="title">
+                            分数项列表
+                        </h3></div>
+                    <form type="form" action="/teachers/modify_grade_item/" method="post">
+                        {% csrf_token %}
+
+                        <a class="btn btn-primary btn-sm rounded-s" href="#" data-toggle="modal"
+                           data-target="#add-record">新建分数项</a> &nbsp
+                        <input type="submit" value="保存修改" class="btn btn-primary btn-sm rounded-s">
+                        <ul class="item-list striped" style="margin-left:2%">
+                            <li class="item item-list-header hidden-sm-down">
+                                <div class="item-row">
+                                    <div class="item-col item-col-header md">
+                                        <div><span>分数项序号</span></div>
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        <div><span>分数项类型</span></div>
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        <div><span>名称</span></div>
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        <div><span>作业最高分（满分）</span></div>
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        <div><span>当前比例(%)</span></div>
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        <div><span>操作</span></div>
+                                    </div>
+                                </div>
+                            </li>
+                            {% for src in gradeItems %}
+                            <li class="item">
+                                <div class="item-row">
+                                    <div class="item-col">
+                                        <label type="text" class="form-control underlined" name="{{ src.id }}"
+                                               value="">{{ forloop.counter }}</label>
+                                    </div>
+                                    <div class="item-col">
+                                        {% ifequal src.type '作业' %}
+                                        <input type="text" class="form-control underlined" name="{{ src.id }}"
+                                               value="{{ src.type }}" readonly="readonly">
+                                        {% else %}
+                                        <input type="text" class="form-control underlined" name="{{ src.id }}"
+                                               value="{{ src.type }}">
+                                        {% endifequal %}
+                                    </div>
+                                    <div class="item-col">
+                                        <input type="text" class="form-control underlined" name="{{ src.id }}"
+                                               value="{{ src.name }}">
+                                    </div>
+                                    <div class="item-col">
+                                        <input type="text" class="form-control underlined" name="{{ src.id }}"
+                                               value="{{ src.maxscore }}">
+                                    </div>
+                                    <div class="item-col">
+                                        <input type="text" class="form-control underlined"
+                                               name="{{ src.id }}" value="{{ src.ratio }}">
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        {% ifequal src.type "作业" %}
+                                        {% else %}
+                                        <div><a href="/teachers/remove_grade_item/{{ src.id }}/">删除</a></div>
+                                        <div><a href="/teachers/upload_grade_item/{{ src.id }}">编辑分数项详情</a></div>
+                                        {% endifequal %}
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <br>
+                        <div>
+                        </div>
+                    </form>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    {% ifequal sum_rate 100.0 %}
+    <div class="card">
+        <div class="card-block">
+            <form type="form" action="/teachers/export_excel_total_grade/" method="post">
+                {% csrf_token %}
+                <div class="card-title-block">
+                    <h3 class="title">团队成绩表</h3>
+                    <br>
+                    <input type="submit" class="btn btn-primary btn-sm rounded-s" value="导出">
+                </div>
+                <div class="title-block">
+                    <div class="card items">
+                        <ul class="item-list striped">
+                            <li class="item item-list-header hidden-sm-down">
+                                <div class="item-row">
+                                    <div class="item-col item-col-header md">
+                                        <div><span>团队编号</span></div>
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        <div><span>团队名称</span></div>
+                                    </div>
+                                    <div class="item-col item-col-header">
+                                        <div><span>团队分数</span></div>
+                                    </div>
+                                </div>
+                            </li>
+                            {% for src in team_grade %}
+                            <li class="item">
+                                <div class="item-row">
+                                    <div class="item-col">
+                                        <input type="text" class="form-control underlined"
+                                               name="idlist" value="{{ src.id }}" readonly="readonly">
+                                    </div>
+                                    <div class="item-col">
+                                        <input type="text" class="form-control underlined"
+                                               name="namelist" value="{{ src.name }}" readonly="readonly">
+                                    </div>
+                                    <div class="item-col">
+                                        <input type="text" class="form-control underlined"
+                                               name="gradelist" value="{{ src.grade }}" readonly="readonly">
+                                    </div>
+{#                                    <div class="item-col">#}
+{#                                        {{ src.id }}#}
+{#                                    </div>#}
+{#                                    <div class="item-col">#}
+{#                                        {{ src.name }}#}
+{#                                    </div>#}
+{#                                    <div class="item-col">#}
+{#                                        {{ src.grade }}#}
+{#                                    </div>#}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <br><br><br>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+{#    <div class="card">#}
+{#        <div class="card-block">#}
+{#            <div class="card-title-block">#}
+{#                <h3 class="title">导出个人成绩表</h3>#}
+{#                <br>#}
+{#                <button class="btn btn-primary btn-sm rounded-s" href="#">导出</button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    {% else %}
+    <label>当前分数总权重：{{ sum_rate }}%</label>
+    {% endifequal %}
+</article>
+</div>
+</div>
+
+<!-- /.modal -->
+<div class="modal fade" id="add-record">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-pencil"></i> 添加分数项</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="card card-block sameheight-item" style="height: 1000px;">
+                        <div class="title-block">
+                            <form role="form" action="/teachers/add_grade_item/" method="post">
+                                {% csrf_token %}
+                                <div class="form-group"><label class="control-label">分数项类型</label> <input
+                                        type="text"
+                                        class="form-control underlined"
+                                        name="type">
+                                </div>
+                                <div class="form-group"><label class="control-label">名称</label> <input type="text"
+                                                                                                       class="form-control underlined"
+                                                                                                       name="name">
+                                </div>
+                                <div class="form-group"><label class="control-label">作业满分</label> <input type="text"
+                                                                                                         class="form-control underlined"
+                                                                                                         name="full_mark">
+                                </div>
+                                <div class="form-group"><label class="control-label">当前比例</label> <input type="text"
+                                                                                                         class="form-control underlined"
+                                                                                                         name="score_percentage">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">创建</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+
+<script src="/static/js/vendor.js"></script>
+<script src="/static/js/app.js"></script>
+<script>
+        function delete_resource(id) {
+            $('#delete_r').click(function () {
+                $.get('/teachers/delete_resource/?id=' + id, function (data, status) {
+                    alert('删除成功！');
+                    window.location.href = '/teachers/manage_resources/';
+                });
+            });
+        }
+
+
+
+</script>
+
+{% endblock %}

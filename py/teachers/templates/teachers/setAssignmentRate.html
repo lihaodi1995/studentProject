@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> 后台管理 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <!-- Theme initialization -->
+    <link rel="stylesheet" href="/static/css/app.css">
+</head>
+
+<body>
+<div class="main-wrapper">
+    <div class="app" id="app">
+        <article class="content items-list-page">
+            <h3 class="title">作业列表</h3>
+            <br>
+
+                <div class="title-block">
+                </div>
+
+            <div class="card items">
+                <form type="form">
+                <ul class="item-list striped">
+
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col item-col-header md">
+                                <div><span>作业序号</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>作业名称</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>作业满分</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>作业权重</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% for src in filelist %}
+                    <li class="item">
+                        <div class="item-row">
+                            <div class="item-col">
+                                {{ src.id }}
+                            </div>
+                            <div class="item-col">
+                                {{ src.name }}
+                            </div>
+                            <div class="item-col">
+                                <input type="text" class="form-control underlined" name="fullgrade_{{ src.id }}" value="{{ src.full_grade }}">
+                            </div>
+                            <div class="item-col">
+                                <input type="text" class="form-control underlined" name="score_percentage_{{ src.id }}" value="{{ src.score_percentage }}">
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <input type="submit" value="保存修改" class="btn btn-primary">
+                </form>
+            </div>
+        </article>
+    </div>
+</div>
+
+<script src="/static/js/vendor.js"></script>
+<script src="/static/js/app.js"></script>
+<script>
+    function delete_resource(id) {
+        $('#delete_r').click(function () {
+           $.get('/teachers/delete_resource/?id='+id,function (data,status) {
+                alert('删除成功！');
+                window.location.href='/teachers/manage_resources/';
+           }) ;
+        });
+    }
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+{% extends "./adminBase.html" %}
+{% block title %}
+    <title> 课程管理 </title>
+{% endblock %}
+{% block course_active %}
+active
+{% endblock %}
+{% block mainbody %}
+        <article class="content items-list-page">
+            <h3 class="title">课程信息</h3>
+            <br>
+
+            <div class="title-search-block">
+                <div class="title-block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btn-primary btn-sm rounded-s" href="#" data-toggle="modal" data-target="#add-course">添加课程</a>
+                            <div class="action dropdown">
+                                <button class="btn btn-sm rounded-s btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">	操作...</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#confirm-modal" onclick="delete_courses();"><i class="fa fa-close icon"></i>删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="items-search">
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input type="text" class="form-control boxed rounded-s" placeholder="Search for...">
+                            <span class="input-group-btn"><button class="btn btn-secondary rounded-s" type="button"><i class="fa fa-search"></i></button></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card items">
+                <ul class="item-list striped">
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col fixed item-col-check"> <label class="item-check" id="select-all-items">
+                    <input type="checkbox" class="checkbox">
+                    <span></span>
+                </label>
+            </div>
+                            <div class="item-col item-col-header md">
+                                <div><span>课程名</span> </div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div> <span>学期</span> </div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div> <span>学分</span> </div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div> <span>周次</span> </div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div> <span>上课地点</span> </div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div> <span>上课时间</span> </div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div> <span>状态</span> </div>
+                            </div>
+                            <div class="item-col item-col-header fixed item-col-actions-dropdown"> </div>
+                        </div>
+                    </li>
+
+                    {% if course %}
+                    {% for c in course %}
+                    <li class="item">
+                        <div class="item-row">
+                            <div class="item-col fixed item-col-check"> <label class="item-check" id="select-all-items">
+                                <input name="check_course" type="checkbox" class="checkbox" value="{{ c.id }}">
+                                <span></span></label>
+                            </div>
+                            <div class="item-col">
+                                {{ c.name }}
+                            </div>
+                            <div class="item-col">
+                                {{ c.semester.name }}
+                            </div>
+                            <div class="item-col">
+                                {{ c.credit }}
+                            </div>
+                            <div class="item-col">
+                                {{ c.weeks }}
+                            </div>
+                            <div class="item-col">
+                                {{ c.address }}
+                            </div>
+                            <div class="item-col">
+                                {{ c.time }}
+                            </div>
+                            <div class="item-col">
+                                {{ c.status }}
+                            </div>
+                            <div class="item-col fixed item-col-actions-dropdown">
+                                <div class="item-actions-dropdown">
+                                    <a class="item-actions-toggle-btn"> <span class="inactive">
+                                <i class="fa fa-cog"></i>
+                            </span> <span class="active">
+                            <i class="fa fa-chevron-circle-right"></i>
+                            </span> </a>
+                                    <div class="item-actions-block">
+                                        <ul class="item-actions-list">
+                                            <li>
+                                                <a class="remove" href="#" data-toggle="modal" data-target="#confirm-modal" onclick="delete_course({{c.id}});"> <i class="fa fa-trash-o "></i> </a>
+                                            </li>
+                                            <li>
+                                                <a class="remove" href="/admin/edit_course/?id={{c.id}}"> <i class="fa fa-pencil "></i> </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <p>No Course.</p>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+        </article>
+        <!-- /.modal -->
+        <div class="modal fade" id="confirm-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                        <h4 class="modal-title"><i class="fa fa-warning"></i> 消息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>是否删除?</p>
+                    </div>
+                    <div class="modal-footer"> <button type="button" id="delete_c" class="btn btn-primary" data-dismiss="modal">是</button> <button type="button"
+                            class="btn btn-secondary" data-dismiss="modal">否</button> </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="add-course">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-pencil"></i> 添加课程</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" action="/admin/add_course/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group"> <label class="control-label">*课程名</label> <input type="text" required="required" class="form-control underlined" name="name" id="course_name"> </div>
+                            <div class="form-group"> <label class="control-label">*学期</label>
+                                <select class="form-control" name="semester_id" id="semester_id">
+                                {% for i in semester_list %}
+                                <option value="{{ i.id }}"> {{ i.name }} </option>
+                                {% endfor %}
+                            </select> </div>
+
+                            <div class="form-group"> <label class="control-label">*学分</label> <input type="text" required="required" class="form-control underlined" name="credit" id="credit"> </div>
+                            <div class="form-group"> <label class="control-label">周次</label> <input type="text" class="form-control underlined"name="weeks"> </div>
+                            <div class="form-group"><label class="control-label">开课时间</label><input type="text" class="form-control underlined" name="open_time" value="{{course.open_time}}"></div>
+                            <div class="form-group"> <label class="control-label">上课地点</label> <input type="text" class="form-control underlined" name="address">   </div>
+                            <div class="form-group"> <label class="control-label">上课时间</label> <input type="time" class="form-control underlined" name="time"> </div>
+                            <div class="form-group"> <button href="/admin/edit_course_i" type="submit" class="btn btn-primary" onclick="return checkCourseValiation()">提交并添加人员信息 </button> </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+        <script>
+    function delete_course(id)
+    {
+        $('#delete_c').click(function(){
+            $.get("/admin/delete_course/?id="+id,function(data,status){
+                alert("删除成功！");
+                window.location.href="/admin/set_course/";
+            });
+        });
+    }
+
+    function delete_courses()
+    {
+        $('#delete_c').click(function(){
+
+            $("input:checkbox[name='check_course']:checked").each(function(i){
+                    $.get("/admin/delete_course/?id="+$(this).val(),function(data,status){
+
+                    });
+            });
+            alert("删除成功！");
+            window.location.href="/admin/set_course/";
+        });
+    }
+
+    function checkCourseValiation()
+    {
+        if($("#course_name").val()==''||$("#semester_id").val()==''||$("#credit").val()=='')
+        {
+            alert("请填写所有标有*的部分后提交！");
+            return false;
+        }
+        alert("添加成功.");
+        return true;
+    }
+</script>
+{% endblock %}
+
+
+

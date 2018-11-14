@@ -1,0 +1,63 @@
+{% extends "./adminBase.html" %}
+{% block title %}
+    <title> 编辑学生信息 </title>
+{% endblock %}
+{% block student_active %}
+active
+{% endblock %}
+{% block mainbody %}
+    <article class="content items-list-page">
+                <h3>编辑学生信息</h3>
+                <br>
+                <form role="form" action="/admin/edit_student_i/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="s_id" value="{{student.id}}">
+                            <div class="form-group"><label class="control-label">* 学号</label> <input type="text" name="user_id" required="required" id="user_id"
+                                                                                                   class="form-control underlined" value="{{student.user.id}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">* 姓名</label> <input type="text" name="name" required="required" id="name"
+                                                                                                    class="form-control underlined" value="{{student.user.name}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">* 性别</label> <input type="text" name="gender" required="required" id="gender"
+                                                                                                   class="form-control underlined" value="{{student.user.gender}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">专业</label> <input type="text" name="major"
+                                                                                                   class="form-control underlined" value="{{student.major}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">* 院系</label> <input type="text" name="department" required="required" id="department"
+                                                                                                   class="form-control underlined" value="{{student.department}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">班级</label> <input type="text" name="class_name"
+                                                                                                   class="form-control underlined" value="{{student.class_name}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">电子邮箱</label> <input type="text" name="email"
+                                                                                                   class="form-control underlined" value="{{student.user.email}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">住址</label> <input type="text" name="address"
+                                                                                                   class="form-control underlined" value="{{student.user.address}}">
+                            </div>
+                            <div class="form-group"><label class="control-label">电话</label> <input type="text" name="phone_number"
+                                                                                                   class="form-control underlined" value="{{student.user.phone_number}}">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary rounded-s" onclick="return checkStudentValidation()">确认提交</button>
+                                <a href="/admin/set_student/" class="btn btn-primary rounded-s">返回</a>
+                            </div>
+                </form>
+            </article>
+
+    <script>
+    function checkStudentValidation()
+    {
+        if($("#user_id").val()==''||$("#name").val()==''||$("#gender").val()==''||$("#department").val()=='')
+        {
+            alert("请填写所有带*的项目后提交！");
+            return false;
+        }
+        alert("修改成功！");
+        return true;
+    }
+    </script>
+{% endblock %}
+
+

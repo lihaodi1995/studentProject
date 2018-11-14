@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    {% extends "./studentBase.html" %}
+
+    {% block title %}
+    <title> 资源信息 </title>
+    {% endblock %}
+
+    {% block resource_active%}
+    active
+    {% endblock %}
+
+    {% block mainbody %}
+
+<article class="content items-list-page">
+    <div class="title-search-block">
+        </div>
+        <div class="card">
+            <div class="card-block">
+        <div class="title-block">
+            <div class="form-group"><h3><strong>资源列表</strong></h3></div>
+            <br>
+            <br>
+            <div class="form-group"><label>作业标签</label>
+                <div>
+                    <form method="post" action="/students/select_via_tags/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                </div>
+                <div>
+                    <label class="item-check">
+                        <input id="check_select_all" class="checkbox" type="checkbox">
+                        <span>全选</span>
+                    </label>
+                    {% for tag in course_tag_list %}
+                    {% if tag.tag in checked_course_tag_list %}
+                    <label class="item-check">
+                        <input class="checkbox check_select" type="checkbox" name="checked_tag" value="{{ tag.tag }}"
+                               checked="true">
+                        <span>{{ tag.tag }}</span>
+                    </label>
+                    {% else %}
+                    <label class="item-check">
+                        <input class="checkbox check_select" type="checkbox" name="checked_tag" value="{{ tag.tag }}">
+                        <span>{{ tag.tag }}</span>
+                    </label>
+                    {% endif %}
+                    {% endfor %}
+                    <br>
+                    <input style="float:right" type="submit" value="查询" class="btn btn-primary btn-sm rounded-s">
+                </div>
+            </div>
+        </div>
+        </form>
+
+        <div class="card items">
+            <ul class="item-list striped">
+                <li class="item item-list-header hidden-sm-down">
+                    <div class="item-row">
+                        <div class="item-col item-col-header md">
+                            <div><span>资源名</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>标签</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>上传教师</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>上传时间</span></div>
+                        </div>
+                    </div>
+                </li>
+                {% for src in filelist %}
+                <li class="item">
+                    <div class="item-row">
+                        <div class="item-col">
+                            <a href="/students/download_file_test/{{ src.id }}">{{ src.name }}</a>
+                        </div>
+                        <div class="item-col">
+                            {{ src.tags }}
+                        </div>
+                        <div class="item-col">
+                            {{ src.submitter }}
+                        </div>
+                        <div class="item-col">
+                            {{ src.time |date:"Y-m-d H:i" }}
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+</article>
+
+{% endblock %}
+
+{% block lastjs %}
+<script>
+
+        $(document).ready(function(){
+            $('#check_select_all').change(function(){
+                if($('#check_select_all').is(':checked'))
+                    $('.check_select').prop("checked",  true)
+                else
+                    $('.check_select').prop("checked",  false)
+            });
+        });
+
+</script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 后台管理 </title>
+{% endblock %}
+{% block team_active %}
+active open
+{% endblock %}
+{% block mainbody %}
+<article class="content static-tables-page">
+            <div class="title-block">
+                <h1 class="title">
+                    团队列表
+                </h1>
+            </div>
+            <section class="section">
+                {% for team in team_list %}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="card-title-block">
+                                    <h1 class="title">
+                                        <strong>{{ team.id}}</strong>&nbsp<strong>{{ team.name }}</strong>
+                                    </h1>
+                                </div>
+                                <div>
+                                    <section class="example">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>学号</th>
+                                                        <th>姓名</th>
+                                                        <th>角色</th>
+                                                        <th>邮箱</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for stu in team.stu_list %}
+                                                    <tr>
+                                                        <th scope="row">{{ stu.id }}</th>
+                                                        <td>{{ stu.name }}</td>
+                                                        <td>{{ stu.role }}</td>
+                                                        <td>{{ stu.email }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        </article>
+{% endblock %}

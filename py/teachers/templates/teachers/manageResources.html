@@ -1,0 +1,230 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+<title> 资源管理 </title>
+{% endblock %}
+
+{% block resource_active %}
+active
+{% endblock %}
+
+{% block mainbody %}
+active
+<body>
+
+<article class="content items-list-page">
+    <div class="title-search-block">
+        </div>
+        <div class="card">
+            <div class="card-block">
+        <div class="title-block">
+            <div class="form-group"><h3><strong>资源列表</strong></h3><br>
+                <div>
+                    <a class="btn btn-primary btn-sm rounded-s" href="#" data-toggle="modal"
+                           data-target="#add-resource">新建资源</a>
+                        <a class="btn btn-primary btn-sm rounded-s" href="#" data-toggle="modal"
+                           data-target="#add-tag">新建标签</a>
+                </div>
+                </div>
+            <br>
+            <br>
+            <div class="form-group"><label>作业标签</label>
+
+                <div>
+                    <form method="post" action="/teachers/select_via_tags/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                </div>
+                <div>
+                    <label class="item-check">
+                        <input id="check_select_all" class="checkbox" type="checkbox">
+                        <span>全选</span>
+                    </label>
+                    {% for tag in course_tag_list %}
+                    {% if tag.tag in checked_course_tag_list %}
+                    <label class="item-check">
+                        <input class="checkbox check_select" type="checkbox" name="checked_tag" value="{{ tag.tag }}"
+                               checked="true">
+                        <span>{{ tag.tag }}</span>
+                    </label>
+                    {% else %}
+                    <label class="item-check">
+                        <input class="checkbox check_select" type="checkbox" name="checked_tag" value="{{ tag.tag }}">
+                        <span>{{ tag.tag }}</span>
+                    </label>
+                    {% endif %}
+                    {% endfor %}
+                    <br>
+                    <input style="float:right" type="submit" value="查询" class="btn btn-primary btn-sm rounded-s">
+                </div>
+            </div>
+        </div>
+        </form>
+
+        <div class="card items">
+            <ul class="item-list striped">
+                <li class="item item-list-header hidden-sm-down">
+                    <div class="item-row">
+                        <div class="item-col item-col-header md">
+                            <div><span>资源名</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>标签</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>上传教师</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>上传时间</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>操作</span></div>
+                        </div>
+                    </div>
+                </li>
+                {% for src in filelist %}
+                <li class="item">
+                    <div class="item-row">
+                        <div class="item-col">
+                            <a href="#">{{ src.name }}</a>
+                        </div>
+                        <div class="item-col">
+                            {{ src.tags }}
+                        </div>
+                        <div class="item-col">
+                            {{ src.submitter }}
+                        </div>
+                        <div class="item-col">
+                            {{ src.time |date:"Y-m-d H:i" }}
+                        </div>
+                        <div class="item-col">
+                            <div>
+                                <!--<a class="download-item" href="/teachers/edit_tag/{{ src.id }}">-->
+                                <a class="download-item" href="#">
+                                    <i class="fa fa-check icon"></i>编辑标签
+                                </a>
+                            </div>
+                            <div>
+                                <a class="dropdown-item" href="#" onclick="delete_resource({{ src.id }});"
+                                   data-toggle="modal" data-target="#confirm-modal"><i
+                                        class="fa fa-close icon"></i>删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+</article>
+
+<!-- /.modal -->
+<div class="modal fade" id="confirm-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i> 消息</h4></div>
+            <div class="modal-body">
+                <p>是否删除?</p>
+            </div>
+            <div class="modal-footer">
+
+                <button id="delete_r" type="submit" class="btn btn-primary">是</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">否</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- /.modal -->
+<div class="modal fade" id="add-resource">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-pencil"></i> 添加资源</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form method="post" action="/teachers/upload_resource/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group"><label class="control-label">文件标签</label>
+                            <div>
+                                {% for tag in course_tag_list %}
+                                <label>
+                                    <input class="checkbox" type="checkbox" name="tag" value="{{ tag.tag }}">
+                                    <span>{{ tag.tag }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <input type="file" id="resources" name="resources" multiple="">
+                        <input type="submit" value="上传" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+
+<!-- /.modal -->
+<div class="modal fade" id="add-tag">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-pencil"></i> 添加标签</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form role="form" action="/teachers/add_tag/" method="post">
+                        {% csrf_token %}
+                        <div class="form-group"><label class="control-label">标签名</label> <input type="text"
+                                                                                                name="tag_name"
+                                                                                                class="form-control underlined">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal -->
+
+{% endblock %}
+
+{% block lastjs %}
+<script>
+        function delete_resource(id) {
+            $('#delete_r').click(function () {
+                $.get('/teachers/delete_resource/?id=' + id, function (data, status) {
+                    alert('删除成功！');
+                    window.location.href = '/teachers/manage_resources/';
+                });
+            });
+        }
+        $(document).ready(function(){
+            $('#check_select_all').change(function(){
+                if($('#check_select_all').is(':checked'))
+                    $('.check_select').prop("checked",  true)
+                else
+                    $('.check_select').prop("checked",  false)
+            });
+        });
+
+</script>
+{% endblock %}

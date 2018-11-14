@@ -1,0 +1,140 @@
+{% extends "./studentBase.html" %}
+
+{% block title %}
+    <title> 课程信息 </title>
+{% endblock %}
+
+{% block course_active%}
+active
+{% endblock %}
+
+{% block mainbody %}
+    <article class="content forms-page">
+    <div class="title-block">
+        <h3 class="title">课程信息</h3>
+    </div>
+
+    <section class="section">
+        <div class="card card-block sameheight-item">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td><strong>课程名称</strong></td>
+                    <td>{{ course.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>学期</strong></td>
+                    <td>{{ course.semester.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>周次</strong></td>
+                    <td>{{ course.weeks }}</td>
+                </tr>
+                <tr>
+                    <td><strong>时间</strong></td>
+                    <td>{{ course.time }}</td>
+                </tr>
+                <tr>
+                    <td><strong>地点</strong><br></td>
+                    <td> {{ course.address }}</td>
+                </tr>
+                <tr>
+                    <td><strong>学分</strong></td>
+                    <td> {{ course.credit }}</td>
+                </tr>
+                <tr>
+                    <td><strong>组队限制</strong><br></td>
+                    <td>{{ course.team_people_lower_limit }}-{{ course.team_people_upper_limit }}</td>
+                </tr>
+                <tr>
+                    <td><strong>状态</strong></td>
+                    <td>{{ course.status }}</td>
+                </tr>
+                <tr>
+                    <td><strong>大纲</strong></td>
+                    <td>{{ course.outline }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</article>
+    <div class="modal fade" id="modal-media">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Media Library</h4></div>
+                <div class="modal-body modal-tab-container">
+                    <ul class="nav nav-tabs modal-tabs" role="tablist">
+                        <li class="nav-item"><a class="nav-link" href="#gallery" data-toggle="tab" role="tab">Gallery</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link active" href="#upload" data-toggle="tab" role="tab">Upload</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content modal-tab-content">
+                        <div class="tab-pane fade" id="gallery" role="tabpanel">
+                            <div class="images-container">
+                                <div class="row"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade active in" id="upload" role="tabpanel">
+                            <div class="upload-container">
+                                <div id="dropzone">
+                                    <form action="/" method="POST" enctype="multipart/form-data"
+                                          class="dropzone needsclick dz-clickable" id="demo-upload">
+                                        <div class="dz-message-block">
+                                            <div class="dz-message needsclick"> Drop files here or click to
+                                                upload.
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Insert Selected</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <div class="modal fade" id="confirm-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"><i class="fa fa-warning"></i> Alert</h4></div>
+                <div class="modal-body">
+                    <p>Are you sure want to do this?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- Reference block for JS -->
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+{% endblock %}

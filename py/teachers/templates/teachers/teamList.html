@@ -1,0 +1,163 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> 后台管理 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <!-- Theme initialization -->
+    <link rel="stylesheet" href="/static/css/app.css">
+</head>
+
+<body>
+<div class="main-wrapper">
+    <div class="app" id="app">
+        <header class="header">
+            <div class="header-block header-block-collapse hidden-lg-up">
+                <button class="collapse-btn" id="sidebar-collapse-btn">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="header-block header-block-nav">
+                <ul class="nav-profile">
+                    <li class="profile dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            <div class="img"
+                                 style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&s=40')"></div>
+                            <span class="name">
+    			      admin
+    			    </span> </a>
+                        <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a class="dropdown-item" href="#"> <i class="fa fa-user icon"></i> 个人信息 </a>
+                            <a class="dropdown-item" href="#"> <i class="fa fa-gear icon"></i> 设置 </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="login.html"> <i class="fa fa-power-off icon"></i> 退出登陆 </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <div class="sidebar-container">
+                <div class="sidebar-header">
+                    <div class="brand">
+                        <div class="logo"><span class="l l1"></span> <span class="l l2"></span> <span
+                                class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span></div>
+                        课程管理
+                    </div>
+                </div>
+                <nav class="menu">
+                    <ul class="nav metismenu" id="sidebar-menu">
+
+                        <li>
+                            <a href="/teachers/course_index"> <i class="fa fa-home"></i> 主页 </a> </a>
+                        </li>
+
+                        <li>
+                            <a href="/teachers/manage_resources"> <i class="fa fa-th-large"></i> 资源管理</i> </a>
+
+                        </li>
+
+                        <li class="active open">
+                            <a href=""> <i class="fa fa-th-large"></i> 作业管理 <i class="fa arrow"></i> </a>
+                            <ul>
+                                <li><a href="/teachers/add_homework">
+                                    新建作业
+                                </a></li>
+                                <li class="active"><a href="/teachers/check_assignment">
+                                    作业批改
+                                </a></li>
+                                <li><a href="/teachers/upload_grade_assignments">
+                                    成绩上传
+                                </a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href=""> <i class="fa fa-table"></i> 团队管理 <i class="fa arrow"></i> </a>
+                            <ul>
+                                <li><a href="/teachers/approve_team">
+                                    团队审核
+                                </a></li>
+                                <li><a href="/teachers/fine_tune_team">
+                                    团队微调
+                                </a></li>
+                                <li><a href="/teachers/watch_team">
+                                    查看团队信息
+                                </a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="/teachers/return_index"> <i class="fa fa-home"></i> 返回 </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+
+        </aside>
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <article class="content static-tables-page">
+            <div class="title-block">
+                <h1 class="title">
+                    团队列表
+                </h1>
+            </div>
+             <div class="title-block">
+             </div>
+            <section class="section">
+                {% for team in team_list %}
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="card-title-block">
+                                    <h1 class="title">
+                                        <strong>{{ team.id}}</strong>&nbsp<strong>{{ team.name }}</strong>
+                                    </h1>
+                                </div>
+                                <div>
+                                    <section class="example">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>学号</th>
+                                                        <th>姓名</th>
+                                                        <th>角色</th>
+                                                        <th>邮箱</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for stu in team.stu_list %}
+                                                    <tr>
+                                                        <th scope="row">{{ stu.id }}</th>
+                                                        <td>{{ stu.name }}}</td>
+                                                        <td>{{ stu.role }}</td>
+                                                        <td>{{ stu.email }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        </article>
+    </div>
+
+    <script src="/static/js/vendor.js"></script>
+    <script src="/static/js/app.js"></script>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 任务列表 </title>
+{% endblock %}
+
+{% block homework_active %}
+    active open
+{% endblock %}
+
+{% block mainbody %}
+<article class="content items-list-page">
+    <h3 class="title">作业列表</h3>
+    <br>
+
+        <div class="title-block">
+        </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>作业序号</th>
+                <th>作业名称</th>
+                <th>当前状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        {% for src in assignmentlist %}
+        <tbody>
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ src.name }}</td>
+            <td>{{ src.start_time|date:"Y-m-d H:i" }}-{{ src.end_time|date:"Y-m-d H:i" }}</td>
+            <td>
+                <a class="download-item" href="/teachers/download_resource/{{ src.id }}" style="margin-left:-10%">
+                    <i class="fa fa-film icon"></i>批量下载</a>
+                <a class="download-item" href="/teachers/show_team_assignment/{{ src.id }}" style="margin-left:1%"><i
+                        class="fa fa-user icon"></i>在线批改</a>
+                {# 这里的布局不是很懂，歪歪扭扭的，坐等有缘人来改——by llk2why #}
+                {# 我乱加了两个 div 就神奇的掰直了那个下载 —— by ShaneTsui #}
+                {# 有缘人来改了一手嘿嘿嘿 #}
+                <a class="download-item" href="/teachers/show_edit_assignment/{{ src.id }}" style="margin-left:1%"><i
+                        class="fa fa-edit icon"></i>编辑作业</a>
+            </td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</article>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 课程信息 </title>
+{% endblock %}
+{% block course_active %}
+    active
+{% endblock %}
+{% block mainbody %}
+    <article class="content static-tables-page">
+        <div class="title-block">
+            <h1 class="title">
+                {{ course_id }}-{{ course.name }}-课程信息
+            </h1>
+        </div>
+        <section class="section">
+            <div class="card card-block sameheight-item" style="height: 1500px;">
+                <div class="title-block">
+                    <form role="form" action="/teachers/modify_course/" method="post" style="padding-left:5px">
+                        {% csrf_token %}
+                        <div class="form-group"><label class="control-label">学分</label> <input type="text"
+                                                                                               class="form-control underlined"
+                                                                                               name="credit"
+                                                                                               value="{{ course.credit }}">
+                        </div>
+                        <div class="form-group"><label class="control-label">上课时间</label> <input type="text"
+                                                                                                 class="form-control underlined"
+                                                                                                 name="time"
+                                                                                                 value="{{ course.time }}">
+                        </div>
+                        <div class="form-group"><label class="control-label">课程人数</label> <input disabled="true"
+                                                                                                 type="text"
+                                                                                                 class="form-control underlined"
+                                                                                                 name="number"
+                                                                                                 value="{{ course.number }}"
+                        >
+                        </div>
+
+                        <div class="form-group"><label class="control-label">团队人数上限</label> <input type="text"
+                                                                                                   class="form-control underlined"
+                                                                                                   name="team_people_upper_limit"
+                                                                                                   value="{{ course.team_people_upper_limit }}">
+                        </div>
+                        <div class="form-group"><label class="control-label">团队人数下限</label> <input type="text"
+                                                                                                   class="form-control underlined"
+                                                                                                   name="team_people_lower_limit"
+                                                                                                   value="{{ course.team_people_lower_limit }}">
+                        </div>
+                        <div class="form-group"><label class="control-label">课程大纲</label> <textarea rows="10"
+                                                                                                    class="form-control boxed"
+                                                                                                    name="outline">{{ course.outline }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">修改</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </article>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+{% endblock %}

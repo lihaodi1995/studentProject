@@ -1,0 +1,246 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 课程索引 </title>
+{% endblock %}
+{% block homepage_active %}
+active
+{% endblock %}
+{% block csslast %}
+    <link rel="stylesheet" href="/static/css/clndr.css">
+{% endblock %}
+
+{% block mainbody %}
+   <article class="content items-list-page">
+
+            <h2 class="title">{{ request.session.name }} 您好，本周是校历第<strong>18</strong> 周</h2>
+            <br>
+
+            <div class="title-block">
+                <div class="row">
+                </div>
+            </div>
+
+            <div id="default" class="cal1">
+                <div class="clndr">
+                    <div class="clndr-controls">
+                        <div class="clndr-control-button"><span class="clndr-previous-button">previous</span></div>
+                        <div class="month">June 2017</div>
+                        <div class="clndr-control-button rightalign"><span class="clndr-next-button">next</span></div>
+                    </div>
+                    <table class="clndr-table" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr class="header-days">
+                            <td class="header-day">周日</td>
+                            <td class="header-day">周一</td>
+                            <td class="header-day">周二</td>
+                            <td class="header-day">周三</td>
+                            <td class="header-day">周四</td>
+                            <td class="header-day">周五</td>
+                            <td class="header-day">周六</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="day past adjacent-month last-month calendar-day-2017-05-28 calendar-dow-0">
+                                <div class="day-contents">28</div>
+                            </td>
+                            <td class="day past adjacent-month last-month calendar-day-2017-05-29 calendar-dow-1">
+                                <div class="day-contents">29</div>
+                            </td>
+                            <td class="day past adjacent-month last-month calendar-day-2017-05-30 calendar-dow-2">
+                                <div class="day-contents">30</div>
+                            </td>
+                            <td class="day past adjacent-month last-month calendar-day-2017-05-31 calendar-dow-3">
+                                <div class="day-contents">31</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-01 calendar-dow-4">
+                                <div class="day-contents">1</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-02 calendar-dow-5">
+                                <div class="day-contents">2</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-03 calendar-dow-6">
+                                <div class="day-contents">3</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day past calendar-day-2017-06-04 calendar-dow-0">
+                                <div class="day-contents">4</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-05 calendar-dow-1">
+                                <div class="day-contents">5</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-06 calendar-dow-2">
+                                <div class="day-contents">6</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-07 calendar-dow-3">
+                                <div class="day-contents">7</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-08 calendar-dow-4">
+                                <div class="day-contents">8</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-09 calendar-dow-5">
+                                <div class="day-contents">9</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-10 calendar-dow-6">
+                                <div class="day-contents">10</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day past calendar-day-2017-06-11 calendar-dow-0">
+                                <div class="day-contents">11</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-12 calendar-dow-1">
+                                <div class="day-contents">12</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-13 calendar-dow-2">
+                                <div class="day-contents">13</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-14 calendar-dow-3">
+                                <div class="day-contents">14</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-15 calendar-dow-4">
+                                <div class="day-contents">15</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-16 calendar-dow-5">
+                                <div class="day-contents">16</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-17 calendar-dow-6">
+                                <div class="day-contents">17</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day past calendar-day-2017-06-18 calendar-dow-0">
+                                <div class="day-contents">18</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-19 calendar-dow-1">
+                                <div class="day-contents">19</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-20 calendar-dow-2">
+                                <div class="day-contents">20</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-21 calendar-dow-3">
+                                <div class="day-contents">21</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-22 calendar-dow-4">
+                                <div class="day-contents">22</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-23 calendar-dow-5">
+                                <div class="day-contents">23</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-24 calendar-dow-6">
+                                <div class="day-contents">24</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day past calendar-day-2017-06-25 calendar-dow-0">
+                                <div class="day-contents">25</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-26 calendar-dow-1">
+                                <div class="day-contents">26</div>
+                            </td>
+                            <td class="day past calendar-day-2017-06-27 calendar-dow-2">
+                                <div class="day-contents">27</div>
+                            </td>
+                            <td class="day today calendar-day-2017-06-28 calendar-dow-3">
+                                <div class="day-contents">28</div>
+                            </td>
+                            <td class="day calendar-day-2017-06-29 calendar-dow-4">
+                                <div class="day-contents">29</div>
+                            </td>
+                            <td class="day calendar-day-2017-06-30 calendar-dow-5">
+                                <div class="day-contents">30</div>
+                            </td>
+                            <td class="day adjacent-month next-month calendar-day-2017-07-01 calendar-dow-6">
+                                <div class="day-contents">1</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
+{% endblock %}
+
+{% block firstjs %}
+    <script type="text/template" id="clndr-template">
+    <div class="clndr-controls">
+        <div class="clndr-previous-button">&lsaquo;</div>
+        <div class="month"><%= month %></div>
+        <div class="clndr-next-button">&rsaquo;</div>
+    </div>
+    <div class="clndr-grid">
+        <div class="days-of-the-week">
+            <% _.each(daysOfTheWeek, function (day) { %>
+            <div class="header-day"><%= day %></div>
+            <% }); %>
+            <div class="days">
+                <% _.each(days, function (day) { %>
+                <div class="<%= day.classes %>"><%= day.day %></div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <div class="clndr-today-button">Today</div>
+</script>
+    <script type="text/template" id="clndr-multimonth-template">
+        <div class="multi-month-controls">
+            <div class="clndr-previous-year-button quarter-button">&laquo;</div><!--
+                -->
+            <div class="clndr-previous-button quarter-button">&lsaquo;</div><!--
+                -->
+            <div class="clndr-next-button quarter-button right-align">&rsaquo;</div><!--
+                -->
+            <div class="clndr-next-year-button quarter-button right-align">&raquo;</div>
+        </div>
+        <% _.each(months, function (oneMonth) { %>
+        <div class="clndr-controls">
+            <div class="month"><%= oneMonth.month.format('MMMM YYYY') %></div>
+        </div>
+        <div class="clndr-grid">
+            <div class="days-of-the-week">
+                <% _.each(daysOfTheWeek, function (day) { %>
+                <div class="header-day"><%= day %></div>
+                <% }); %>
+                <div class="days">
+                    <% _.each(oneMonth.days, function (day) { %>
+                    <div class="<%= day.classes %>"><%= day.day %></div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <div class="clndr-today-button">Today</div>
+        <% }); %>
+    </script>
+    <script type="text/template" id="clndr-oneweek-template">
+    <div class="clndr-controls">
+        <div class="clndr-previous-button">&lsaquo;</div>
+        <div class="month">
+            <%= intervalStart.format('MM/DD') %> - <%= intervalEnd.format('MM/DD') %>
+        </div>
+        <div class="clndr-next-button">&rsaquo;</div>
+    </div>
+    <div class="clndr-grid">
+        <div class="days-of-the-week">
+            <% _.each(daysOfTheWeek, function (day) { %>
+            <div class="header-day"><%= day %></div>
+            <% }); %>
+            <div class="days">
+                <% _.each(days, function (day) { %>
+                <div class="<%= day.classes %>"><%= day.day %></div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</script>
+{% endblock %}
+
+{% block lastjs %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
+    <script src="/static/js/clndr.js"></script>
+    <script src="/static/js/calendar.js"></script>
+{% endblock %}
+
+
+

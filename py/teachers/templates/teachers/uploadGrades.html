@@ -1,0 +1,85 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 分数上传 </title>
+{% endblock %}
+
+{% block homework_active %}
+    active open
+{% endblock %}
+
+{% block mainbody %}
+    <article class="content items-list-page">
+            <h3 class="title">分数上传</h3>
+            <br>
+
+                <div class="title-block">
+                </div>
+
+{#        <form class="col-md-2" method="post" action="/teachers/download_grade_excel/1/"#}
+{#                                              enctype="multipart/form-data"/>#}
+{#            {% csrf_token %}#}
+{#            <input type="submit" class="btn btn-success" value="下载个人成绩登分表">#}
+{#        </form>#}
+        <form class="col-md-2" method="post" action="/teachers/download_grade_excel/2/"
+                                              enctype="multipart/form-data"/>
+            {% csrf_token %}
+            <input type="submit" class="btn btn-success" value="下载团队成绩登分表">
+        </form>
+        <br>
+        <br>
+        <br>
+        <div class="card items">
+            <ul class="item-list striped">
+
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col item-col-header md">
+                                <div><span>作业序号</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>作业名称</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>作业类型</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>操作</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% for ass in ass_list %}
+                    <li class="item">
+                        <div class="item-row">
+                            <div class="item-col">
+                                {{ forloop.counter }}
+                            </div>
+                            <div class="item-col">
+                                {{ ass.name }}
+                            </div>
+                            <div class="item-col">
+                                {{ ass.type }}
+                            </div>
+                            <div class="item-col">
+                                <div>
+                                    {% ifequal ass.type "团队" %}
+                                        <form method="post" action="/teachers/set_grades/2/{{ ass.id }}/"
+                                              enctype="multipart/form-data"/>
+                                        {% csrf_token %}
+                                        <input type="file" id="student_grade_file" name="grade_file"><input type="submit" value="上传" class="btn btn-primary">
+                                        </form>
+                                    {% else %}
+                                        <form method="post" action="/teachers/set_grades/2/{{ ass.id }}/"
+                                              enctype="multipart/form-data"/>
+                                        {% csrf_token %}
+                                        <input type="file" id="student_grade_file" name="grade_file"><input type="submit" value="上传" class="btn btn-primary">
+                                        </form>
+                                    {% endifequal %}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </article>
+{% endblock %}

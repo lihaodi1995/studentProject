@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+<!-- /.website title -->
+<title>主页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- CSS Files -->
+<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/static/css/font-awesome.min.css" rel="stylesheet">
+<link href="/static/css/pe-icon-7-stroke.css" rel="stylesheet">
+<link href="/static/css/animate.css" rel="stylesheet" media="screen">
+<link href="/static/css/owl.theme.css" rel="stylesheet">
+<link href="/static/css/owl.carousel.css" rel="stylesheet">
+
+<!-- Colors -->
+<link href="/static/css/css-index.css" rel="stylesheet" media="screen">
+
+
+<!-- Google Fonts -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" />
+
+</head>
+  
+<body data-spy="scroll" data-target="#navbar-scroll">
+
+<!-- /.preloader -->
+<div id="preloader"></div>
+<div id="top"></div>
+
+<!-- /.parallax full screen background image -->
+<div class="fullscreen landing parallax" style="background-image:url('/static/images/bg.jpg');" data-img-width="2000" data-img-height="1333" data-diff="100">
+	
+	<div class="overlay">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<!-- /.main title -->
+						<h1 class="wow fadeInLeft">&nbsp;</h1>
+						
+				  <h1 class="wow fadeInLeft">在线协同教学平台</h1>  
+						
+						<div class="landing-text wow fadeInUp">
+							<p>北京航空航天大学软件学院 软件工程实践课程教学平台</p>
+					</div>
+					<!-- /.header button -->
+
+				</div> 
+				
+				<!-- /.signup form -->
+				<div class="col-md-5">
+				
+					<div class="signup-header wow fadeInUp">
+						<h3 class="form-title text-center">登录</h3>
+						<form class="form-header" action="/login/" role="form" method="post" >
+							{% csrf_token %}
+							<div class="form-group"></div>
+							<div class="form-group">
+								<input class="form-control input-lg" name="id" id="id" type="text" placeholder="账号" required>
+							</div>
+							<div class="form-group">
+								<input class="form-control input-lg" name="password" id="password" type="password" placeholder="密码" required>
+							</div>
+						  	<div class="form-group last">
+								<div class="button-demo text-center">
+									<ul class="list-inline" style="margin-top: 25px">
+										<input type="submit" id="submit" name="submit" class="btn-default btn-warning" value="登录">
+										
+									</ul>
+								</div>
+							</div>
+						 	<div class="form-group last"></div>
+						 	<div class="form-group last"></div>
+							<div class="form-group last"></div>
+						</form>
+					</div>				
+				
+				</div>
+			</div>
+		</div> 
+	</div> 
+</div>
+ 
+<!-- NAVIGATION -->
+
+<div id="testi">
+	<div class="container">
+		<div class="text-center">
+			<h2 class="wow fadeInLeft">平台介绍</h2>
+			<div class="title-line wow fadeInRight"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+			   <div id="owl-testi" class="owl-carousel owl-theme wow fadeInUp">
+
+					<!-- /.testimonial 1 -->
+					<div class="testi-item">
+						<div class="client-pic text-center">
+
+							<!-- /.client photo -->
+							<img src="/static/images/bh-logo.jpg" alt="client">
+						</div>
+						<div class="box">
+
+							<!-- /.testimonial content -->
+							<p class="message text-center">“尚德务实、求真拓新”是北航的办学理念，反映了北航的办学传统和办学特色，是学校今后办学和发展的基本理念，也是全校师生员工建设北航的共同思想基础。</p>
+						</div>
+						<div class="client-info text-center">
+
+						<!-- /.client name -->
+							北京航空航天大学&nbsp<span class="company">1952 - 2017</span>
+						</div>
+					</div>
+
+					<!-- /.testimonial 2 -->
+					<div class="testi-item">
+						<div class="client-pic text-center">
+
+							<!-- /.client photo -->
+							<img src="/static/images/se-logo.jpg" alt="client">
+						</div>
+						<div class="box">
+
+							<!-- /.testimonial content -->
+							<p class="message text-center">北京航空航天大学软件学院是2002年经国家教育部和国家纪委联合批准成立的全国37所国家示范性软件学院之一。北航软件学院以培养高层次、实用性、复合型、国际化的软件工程专业人才为宗旨，为创建适应行业需求和市场导向的新型办学机制探路，为软件工程高端人才培养做示范，为推进工程教育的改革提供实践经验。</p>
+						</div>
+						<div class="client-info text-center">
+
+							<!-- /.client name -->
+							北京航空航天大学软件学院&nbsp <span class="company">2002-2017</span>
+						</div>
+					</div>
+
+					<!-- /.testimonial 3 -->
+					<div class="testi-item">
+						<div class="client-pic text-center">
+
+							<!-- /.client photo -->
+							<img src="/static/images/se-logo.jpg" alt="client">
+						</div>
+						<div class="box">
+
+							<!-- /.testimonial content -->
+							<p class="message text-center">软件工程实践是软件学院为本科生开展的实践性课程，旨在帮助学生理解与体验软件的开发过程，并对理论知识有更深的理解</p>
+						</div>
+						<div class="client-info text-center">
+
+							<!-- /.client name -->
+							开课老师： <span class="company">林广艳 贾经冬</span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- /.footer -->
+<footer id="footer">
+	<div class="container">
+		<div class="col-sm-4 col-sm-offset-4">
+			<div class="text-center wow fadeInUp" style="font-size: 14px;"> - - All Rights Reserved &nbsp; Online Course 2017 - - </div>
+			<a href="#" class="scrollToTop"><i class="pe-7s-up-arrow pe-va"></i></a>
+		</div>	
+	</div>	
+</footer>
+	
+	<!-- /.javascript files -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+    <script src="/static/js/jquery.sticky.js"></script>
+	<script src="/static/js/wow.min.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script>
+		new WOW().init();
+	</script>
+  </body>
+</html>

@@ -1,0 +1,271 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+<title> 分组调整 </title>
+{% endblock %}
+{% block team_active %}
+active open
+{% endblock %}
+
+{% block mainbody %}
+<article class="content cards-page">
+    <div class="title-block">
+        <h3 class="title">团队调整</h3>
+
+    </div>
+    <div class="col-xl-3" style="position: fixed; right: 5%; height: 300px; overflow:auto">
+
+        <div class="card sameheight-item">
+            <div class="card-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="card-title-block">
+                    <h3 class="title">备选学生</h3>
+                </div>
+                <section class="section stuContainer" id="stuContainer">
+
+                </section>
+            </div>
+            <!-- /.card-block -->
+        </div>
+        <!-- /.card -->
+
+    </div>
+    <section class="section">
+        <div class="row sameheight-container" id="studentsContainer">
+            <!-- /.col-xl-6 -->
+
+        </div>
+    </section>
+    <button class="btn btn-oval btn-success" id="btn_AddNewGroup" style="margin-left: 3%">确认提交所有团队更改</button>
+</article>
+{% endblock %}
+
+{%block lastjs %}
+<script src="/static/js/jquery.cookie-1.4.1.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+	    get_team_info();
+	    get_no_team_student();
+	});
+function allowDrop(ev)
+{
+	ev.preventDefault();
+}
+
+function drag(ev)
+{
+	ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function drop(ev)
+{
+	console.log("drop!");
+	ev.preventDefault();
+	var data= ev.dataTransfer.getData("Text");
+	ev.target.appendChild(document.getElementById(data));
+}
+
+var lageStr = '<div class="col-xl-8" id="tobeAppend"><div class="card sameheight-item"><div class="card-block"><!-- Nav tabs --><div class="card-title-block">  <h3 class="title">New团队</h3></div><ul class="nav nav-tabs nav-tabs-bordered"><li class="nav-item"> <a href="#groupTask3" class="nav-link active" data-target="#groupTask3" data-toggle="tab" aria-controls="groupTask3" role="tab">成员分工</a> </li>   <li class="nav-item"> <a href="#group3" class="nav-link link" data-target="#group3" data-toggle="tab" aria-controls="group3" role="tab">团队成员</a> </li><li class="nav-item"> <a href="#detail3" class="nav-link" data-target="#detail3" aria-controls="detail3" data-toggle="tab" role="tab">团队详情</a> </li><li class="nav-item"> <a href="" class="nav-link" data-target="#operator3" aria-controls="operator3" data-toggle="tab" role="tab">操作</a> </li></ul><!-- Tab panes --><div class="tab-content tabs-bordered"><div class="tab-pane fade in active" id="groupTask3">  <h4>成员分工</h4><table class="table table-sm"><tbody><tr><td>Anna</td><td>Web</td></tr><tr><td>OYZH</td><td>Interface</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr></tbody></table></div>   <div class="tab-pane fade stuContainer" id="group3" ondrop="drop(event)" ondragover="allowDrop(event)">  <h4>队伍成员</h4>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu1">张三</button>  <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="stu2">李四</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu3">1234</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu4">asds</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu5">IOSD</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu6">IOSD</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu7">IOSD</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu8">IOSD</button></div><div class="tab-pane fade" id="detail3"><h4>团队详情</h4><table class="table table-sm"><thead class="thead-inverse"><tr><th>组号</th><th>组名</th><th>人数</th><th>组长</th></tr></thead><tbody><tr><td>1</td><td>NoExist</td><td>8</td><td>大爷</td></tr></tbody></table></div><div class="tab-pane fade" id="operator3"><h4>操作</h4><button class="btn btn-pill-left btn-success" draggable="true">同意</button><button class="btn btn-pill-right btn-danger" draggable="true">拒绝</button></div></div></div><!-- /.card-block --></div><!-- /.card --></div>'
+
+$(document).ready(function(){
+    $.ajaxSetup({
+    beforeSend: function(xhr, settings){
+      var csrftoken = $.cookie('csrftoken');
+      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    }
+    });
+	//TobeAppend
+	$("#btn_AddNewGroup").click(function(){
+        var jsonStr = collectAllIds();
+		 $.post( "/teachers/submit_team/", { json: jsonStr } ,function(data){
+           alert("更改成功");
+        });
+	});
+
+});
+var jsonData;
+function get_no_team_student()
+{
+    $.getJSON('/teachers/get_all_no_select_stu/',function(data){
+        $.each(data.student_list,function(i,item){
+            var stu_info="";
+            var diffColor="style=\"background: #F58F90\"";
+            if(item.gender=='\u5973')
+            {
+                stu_info="<button class=\"btn btn-primary btn-lg stuTag\"" +diffColor+
+                        " ondragstart=\"drag(event)\" draggable=\"true\" " +
+                  "id=\"stu_id" + item.id +
+                  "\">" + item.user_id +" "+ item.stu_name +
+                  "</button>&nbsp";
+            }
+            else
+            {
+                stu_info="<button class=\"btn btn-primary btn-lg stuTag\" ondragstart=\"drag(event)\" draggable=\"true\" " +
+                  "id=\"stu_id" + item.id +
+                  "\">" + item.user_id +" "+ item.stu_name +
+                  "</button>&nbsp";
+            }
+            $("#stuContainer").append(stu_info);
+
+        });
+    })
+}
+function get_team_info()//从Json数据中获得队伍信息后填充到表内
+{
+    $.getJSON('/teachers/get_team_info/', function(data) {
+        jsonData = data;
+        $.each(data.team_list, function (i, item) {
+            console.log(item.id);
+            var htmlTable1="<div class=\"col-xl-8\" id=\"outside_" + item.id +
+                "\"" +">" +
+                "<div class=\"card sameheight-item\">" +
+                "<div class=\"card-block\">" +
+                "<div class=\"card-title-block\">" +
+                "<h3 class=\"title\">";
+            var htmlTable2=item.name+"</h3>" +
+                "</div>" +
+                "<ul class=\"nav nav-tabs nav-tabs-bordered\">" +
+                "<li class=\"nav-item\"> ";
+            var htmlTable3="<a href=\"#groupTask" + item.id + "\"class=\"nav-link active\"data-target=\"" + "#groupTask" + item.id + "\" data-toggle=\"tab\" aria-controls=\"" + "groupTask" + item.id + "\"role=\"tab\">成员分工</a>" +
+                " </li><li class=\"nav-item\">";
+            var htmlTable4="<a href=\"#group" + item.id + "\" class=\"nav-link link\" data-target=\"#group" + item.id + "\" data-toggle=\"tab\" aria-controls=\"group" + item.id + "\" role=\"tab\" " + "id=\"group_button_" + item.id + "\"" + ">团队成员</a>" +
+                " </li><li class=\"nav-item\"> ";
+            var htmlTable5="<a href=\"#detail" +  item.id + "\" class=\"nav-link\" data-target=\"#detail" + item.id + "\" aria-controls=\"detail" + item.id + "\" data-toggle=\"tab\" role=\"tab\">团队详情</a>" +
+                " </li><li class=\"nav-item\">"
+            var htmlTable6="<a href=\""+ "\" class=\"nav-link\" data-target=\"#operator" + item.id + "\" aria-controls=\"operator" + item.id + "\"data-toggle=\"tab\" role=\"tab\">操作</a>" +
+                " </li>" +
+                "</ul><div class=\"tab-content tabs-bordered\">" +
+                " <div class=\"tab-pane fade in active\" " + "id=\"groupTask" + item.id + "\">";
+            var htmlTable7="<h4>成员分工</h4><table class=\"table table-sm\"><tbody id=\"tbody_" +item.id+
+                "\">";
+
+            var h8="</tbody></table></div>";
+            var h9="<div class=\"tab-pane fade stuContainer\" id=\"group" + item.id +
+                "\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\"> <h4>队伍成员</h4> ";
+
+            var h10=" </div> " +
+                "<div class=\"tab-pane fade\" id=\"detail" +item.id+
+                "\"> <h4>团队详情</h4> " +
+                "<table class=\"table table-sm\"> " +
+                "<thead class=\"thead-inverse\"> " +
+                "<tr> " +
+                "<th>组号</th> " +
+                "<th>组名</th> " +
+                "<th>人数</th> " +
+                "<th>组长</th> " +
+                "</tr> </thead> <tbody> <tr>";
+            var h11="<td>" +item.id +
+                "</td><td>" + item.name +
+                "</td><td>" +item.people_number +
+                "</td><td>" + item.head_id +
+                "</td>";
+            var h12="</tr></tbody></table></div>";
+            var h13="<div class=\"tab-pane fade\" id=\"operator" + item.id +
+                "\">";
+            var h14="<h4>操作</h4><button class=\"btn btn-pill-left btn-success\" draggable=\"true\"" +"id=\"accept_group_"+ item.id + "\"" +"onclick=\"addCloseButtonToggle(" + item.id +
+                ") \""+
+                ">同意</button>";
+            var h15="<button class=\"btn btn-pill-right btn-danger\" draggable=\"true\" id=\"cancel_group_" + item.id + "\"" +"onclick=\"addCloseButtonToggle(" +item.id+
+                ")\""+
+                ">拒绝</button>";
+            var h16="</div> </div> </div> </div> </div>";
+            $("#studentsContainer").append(htmlTable1+htmlTable2+htmlTable3+htmlTable4+htmlTable5+htmlTable6+htmlTable7+h8+h9+ h10 + h11 + h12 + h13 + h14 + h15 + h16);
+
+            var tmp= "#tbody_" + item.id;
+
+            $.each(item.member_list, function (i2, item2){//分工填表
+              var tabletime="<tr> <td>" +item2.student_id+
+                  "</td> <td>" +item2.role+
+                  "</td> </tr>";
+
+              $(tmp).append(tabletime);
+
+            });
+
+            var tmp2="#group"+item.id;
+
+            $.each(item.member_list, function (i2, item2){//成员微调button
+                var diffColor="style=\"background: #F58F90\"";
+                var tableButton="";
+                if(item2.gender=='\u5973')
+                {
+                    tableButton="<button class=\"btn btn-primary btn-lg stuTag\"" +diffColor+
+                        " ondragstart=\"drag(event)\" draggable=\"true\" " +
+                  "id=\"stu_id" + item2.id +
+                  "\">" + item2.student_id +
+                  "</button>&nbsp";
+                }
+                else
+                {
+                    tableButton="<button class=\"btn btn-primary btn-lg stuTag\" ondragstart=\"drag(event)\" draggable=\"true\" " +
+                  "id=\"stu_id" + item2.id +
+                  "\">" + item2.student_id +
+                  "</button>&nbsp";
+                }
+
+
+              $(tmp2).append(tableButton);
+            });
+        });
+    });
+}
+
+function getGroupMenberIds(groupId){
+    var strIds = [];
+    console.log("groupId" + " is " + groupId);
+    var btns = $(groupId).find("button");
+    btns.each(function(i,tmpBtn){
+        var currentT = tmpBtn;
+        while(currentT.hasChildNodes){
+            currentT = $(currentT).children();
+            if(currentT.attr("tagName") == "button"){
+                strIds.push($(currentT).attr("id") );
+                console.log($(currentT).attr("id") + " is " + i);//弹出子元素标签
+            }
+        }
+     console.log($(tmpBtn).attr("id")+ " is " + i);//弹出子元素标签
+     strIds.push($(tmpBtn).attr("id"));
+
+    });
+    console.log(strIds);
+    return strIds;
+}
+
+//groupId,groupButton
+function addCloseButtonToggle(groupId){
+    var tmp="#outside_"+groupId;
+     $(tmp).slideUp("slow");
+     console.log ( collectAllIds() );
+    $.get("/teachers/agree_team/?id="+groupId,function(data,status){});
+}
+
+function collectAllIds(){
+    var jsonReturn = '{"team":[';
+
+    var data = jsonData
+    $.each(data.team_list, function (i, item) {
+        jsonReturn += '{"team_id":'+ item.id;
+        var groupId = "#" + "group" + item.id;
+        var strArr = getGroupMenberIds(groupId);
+        var len = strArr.length
+        jsonReturn += ' ,"stu_id":[';
+        for (var index = 0; index < len; index++) {
+            var element = strArr[index].substring(6,strArr[index].length);
+            jsonReturn += '{"id":' + element + '}'
+            if(index < len - 1){
+                jsonReturn += ','
+            }
+        }
+        jsonReturn += ']},';   
+    });
+    //去掉一个，
+    jsonReturn = jsonReturn.substr(0,jsonReturn.length - 1);
+    jsonReturn += ']}';
+
+    return jsonReturn;
+}
+
+
+</script>
+
+{% endblock %}
+

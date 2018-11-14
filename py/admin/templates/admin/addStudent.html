@@ -1,0 +1,120 @@
+{% extends "./adminBase.html" %}
+
+{% block title %}
+    <title> 添加学生 </title>
+{% endblock %}
+{% block student_active %}
+    active
+{% endblock %}
+
+{% block mainbody %}
+    <article class="content items-list-page">
+
+            <h2 class="title">新建学生</h2>
+            <br>
+
+            <div class="title-search-block">
+                <div class="title-block">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <lable>手动新建学生</lable>
+                    <br>
+                    <br>
+                    <a class="btn btn-primary btn-sm rounded-s" href="#" data-toggle="modal" data-target="#add-student">新建学生</a>
+                </div>
+            </div>
+
+            <div class="title-block">
+                <div class="row">
+                </div>
+            </div>
+
+            <div class="items-search">
+                <form class="form-inline">
+                    <div class="input-group"><input type="text" class="form-control boxed rounded-s"
+                                                    placeholder="Search for..."> <span class="input-group-btn">
+					<button class="btn btn-secondary rounded-s" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</span></div>
+                </form>
+            </div>
+
+            <div>
+                <lable>批量导入学生信息</lable>
+                <br>
+                <br>
+                <form method="post" action="/admin/upload_students_info/" enctype="multipart/form-data"/>
+                {% csrf_token %}
+                <input type="file" id="student_file" name="student_file">
+                <input type="submit" value="上传" class="btn btn-primary">
+                </form>
+            </div><br>
+
+        </article>
+    <!--./model-->
+    <div class="modal fade" id="add-student">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-pencil"></i> 添加学生</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" action="/admin/add_one_student/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group"><label class="control-label">* 学号</label> <input type="text" name="user_id" id="user_id"
+                                                                                                   class="form-control underlined" required="required">
+                            </div>
+                            <div class="form-group"><label class="control-label">* 姓名</label> <input type="text" name="name" id="name"
+                                                                                                    class="form-control underlined" required="required">
+                            </div>
+                            <div class="form-group"><label class="control-label">* 性别</label> <input type="text" name="gender" required="required" id="gender"
+                                                                                                   class="form-control underlined">
+                            </div>
+                            <div class="form-group"><label class="control-label">专业</label> <input type="text" name="major"
+                                                                                                   class="form-control underlined">
+                            </div>
+                            <div class="form-group"><label class="control-label">* 院系</label> <input type="text" name="department" required="required" id="department"
+                                                                                                   class="form-control underlined">
+                            </div>
+                            <div class="form-group"><label class="control-label">班级</label> <input type="text" name="class_name"
+                                                                                                   class="form-control underlined">
+                            </div>
+                            <div class="form-group"><label class="control-label">电子邮箱</label> <input type="text" name="email"
+                                                                                                   class="form-control underlined">
+                            </div>
+                            <div class="form-group"><label class="control-label">住址</label> <input type="text" name="address"
+                                                                                                   class="form-control underlined">
+                            </div>
+                            <div class="form-group"><label class="control-label">电话</label> <input type="text" name="phone_number"
+                                                                                                   class="form-control underlined">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" onclick="return checkStudentValidation()">提交</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    function checkStudentValidation()
+                    {
+                        if($("#user_id").val()==''||$("#name").val()==''||$("#gender").val()==''||$("#department").val()=='')
+                        {
+                            alert("请填写所有带*的项目后提交！");
+                            return false;
+                        }
+                        alert("添加成功，返回学生列表");
+                        return true;
+                    }
+                </script>
+            </div>
+        </div>
+{% endblock %}
+
+
+

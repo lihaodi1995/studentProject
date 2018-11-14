@@ -1,0 +1,242 @@
+{% extends "./adminBase.html" %}
+{% block title %}
+    <title> 学期管理 </title>
+{% endblock %}
+{% block semester_active %}
+active
+{% endblock %}
+{% block mainbody %}
+    <article class="content items-list-page">
+            <h3 class="title">学期信息</h3>
+            <br>
+
+            <div class="title-search-block">
+                <div class="title-block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btn-primary btn-sm rounded-s" href="#" data-toggle="modal"
+                               data-target="#add_semester">
+                                添加学期
+                            </a>
+                            <div class="action dropdown">
+                                <button class="btn  btn-sm rounded-s btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenu1" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    操作...
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" onclick="delete_semesters();"
+                                       data-target="#confirm-modal"><i class="fa fa-close icon"></i>删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="items-search">
+                    <form class="form-inline">
+                        <div class="input-group"><input type="text" class="form-control boxed rounded-s"
+                                                        placeholder="Search for..."> <span class="input-group-btn">
+					<button class="btn btn-secondary rounded-s" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</span></div>
+                    </form>
+                </div>
+            </div>
+            <div class="card items">
+                <ul class="item-list striped">
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col fixed item-col-check"><label class="item-check" id="select-all-items">
+                                <input type="checkbox" class="checkbox">
+                                <span></span>
+                            </label>
+                            </div>
+                            <div class="item-col item-col-header md">
+                                <div><span>学期名</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>开始时间</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>结束时间</span></div>
+                            </div>
+                             <div class="item-col item-col-header">
+                                <div><span>操作</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% if semester %}
+                    {% for s in semester %}
+                    <li class="item">
+                        <div class="item-row">
+                            <div class="item-col fixed item-col-check"><label class="item-check" id="select-all-items">
+                                <input name="check_semester" type="checkbox" class="checkbox" value="{{ s.id }}">
+                                <span></span>
+                            </label></div>
+                            <div class="item-col">
+                                {{ s.name }}
+                            </div>
+                            <div class="item-col">
+                                {{ s.start_time }}
+                            </div>
+                            <div class="item-col">
+                                {{ s.end_time }}
+                            </div>
+                            <div class="item-col">
+                                <div>
+                                    <a href="#">关闭学期</a>
+                                </div>
+                                <div class="item-actions-dropdown">
+                                    <a class="item-actions-toggle-btn"> <span class="inactive">
+									<i class="fa fa-cog"></i>
+								</span> <span class="active">
+								<i class="fa fa-chevron-circle-right"></i>
+								</span> </a>
+                                    <div class="item-actions-block">
+                                        <ul class="item-actions-list">
+                                            <li>
+                                                <a class="remove" href="#" data-toggle="modal" onclick="delete_semester({{ s.id }})"
+                                                   data-target="#confirm-modal"> <i class="fa fa-trash-o "></i> </a>
+                                            </li>
+                                            <li>
+                                                <a class="remove" href="/admin/edit_semester/?id={{s.id}}"> <i
+                                                        class="fa fa-pencil "></i> </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <p>No semester!</p>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+        </article>
+    <!-- /.modal -->
+    <div class="modal fade" id="confirm-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title"><i class="fa fa-warning"></i> 消息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>是否删除?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="delete_s" class="btn btn-primary" data-dismiss="modal">是</button>
+                        <button type="button"
+                                class="btn btn-secondary" data-dismiss="modal">否
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    <div class="modal fade" id="add_semester">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-pencil"></i> 添加学期</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" action="/admin/add_semester/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group"><label class="control-label">*学期名称</label> <input type="text"
+                                                                                                     class="form-control underlined" id="semester_name" name="name">
+                            </div>
+                            <div class="form-group"><label class="control-label">*开始时间</label> <input type="date"
+                                                                                                     class="form-control underlined" id="start_time" name="start_time">
+                            </div>
+                            <div class="form-group"><label class="control-label">*结束时间</label> <input type="date"
+                                                                                                     class="form-control underlined" id="end_time" name="end_time">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" onclick="return checkSemesterName();">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    <script>
+        function delete_semester(id)
+        {
+            $('#delete_s').click(function(){
+                $.get("/admin/delete_semester/?id="+id,function(data,status){
+                    alert("删除成功！");
+                    window.location.href="/admin/set_semester/";
+                });
+            });
+        }
+
+        function delete_semesters()
+        {
+            $('#delete_s').click(function(){
+
+                $("input:checkbox[name='check_semester']:checked").each(function(i){
+                        $.get("/admin/delete_semester/?id="+$(this).val(),function(data,status){
+
+                        });
+                });
+                alert("删除成功！");
+                window.location.href="/admin/set_semester/";
+            });
+        }
+
+        function checkSemesterName()
+        {
+            var n = $("#semester_name");
+            var nclass = $(".semester_name");
+            //Jquery selector 选择器
+
+            var n=document.getElementById("semester_name");
+            var st=document.getElementsByName("start_time");
+            var et=document.getElementsByName("end_time");
+            if(n.value=='')
+            {
+                alert("学期名称不能为空，请填写后再提交");
+                return false;
+            }
+            if($("#start_time").val()=='')
+            {
+                alert("请设置学期开始时间");
+                return false;
+            }
+            if($("#end_time").val()=='')
+            {
+                alert("请设置学期结束时间");
+                return false;
+            }
+            var dateAStr=$("#start_time").val();
+            var arrA=dateAStr.split("-");
+            var dateA=new Date(arrA[0],arrA[1],arrA[2]);
+            var dateAT=dateA.getTime();
+            var dateBStr=$("#end_time").val();
+            var arrB=dateBStr.split("-");
+            var dateB=new Date(arrB[0],arrB[1],arrB[2]);
+            var dateBT=dateB.getTime();
+            if(dateAT>=dateBT)
+            {
+                alert("学期开始时间不早于结束时间，请修改后提交");
+                return false;
+            }
+            alert("已添加新学期内容.");
+            return true;
+        }
+
+    </script>
+{% endblock %}
+

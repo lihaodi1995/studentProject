@@ -1,0 +1,269 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 分组调整 </title>
+{% endblock %}
+{% block group_active %}
+active
+{% endblock %}
+
+{% block mainbody %}
+<article class="content cards-page">
+    <div class="title-block">
+        <h3 class="title">团队调整</h3>
+        <p class="title-description"> CopyRight Reserved By OYZH </p>
+    </div>
+
+    <section class="section">
+        <div class="row sameheight-container" id="studentsContainer">
+           <!-- /.col-xl-6 -->
+            <div class="col-xl-3" style="position: fixed; right: 5%">
+
+                <div class="card sameheight-item">
+                <div class="card-block" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="card-title-block">
+                        <h3 class="title">备选学生</h3>
+                    </div>
+                    <section class="section stuContainer">
+                        <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="anny8">王同学</button>
+                        <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="anny9">某同学2</button>
+                        <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="anny10">测试用户</button>
+                        <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="anny11">未知</button>
+                        <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="anny12">某同学XX</button>
+                    </section>
+                </div>
+                <!-- /.card-block -->
+                </div>
+                <!-- /.card -->
+
+            </div>
+            <div class="col-xl-8">
+                <div class="card sameheight-item">
+                    <div class="card-block">
+                        <!-- Nav tabs -->
+                        <div class="card-title-block">
+                          <h3 class="title">NoExist团队</h3>
+                        </div>
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item"> <a href="#groupTask" class="nav-link active" data-target="#groupTask" data-toggle="tab" aria-controls="groupTask" role="tab">成员分工</a> </li>
+                           <li class="nav-item"> <a href="#group" class="nav-link link" data-target="#group" data-toggle="tab" aria-controls="group" role="tab">团队成员</a> </li>
+                            <li class="nav-item"> <a href="#detail" class="nav-link" data-target="#detail" aria-controls="detail" data-toggle="tab" role="tab">团队详情</a> </li>
+                            <li class="nav-item"> <a href="" class="nav-link" data-target="#operator" aria-controls="operator" data-toggle="tab" role="tab">操作</a> </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs-bordered">
+                            <div class="tab-pane fade in active" id="groupTask">
+                              <h4>成员分工</h4>
+                                <table class="table table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td>张同学></td>
+                                        <td>产品</td>
+                                    </tr>
+                                    <tr>
+                                        <td>李同学</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>某同学</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>iOS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>CSS</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>Java</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                           <div class="tab-pane fade stuContainer" id="group" ondrop="drop(event)" ondragover="allowDrop(event)">
+                              <h4>队伍成员</h4>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="any">王一百</button>
+                              <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="an1y">李四</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="anny2">1234</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="anny3">asds</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="anny4">Alise</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="anny5">IOSD</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="anny6">Android</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="anny7">IOSD</button>
+                            </div>
+                            <div class="tab-pane fade" id="detail">
+                                <h4>团队详情</h4>
+                                <table class="table table-sm">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>组号</th>
+                                        <th>组名</th>
+                                        <th>人数</th>
+                                        <th>组长</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>NoExist</td>
+                                        <td>8</td>
+                                        <td>大爷</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <div class="tab-pane fade" id="operator">
+                                <h4>操作</h4>
+                                <button class="btn btn-pill-left btn-success" draggable="true">同意</button>
+                                <button class="btn btn-pill-right btn-danger" draggable="true">拒绝</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-block -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-xl-8" id="tobeAppend">
+                <div class="card sameheight-item">
+                    <div class="card-block">
+                        <!-- Nav tabs -->
+                        <div class="card-title-block">
+                          <h3 class="title">New团队</h3>
+                        </div>
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item"> <a href="#groupTask2" class="nav-link active" data-target="#groupTask2" data-toggle="tab" aria-controls="groupTask2" role="tab">成员分工</a> </li>
+                           <li class="nav-item"> <a href="#group2" class="nav-link link" data-target="#group2" data-toggle="tab" aria-controls="group2" role="tab">团队成员</a> </li>
+                            <li class="nav-item"> <a href="#detail2" class="nav-link" data-target="#detail2" aria-controls="detail2" data-toggle="tab" role="tab">团队详情</a> </li>
+                            <li class="nav-item"> <a href="" class="nav-link" data-target="#operator2" aria-controls="operator2" data-toggle="tab" role="tab">操作</a> </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs-bordered">
+                            <div class="tab-pane fade in active" id="groupTask2">
+                              <h4>成员分工</h4>
+                                <table class="table table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td>Anna</td>
+                                        <td>Web</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>Interface</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                    <tr>
+                                        <td>OYZH</td>
+                                        <td>前端开发</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                           <div class="tab-pane fade stuContainer" id="group2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                              <h4>队伍成员</h4>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu1">张三</button>
+                              <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="stu2">李四</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu3">1234</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu4">asds</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu5">IOSD</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu6">IOSD</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu7">IOSD</button>
+                              <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu8">IOSD</button>
+                            </div>
+                            <div class="tab-pane fade" id="detail2">
+                                <h4>团队详情</h4>
+                                <table class="table table-sm">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th>组号</th>
+                                        <th>组名</th>
+                                        <th>人数</th>
+                                        <th>组长</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>NoExist</td>
+                                        <td>8</td>
+                                        <td>大爷</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <div class="tab-pane fade" id="operator2">
+                                <h4>操作</h4>
+                                <button class="btn btn-pill-left btn-success" draggable="true">同意</button>
+                                <button class="btn btn-pill-right btn-danger" draggable="true">拒绝</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-block -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </section>
+    <button class="btn btn-oval btn-success" id="btn_AddNewGroup" style="margin-left: 3%">新建</button>
+</article>
+{% endblock %}
+
+<script>
+function allowDrop(ev)
+{
+	ev.preventDefault();
+}
+
+function drag(ev)
+{
+	ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function drop(ev)
+{
+	console.log("drop!");
+	ev.preventDefault();
+	var data= ev.dataTransfer.getData("Text");
+	ev.target.appendChild(document.getElementById(data));
+}
+
+var lageStr = '<div class="col-xl-8" id="tobeAppend"><div class="card sameheight-item"><div class="card-block"><!-- Nav tabs --><div class="card-title-block">  <h3 class="title">New团队</h3></div><ul class="nav nav-tabs nav-tabs-bordered"><li class="nav-item"> <a href="#groupTask3" class="nav-link active" data-target="#groupTask3" data-toggle="tab" aria-controls="groupTask3" role="tab">成员分工</a> </li>   <li class="nav-item"> <a href="#group3" class="nav-link link" data-target="#group3" data-toggle="tab" aria-controls="group3" role="tab">团队成员</a> </li><li class="nav-item"> <a href="#detail3" class="nav-link" data-target="#detail3" aria-controls="detail3" data-toggle="tab" role="tab">团队详情</a> </li><li class="nav-item"> <a href="" class="nav-link" data-target="#operator3" aria-controls="operator3" data-toggle="tab" role="tab">操作</a> </li></ul><!-- Tab panes --><div class="tab-content tabs-bordered"><div class="tab-pane fade in active" id="groupTask3">  <h4>成员分工</h4><table class="table table-sm"><tbody><tr><td>Anna</td><td>Web</td></tr><tr><td>OYZH</td><td>Interface</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr><tr><td>OYZH</td><td>前端开发</td></tr></tbody></table></div>   <div class="tab-pane fade stuContainer" id="group3" ondrop="drop(event)" ondragover="allowDrop(event)">  <h4>队伍成员</h4>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu1">张三</button>  <button class="btn btn-warning btn-lg stuTag" style="background: #F58F90" ondragstart="drag(event)" draggable="true" id="stu2">李四</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu3">1234</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu4">asds</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu5">IOSD</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu6">IOSD</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu7">IOSD</button>  <button class="btn btn-primary btn-lg stuTag" ondragstart="drag(event)" draggable="true" id="stu8">IOSD</button></div><div class="tab-pane fade" id="detail3"><h4>团队详情</h4><table class="table table-sm"><thead class="thead-inverse"><tr><th>组号</th><th>组名</th><th>人数</th><th>组长</th></tr></thead><tbody><tr><td>1</td><td>NoExist</td><td>8</td><td>大爷</td></tr></tbody></table></div><div class="tab-pane fade" id="operator3"><h4>操作</h4><button class="btn btn-pill-left btn-success" draggable="true">同意</button><button class="btn btn-pill-right btn-danger" draggable="true">拒绝</button></div></div></div><!-- /.card-block --></div><!-- /.card --></div>'
+
+$(document).ready(function(){
+	//TobeAppend
+	$("#btn_AddNewGroup").click(function(){
+		$("#studentsContainer").append(lageStr);
+	});
+
+});
+</script>
+
+

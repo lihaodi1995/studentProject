@@ -1,0 +1,97 @@
+{% extends "./adminBase.html" %}
+{% block title %}
+    <title> 添加教师 </title>
+{% endblock %}
+{% block teacher_active %}
+    active
+{% endblock %}
+{% block mainbody %}
+    <article class="content items-list-page">
+            <h2 class="title">新建教师</h2>
+            <br>
+
+            <div class="title-search-block">
+                <div class="title-block">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <lable>手动新建教师</lable>
+                    <a class="btn btn-primary btn-sm rounded-s" href="#" data-toggle="modal" data-target="#add-teacher">新建教师</a>
+                </div>
+            </div>
+
+            <div class="title-block">
+                <div class="row">
+                </div>
+            </div>
+
+            <div class="items-search">
+                <form class="form-inline">
+                    <div class="input-group"><input type="text" class="form-control boxed rounded-s"
+                                                    placeholder="Search for..."> <span class="input-group-btn">
+					<button class="btn btn-secondary rounded-s" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</span></div>
+                </form>
+            </div>
+        </article>
+    <!--./model-->
+    <div class="modal fade" id="add-teacher">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"><i class="fa fa-pencil"></i> 添加教师</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" action="/admin/add_one_teacher/" method="post">
+                                {% csrf_token %}
+                                <div class="form-group"><label class="control-label">* 教工号</label> <input type="text" name="user_idd" required="required" id="user_idd"
+                                                                                                       class="form-control underlined">
+                                </div>
+                                <div class="form-group"><label class="control-label">* 姓名</label> <input type="text" name="name" required="required" id="name"
+                                                                                                       class="form-control underlined">
+                                </div>
+                                <div class="form-group"><label class="control-label">性别</label> <input type="text" name="gender"
+                                                                                                       class="form-control underlined">
+                                </div>
+
+
+                                <div class="form-group"><label class="control-label">电子邮箱</label> <input type="text" name="email"
+                                                                                                         class="form-control underlined">
+                                </div>
+                                <div class="form-group"><label class="control-label">住址</label> <input type="text" name="address"
+                                                                                                       class="form-control underlined">
+                                </div>
+                                <div class="form-group"><label class="control-label">电话</label> <input type="text" name="phone_number"
+                                                                                                       class="form-control underlined">
+                                </div>
+
+                                <div class="form-group"><label class="control-label">* 职称</label> <input type="text" name="position" required="required" id="position"
+                                                                                                       class="form-control underlined">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" onclick="return submitAssertion()">确认提交</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <script>
+    function submitAssertion()
+    {
+        if($("#user_idd").val()==''||$("#name").val()==''||$("#position").val()=='')
+        {
+            alert("请填写所有带*的项目后提交！");
+            return false;
+        }
+        alert("添加成功！");
+        return true;
+    }
+    </script>
+{% endblock %}
+

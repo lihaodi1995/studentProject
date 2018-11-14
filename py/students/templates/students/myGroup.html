@@ -1,0 +1,106 @@
+{% extends "./studentBase.html" %}
+
+{% block mainbody %}
+<article class="content forms-page">
+    <div class="title-block">
+        <h3 class="title">我的团队</h3>
+        <br><br>
+        <label>当前状态：{{ team.status }}</label>
+        <br><br><br>
+        <div class="title-block">
+            <h3 class="title">成员列表</h3>
+            <br>
+        </div>
+        <section class="section">
+            <div class="card card-block sameheight-item">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>组员名</th>
+                        <th>学号</th>
+                        <th>状态</th>
+                        {% if is_head %}
+                        <th>操作</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>{{team.head.user.name}}</strong></td>
+                        <td><strong>{{team.head.user.id}}</strong></td>
+                        <td>组长</td>
+                    </tr>
+                    {% if apply_list %}
+                    {% for a in apply_list %}
+
+                    <tr>
+                        <td><strong>{{a.apply_people.user.name}}</strong></td>
+                        <td><strong>{{a.apply_people.user.id}}<strong></td>
+                        <td>{{a.apply_status}}</td>
+                        {% if is_head %}
+                        <td align="left">
+                            {% ifequal team.status '组建中' %}
+                            {% ifequal a.apply_status '通过' %}
+                            <a class="btn btn-warning" href="/students/delete_member/?id={{a.apply_people.id}}">删除该成员</a>
+                            {% else %}
+                            <a class="btn btn-primary" href="/students/pass_apply/?id={{a.id}}">通过</a>
+                            <a class="btn btn-warning" href="/students/refuse_apply/?id={{a.id}}">拒绝</a>
+                            {% endifequal %}
+                            {% else %}
+                            <p>已提交！</p>
+                            {% endifequal %}
+                        </td>
+                        {% endif %}
+                    </tr>
+
+                    {% endfor %}
+                    {% else %}
+                    <p>该组只有你一人！</p>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+        {% if is_head %}
+        {% ifequal team.status '组建中' %}
+        <button class="btn btn-warning" data-toggle="modal" data-target="#add-member"> 添加成员</button>
+        <a class="btn btn-success" href="/students/apply_to_teacher/?id={{team.id}}"> 提交老师审核</a>
+        <a class="btn btn-danger" href="/students/disband_group/?id={{team.id}}">解散团队</a>
+        {% else %}
+        <p>已提交！</p>
+        {% endifequal %}
+        {% endif %}
+    </div>
+</article>
+<!--Moduel!-->
+<div class="modal fade" id="add-member">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-pencil"></i>添加成员</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" action="/students/add_member/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="team_id" value="{{team.id}}">
+                    <div class="form-group"><label class="control-label">学号</label> <input type="text"
+                                                                                           name="user_id"
+                                                                                           class="form-control underlined">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

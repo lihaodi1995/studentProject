@@ -1,0 +1,214 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% block title %}
+    <title> 后台管理 </title>
+    {% endblock %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <!-- Theme initialization -->
+    <link rel="stylesheet" href="/static/css/app.css">
+    {% block csslast %}
+    {% endblock %}
+</head>
+
+<body>
+<div class="main-wrapper">
+    <div class="app" id="app">
+        <header class="header">
+            <!--Right collapse button-->
+            <div class="header-block header-block-collapse hidden-lg-up">
+                <button class="collapse-btn" id="sidebar-collapse-btn">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <!--Right user icon and notification-->
+            <div class="header-block header-block-nav">
+                <ul class="nav-profile">
+                    <!--Buttons in front end-->
+
+                    {% if selectCourseList %}
+                    <div class="header-block header-block-buttons">
+
+                        {% for i in selectCourseList %}
+                        {% ifequal request.session.course_id i.course.id%}
+                        <a href="/teachers/course_info/" class="btn btn-oval btn-sm rounded-s header-btn"
+                           style="border:5px solid #eaf5ff">
+                            <i class="fa fa-archive"></i> {{ i.course.name }}
+                        </a></a>
+                        {% else %}
+                        <a href="/teachers/course_info/" class="btn btn-oval btn-sm rounded-s header-btn">
+                            <i class="fa fa-archive"></i> {{ i.course.name }}
+                        </a>
+                        {% endifequal %}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <!--Buttons in front end-->
+                    <div class="header-block header-block-buttons">
+                        <a href="#" class="btn btn-oval btn-sm rounded-s header-btn" style="border:5px solid #eaf5ff">
+                            <i class="fa fa-archive"></i> Scrum开发实践 </a>
+                        <a href="#" class="btn btn-oval btn-sm rounded-s header-btn">
+                            <i class="fa fa-archive"></i> 软件工程
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <!--Notification part-->
+                    <!--<li class="notifications new">
+                      <a href="" data-toggle="dropdown"> <i class="fa fa-bell-o"></i>
+                        <sup>
+                            <span class="counter">8</span>
+                        </sup>
+                      </a>
+                        <div class="dropdown-menu notifications-dropdown-menu">
+                            <ul class="notifications-container">
+                                <li>
+                                    <a href="" class="notification-item">
+                                        <div class="img-col">
+                                            <div class="img" style="background-image: url('assets/faces/3.jpg')"></div>
+                                        </div>
+                                        <div class="body-col">
+                                            <p> <span class="accent">Zack Alien</span> pushed new commit: <span class="accent">Fix page load performance issue</span>. </p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="notification-item">
+                                        <div class="img-col">
+                                            <div class="img" style="background-image: url('assets/faces/5.jpg')"></div>
+                                        </div>
+                                        <div class="body-col">
+                                            <p> <span class="accent">Amaya Hatsumi</span> started new task: <span class="accent">Dashboard UI design.</span>. </p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="notification-item">
+                                        <div class="img-col">
+                                            <div class="img" style="background-image: url('assets/faces/8.jpg')"></div>
+                                        </div>
+                                        <div class="body-col">
+                                            <p> <span class="accent">Andy Nouman</span> deployed new version of <span class="accent">NodeJS REST Api V3</span> </p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <footer>
+                                <ul>
+                                    <li><a href="">View All</a></li>
+                                </ul>
+                            </footer>
+                        </div>
+                    </li>
+                    <!--User photo and name button-->
+                    <li class="profile dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            <div class="img"
+                                 style="background-image: url('/static/images/user.png')"></div>
+                            <span class="name">
+    			      {{request.session.user_name}}
+    			    </span> </a>
+                        <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a class="dropdown-item" href="/teachers/teacher_info/Z"> <i class="fa fa-user icon"></i>
+                                个人信息 </a>
+                            <a class="dropdown-item" href="/teachers/setPassword/"> <i class="fa fa-gear icon"></i> 修改密码
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout"> <i class="fa fa-power-off icon"></i> 注销 </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <div class="sidebar-container">
+                <div class="sidebar-header">
+                    <div class="brand">
+                        <div class="logo"><span class="l l1"></span> <span class="l l2"></span> <span
+                                class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span></div>
+                        课程管理
+                    </div>
+                </div>
+                <nav class="menu">
+                    <ul class="nav metismenu" id="sidebar-menu">
+
+                        <li class="{% block homepage_active %}{% endblock %}">
+                            <a href="/teachers/course_index"> <i class="fa fa-home"></i> 主页 </a> </a>
+                        </li>
+
+                        <li class="{% block course_active %}{% endblock %}">
+
+                            <a href="/teachers/course_info"> <i class="fa fa-info-circle"></i> 课程信息 </a> </a>
+                        </li>
+
+                        <li class="{% block homework_active %}{% endblock %}">
+                            <a href=""> <i class="fa fa-book"></i> 作业管理 <i class="fa arrow"></i> </a>
+
+                            <ul>
+                                <li><a href="/teachers/add_assignment"><i class="fa fa-plus"></i>
+                                    新建作业
+                                </a></li>
+                                <li><a href="/teachers/check_assignment"><i class="fa fa-pencil"></i>
+                                    作业批改
+                                </a></li>
+                                <li><a href="/teachers/upload_grades"><i class="fa fa-cloud-upload"></i>
+                                    成绩上传
+                                </a></li>
+                                <li><a href="/teachers/assignment_form"><i class="fa fa-list-alt"></i>
+                                    作业报表
+                                </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="{% block grade_active %}{% endblock %}">
+
+                            <a href="/teachers/manage_grade"> <i class="fa fa-check-square-o"></i> 成绩管理</i> </a>
+
+
+                        </li>
+
+                        <li class="{% block resource_active %}{% endblock %}">
+                            <a href="/teachers/manage_resources"> <i class="fa fa-cloud-download"></i> 资源管理</i> </a>
+
+                        </li>
+
+                        <li class="{% block team_active %}{% endblock %}">
+                            <a href=""> <i class="fa fa-group"></i> 团队管理 <i class="fa arrow"></i> </a>
+                            <ul>
+                                <li><a href="/teachers/approve_team"><i class="fa fa-check-square-o"></i>
+                                    团队审核与微调
+                                </a></li>
+
+                                <li><a href="/teachers/watch_team"><i class="fa fa-list"></i>
+                                    查看团队信息
+                                </a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </div>
+
+        </aside>
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        {% block mainbody %}
+        {% endblock %}
+    </div>
+    {% block allscript %}
+    <script src="/static/js/vendor.js"></script>
+    <script src="/static/js/app.js"></script>
+    {% block lastjs %}
+    {% endblock %}
+    {% endblock %}
+</div>
+</body>
+
+</html>

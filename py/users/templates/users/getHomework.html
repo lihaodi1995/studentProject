@@ -1,0 +1,275 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> 查看作业-学生平台 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <!-- Theme initialization -->
+    <link rel="stylesheet" href="/static/css/app.css">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <header class="header">
+                <div class="header-block header-block-collapse hidden-lg-up"> <button class="collapse-btn" id="sidebar-collapse-btn">
+    			<i class="fa fa-bars"></i>
+    		</button> </div>
+
+                <div class="header-block header-block-nav">
+                    <ul class="nav-profile">
+                        <li class="profile dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&s=40')"> </div> <span class="name">
+    			      admin
+    			    </span> </a>
+                            <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <a class="dropdown-item" href="#"> <i class="fa fa-user icon"></i> 个人信息 </a>
+                                <a class="dropdown-item" href="/admin/set_password"> <i class="fa fa-gear icon"></i> 密码设置 </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="login.html"> <i class="fa fa-power-off icon"></i> 退出登陆 </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <aside class="sidebar">
+                    <div class="sidebar-container">
+                        <div class="sidebar-header">
+                            <div class="brand">
+                                <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div> 学生系统 </div>
+                        </div>
+                        <nav class="menu">
+                            <ul class="nav metismenu" id="sidebar-menu">
+                                <li> <a href="index.html"> <em class="fa fa-home"></em> 主页 </a> </li>
+
+                                <li>
+                                <a href="forms.html"> <i class="fa fa-pencil-square-o"></i> 个人信息 </a>
+                                </li>
+                                <li>
+                                    <a href=""> <i class="fa fa-sitemap"></i> 课程体系<i class="fa arrow"></i> </a>
+                                    <ul class="collapse">
+										<li> <a href=""> <i class="fa fa-check-circle-o"></i> Scrum </a></li>
+										<li><a href=""> <em class="fa fa-check-circle-o"></em> 软件工程过程 </a> </li>
+									</ul>
+                                </li>
+                                	<li class="active"> <a href="/users/get_homework"> <i class="fa fa-file-text-o"></i> 作业 </a></li>
+									<li><a href=""> <em class="fa fa-th-large"></em> 资源管理 </a> </li>
+									                                <li>
+                                    <a href=""> <i class="fa fa-sitemap"></i> 团队管理<i class="fa arrow"></i> </a>
+                                    <ul class="collapse">
+										<li> <a href=""> <i class="fa fa-flag-o"></i> 团队组建</a></li>
+										<li><a href=""> <em class="fa fa-check"></em> 提交申请 </a> </li>
+									</ul>
+                                </li>
+									<li><a href=""> <em class="fa fa-comment"></em> 在线交流 </a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <footer class="sidebar-footer">
+                        <ul class="nav metismenu" id="customize-menu">
+                            <li>
+                                <ul>
+                                    <li class="customize">
+                                        <div class="customize-item">
+                                            <div class="row customize-header">
+                                                <div class="col-xs-4"> </div>
+                                                <div class="col-xs-4"> <label class="title">fixed</label> </div>
+                                                <div class="col-xs-4"> <label class="title">static</label> </div>
+                                            </div>
+                                            <div class="row hidden-md-down">
+                                                <div class="col-xs-4"> <label class="title">Sidebar:</label> </div>
+                                                <div class="col-xs-4"> <label>
+    				                        <input class="radio" type="radio" name="sidebarPosition" value="sidebar-fixed" >
+    				                        <span></span>
+    				                    </label> </div>
+                                                <div class="col-xs-4"> <label>
+    				                        <input class="radio" type="radio" name="sidebarPosition" value="">
+    				                        <span></span>
+    				                    </label> </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4"> <label class="title">Header:</label> </div>
+                                                <div class="col-xs-4"> <label>
+    				                        <input class="radio" type="radio" name="headerPosition" value="header-fixed">
+    				                        <span></span>
+    				                    </label> </div>
+                                                <div class="col-xs-4"> <label>
+    				                        <input class="radio" type="radio" name="headerPosition" value="">
+    				                        <span></span>
+    				                    </label> </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4"> <label class="title">Footer:</label> </div>
+                                                <div class="col-xs-4"> <label>
+    				                        <input class="radio" type="radio" name="footerPosition" value="footer-fixed">
+    				                        <span></span>
+    				                    </label> </div>
+                                                <div class="col-xs-4"> <label>
+    				                        <input class="radio" type="radio" name="footerPosition" value="">
+    				                        <span></span>
+    				                    </label> </div>
+                                            </div>
+                                        </div>
+                                        <div class="customize-item">
+                                            <ul class="customize-colors">
+                                                <li> <span class="color-item color-red" data-theme="red"></span> </li>
+                                                <li> <span class="color-item color-orange" data-theme="orange"></span> </li>
+                                                <li> <span class="color-item color-green" data-theme="green"></span> </li>
+                                                <li> <span class="color-item color-seagreen" data-theme="seagreen"></span> </li>
+                                                <li> <span class="color-item color-blue active" data-theme=""></span> </li>
+                                                <li> <span class="color-item color-purple" data-theme="purple"></span> </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <a href=""> <i class="fa fa-cog"></i> Customize </a>
+                            </li>
+                        </ul>
+                    </footer>
+            </aside>
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+            <article class="content items-list-page">
+                <h3 class="title">未截止作业</h3>
+                <br>
+
+                <div class="card items">
+                    <ul class="item-list striped">
+                        <li class="item item-list-header hidden-sm-down">
+                            <div class="item-row">
+
+                                <div class="item-col item-col-header item-col-title">
+                                    <div> <span>作业名称</span> </div>
+                                </div>
+                                <div class="item-col item-col-header">
+                                    <div> <span>开始时间</span> </div>
+                                </div>
+                                <div class="item-col item-col-header">
+                                    <div> <span>最晚结束时间</span> </div>
+                                </div>
+                                <div class="item-col item-col-header">
+                                    <div> <span>提交状态</span> </div>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        {% if assignment %}
+                        {% for s in assignment %}
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col">
+                                    <a href="/users/homework_info">{{ s.name }}</a>
+                                </div>
+                                <div class="item-col item-col-title">
+                                    {{ s.start_time }}
+                                </div>
+                                <div class="item-col">
+                                    {{ s.deadline }}
+                                </div>
+
+                                <div class="item-col">
+                                    {{ s.submission_time }}
+                                </div>
+
+                            </div>
+                        </li>
+                        {% endfor %}
+                        {% else %}
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col">
+                                    No assignments to do.
+                                </div>
+                            </div>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <br>
+                <h3 class="title">已完成作业</h3>
+                <br>
+
+                <div class="card items">
+                    <ul class="item-list striped">
+                        <li class="item item-list-header hidden-sm-down">
+                            <div class="item-row">
+
+                                <div class="item-col item-col-header md item-col-title">
+                                    <div> <span>作业名称</span> </div>
+                                </div>
+
+                                <div class="item-col item-col-header">
+                                    <div> <span>提交状态</span> </div>
+                                </div>
+
+                                <div class="item-col item-col-header">
+                                    <div> <span>最后提交时间</span> </div>
+                                </div>
+
+                                <div class="item-col item-col-header">
+                                    <div> <span>得分</span> </div>
+                                </div>
+
+                                <div class="item-col item-col-header">
+                                    <div> <span>评价详情</span> </div>
+                                </div>
+
+
+                            </div>
+                        </li>
+                        {% if submission %}
+                        {% for t in submission %}
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col item-col-title">
+                                    {{ t.name }}
+                                </div>
+                                <div class="item-col">
+                                    {{ t.submission_status }}
+                                </div>
+                                <div class="item-col">
+                                    {{ t.submission_time }}
+                                </div>
+                                <div class="item-col">
+                                    {{ t.score }}
+                                </div>
+                                <div class="item-col">
+                                    <a href="/users/revision_info">查看</a>
+                                </div>
+
+                            </div>
+                        </li>
+                        {% endfor %}
+                        {% else %}
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col">
+                                    No assignments done.
+                                </div>
+                            </div>
+                        </li>
+                        {% endif %}
+
+
+
+                    </ul>
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+
+    <script src="/static/js/vendor.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>

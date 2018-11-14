@@ -1,0 +1,57 @@
+{% extends "./studentBase.html" %}
+{% block title %}
+    <title> 作业信息 </title>
+{% endblock %}
+{% block homework_active%}
+active
+{% endblock %}
+{% block mainbody %}
+<article class="content items-list-page">
+            <h3 class="title">作业列表</h3>
+            <br>
+
+                <div class="title-block">
+                </div>
+
+            <div class="card items">
+                <ul class="item-list striped">
+
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col item-col-header md">
+                                <div><span>作业序号</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>作业名称</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>当前状态</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>截止日期</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% for src in assignmentList %}
+                    <li class="item">
+                        <div class="item-row">
+                            <div class="item-col">
+                                {{ src.id }}
+                            </div>
+                            <div class="item-col">
+                                <a class="download-item" href="/students/ass_detail/{{ src.id }}">{{ src.name }}</a>
+                            </div>
+                            <div class="item-col">
+                                {{ src.start_time }}
+                            </div>
+                            <div class="item-col">
+                                {{ src.end_time }}
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </article>
+
+{% endblock %}

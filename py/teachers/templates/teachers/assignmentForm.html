@@ -1,0 +1,140 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 作业报表 </title>
+{% endblock %}
+{% block homework_active %}
+    active open
+{% endblock %}
+
+{% block mainbody %}
+    <article class="content items-list-page">
+        <h3 class="title">作业列表</h3>
+        <br>
+
+        <div class="title-block">
+            <p>请选择作业</p>
+            <select id="select_ass">
+                {% for a in ass_list %}
+                {% ifequal a asnmt%}
+                <option value="{{ a.id }}" selected>{{ a.name }}</option>
+                {% else %}
+                <option value="{{ a.id }}">{{ a.name }}</option>
+                {% endifequal %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="card items">
+                <ul class="item-list striped">
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col item-col-header md">
+                                <div><span>团队ID</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>团队名称</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>{{ asnmt.name }}提交状态</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>{{ asnmt.name }}分数</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% for tm in teams %}
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col">
+                                    {{ tm.id }}
+                                </div>
+                                <div class="item-col">
+                                    {{ tm.name }}
+                                </div>
+                                {% ifequal tm.record_id  False %}
+                                    <div class="item-col"style="color:red">
+                                       未提交
+                                    </div>
+                                {% else %}
+                                    <div class="item-col"style="color:limegreen">
+                                       已提交
+                                    </div>
+                                {% endifequal %}
+                                {% ifequal tm.record_id  False %}
+                                    <div class="item-col">
+                                    </div>
+                                {% else %}
+                                    <div class="item-col">
+                                        {% if tm.record_id.score > 0 %}
+                                            <div class="item-col">
+                                                { tm.record_id.score }}
+                                            </div>
+                                        {% else %}
+                                            <div class="item-col">
+                                                无
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endifequal %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <br>
+        </div>
+
+
+    <h3 class="title">累计作业列表</h3>
+        <br>
+        <a href="/teachers/export_assignment_report/{{ course_id }}/">导出累计作业报表</a>
+        <div class="title-block">
+        </div>
+
+        <div class="card items">
+                <ul class="item-list striped">
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col item-col-header md">
+                                <div><span>团队ID</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>团队名称</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>完成作业数</span></div>
+                            </div>
+                        </div>
+                    </li>
+                    {% for tm in teams %}
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col">
+                                    {{ tm.id }}
+                                </div>
+                                <div class="item-col">
+                                    {{ tm.name }}
+                                </div>
+                                <div class="item-col">
+                                   {{ tm.sub_num }}
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <br>
+        </div>
+
+    </article>
+
+{% endblock %}
+{% block lastjs %}
+<script>
+    $(document).ready(function(){
+        $("#select_ass").change(function(){
+            var checkValue=$("#select_ass").val();
+            window.location.href="/teachers/assignment_form/"+checkValue;
+        });
+    });
+
+</script>
+{% endblock %}

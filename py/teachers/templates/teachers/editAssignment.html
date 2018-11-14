@@ -1,0 +1,85 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 添加作业 </title>
+{% endblock %}
+{% block homework_active %}
+    active open
+{% endblock %}
+{% block mainbody %}
+    <div class="title-block">
+        <h3 class="title">
+            编辑作业
+        </h3>
+    </div>
+   <article class="content static-tables-page">
+            <div class="title-block">
+                <h1 class="title">
+                    编辑作业
+                </h1>
+            </div>
+            <section class="section">
+                <div class="card card-block sameheight-item" style="height: 1000px;">
+                    <div class="title-block">
+                        <form role="form" action="/teachers/edit_assignment/{{ ass_id }}/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group"><label class="control-label">作业名</label> <input type="text"
+                                                                                                    class="form-control underlined"
+                                                                                                    name="name" value="{{ ass.name }}">
+                            </div>
+                            <div>
+                                <div class="form-group"><label class="control-label">作业类型</label>
+                                    {% ifequal ass.type "团队" %}
+                                        <div><label>
+                                            <input class="radio" name="inline-radios" type="radio" value="团队" checked="true">
+                                            <span>团队</span>
+                                        </label> <label>
+                                            <input class="radio" name="inline-radios" type="radio" value="个人">
+                                            <span>个人</span>
+                                        </label>
+                                        </div>
+                                    {% else %}
+                                        <div><label>
+                                            <input class="radio" name="inline-radios" type="radio" value="团队">
+                                            <span>团队</span>
+                                        </label> <label>
+                                            <input class="radio" name="inline-radios" type="radio" value="个人" checked="true">
+                                            <span>个人</span>
+                                        </label>
+                                        </div>
+                                    {% endifequal %}
+                                </div>
+                            </div>
+                            <div class="form-group"><label class="control-label">开始时间</label> <input type="datetime-local"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="start_time" value="">{{ ass.start_time |date:"Y-m-d H:i" }}
+                            </div>
+                            <div class="form-group"><label class="control-label">结束时间</label> <input type="datetime-local"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="end_time" value="">{{ ass.end_time |date:"Y-m-d H:i" }}
+                            </div>
+                            <div class="form-group"><label class="control-label">允许提交次数</label> <input type="text"
+                                                                                                       class="form-control underlined"
+                                                                                                       name="allow_submit_times" value="{{ ass.allow_submit_times }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">最高分数</label> <input type="text"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="score" value="{{ ass.score }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">分数权重</label> <input type="text"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="score_percentage" value="{{ ass.score_percentage }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">作业说明</label> <textarea rows="10"
+                                                                                                        class="form-control boxed"
+                                                                                                        name="detail" value=""> {{ ass.detail }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">确认修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+{% endblock %}

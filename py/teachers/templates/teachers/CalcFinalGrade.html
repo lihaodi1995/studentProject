@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+    <article class="content items-list-page">
+            <h2 class="title">作业详情</h2>
+            <br>
+
+            <div class="title-block">
+                <div class="row">
+                </div>
+            </div>
+
+            <div>
+                <form>
+                    <label>作业名称：&nbsp</label>{{ s.name }}
+                    <br><br>
+                    <label>开始时间：&nbsp</label>{{ s.start_time }}
+                    <br><br>
+                    <label>结束时间：&nbsp</label>{{ s.deadline }}
+                    <br><br>
+                    <label>允许提交次数：&nbsp</label>{{ s.submission }}
+                    <br><br>
+                    <label>作业详情：&nbsp</label>{{ s.requirement }}
+                    <br><br>
+                    <label>作业资源：</label>
+                    <a href="#" class="btn btn-primary btn-sm rounded-s">下载选中文档</a>
+                    <br>
+
+                    <div class="card items col-md-10">
+                        <ul class="item-list striped">
+
+                            <li class="item item-list-header hidden-sm-down">
+                            <div class="item-row">
+                                <div class="item-col fixed item-col-check"> <label class="item-check" id="select-all-items">
+						<input type="checkbox" class="checkbox">
+						<span></span>
+					</label> </div>
+                                <div class="item-col item-col-header md">
+                                    <div> <span>附件名称</span> </div>
+                                </div>
+
+                                <div class="item-col item-col-header fixed item-col-actions-dropdown"> </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="item-row">
+                                {% if assignment_file %}
+                                {% for af in assignment_file %}
+                                    <div class="item-col fixed item-col-check"> <label class="item-check" id="select-all-items">
+                                        <input type="checkbox" class="checkbox">
+                                        <span></span>
+                                    </label>
+                                    </div>
+
+
+                                    <div class="item-col item-col-title">
+                                        {{ af.name }}
+                                    </div>
+
+                                    <div class="item-col">
+                                        <a href="#" >下载</a>
+                                    </div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="item-col fixed item-col-check"> <label class="item-check" id="select-all-items">
+
+                                        <span></span>
+                                    </label>
+                                    </div>
+
+
+                                    <div class="item-col item-col-title">
+                                        No file uploaded.
+                                    </div>
+
+                                    <div class="item-col">
+                                        <a href="#" > </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </li>
+
+                        </ul>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="title-block">
+                <div class="row">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 form-control-label text-xs-left">提交文本：</label>
+                    <div class="col-sm-10"><form>
+                        {% csrf_token %}
+                        <div class="wyswyg">
+                            <div class="toolbar"> <span class="ql-format-group">
+			                    <select title="Size" class="ql-size">
+				                    <option value="10px">Small</option>
+                                    <option value="13px" selected>Normal</option>
+                                    <option value="18px">Large</option>
+                                    <option value="32px">Huge</option>
+			                    </select>
+                                </span> <span class="ql-format-group">
+                                <span title="Bold" class="ql-format-button ql-bold"></span> <span class="ql-format-separator"></span> <span title="Italic" class="ql-format-button ql-italic"></span> <span class="ql-format-separator"></span> <span title="Underline" class="ql-format-button ql-underline"></span>                                            <span class="ql-format-separator"></span> <span title="Strikethrough" class="ql-format-button ql-strike"></span> </span> <span class="ql-format-group">
+                                <select title="Text Color" class="ql-color">
+                                    <option value="rgb(0, 0, 0)" label="rgb(0, 0, 0)" selected></option>
+                                    <option value="rgb(230, 0, 0)" label="rgb(230, 0, 0)"></option>
+                                    <option value="rgb(255, 153, 0)" label="rgb(255, 153, 0)"></option>
+                                    <option value="rgb(255, 255, 0)" label="rgb(255, 255, 0)"></option>
+                                    <option value="rgb(0, 138, 0)" label="rgb(0, 138, 0)"></option>
+                                    <option value="rgb(0, 102, 204)" label="rgb(0, 102, 204)"></option>
+                                    <option value="rgb(153, 51, 255)" label="rgb(153, 51, 255)"></option>
+                                    <option value="rgb(255, 255, 255)" label="rgb(255, 255, 255)"></option>
+                                    <option value="rgb(250, 204, 204)" label="rgb(250, 204, 204)"></option>
+                                    <option value="rgb(255, 235, 204)" label="rgb(255, 235, 204)"></option>
+                                    <option value="rgb(255, 255, 204)" label="rgb(255, 255, 204)"></option>
+                                    <option value="rgb(204, 232, 204)" label="rgb(204, 232, 204)"></option>
+                                    <option value="rgb(204, 224, 245)" label="rgb(204, 224, 245)"></option>
+                                    <option value="rgb(235, 214, 255)" label="rgb(235, 214, 255)"></option>
+                                    <option value="rgb(187, 187, 187)" label="rgb(187, 187, 187)"></option>
+                                    <option value="rgb(240, 102, 102)" label="rgb(240, 102, 102)"></option>
+                                    <option value="rgb(255, 194, 102)" label="rgb(255, 194, 102)"></option>
+                                    <option value="rgb(255, 255, 102)" label="rgb(255, 255, 102)"></option>
+                                    <option value="rgb(102, 185, 102)" label="rgb(102, 185, 102)"></option>
+                                    <option value="rgb(102, 163, 224)" label="rgb(102, 163, 224)"></option>
+                                    <option value="rgb(194, 133, 255)" label="rgb(194, 133, 255)"></option>
+                                    <option value="rgb(136, 136, 136)" label="rgb(136, 136, 136)"></option>
+                                    <option value="rgb(161, 0, 0)" label="rgb(161, 0, 0)"></option>
+                                    <option value="rgb(178, 107, 0)" label="rgb(178, 107, 0)"></option>
+                                    <option value="rgb(178, 178, 0)" label="rgb(178, 178, 0)"></option>
+                                    <option value="rgb(0, 97, 0)" label="rgb(0, 97, 0)"></option>
+                                    <option value="rgb(0, 71, 178)" label="rgb(0, 71, 178)"></option>
+                                    <option value="rgb(107, 36, 178)" label="rgb(107, 36, 178)"></option>
+                                    <option value="rgb(68, 68, 68)" label="rgb(68, 68, 68)"></option>
+                                    <option value="rgb(92, 0, 0)" label="rgb(92, 0, 0)"></option>
+                                    <option value="rgb(102, 61, 0)" label="rgb(102, 61, 0)"></option>
+                                    <option value="rgb(102, 102, 0)" label="rgb(102, 102, 0)"></option>
+                                    <option value="rgb(0, 55, 0)" label="rgb(0, 55, 0)"></option>
+                                    <option value="rgb(0, 41, 102)" label="rgb(0, 41, 102)"></option>
+                                    <option value="rgb(61, 20, 102)" label="rgb(61, 20, 102)"></option>
+                                </select>
+                                <span class="ql-format-separator"></span> <select title="Background Color" class="ql-background">
+                                    <option value="rgb(0, 0, 0)" label="rgb(0, 0, 0)"></option>
+                                    <option value="rgb(230, 0, 0)" label="rgb(230, 0, 0)"></option>
+                                    <option value="rgb(255, 153, 0)" label="rgb(255, 153, 0)"></option>
+                                    <option value="rgb(255, 255, 0)" label="rgb(255, 255, 0)"></option>
+                                    <option value="rgb(0, 138, 0)" label="rgb(0, 138, 0)"></option>
+                                    <option value="rgb(0, 102, 204)" label="rgb(0, 102, 204)"></option>
+                                    <option value="rgb(153, 51, 255)" label="rgb(153, 51, 255)"></option>
+                                    <option value="rgb(255, 255, 255)" label="rgb(255, 255, 255)" selected></option>
+                                    <option value="rgb(250, 204, 204)" label="rgb(250, 204, 204)"></option>
+                                    <option value="rgb(255, 235, 204)" label="rgb(255, 235, 204)"></option>
+                                    <option value="rgb(255, 255, 204)" label="rgb(255, 255, 204)"></option>
+                                    <option value="rgb(204, 232, 204)" label="rgb(204, 232, 204)"></option>
+                                    <option value="rgb(204, 224, 245)" label="rgb(204, 224, 245)"></option>
+                                    <option value="rgb(235, 214, 255)" label="rgb(235, 214, 255)"></option>
+                                    <option value="rgb(187, 187, 187)" label="rgb(187, 187, 187)"></option>
+                                    <option value="rgb(240, 102, 102)" label="rgb(240, 102, 102)"></option>
+                                    <option value="rgb(255, 194, 102)" label="rgb(255, 194, 102)"></option>
+                                    <option value="rgb(255, 255, 102)" label="rgb(255, 255, 102)"></option>
+                                    <option value="rgb(102, 185, 102)" label="rgb(102, 185, 102)"></option>
+                                    <option value="rgb(102, 163, 224)" label="rgb(102, 163, 224)"></option>
+                                    <option value="rgb(194, 133, 255)" label="rgb(194, 133, 255)"></option>
+                                    <option value="rgb(136, 136, 136)" label="rgb(136, 136, 136)"></option>
+                                    <option value="rgb(161, 0, 0)" label="rgb(161, 0, 0)"></option>
+                                    <option value="rgb(178, 107, 0)" label="rgb(178, 107, 0)"></option>
+                                    <option value="rgb(178, 178, 0)" label="rgb(178, 178, 0)"></option>
+                                    <option value="rgb(0, 97, 0)" label="rgb(0, 97, 0)"></option>
+                                    <option value="rgb(0, 71, 178)" label="rgb(0, 71, 178)"></option>
+                                    <option value="rgb(107, 36, 178)" label="rgb(107, 36, 178)"></option>
+                                    <option value="rgb(68, 68, 68)" label="rgb(68, 68, 68)"></option>
+                                    <option value="rgb(92, 0, 0)" label="rgb(92, 0, 0)"></option>
+                                    <option value="rgb(102, 61, 0)" label="rgb(102, 61, 0)"></option>
+                                    <option value="rgb(102, 102, 0)" label="rgb(102, 102, 0)"></option>
+                                    <option value="rgb(0, 55, 0)" label="rgb(0, 55, 0)"></option>
+                                    <option value="rgb(0, 41, 102)" label="rgb(0, 41, 102)"></option>
+                                    <option value="rgb(61, 20, 102)" label="rgb(61, 20, 102)"></option>
+                                </select> </span> <span class="ql-format-group">
+                                <span title="List" class="ql-format-button ql-list"></span> <span class="ql-format-separator"></span> <span title="Bullet" class="ql-format-button ql-bullet"></span> <span class="ql-format-separator"></span> <select title="Text Alignment" class="ql-align">
+                                    <option value="left" label="Left" selected></option>
+                                    <option value="center" label="Center"></option>
+                                    <option value="right" label="Right"></option>
+                                    <option value="justify" label="Justify"></option>
+                                </select> </span> <span class="ql-format-group">
+                                <span title="Link" class="ql-format-button ql-link"></span> <span class="ql-format-separator"></span> <button type="button" title="Image" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal-media">
+                                    <i class="fa fa-image"></i> Media
+			                        </button> </span> <span class="ql-format-group">
+		                        </span> </div>
+                                        <!-- Create the editor container -->
+                                        <div class="editor" name="field_content" id="field_content"> Type here. </div>
+                        </div>
+                        <br>
+                        <input type="submit" value="提交" onclick="submit_it()" class="btn btn-primary">
+                 </form></div>
+
+            </div>
+
+
+
+            <div class="title-block">
+                <div class="row">
+                </div>
+            </div>
+
+            <div>
+                <lable>上传文件</lable>
+                <br>
+                <br>
+                {% csrf_token %}
+                <div class="col-sm-12">
+                        <div class="nest" id="DropZoneClose">
+                            <div class="body-nest" id="DropZone">
+                                <form action="#" method="POST" enctype="multipart/form-data" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                    <div class="dz-message-block">
+                                        <div class="dz-message needsclick"> Drop files here or click to upload. </div>
+                                    </div>
+                                </form>
+                                <br>
+                                <button class="btn btn-info submit" id="submit_upload" name="submit_upload">上传</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </article>
+<script src="/static/js/vendor.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

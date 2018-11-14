@@ -1,0 +1,62 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+    <title> 分数上传 </title>
+{% endblock %}
+
+{% block homework_active %}
+    active open
+{% endblock %}
+
+{% block mainbody %}
+
+<article class="content items-list-page">
+        <h3 class="title">分数上传</h3>
+        <br>
+
+        <div class="title-block">
+        </div>
+                        <div class="card card-block sameheight-item" style="height: 1000px;">
+                            <div class="title-block">
+                                <form role="form" id="upload_item_score_model" method="post" action="{{ action }}">
+                                    {% csrf_token %}
+                                    <ul class="item-list striped">
+                                        <li class="item item-list-header hidden-sm-down">
+                                            <div class="item-row">
+                                                <div class="item-col item-col-header md">
+                                                    <div><span>团队序号</span></div>
+                                                </div>
+                                                <div class="item-col item-col-header">
+                                                    <div><span>团队名称</span></div>
+                                                </div>
+                                                <div class="item-col item-col-header">
+                                                    <div><span>团队分数</span></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% for team in team_score_list %}
+                                            <li class="item">
+                                                <div class="item-row">
+                                                    <div class="item-col">
+                                                        {{ team.id }}
+                                                    </div>
+                                                    <div class="item-col">
+                                                        {{ team.name }}
+                                                    </div>
+                                                    <div class="item-col">
+                                                        <input type="text" class="form-control underlined" name="ID_{{ team.id }}" value="{{ team.score }}">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <br>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" >提交分数</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+</article>
+
+{% endblock %}

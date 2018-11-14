@@ -1,0 +1,92 @@
+{% extends "./studentBase.html" %}
+{% block title %}
+    <title> 资源管理 </title>
+{% endblock %}
+
+{% block resource_active %}
+active
+{%  endblock %}
+
+{% block mainbody %}
+active
+<body>
+
+        <article class="content items-list-page">
+            <h3 class="title">资源</h3>
+            <br>
+
+            <div class="title-search-block">
+                <div class="title-block">
+                    <div>
+                        <form method="post" action="/students/select_via_tags/" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group"><label class="control-label">文件标签</label>
+                                <div>
+                                    {% for tag in course_tag_list %}
+                                    <label>
+                                        <input class="checkbox" type="checkbox" name="tag" value="{{ tag.tag }}">
+                                        <span>{{ tag.tag }}</span>
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <input type="submit" value="查询" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+                <div class="card items">
+                    <ul class="item-list striped">
+                        <li class="item item-list-header hidden-sm-down">
+                            <div class="item-row">
+                                <div class="item-col item-col-header md">
+                                    <div><span>资源名</span></div>
+                                </div>
+                                <div class="item-col item-col-header">
+                                    <div><span>标签</span></div>
+                                </div>
+                                <div class="item-col item-col-header">
+                                    <div><span>上传教师</span></div>
+                                </div>
+                                <div class="item-col item-col-header">
+                                    <div><span>上传时间</span></div>
+                                </div>
+                                <div class="item-col item-col-header">
+                                    <div><span>操作</span></div>
+                                </div>
+                            </div>
+                        </li>
+                        {% for src in filelist %}
+                        <li class="item">
+                            <div class="item-row">
+                                <div class="item-col">
+                                    {{ src.name }}
+                                </div>
+                                <div class="item-col">
+                                    {{ src.tags }}
+                                </div>
+                                <div class="item-col">
+                                    {{ src.submitter }}
+                                </div>
+                                <div class="item-col">
+                                    {{ src.time | date:"F j, Y"}}
+                                </div>
+                                <div class="item-col">
+                                    <div>
+                                        <a class="download-item" href="/students/download_resources/{{ src.id }}"><i
+                                                class="fa fa-check icon"></i>下载</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </article>
+
+<script src="/static/js/vendor.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+
+{% endblock %}
+

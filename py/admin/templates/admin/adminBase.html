@@ -1,0 +1,156 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% block title %}
+    <title> 后台管理 </title>
+    {% endblock %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Theme initialization -->
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <link rel="stylesheet" href="/static/css/app.css">
+    {% block csslast %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="app" id="app">
+            <header class="header">
+                <div class="header-block header-block-collapse hidden-lg-up">
+                    <button class="collapse-btn" id="sidebar-collapse-btn">
+    			        <i class="fa fa-bars"></i>
+    		        </button> </div>
+
+                <div class="header-block header-block-nav">
+                    <ul class="nav-profile">
+                    <!--Notification part-->
+{#                    <!<li class="notifications new">#}
+{#                      <a href="" data-toggle="dropdown"> <i class="fa fa-bell-o"></i>#}
+{#                        <sup>#}
+{#    			            <span class="counter">8</span>#}
+{#                        </sup>#}
+{#                      </a>#}
+{#                        <div class="dropdown-menu notifications-dropdown-menu">#}
+{#                            <ul class="notifications-container">#}
+{#                                <li>#}
+{#                                    <a href="" class="notification-item">#}
+{#                                        <div class="img-col">#}
+{#                                            <div class="img" style="background-image: url('assets/faces/3.jpg')"></div>#}
+{#                                        </div>#}
+{#                                        <div class="body-col">#}
+{#                                            <p> <span class="accent">Zack Alien</span> pushed new commit: <span class="accent">Fix page load performance issue</span>. </p>#}
+{#                                        </div>#}
+{#                                    </a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="" class="notification-item">#}
+{#                                        <div class="img-col">#}
+{#                                            <div class="img" style="background-image: url('assets/faces/5.jpg')"></div>#}
+{#                                        </div>#}
+{#                                        <div class="body-col">#}
+{#                                            <p> <span class="accent">Amaya Hatsumi</span> started new task: <span class="accent">Dashboard UI design.</span>. </p>#}
+{#                                        </div>#}
+{#                                    </a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="" class="notification-item">#}
+{#                                        <div class="img-col">#}
+{#                                            <div class="img" style="background-image: url('assets/faces/8.jpg')"></div>#}
+{#                                        </div>#}
+{#                                        <div class="body-col">#}
+{#                                            <p> <span class="accent">Andy Nouman</span> deployed new version of <span class="accent">NodeJS REST Api V3</span> </p>#}
+{#                                        </div>#}
+{#                                    </a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                            <footer>#}
+{#                                <ul>#}
+{#                                    <li><a href="">View All</a></li>#}
+{#                                </ul>#}
+{#                            </footer>#}
+{#                        </div>#}
+{#                    </li>#}
+                    <!--User photo and name button-->
+                    <li class="profile dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            <div class="img"
+                                 style="background-image: url('/static/images/user.png')"></div>
+                            <span class="name">
+    			      {{request.session.user_name}}
+    			    </span> </a>
+                            <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <a class="dropdown-item" href="/admin/set_password"> <i class="fa fa-gear icon"></i> 设置密码 </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout"> <i class="fa fa-power-off icon"></i> 退出登陆 </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <aside class="sidebar">
+                <div class="sidebar-container">
+                    <div class="sidebar-header">
+                        <div class="brand">
+                            <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span>                                <span class="l l5"></span> </div> 教务管理 </div>
+                    </div>
+                    <nav class="menu">
+                        <ul class="nav metismenu" id="sidebar-menu">
+                            <li class="{% block homepage_active %}{% endblock %}">
+                                <a href="/admin/"> <i class="fa fa-home"></i> 主页 </a>
+                            </li>
+                            <li class="{% block semester_active %}{% endblock %}">
+                                <a href="/admin/set_semester"> <i class="fa fa-calendar"></i> 学期管理 </a>
+                            </li>
+                            <li class="{% block course_active %} {% endblock %}">
+                                <a href="/admin/set_course"> <i class="fa fa-group"></i> 课程管理 </a>
+                            </li>
+                            <li class="{% block teacher_active %}{% endblock %}">
+                                <a href=""> <i class="fa fa-book"></i> 教师管理  <i class="fa arrow"></i></a>
+                                <ul>
+                                    <li> <a href="/admin/set_teacher"><i class="fa fa-bars"></i>
+    								查看教师列表
+    							</a> </li>
+                                    <li> <a href="/admin/add_teacher"><i class="fa fa-plus"></i>
+    							    添加教师
+    							</a> </li>
+                                </ul>
+                            </li>
+                            <li class="{% block student_active %}{% endblock %}">
+                                <a href=""> <i class="fa fa-table"></i> 学生管理 <i class="fa arrow"></i></a>
+                                <ul>
+                                    <li> <a href="/admin/set_student"><i class="fa fa-bars"></i>
+    								查看学生列表
+    							</a> </li>
+                                    <li> <a href="/admin/add_student"><i class="fa fa-plus"></i>
+    								添加学生
+    							</a> </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+            </aside>
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+            {% block mainbody %}
+            <article>Origin</article>
+            {% endblock %}
+        </div>
+    </div>
+{% block allscript %}
+    <script src="/static/js/vendor.js"></script>
+    <script src="/static/js/app.js"></script>
+    {% block jslast %}
+
+    {% endblock %}
+{% endblock %}
+</body>
+
+</html>
+

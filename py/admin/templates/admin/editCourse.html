@@ -1,0 +1,318 @@
+{% extends "./adminBase.html" %}
+{% block title %}
+<title> 编辑课程信息 </title>
+{% endblock %}
+{% block course_active %}
+active
+{% endblock %}
+{% block mainbody %}
+<article class="content items-list-page">
+    <h3>编辑课程信息</h3>
+    <br>
+
+    <form role="form" action="/admin/edit_course_i/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{course.id}}"/>
+        <div class="form-group"><label class="control-label">* 课程名</label> <input type="text" id="name"
+                                                                                  class="form-control underlined"
+                                                                                  name="name" value="{{course.name}}">
+        </div>
+
+        <div class="form-group"><label class="control-label">* 学期</label>
+            <select class="form-control" name="semester_id">
+                {% for i in semester_list %}
+                {% ifequal i.id courses.semester.id %}
+                <option value="{{ i.id }}" selected="selected"> {{ i.name }}</option>
+                {% else %}
+                <option value="{{ i.id }}"> {{ i.name }}</option>
+                {% endifequal %}
+                {% endfor %}
+            </select></div>
+        <div class="form-group"><label class="control-label">开课时间</label><input type="text"
+                                                                                class="form-control underlined"
+                                                                                name="open_time"
+                                                                                value="{{course.weeks}}{{course.time}}">
+        </div>
+        <div class="form-group"><label class="control-label">* 学分</label> <input type="text" id="credit"
+                                                                                 class="form-control underlined"
+                                                                                 name="credit"
+                                                                                 value="{{course.credit}}">
+        </div>
+        <div class="form-group"><label class="control-label">周次</label> <input type="text"
+                                                                               class="form-control underlined"
+                                                                               name="weeks" value="{{course.weeks}}">
+        </div>
+        <div class="form-group"><label class="control-label">上课地点</label> <input type="text"
+                                                                                 class="form-control underlined"
+                                                                                 name="address"
+                                                                                 value="{{course.address}}"></div>
+        <div class="form-group"><label class="control-label">上课时间</label> <input type="time"
+                                                                                 class="form-control underlined"
+                                                                                 name="time" value="{{course.time}}">
+        </div>
+        <div class="form-group">
+            <label class="control-label">选择教师</label>
+
+            <div class="card items">
+                <ul class="item-list striped">
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col fixed item-col-check"><label class="item-check">
+
+                                <span></span>
+                            </label></div>
+                            <div class="item-col item-col-header md">
+                                <div><span>工号</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>姓名</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>学院</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>职称</span></div>
+                            </div>
+                             <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                        </div>
+                    </li>
+
+                    {% if teacher %}
+                    {% for t in teacher %}
+                    {% with temp=forloop.counter0 %}
+                    <li class="item">
+                        {% ifequal t.1 0%}
+                        <div class="item-row" name="">
+                            <div class="item-col fixed item-col-check"><label class="item-check">
+                                <input name="check_teacher" type="checkbox" class="checkbox" value="{{t.0.id}}">
+                                <span></span>
+                            </label></div>
+                        {% else %}
+                            <div class="item-row" name="">
+                            <div class="item-col fixed item-col-check"><label class="item-check">
+                                <input name="check_teacher" type="checkbox" class="checkbox" checked="checked" value="{{t.id}}">
+                                <span></span>
+                            </label></div>
+                        {% endifequal %}
+
+
+                            <div class="item-col">
+                                {{ t.0.user.id }}
+                            </div>
+                            <div class="item-col">
+                                {{ t.0.user.name }}
+                            </div>
+                            <div class="item-col">
+                                软件学院
+                            </div>
+                            <div class="item-col">
+                                {{ t.0.position }}
+                            </div>
+                        </div>
+                    </li>
+                    {% endwith %}
+                    {% endfor %}
+                    {% else %}
+                    <p>No Teacher.</p>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="control-label">选择学生 </label>
+            <div>
+                <form method="post" action="/admin/upload_students_info/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" id="student_file" name="student_file">
+                    <input type="submit" value="上传" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="card items">
+                <ul class="item-list striped">
+                    <li class="item item-list-header hidden-sm-down">
+                        <div class="item-row">
+                            <div class="item-col fixed item-col-check"><label class="item-check" id="select-all-items">
+                                <input name="check_student1" type="checkbox" class="checkbox" value="-1">
+                                <span></span>
+                            </label></div>
+                            <div class="item-col item-col-header md">
+                                <div><span>学号</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>姓名</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>性别</span></div>
+                            </div>
+                            <div class="item-col item-col-header">
+                                <div><span>学院</span></div>
+                            </div>
+                            <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                        </div>
+                    </li>
+                    {% if student_un_select %}
+                    {% for s in student_un_select %}
+                    <li class="item">
+                        <div class="item-row">
+                            <div class="item-col fixed item-col-check"><label class="item-check">
+                                <input name="check_student" type="checkbox" class="checkbox" value="{{s.id}}">
+                                <span></span>
+                            </label></div>
+
+                            <div class="item-col">
+                                {{ s.user.id }}
+                            </div>
+                            <div class="item-col">
+                                {{ s.user.name }}
+                            </div>
+                            <div class="item-col">
+                                {{ s.user.gender }}
+                            </div>
+                            <div class="item-col">
+                                {{ s.department }}
+                            </div>
+
+                        </div>
+                    </li>
+
+
+                    {% endfor %}
+                    {% else %}
+                    <p>No users.</p>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" id="edit_course_submit" class="btn btn-primary" onclick="return submitAllCheckBox()">
+                提交
+            </button>
+            <a href="/admin/set_course/" class="btn btn-primary">返回</a>
+        </div>
+        <br>
+
+        <h4>已添加学生</h4>
+        <div class="card items">
+            <ul class="item-list striped">
+                <li class="item item-list-header hidden-sm-down">
+                    <div class="item-row">
+
+                        <div class="item-col item-col-header md">
+                            <div><span>学号</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>姓名</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>性别</span></div>
+                        </div>
+                        <div class="item-col item-col-header">
+                            <div><span>学院</span></div>
+                        </div>
+                        <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                    </div>
+                </li>
+                {% if student_selected %}
+                {% for s in student_selected %}
+                <li class="item">
+                    <div class="item-row">
+
+                        <div class="item-col">
+                            {{ s.student.user.id }}
+                        </div>
+                        <div class="item-col">
+                            {{ s.student.user.name }}
+                        </div>
+                        <div class="item-col">
+                            {{ s.student.user.gender }}
+                        </div>
+                        <div class="item-col">
+                            {{ s.student.department }}
+                        </div>
+                        <div class="item-col fixed item-col-actions-dropdown">
+                            <div class="item-actions-dropdown">
+                                <a class="item-actions-toggle-btn"> <span class="inactive">
+                            <i class="fa fa-cog"></i>
+                        </span> <span class="active">
+                        <i class="fa fa-chevron-circle-right"></i>
+                        </span> </a>
+                                <div class="item-actions-block">
+                                    <ul class="item-actions-list">
+                                        <li>
+                                            <a class="remove" href="#" data-toggle="modal"
+                                               data-target="#confirm-modal"
+                                               onclick="delete_student({{ s.student.id }})"> <i
+                                                    class="fa fa-trash-o "></i> </a>
+                                        </li>
+                                        <li>
+                                            <a class="edit" href="/admin/edit_student/?id={{s.student.id}}"> <i
+                                                    class="fa fa-pencil"></i> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+                {% else %}
+                <p>No users.</p>
+                {% endif %}
+            </ul>
+        </div>
+    </form>
+</article>
+<script>
+    function submitAllCheckBox()
+    {
+        if($("#course_name").val()==''||$("#credit").val()=='')
+        {
+            alert("请填写所有标有*的部分后提交！");
+            return false;
+        }
+        $("input:checkbox[name='check_teacher']:checked").each(function(i){
+            $.get("/admin/course_add_teacher/?teacher_id="+$(this).val(),function(data,status){
+
+            });
+        });
+        $("input:checkbox[name='check_student']:checked").each(function(i){
+            if($(this).val()!=-1) {
+                $.get("/admin/course_add_student/?student_id=" + $(this).val(), function (data, status) {
+
+                });
+            }
+        });
+        alert("修改成功！");
+        window.location.reload();
+        return true;
+    }
+
+</script>
+<!--<script>-->
+<!--function course_add_teacher(id)-->
+<!--{-->
+<!--$('#edit_course_submit').click(function(){-->
+<!--$.get("/admin/course_add_teacher/?teacher_id="+id,function(data,status){-->
+<!--alert("删除成功！");-->
+<!--window.location.href="/admin/set_course/";-->
+<!--});-->
+<!--});-->
+<!--}-->
+
+<!--function delete_courses()-->
+<!--{-->
+<!--$('#edit_course_submit').click(function(){-->
+
+<!--$("input:checkbox[name='check_course']:checked").each(function(i){-->
+<!--$.get("/admin/delete_course/?id="+$(this).val(),function(data,status){-->
+
+<!--});-->
+<!--});-->
+<!--alert("删除成功！");-->
+<!--window.location.href="/admin/set_course/";-->
+<!--});-->
+<!--}-->
+<!--</script>-->
+{% endblock %}

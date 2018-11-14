@@ -1,0 +1,117 @@
+{% extends "./studentBase.html" %}
+{% block title %}
+    <title> 设置分组 </title>
+{% endblock %}
+{% block group_active %}
+active
+{% endblock %}
+{% block mainbody %}
+    <article class="content forms-page">
+        <div class="title-block">
+                <h3 class="title">我的申请</h3>
+                {% if my_apply %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>团队名称</th>
+                        <th>负责人</th>
+                        <th>申请状态</th>
+                        <th>撤销申请</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>{{ my_apply.team.name }}</th>
+                        <th>{{ my_apply.team.head.user.name }}</th>
+                        <th>{{ my_apply.apply_status }}</th>
+                        {% ifequal my_apply.apply_status '通过'%}
+                        <th>你已经通过申请！</th>
+                        {% else %}
+                        <th><a href="/students/delete_apply/?id={{ my_apply.id }}" class="btn btn-warning">撤销申请</a></th>
+                        {% endifequal %}
+
+                    </tr>
+                    </tbody>
+                </table>
+                {% else %}
+                    {% if my_team %}
+                    <p>你是团队{{my_team.name}}的组长！</p>
+                    {% else %}
+                    <p>你还没申请团队！</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="title-block">
+                <h3 class="title">团队组建</h3>
+                <br>
+                <section class="section">
+                    <div class="card card-block sameheight-item">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>团队名称</th>
+                                <th>负责人</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% if team_list %}
+                            {% for t in team_list %}
+                            <tr>
+                                <td><strong>{{t.name}}</strong></td>
+                                <td>{{t.head.user.name}}</td>
+                                <td>{{t.status}}</td>
+                                {% ifequal t.status '组建中' %}
+                                <td align="left">
+                                    <a class="btn btn-primary" href="/students/apply_group/?id={{t.id}}">申请</a>
+                                </td>
+                                {% else %}
+                                    <td>已提交！</td>
+                                {% endifequal %}
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <p>暂时没有团队，你可以创建一个团队！</p>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+                <button class="btn btn-success" data-toggle="modal" data-target="#add-group">创建团队</button>
+            </div>
+        </div>
+
+    </article>
+    <div class="modal fade" id="add-group">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="fa fa-pencil"></i> 创建团队</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/students/add_group/" method="post">
+                        {% csrf_token %}
+                        <div class="form-group"><label class="control-label">团队名称</label> <input type="text" name="name"
+                                                                                               class="form-control underlined">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">确认提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block t123 %}
+active
+{% endblock %}
+

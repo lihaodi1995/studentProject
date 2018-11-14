@@ -1,0 +1,192 @@
+{% extends "./teacherBase.html" %}
+{% block title %}
+<title> 检查作业 </title>
+{% endblock %}
+{% block homework_active %}
+    active open
+{% endblock %}
+{% block mainbody %}
+<article class="content items-list-page">
+    <h2 class="title">在线批改</h2>
+    <br>
+
+    <div class="title-block">
+        <div class="row">
+        </div>
+    </div>
+
+    <div>
+        <form>
+
+
+            <label>作业名称：&nbsp</label>{{ s.name }}
+            <br><br>
+
+            <label>组号：&nbsp</label>{{ s.team_no }}
+            <br><br>
+
+                <label>作业详情：&nbsp</label>
+                <br><br>
+                <div class="form-group row">
+                    <section class="section">
+                        <div class="row sameheight-container">
+                            <div class="col-md-10">
+                                <div class="card card-block sameheight-item">
+                                    <form role="form">
+                                        <div class="form-group" id="submission_detail" name="submission_detail">
+                                            {{ s.detail }}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </form>
+
+            </div>
+
+    <div class="title-block">
+        <h3>作业文本</h3>
+        <div class="card items col-md-10">
+            {{s.text}}
+        </div>
+    </div>
+
+        <div class="title-search-block">
+            <div class="title-block">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3 class="title">
+                            作业附件&nbsp&nbsp&nbsp
+                            <a class="btn btn-primary btn-sm rounded-s" onclick="download_selecteds()">下载选中文档</a>
+                            <br><br>
+                        </h3>
+                    </div>
+                </div>
+                <div class="card items col-md-10">
+                    <ul class="item-list striped">
+
+                            <li class="item item-list-header hidden-sm-down">
+                                <div class="item-row">
+                                    <div class="item-col fixed item-col-check"><label class="item-check"
+                                                                                      id="select-all-items">
+                                        <input type="checkbox" class="checkbox">
+                                        <span></span>
+                                    </label></div>
+                                    <div class="item-col item-col-header md">
+                                        <div><span>附件名称</span></div>
+                                    </div>
+
+                                    <div class="item-col item-col-header fixed item-col-actions-dropdown"></div>
+                                </div>
+                            </li>
+
+                        <li class="item">
+                            <div class="item-row">
+                                {% if submission %}
+                                    {% for s in submission %}
+                                        <div class="item-col fixed item-col-check"><label class="item-check"
+                                                                                          id="select-all-items">
+                                            <input type="checkbox" class="checkbox" name="check_team_assignment" id="{{s.id}}" value="{{ s.id }}">
+                                            <span></span>
+                                        </label>
+                                        </div>
+
+
+                                    <div class="item-col item-col-title">
+                                        {{ s.name }}
+                                    </div>
+
+                        <div class="item-col">
+                            <a href="https://view.officeapps.live.com/op/view.aspx?src=microhhh.cn/teachers/download_file_test/{{ s.id }}"
+                               target="_blank">在线查看</a>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="item-col fixed item-col-check"><label class="item-check"
+                                                                          id="select-all-items">
+
+                                        <span></span>
+                                    </label>
+                                    </div>
+
+
+                                    <div class="item-col item-col-title">
+                                        No file uploaded.
+                                    </div>
+
+                        <div class="item-col">
+                            <a href="#"> </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="col-md-10">
+        <h3 class="title">作业评价</h3>
+        <br>
+        <br>
+        <form method="post" action="/teachers/add_revise_record/{{ rec_id }}/" enctype="multipart/form-data"/>
+        {% csrf_token %}
+        <fieldset class="form-group">
+
+                    <div class="row form-group">
+                        <div class="col-xs-1"><label>分数：</label></div>
+                        <div class="col-xs-6"><input type="text" name="score" id="score" class="form-control"
+                                                     placeholder="Score"></div>
+                    </div>
+
+                    <br>
+                    <label class="control-label" for="formGroupExampleInput3">评语：</label>
+                    <textarea rows="3" class="form-control" name="revision_comment" id="revision_comment"></textarea>
+                </fieldset>
+
+                <a><input type="submit"  class="btn btn-primary btn-sm rounded-s" value="提交评价"></a>
+
+                </form>
+            </div>
+        </article>
+
+{% endblock %}
+
+{%block lastjs %}
+
+
+<script>
+        function download_selecteds() {
+
+            var links = [];
+            $("input:checkbox[name='check_team_assignment']:checked").each(function(i){
+                 links.push("/teachers/download_file_test/"+$(this).attr("id"))
+            });
+
+            download(links);
+        }
+
+       var download = function(links) {
+       for(var i=0; i<links.length; i++) {
+         var iframe = $('<iframe style="visibility: collapse;"></iframe>');
+         $('body').append(iframe);
+         var content = iframe[0].contentDocument;
+         var form = '<form action="' + links[i] + '" method="GET"></form>';
+         content.write(form);
+         $('form', content).submit();
+         setTimeout((function(iframe) {
+           return function() {
+             iframe.remove();
+           }
+         })(iframe), 2000);
+       }
+     }
+</script>
+
+{% endblock %}

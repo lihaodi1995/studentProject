@@ -1,0 +1,76 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> 后台管理 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <!-- Theme initialization -->
+    <link rel="stylesheet" href="/static/css/app.css">
+</head>
+
+<body>
+<div class="main-wrapper">
+    <div class="app" id="app">
+
+        <article class="content static-tables-page">
+            <div class="title-block">
+                <h1 class="title">
+                    {{ request.session.course_id }}-课程信息
+                </h1>
+            </div>
+            <section class="section">
+                <div class="card card-block sameheight-item" style="height: 1500px;">
+                    <div class="title-block">
+                        <form role="form" action="/teachers/add_one_assignment/" method="post">
+                            {% csrf_token %}
+                            <div class="form-group"><label class="control-label">学分</label> <input type="text"
+                                                                                                    class="form-control underlined"
+                                                                                                    name="credit" value="{{ courseinfo.credit }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">开始时间</label> <input type="date"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="start_time" value="{{ courseinfo.startime }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">结束时间</label> <input type="date"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="end_time" value="{{ courseinfo.endtime }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">课程人数</label> <input  disabled="true" type="text"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="end_time" value="{{ courseinfo.number }}">
+                            </div>
+                            </div>
+                            <div class="form-group"><label class="control-label">团队人数上限</label> <input type="text"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="score" value="{{ courseinfo.team_people_upper_limit }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">团队人数下限</label> <input type="text"
+                                                                                                     class="form-control underlined"
+                                                                                                     name="score_percentage" value="{{ courseinfo.team_people_lower_limit }}">
+                            </div>
+                            <div class="form-group"><label class="control-label">课程大纲</label> <textarea rows="10"
+                                                                                                        class="form-control boxed"
+                                                                                                        name="detail" value="{{ courseinfo.outline }}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </article>
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    </div>
+
+    <script src="/static/js/vendor.js"></script>
+    <script src="/static/js/app.js"></script>
+</div>
+</body>
+
+</html>

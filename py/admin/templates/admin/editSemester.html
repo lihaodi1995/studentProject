@@ -1,0 +1,72 @@
+{% extends "./adminBase.html" %}
+{% block title %}
+    <title> 编辑学期 </title>
+{% endblock %}
+{% block semester_active %}
+active
+{% endblock %}
+{% block mainbody %}
+    <article class="content items-list-page">
+        <h3>编辑学期信息</h3>
+
+        <br>
+        <form role="form" action="/admin/edit_semester_i/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{semester.id}}">
+            <div class="form-group"><label class="control-label">*学期名称</label> <input type="text"
+                                                                                     class="form-control underlined" id="semester_name" name="name" value="{{semester.name}}">
+            </div>
+            <div class="form-group"><label class="control-label">*开始时间</label> <input type="date"
+                                                                                     class="form-control underlined" id="start_time" name="start_time" value="{{semester.start_time}}">
+            </div>
+            <div class="form-group"><label class="control-label">*结束时间</label> <input type="date"
+                                                                                                     class="form-control underlined" id="end_time" name="end_time" value="{{semester.end_time}}">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary rounded-s" onclick="return checkSemesterName()">提交</button>
+                <a href="/admin/set_semester/" class="btn btn-primary rounded-s">返回</a>
+            </div>
+        </form>
+    </article>
+{% endblock %}
+{% block jslast %}
+    <script>
+        function checkSemesterName()
+        {
+            var n=document.getElementById("semester_name");
+            var st=document.getElementsByName("start_time");
+            var et=document.getElementsByName("end_time");
+            if(n.value=='')
+            {
+                alert("学期名称不能为空，请填写后再提交");
+                return false;
+            }
+            if($("#start_time").val()=='')
+            {
+                alert("请设置学期开始时间");
+                return false;
+            }
+            if($("#end_time").val()=='')
+            {
+                alert("请设置学期结束时间");
+                return false;
+            }
+            var dateAStr=$("#start_time").val();
+            var arrA=dateAStr.split("-");
+            var dateA=new Date(arrA[0],arrA[1],arrA[2]);
+            var dateAT=dateA.getTime();
+            var dateBStr=$("#end_time").val();
+            var arrB=dateBStr.split("-");
+            var dateB=new Date(arrB[0],arrB[1],arrB[2]);
+            var dateBT=dateB.getTime();
+            if(dateAT>=dateBT)
+            {
+                alert("学期开始时间不早于结束时间，请修改后提交");
+                return false;
+            }
+            alert("已修改学期内容.");
+            return true;
+        }
+    </script>
+
+{% endblock %}

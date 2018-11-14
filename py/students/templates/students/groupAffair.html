@@ -1,0 +1,111 @@
+{% extends "./studentBase.html" %}
+{% block title %}
+    <title> 设置分组 </title>
+{% endblock %}
+{% block group_active %}
+active
+{% endblock %}
+{% block mainbody %}
+    <article class="content forms-page">
+        <div class="title-block">
+            <h3 class="title">团队事务</h3>
+            <br>
+            <br>
+            <p>只有负责人才能提交作业！</p>
+            <section class="section">
+                <div class="card card-block sameheight-item">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>成员</th>
+                            <th>角色</th>
+                            <th>成绩比重</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% if team_info_list %}
+                        {% for t in team_info_list %}
+                        <tr>
+                            <td><strong>{{t.student.user.name}}</strong></td>
+                            <td>{{t.role}}</td>
+                            <td>{{t.weight}}</td>
+                            <td align="left">
+                                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#set-weight" onclick="set_weight_id({{t.id}})">设置比重</a>
+                                <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#update-role" onclick="set_role_id({{t.id}})">修改角色</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <p>暂时没有团队，你可以创建一个团队！</p>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </div>
+
+    </article>
+
+<div class="modal fade" id="set-weight">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="fa fa-pencil"></i> 设置比重</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/students/set_weight/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="weight_id" name="id">
+                        <div class="form-group"><label class="control-label">比重</label> <input type="text" name="weight"
+                                                                                               class="form-control underlined">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">确认提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="update-role">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="fa fa-pencil"></i>修改角色</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/students/update_role/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="role_id" name="id">
+                        <div class="form-group"><label class="control-label">角色</label> <input type="text" name="role"
+                                                                                               class="form-control underlined">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">确认提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{%block lastjs %}
+<script>
+    function set_weight_id(id){
+        $('#weight_id').val(id);
+    }
+    function set_role_id(id){
+        $('#role_id').val(id);
+    }
+</script>
+{% endblock %}
