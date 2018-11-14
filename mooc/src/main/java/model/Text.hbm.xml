@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.Text" table="text" catalog="rua" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="content" type="binary">
+            <column name="Content" />
+        </property>
+    </class>
+</hibernate-mapping>

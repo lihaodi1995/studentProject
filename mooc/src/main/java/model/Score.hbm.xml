@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.Score" table="score" catalog="rua" optimistic-lock="version">
+        <composite-id name="id" class="model.ScoreId">
+            <key-property name="memId" type="int">
+                <column name="mem_id" />
+            </key-property>
+            <key-property name="checkedId" type="int">
+                <column name="checked_id" />
+            </key-property>
+        </composite-id>
+        <property name="score" type="double">
+            <column name="score" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

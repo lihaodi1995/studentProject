@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.Course" table="course" catalog="rua" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" />
+        </property>
+        <property name="teacherId" type="java.lang.Integer">
+            <column name="Teacher_id" />
+        </property>
+        <property name="startTime" type="string">
+            <column name="Start_time" />
+        </property>
+        <property name="endTime" type="string">
+            <column name="End_time" />
+        </property>
+        <property name="status" type="java.lang.Byte">
+            <column name="Status" />
+        </property>
+        <property name="info" type="string">
+            <column name="Info" />
+        </property>
+        <property name="tp" type="string">
+            <column name="tp" />
+        </property>
+        <property name="place" type="string">
+            <column name="place" />
+        </property>
+        <property name="score" type="string">
+            <column name="score" />
+        </property>
+        <property name="teacher" type="string">
+            <column name="teacher" />
+        </property>
+        <property name="people" type="string">
+            <column name="people" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.Task" table="task" catalog="rua" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="Title" not-null="true" />
+        </property>
+        <property name="info" type="string">
+            <column name="Info" />
+        </property>
+        <property name="courseId" type="int">
+            <column name="Course_id" not-null="true" />
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="Start_time" length="19" />
+        </property>
+        <property name="endTime" type="timestamp">
+            <column name="End_time" length="19" />
+        </property>
+        <property name="status" type="byte">
+            <column name="Status" not-null="true" />
+        </property>
+        <property name="weight" type="java.lang.Double">
+            <column name="weight" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

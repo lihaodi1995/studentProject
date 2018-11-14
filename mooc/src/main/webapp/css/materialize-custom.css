@@ -1,0 +1,25 @@
+#nav-mobile{
+    width:250px;
+}
+main{
+    margin-left:250px;
+    margin-top: 20px;
+}
+
+.waves-effect.waves-cyan .waves-ripple {
+    background-color: rgba(0, 188, 212, 1);
+}
+/*#nav-mobile li:hover{*/
+    /*background-color: #00bcd4 !important;*/
+/*}*/
+#nav-mobile li.active{
+    background-color: #00bcd4;
+    transition:background-color .3s ease-in;
+}
+#nav-mobile li.active *{
+    color:#fff;
+}
+
+.opacity{
+    opacity: 0.7;
+}

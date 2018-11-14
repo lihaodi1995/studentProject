@@ -1,0 +1,50 @@
+.color-red {
+    color: red;
+}
+.teamlist{
+    background-color: #00bcd4 !important;
+    margin-bottom: 8px;
+    font-size: 16px;
+    padding-right: 0px;
+    padding-left: 0px;
+    color: #fff !important;
+}
+.teamContent{
+    background-color: #fff !important;
+    display: none;
+    margin-bottom: 8px;
+    padding-top: 8px !important;
+    padding-bottom:8px !important;
+}
+.row{
+    margin-bottom: 0px;
+}
+.team-mng{
+    background-color: #00bcd4 !important;
+    font-size: 16px;
+    color: #fff;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+.team-info-mng{
+    padding-top: 8px;
+    padding-bottom: 8px !important;
+}
+.agree{
+    color: #fff;
+    background-color: #00bcd4;
+    border-radius: 2px;
+    padding: 0 1rem;
+}
+.disagree{
+    color: #fff;
+    background-color: #e51c23;
+    border-radius: 2px;
+    padding: 0 1rem;
+}
+#team-manage{
+    display: none;
+}
+#team-check{
+    display: none;
+}

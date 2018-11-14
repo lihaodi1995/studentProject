@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/rua?useUnicode=true&amp;characterEncoding=UTF8</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="model/GroupMember.hbm.xml" />
+        <mapping resource="model/Course.hbm.xml" />
+        <mapping resource="model/Application.hbm.xml" />
+        <mapping resource="model/SubText.hbm.xml" />
+        <mapping resource="model/Text.hbm.xml" />
+        <mapping resource="model/Upload.hbm.xml" />
+        <mapping resource="model/Score.hbm.xml" />
+        <mapping resource="model/Attendance.hbm.xml" />
+        <mapping resource="model/Resources.hbm.xml" />
+        <mapping resource="model/User.hbm.xml" />
+        <mapping resource="model/SubResouces.hbm.xml" />
+        <mapping resource="model/Absence.hbm.xml" />
+        <mapping resource="model/Group.hbm.xml" />
+        <mapping resource="model/TaskManager.hbm.xml" />
+        <mapping resource="model/Grade.hbm.xml" />
+        <mapping resource="model/Student.hbm.xml" />
+        <mapping resource="model/Task.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

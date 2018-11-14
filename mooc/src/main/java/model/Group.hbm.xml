@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.Group" table="group" catalog="rua" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" not-null="true" />
+        </property>
+        <property name="managerId" type="int">
+            <column name="Manager_id" not-null="true" />
+        </property>
+        <property name="status" type="byte">
+            <column name="Status" not-null="true" />
+        </property>
+        <property name="info" type="string">
+            <column name="Info" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

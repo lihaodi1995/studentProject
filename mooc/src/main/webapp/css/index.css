@@ -1,0 +1,70 @@
+.body {
+    background-color: #c0c0c0;
+}
+
+.brand-logo {
+    padding-left: 20px !important;
+}
+
+.header {
+    z-index: 1000;
+}
+
+#content {
+    padding-top: 64px !important;
+    z-index: 999;
+}
+
+.side-nav {
+    z-index: 998 !important;
+    margin-top: 64px;
+}
+
+.baractive {
+    background-color: #80deea;
+    transition: background-color 0.2s ease-in;
+}
+
+main {
+    padding-left: 250px;
+}
+
+@media only screen and (max-width: 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+
+.edit-dagang{
+    /*display: inline-block;*/
+    display: none;
+    position: relative;
+    top:-30px;
+}
+.show-dagang{
+    display: inline-block;
+    /*display: none;*/
+}
+
+
+.toolbox{
+    padding-top: 10px;
+    padding-left:5px;
+    padding-right: 5px;
+}
+
+.deletesrc,.downloasrc,.publishsrc{
+    float: right;
+    margin-left: 5px;
+
+}
+
+.selectDown form p{
+    margin-top:0;
+    height:40px;
+}
+
+.selectDown form p label{
+    margin-top: 12px;
+}
+

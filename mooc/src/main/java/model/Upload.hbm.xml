@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.Upload" table="upload" catalog="rua" optimistic-lock="version">
+        <id name="resourcesId" type="java.lang.Integer">
+            <column name="Resources_id" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="Title" not-null="true" />
+        </property>
+        <property name="num" type="string">
+            <column name="num" />
+        </property>
+        <property name="teacherId" type="int">
+            <column name="Teacher_id" not-null="true" />
+        </property>
+        <property name="ts" type="string">
+            <column name="Ts" not-null="true" />
+        </property>
+        <property name="path" type="string">
+            <column name="Path" />
+        </property>
+    </class>
+</hibernate-mapping>

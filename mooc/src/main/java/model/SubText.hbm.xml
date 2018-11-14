@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.SubText" table="sub_text" catalog="rua" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="taskId" type="java.lang.Integer">
+            <column name="Task_id">
+                <comment>&#181;&#218;&#188;&#184;&#180;&#206;&#215;&#247;&#210;&#181;</comment>
+            </column>
+        </property>
+        <property name="textId" type="string">
+            <column name="Text_id">
+                <comment>&#184;&#189;&#188;&#254;&#206;&#196;&#188;&#254;&#195;&#251;</comment>
+            </column>
+        </property>
+        <property name="groupId" type="java.lang.Integer">
+            <column name="Group_id">
+                <comment>&#181;&#218;&#188;&#184;&#215;&#233;</comment>
+            </column>
+        </property>
+        <property name="info" type="string">
+            <column name="info">
+                <comment>fujianxinxi</comment>
+            </column>
+        </property>
+        <property name="taskTitle" type="string">
+            <column name="Task_Title" />
+        </property>
+        <property name="grade" type="string">
+            <column name="grade" />
+        </property>
+        <property name="comment" type="string">
+            <column name="comment" />
+        </property>
+    </class>
+</hibernate-mapping>

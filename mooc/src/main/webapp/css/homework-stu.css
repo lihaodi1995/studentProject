@@ -1,0 +1,60 @@
+.row{
+    margin-bottom: 0px !important;
+}
+.homework, .download{
+    display: block;
+    margin-bottom:8px;
+    /*padding-top: 2vh !important;*/
+    /*padding-bottom: 2vh !important;*/
+    padding-left: 0px;
+    padding-right: 0px;
+    color: #fff;
+    font-size:16px;
+}
+.download{
+    text-align: center;
+}
+.hwContent.reveal{
+    display: block;
+}
+.hwContent{
+    display: none;
+    background-color: #fff !important;
+    color:#000;
+    margin-bottom: 8px;
+}
+/*.homework:nth-child(odd),download:nth-child(odd){*/
+    /*background-color: #00bcd4 !important;*/
+/*}*/
+/*.homework:nth-child(even),download:nth-child(even){*/
+    /*background-color: #80deea !important;*/
+/*}*/
+/*FIXIT:目前为实现*/
+/*.homework:nth-child(odd){*/
+    /*background-color: #00bcd4 !important;*/
+/*}*/
+/*.homework:nth-child(even){*/
+    /*background-color: #80deea !important;*/
+/*}*/
+/*替代版本*/
+.homework, .download{
+    background-color: #00bcd4 !important;
+}
+.homework a{
+    /*float: right;*/
+    display: inline-block;
+    float: right;
+    text-decoration: none;
+}
+.submit-btn{
+    margin-bottom: 8px;
+}
+.input-field input[type=text]:focus+label{
+    color: #00bcd4 !important;
+}
+.input-field label {
+    color: #00bcd4;
+}
+.input-field textarea[type=text]:focus {
+    border-bottom: 1px solid #00bcd4 !important;
+}

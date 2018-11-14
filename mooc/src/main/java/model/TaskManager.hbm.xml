@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.TaskManager" table="task_manager" catalog="rua" optimistic-lock="version">
+        <composite-id name="id" class="model.TaskManagerId">
+            <key-property name="studentId" type="int">
+                <column name="Student_id" />
+            </key-property>
+            <key-property name="taskId" type="int">
+                <column name="Task_id" />
+            </key-property>
+        </composite-id>
+        <property name="groupId" type="int">
+            <column name="Group_id" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

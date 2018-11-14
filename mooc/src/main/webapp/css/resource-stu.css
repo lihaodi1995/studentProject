@@ -1,0 +1,46 @@
+.row{
+    margin-bottom:0px !important;
+}
+.resource{
+    display: block;
+    margin-bottom:8px;
+    /*padding-top: 2vh !important;*/
+    /*padding-bottom: 2vh !important;*/
+    padding-left: 0px;
+    padding-right: 0px;
+    color: #fff;
+    font-size:16px;
+}
+
+/*.resource:active{*/
+    /*height:600px;*/
+/*}*/
+.resContent.reveal{
+    display: block;
+}
+.resContent{
+    display: none;
+    background-color: #fff !important;
+    color:#000;
+    margin-bottom: 8px;
+}
+/*目前为实现*/
+/*.resource:nth-child(odd){*/
+    /*background-color: #00bcd4 !important;*/
+/*}*/
+/*.resource:nth-child(even){*/
+    /*background-color: #80deea !important;*/
+/*}*/
+/*替代版本*/
+.resource{
+    background-color: #00bcd4 !important;
+}
+.resource a{
+    /*float: right;*/
+    display: inline-block;
+    float: right;
+    text-decoration: none;
+}
+#download{
+    margin-bottom: 8px;
+}

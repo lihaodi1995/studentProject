@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.Absence" table="absence" catalog="rua" optimistic-lock="version">
+        <composite-id name="id" class="model.AbsenceId">
+            <key-property name="id" type="int">
+                <column name="ID" />
+            </key-property>
+            <key-property name="date" type="timestamp">
+                <column name="date" length="19" />
+            </key-property>
+        </composite-id>
+        <property name="stuName" type="string">
+            <column name="stuName" not-null="true" />
+        </property>
+        <property name="groupId" type="java.lang.Integer">
+            <column name="group_id" />
+        </property>
+    </class>
+</hibernate-mapping>

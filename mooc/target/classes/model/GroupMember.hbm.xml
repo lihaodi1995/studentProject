@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-4 19:51:05 by Hibernate Tools 5.2.1.Final -->
+<hibernate-mapping>
+    <class name="model.GroupMember" table="group_member" catalog="rua" optimistic-lock="version">
+        <composite-id name="id" class="model.GroupMemberId">
+            <key-property name="memberId" type="int">
+                <column name="Member_id" />
+            </key-property>
+            <key-property name="groupId" type="int">
+                <column name="Group_id" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>
