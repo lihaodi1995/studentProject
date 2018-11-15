@@ -1,0 +1,397 @@
+.wqd-buyCar {
+  display: none;
+  width: 390px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  background: #ffffff;
+  -moz-transition: 0.35s;
+  -o-transition: 0.35s;
+  -webkit-transition: 0.35s;
+  transition: 0.35s; }
+  .wqd-buyCar .left {
+    cursor: pointer;
+    width: 40px;
+    height: 100%;
+    background: #000000;
+    float: left; }
+    .wqd-buyCar .left ul {
+      margin-top: 175px; }
+      .wqd-buyCar .left ul .personal {
+        width: 100%;
+        padding-top: 15px;
+        background: #000000;
+        padding-bottom: 10px;
+        margin-bottom: 10px; }
+        .wqd-buyCar .left ul .personal:hover {
+          background-color: #dd000a; }
+        .wqd-buyCar .left ul .personal a {
+          display: block;
+          margin: 0 auto; }
+        .wqd-buyCar .left ul .personal img {
+          display: block;
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin: 0 auto;
+          box-shadow: 0 0 9px 0 #ddd; }
+        .wqd-buyCar .left ul .personal span {
+          display: block;
+          width: 22px;
+          margin: 0 auto;
+          margin-top: 15px;
+          margin-bottom: 5px;
+          text-align: center;
+          font-size: 14px;
+          color: #ffffff;
+          line-height: 20px; }
+      .wqd-buyCar .left ul .personal-car {
+        height: 150px;
+        padding: 30px 0 5px 0;
+        width: 100%;
+        position: relative; }
+        .wqd-buyCar .left ul .personal-car:hover {
+          background-color: #dd000a; }
+        .wqd-buyCar .left ul .personal-car:hover::before, .wqd-buyCar .left ul .personal-car:hover::after {
+          background-color: #dd000a; }
+        .wqd-buyCar .left ul .personal-car:before, .wqd-buyCar .left ul .personal-car:after {
+          content: '';
+          width: 25px;
+          height: 1px;
+          background-color: #666666;
+          position: absolute; }
+        .wqd-buyCar .left ul .personal-car:before {
+          top: 0;
+          left: 8px; }
+        .wqd-buyCar .left ul .personal-car:after {
+          bottom: 0;
+          left: 8px; }
+        .wqd-buyCar .left ul .personal-car span, .wqd-buyCar .left ul .personal-car i.strong {
+          display: block; }
+        .wqd-buyCar .left ul .personal-car i {
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-position: 0 0;
+          margin: 0 auto;
+          margin-bottom: 10px; }
+        .wqd-buyCar .left ul .personal-car span {
+          display: block;
+          width: 22px;
+          margin: 0 auto;
+          margin-top: 15px;
+          margin-bottom: 5px;
+          text-align: center;
+          font-size: 14px;
+          color: #ffffff;
+          line-height: 20px; }
+        .wqd-buyCar .left ul .personal-car strong {
+          width: 20px;
+          height: 20px;
+          display: block;
+          text-align: center;
+          line-height: 20px;
+          color: #ff3300;
+          margin: 0 auto;
+          background: url("/images/mall/buy-circal.png"); }
+          .wqd-buyCar .left ul .personal-car strong.none {
+            display: none; }
+  .wqd-buyCar .right {
+    float: right;
+    width: 350px;
+    height: 100%;
+    padding: 40px 0 200px;
+    position: relative;
+    background-color: #f4f4f4; }
+    .wqd-buyCar .right .detail-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px; }
+      .wqd-buyCar .right .detail-top a {
+        margin: 16px 0 0 18px;
+        display: inline-block;
+        font-size: 12px;
+        color: #666666;
+        position: relative;
+        padding-right: 15px;
+        cursor: pointer; }
+        .wqd-buyCar .right .detail-top a:before {
+          content: "";
+          display: block;
+          width: 6px;
+          height: 12px;
+          background-position: 0px -208px;
+          position: absolute;
+          top: 3px;
+          left: 67px; }
+        .wqd-buyCar .right .detail-top a:hover {
+          color: #ea000b; }
+          .wqd-buyCar .right .detail-top a:hover:before {
+            background-position: 0px -230px; }
+    .wqd-buyCar .right .null {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100; }
+      .wqd-buyCar .right .null.on {
+        display: block; }
+      .wqd-buyCar .right .null span {
+        color: #666666;
+        font-size: 12px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); }
+    .wqd-buyCar .right #wqd-about {
+      background-color: #f4f4f4;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; }
+      .wqd-buyCar .right #wqd-about .nano-content {
+        padding: 0 20px 0 0;
+        outline: none; }
+      .wqd-buyCar .right #wqd-about .nano > .nano-pane {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        visibility: hidden;
+        opacity: .01;
+        -webkit-transition: .2s;
+        -moz-transition: .2s;
+        -o-transition: .2s;
+        transition: .2s;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background: transparent;
+        width: 8px;
+        z-index: 99; }
+      .wqd-buyCar .right #wqd-about .nano-pane {
+        background-color: transparent;
+        width: 6px;
+        right: 1px;
+        margin: 0px; }
+        .wqd-buyCar .right #wqd-about .nano-pane .nano-slider {
+          background: #444;
+          position: relative;
+          -moz-border-radius: 3px;
+          -webkit-border-radius: 3px;
+          margin: 0;
+          border-radius: 4px;
+          background: rgba(39, 39, 39, 0.5); }
+    .wqd-buyCar .right .detail-list li {
+      position: relative;
+      width: 340px;
+      min-height: 120px;
+      background-color: #fff;
+      margin-top: 30px;
+      padding: 20px 0 20px 30px;
+      font-size: 12px; }
+      .wqd-buyCar .right .detail-list li .edit-radio {
+        width: 15px;
+        height: 15px;
+        display: block;
+        position: absolute;
+        top: 55px;
+        left: 8px;
+        background-position: 0px -252px;
+        cursor: pointer; }
+        .wqd-buyCar .right .detail-list li .edit-radio.active {
+          background-position: 0px -277px; }
+      .wqd-buyCar .right .detail-list li.list-first {
+        margin-top: 0; }
+      .wqd-buyCar .right .detail-list li dl {
+        padding-left: 116px;
+        position: relative; }
+      .wqd-buyCar .right .detail-list li dt {
+        position: absolute;
+        left: 0px; }
+        .wqd-buyCar .right .detail-list li dt a {
+          display: block; }
+        .wqd-buyCar .right .detail-list li dt img {
+          width: 106px;
+          height: 80px; }
+      .wqd-buyCar .right .detail-list li dd {
+        float: left; }
+      .wqd-buyCar .right .detail-list li .detail-title {
+        width: 170px;
+        height: 35px;
+        color: #666666; }
+        .wqd-buyCar .right .detail-list li .detail-title a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          color: #666666; }
+          .wqd-buyCar .right .detail-list li .detail-title a:hover {
+            color: #59c4ff; }
+      .wqd-buyCar .right .detail-list li .detail-describe {
+        width: 175px;
+        margin: 10px 0 5px 0;
+        color: #333333;
+        word-wrap: break-word;
+        word-break: break-all; }
+        .wqd-buyCar .right .detail-list li .detail-describe span {
+          margin-left: 5px; }
+          .wqd-buyCar .right .detail-list li .detail-describe span.describe-first {
+            margin-left: 0; }
+      .wqd-buyCar .right .detail-list li .detail-model {
+        width: 190px; }
+        .wqd-buyCar .right .detail-list li .detail-model span, .wqd-buyCar .right .detail-list li .detail-model i, .wqd-buyCar .right .detail-list li .detail-model em {
+          display: inline-block; }
+        .wqd-buyCar .right .detail-list li .detail-model em {
+          margin-left: 20px; }
+      .wqd-buyCar .right .detail-list li .model {
+        margin-right: 5px; }
+      .wqd-buyCar .right .detail-list li .num-reduse, .wqd-buyCar .right .detail-list li .num-add {
+        width: 17px;
+        height: 17px;
+        vertical-align: bottom;
+        cursor: pointer; }
+      .wqd-buyCar .right .detail-list li .num-reduse {
+        background-position: 0px -79px; }
+        .wqd-buyCar .right .detail-list li .num-reduse:hover {
+          background-position: 0px -133px; }
+      .wqd-buyCar .right .detail-list li .num-add {
+        background-position: 0px -52px; }
+        .wqd-buyCar .right .detail-list li .num-add:hover {
+          background-position: 0px -106px; }
+      .wqd-buyCar .right .detail-list li .number {
+        width: 30px;
+        text-align: center; }
+      .wqd-buyCar .right .detail-list li .price {
+        width: 65px;
+        text-align: center; }
+      .wqd-buyCar .right .detail-list li .delete {
+        width: 13px;
+        height: 14px;
+        background-position: 0px -160px;
+        vertical-align: bottom;
+        cursor: pointer; }
+        .wqd-buyCar .right .detail-list li .delete:hover {
+          background-position: 0px -184px; }
+    .wqd-buyCar .right .detail-bottom {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 200px;
+      margin: 0 auto; }
+      .wqd-buyCar .right .detail-bottom.clickable .reckoning {
+        background: #cccccc; }
+      .wqd-buyCar .right .detail-bottom.clickable:after {
+        display: block;
+        content: '';
+        width: 270px;
+        height: 35px;
+        position: absolute;
+        top: 115px;
+        right: 40px; }
+      .wqd-buyCar .right .detail-bottom .item {
+        width: 330px;
+        margin: 0 auto;
+        font-size: 12px;
+        color: #333333;
+        padding: 20px 0;
+        border-top: 1px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        padding-left: 10px;
+        padding-right: 10px; }
+        .wqd-buyCar .right .detail-bottom .item .item-all {
+          width: 50px;
+          float: left; }
+        .wqd-buyCar .right .detail-bottom .item span {
+          display: inline-block; }
+          .wqd-buyCar .right .detail-bottom .item span.select {
+            float: right; }
+        .wqd-buyCar .right .detail-bottom .item .radio-all {
+          width: 15px;
+          height: 15px;
+          display: inline-block;
+          background-position: 0px -252px;
+          cursor: pointer;
+          vertical-align: text-bottom;
+          margin-right: 5px; }
+          .wqd-buyCar .right .detail-bottom .item .radio-all.active {
+            background-position: 0px -277px; }
+      .wqd-buyCar .right .detail-bottom strong {
+        display: block;
+        margin: 5px auto 20px;
+        font-size: 14px;
+        color: #ea000b;
+        text-align: center;
+        width: 270px; }
+      .wqd-buyCar .right .detail-bottom .reckoning {
+        margin: 0 auto;
+        background-color: #ea000b;
+        width: 270px;
+        height: 35px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 14px;
+        text-align: center;
+        line-height: 35px;
+        cursor: pointer; }
+  .wqd-buyCar .personal-car i, .wqd-buyCar .edit-radio, .wqd-buyCar .radio-all, .wqd-buyCar .detail-top a:before, .wqd-buyCar .num-reduse, .wqd-buyCar .num-add, .wqd-buyCar em.delete {
+    background: url("/images/mall/result-shopping.png") no-repeat; }
+
+.wqd-buyCar.goods-members {
+  display: block;
+  width: 0;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 40px; }
+  .wqd-buyCar.goods-members ul {
+    margin-top: 150px; }
+  .wqd-buyCar.goods-members .left .personal-car {
+    display: none; }
+  .wqd-buyCar.goods-members .right {
+    display: none; }
+
+.wqd-buyCar.goods-pay {
+  display: block;
+  right: -350px; }
+  .wqd-buyCar.goods-pay.show {
+    right: 0 !important;
+    -moz-transition: 0.35s;
+    -o-transition: 0.35s;
+    -webkit-transition: 0.35s;
+    transition: 0.35s; }
+  .wqd-buyCar.goods-pay .left {
+    height: 100%; }
+    .wqd-buyCar.goods-pay .left ul {
+      margin-top: 150px; }
+    .wqd-buyCar.goods-pay .left .personal-car, .wqd-buyCar.goods-pay .left .personal-title, .wqd-buyCar.goods-pay .left .personal-number {
+      display: block; }
+    .wqd-buyCar.goods-pay .left .personal {
+      position: static; }
+  .wqd-buyCar.goods-pay .right {
+    display: block; }
+
+.mini {
+  display: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  z-index: 11;
+  transition: ease;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%; }
+
+
