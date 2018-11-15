@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>在线协同教学平台</title>
+    <link href="~/css/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <!--<script type="text/javascript" src="js/jQuery1.7.js"></script>-->
+    <script type="text/javascript" src="~/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery1.42.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.SuperSlide.js"></script>
+    <script type="text/javascript" src="~/js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/dashboard.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $tab_li = $('#tab ul li');
+            $tab_li.hover(function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+                var index = $tab_li.index(this);
+                $('div.tab_box > div').eq(index).show().siblings().hide();
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".screenbg ul li").each(function () {
+                $(this).css("opacity", "0");
+            });
+            $(".screenbg ul li:first").css("opacity", "1");
+            var index = 0;
+            var t;
+            var li = $(".screenbg ul li");
+            var number = li.size();
+            function change(index) {
+                li.css("visibility", "visible");
+                li.eq(index).siblings().animate({ opacity: 0 }, 3000);
+                li.eq(index).animate({ opacity: 1 }, 3000);
+            }
+            function show() {
+                index = index + 1;
+                if (index <= number - 1) {
+                    change(index);
+                } else {
+                    index = 0;
+                    change(index);
+                }
+            }
+            t = setInterval(show, 2000);
+            //根据窗口宽度生成图片宽度
+            var width = $(window).width();
+            $(".screenbg ul img").css("width", width + "px");
+        });
+    </script>
+</head>
+
+<body>
+    <div class="loginbox">
+        <div class="loginboxinner">
+
+            <div class="logo">
+                <h1 class="logo">TOY<span>CAR</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+            </div><!--logo-->
+
+            <br clear="all" />
+
+            <form id="login" action="\User\Login" method="post">
+
+                <div class="username">
+                    <div class="usernameinner">
+                        <input type="text" required=required name="username" id="username" />
+                    </div>
+
+                </div>
+
+                <div class="password">
+                    <div class="passwordinner">
+                        <input type="password" required=required name="password" id="password" />
+                    </div>
+                </div>
+                @{
+
+                    <div style="color:red; text-align:center">@ViewData["message"]</div>
+                }
+                <!--登陆对象-->
+                <div class="log">
+                    <div class="anniu">
+                        <input type="radio" checked=checked name="status" id="c" value=1 class="radio" /><label for="c" class="radio" style="display:inline-block;width:100px;">学生登录</label>
+
+                        <input type="radio" name="status" id="c" value=2 class="radio" /><label for="c" class="radio" style="display:inline-block;width:100px;">
+                            教师登录
+                        </label>
+
+                        <input type="radio" name="status" id="c" value=3 class="radio" /><label for="c" class="radio">管理员登录</label>
+                    </div>
+                </div>
+
+                <button type="submit">登录</button>
+
+                @{
+                    <div class="message" style="color:red">@ViewData["1"]</div>
+                }
+
+            </form>
+
+        </div><!--loginboxinner-->
+    </div><!--loginbox-->
+
+
+    <div class="screenbg">
+        <ul>
+            <li><a href="javascript:;"><img src="~/images/1.png" /></a></li>
+            <li><a href="javascript:;"><img src="~/images/2.png" /></a></li>
+            <li><a href="javascript:;"><img src="~/images/3.png" /></a></li>
+
+        </ul>
+    </div>
+</body>
+</html>

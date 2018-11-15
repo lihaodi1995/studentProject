@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/dashboard.js"></script>
+    <script>
+        function rec2() {
+            var t1 = document.getElementById("yourwork1").value;
+            var t2 = document.getElementById("time1").value;
+            var t3 = document.getElementById("name1").value;
+            if (t1 == "") {
+                alert("请输入作业内容！");
+                window.location.href = "Teacher_changeHomework"
+            }
+            else if (t2 == "") {
+                alert("请输入提交时间！");
+                window.location.href = "Teacher_changeHomework"
+            }
+            else if (t3 == "") {
+                alert("分数占比！");
+                window.location.href = "Teacher_changeHomework"
+            }
+            else {
+                document.getElementById("form1").submit;
+                window.location.href = "Teacher_homeworkCheck";
+            }
+        }
+
+    </script>
+    <style type="text/css">
+        .a-upload {
+        padding: 4px 10px;
+        height: 20px;
+        line-height: 20px;
+        position: relative;
+        cursor: pointer;
+        color: #888;
+        background: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1
+        }
+
+
+            </style>
+</head>
+
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>教师</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            工号：
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <li><a href="\teacher\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li><a href="\teacher\Teacher_setClassMessage"><span class="icon icon-flatscreen"></span>设置课程信息</a></li>
+                <li class="current"><a href="\teacher\Teacher_classresource"><span class="icon icon-pencil"></span>课程资源</a>
+                <li><a href="\teacher\\teacher\Teacher_HomeworkCtrl"><span class="icon icon-message"></span>作业管理界面</a></li>
+                <li><a href="Teacher_homeworkpinggu"><span class="icon icon-chart"></span>作业评价</a></li>
+                <li><a href="\teacher\Teacher_chatOL"><span class="icon icon-pencil"></span>学生成绩</a></li>
+                <li><a href="\teacher\Teacher_studentTeamCtrl"><span class="icon icon-speech"></span>学生团队管理</a></li>
+            </ul>
+
+
+
+        </div><!--header-->
+
+        <div class="vernav2 iconmenu">
+            <ul>
+              <li><a href="\teacher\Teacher_homeworkCheck">查看作业列表</a></li>
+              <li><a href="\teacher\Teacher_addHomework">布置作业</a></li>
+            </ul>
+            <a class="togglemenu"></a>
+            <br /><br />
+        </div><!--leftmenu-->
+
+
+
+        <form id="form1" class="stdform" action="" method="post">
+
+            <div class="centercontent">
+                <h4 style="font-family:隶书;font-size:20pt"><b>修改作业</b></h4><br />
+                作业内容：
+                <div class="t1">
+                    <textarea required=required id="yourwork1" name="yourworks" cols="10" rows="10"></textarea>
+                    <br />
+                </div>
+                <br />
+                提交时间：<br />
+                <input required=required type="date" id="time1" name="time" size="20" maxlength="15" />
+                <br /> <br />
+
+                <style type="text/css">
+                    t1 {
+                        padding-left: 200px;
+                    }
+                </style>
+                分数占比：
+                <div class="t1">
+                    <input required=required type="text" id="name1" name="score" size="20" maxlength="15" />
+                    <br />
+
+                    <br />
+                    <br /> <br />
+                    <input type="submit" name="change" value="确认修改" onclick="rec2()" />
+                </div>
+            </div><!-- centercontent -->
+            <style type="text/css">
+                .centercontent {
+                    padding: 150px;
+                }
+            </style>
+        </form>
+
+            </div><!--bodywrapper-->
+
+</body>
+</html>

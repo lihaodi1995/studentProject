@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@using WebApplication2.Models;
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.tagsinput.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/charCount.js"></script>
+    <script type="text/javascript" src="~/js/plugins/ui.spinner.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/forms.js"></script>
+    <!--[if IE 9]>
+        <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
+    <![endif]-->
+    <!--[if IE 8]>
+        <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+</head>
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>教务人员</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+                        
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <li><a href="\jiaowu\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li class="current"><a href="\jiaowu\Tojiaowu"><span class="icon icon-flatscreen"></span>学期管理</a></li>
+                <li><a href="\jiaowu\Tomanageblog"><span class="icon icon-pencil"></span>课程管理</a></li>
+                <!--li><a href="messages"><span class="icon icon-message"></span>查看消息</a></li>
+                <li><a href="reports"><span class="icon icon-chart"></span>统计报表</a></li>-->
+            </ul>
+            <div class="headerwidget">
+
+            </div><!--headerwidget-->
+
+        </div><!--header-->
+
+        <div class="vernav2 iconmenu">
+            <ul>
+					<li class="current"><a href="\jiaowu\Toxueqixinxi" class="icon icon-pencil">学期信息</a></li>
+                    
+					<li><a href="\jiaowu\Toxueshengminglu" class="icon icon-pencil">学生名录</a></li>
+
+            </ul>
+            <a class="togglemenu"></a>
+            <br /><br />
+        </div><!--leftmenu-->
+
+        <div class="centercontent">
+			<div class="pageheader notab">
+			<h1 class="pagetitle">学期信息</h1>
+		</div><!--pageheader-->
+		
+		<div id="contentwrapper" class="contentwrapper">
+                        
+                
+        
+
+            <div id="xueqixinxi">
+                <form method="post">
+                    <table id="change" border="1" width="800" align="center">
+                        <tr align="center" valign="middle">
+                            <th>选择</th>
+                            <th>学期名称</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                        </tr>
+                        @foreach (term t in Model)
+                        {
+                            <tr align="center">
+
+                                <td><input type="radio" name="change1" /></td>
+                                <td>@t.term_name</td>
+                                <td>@t.starttime</td>
+                                <td>@t.endtime</td>
+
+                            </tr>
+                        }
+                    </table>
+                    <br />
+                    <script>
+                        function rec() {
+                            console.log("here!!!");
+                            var a = document.getElementsByName("change1");
+                            var b;
+                            var c = "选中了";
+                            for (var i = 0; i < a.length; i++) {
+                                if (a[i].checked) {
+                                    b = i;
+                                }
+                            }
+                            if (b == undefined) {
+                                c = "未选中";
+                                alert("大佬你没选！");
+                            }
+                            console.log("b:", b);
+                            console.log("valueId:", document.getElementById("change"));
+                            var valueId = document.getElementById("change").rows[b + 1].cells[1];
+                            var getValue = valueId.innerHTML;
+                            //getValue
+                            console.log("getValue:", getValue);
+                            //ViewBag.value = getValue;
+                            document.getElementById('2').value = getValue + c + "修改";
+                            document.getElementById('4').value = getValue + c + "删除";
+                            // return getValue;
+                        }
+
+                        function roc() {
+                            console.log("here!!!");
+                            var a = document.getElementsByName("change1");
+                            var b;
+                            document.getElementById('3').value = "添加";
+                        }
+                    </script>
+                    <button id="2" type="submit" name="alterbutton" value="修改" onclick="javascript:rec()">修改</button>
+                    <button id="3" type="submit" name="alterbutton" value="添加" onclick="javascript:roc()">添加</button>
+                    <button id="4" type="submit" name="alterbutton" value="删除" onclick="javascript:rec()">删除</button>
+                    <style type="~/text/css">
+                        table, th, td {
+                            border: 1px solid white;
+                            vertical-align: middle;
+                        }
+
+                        th {
+                            height: 50px;
+                        }
+
+                        td {
+                            height: 50px;
+                            vertical-align: center;
+                        }
+
+                        #xueqixinxi {
+                            padding-left: 40px;
+                            padding-top: 40px;
+                        }
+                    </style>
+                </form></div>
+			
+         </div><!-- centercontent -->
+
+
+    </div><!--bodywrapper-->
+        
+    
+</body>
+</html>

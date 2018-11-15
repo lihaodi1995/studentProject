@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="database1ModelStoreContainer" CdmEntityContainer="database1Entities">
+    <EntitySetMapping Name="assignment">
+      <EntityTypeMapping TypeName="database1Model.assignment">
+        <MappingFragment StoreEntitySet="assignment">
+          <ScalarProperty Name="assignment_id" ColumnName="assignment_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="starttime" ColumnName="starttime" />
+          <ScalarProperty Name="deadline" ColumnName="deadline" />
+          <ScalarProperty Name="requirement" ColumnName="requirement" />
+          <ScalarProperty Name="sub_max_times" ColumnName="sub_max_times" />
+          <ScalarProperty Name="proportion" ColumnName="proportion" />
+          <ScalarProperty Name="assignment_name" ColumnName="assignment_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="course">
+      <EntityTypeMapping TypeName="database1Model.course">
+        <MappingFragment StoreEntitySet="course">
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="term_id" ColumnName="term_id" />
+          <ScalarProperty Name="course_name" ColumnName="course_name" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+          <ScalarProperty Name="credit" ColumnName="credit" />
+          <ScalarProperty Name="requirement" ColumnName="requirement" />
+          <ScalarProperty Name="outline" ColumnName="outline" />
+          <ScalarProperty Name="maxsize" ColumnName="maxsize" />
+          <ScalarProperty Name="minsize" ColumnName="minsize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="jiaowu">
+      <EntityTypeMapping TypeName="database1Model.jiaowu">
+        <MappingFragment StoreEntitySet="jiaowu">
+          <ScalarProperty Name="jiaowu_id" ColumnName="jiaowu_id" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="score">
+      <EntityTypeMapping TypeName="database1Model.score">
+        <MappingFragment StoreEntitySet="score">
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="ratio" ColumnName="ratio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="student">
+      <EntityTypeMapping TypeName="database1Model.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="student_id" ColumnName="student_id" />
+          <ScalarProperty Name="student_name" ColumnName="student_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="team_id" ColumnName="team_id" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="score" ColumnName="score" />
+          <ScalarProperty Name="apply" ColumnName="apply" />
+          <ScalarProperty Name="ratio" ColumnName="ratio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="submission">
+      <EntityTypeMapping TypeName="database1Model.submission">
+        <MappingFragment StoreEntitySet="submission">
+          <ScalarProperty Name="submission_id" ColumnName="submission_id" />
+          <ScalarProperty Name="assignment" ColumnName="assignment" />
+          <ScalarProperty Name="team_id" ColumnName="team_id" />
+          <ScalarProperty Name="score" ColumnName="score" />
+          <ScalarProperty Name="sub_time" ColumnName="sub_time" />
+          <ScalarProperty Name="sub_count" ColumnName="sub_count" />
+          <ScalarProperty Name="sub_path" ColumnName="sub_path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teacher">
+      <EntityTypeMapping TypeName="database1Model.teacher">
+        <MappingFragment StoreEntitySet="teacher">
+          <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+          <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="team">
+      <EntityTypeMapping TypeName="database1Model.team">
+        <MappingFragment StoreEntitySet="team">
+          <ScalarProperty Name="team_id" ColumnName="team_id" />
+          <ScalarProperty Name="team_name" ColumnName="team_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="leader_id" ColumnName="leader_id" />
+          <ScalarProperty Name="teamsize" ColumnName="teamsize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="term">
+      <EntityTypeMapping TypeName="database1Model.term">
+        <MappingFragment StoreEntitySet="term">
+          <ScalarProperty Name="term_id" ColumnName="term_id" />
+          <ScalarProperty Name="term_name" ColumnName="term_name" />
+          <ScalarProperty Name="starttime" ColumnName="starttime" />
+          <ScalarProperty Name="endtime" ColumnName="endtime" />
+          <ScalarProperty Name="week" ColumnName="week" />
+          <ScalarProperty Name="info" ColumnName="info" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

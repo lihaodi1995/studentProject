@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@using WebApplication2.Models;
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>在线协同教学平台</title>
+<link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+function rec1()
+{
+  alert("已通过审核！");
+  location.href = "\teacher\Teacher_checkTeam";
+}
+function rec2()
+{
+  alert("未通过审核！");
+  location.href = "\teacher\Teacher_checkTeam";
+}
+</script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="~/js/plugins/excanvas.min.js"></script><![endif]-->
+<!--[if IE 9]>
+    <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
+<![endif]-->
+<!--[if IE 8]>
+    <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
+<![endif]-->
+<!--[if lt IE 9]>
+	<script src="~/js/plugins/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="topheader">
+        <div class="left">
+            <h1 class="logo">Toy <span>Car</span></h1>
+            <span class="slogan">在线协同教学平台</span>
+
+
+
+            <br clear="all" />
+
+        </div><!--left-->
+
+        <div class="right">
+        	<!--<div class="notification">
+                <a class="count" href="ajax/notifications"><span>9</span></a>
+        	</div>-->
+            <div class="userinfo">
+            	<img src="~/images/thumbs/avatar.png" alt="" />
+                <span>教师</span>
+            </div><!--userinfo-->
+
+            <div class="userinfodrop">
+                <div class="avatar">
+                    <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+
+                </div><!--avatar-->
+                <div class="userdata">
+                    <h4>
+                        @if (Session["CurUserName"] != null)
+                        {
+                            @Session["CurUserName"].ToString();
+                        }
+                    </h4>
+                    <span>
+                        工号：
+                        @if (Session["CurUser"] != null)
+                        {
+                            @Session["CurUser"].ToString();
+                        }
+                    </span>
+                    <ul>
+                        <li><a href="\teacher\LogOut">退出</a></li>
+                    </ul>
+                </div><!--userdata-->
+            </div><!--userinfodrop-->
+        </div><!--right-->
+    </div><!--topheader-->
+
+
+    <div class="header">
+    	<ul class="headermenu">
+        	<li><a href="\teacher\Teacher_setClassMessage"><span class="icon icon-flatscreen"></span>设置课程信息</a></li>
+            <li><a href="\teacher\Teacher_classresource"><span class="icon icon-pencil"></span>课程资源</a></li>
+            <li><a href="\teacher\Teacher_HomeworkCtrl"><span class="icon icon-message"></span>作业管理界面</a></li>
+            <li class="current"><a href="\teacher\Teacher_homeworkpinggu"><span class="icon icon-chart"></span>作业评价</a></li>
+			<li><a href="\teacher\Teacher_chatOL"><span class="icon icon-pencil"></span>学生成绩</a></li>
+			<li><a href="\teacher\Teacher_studentTeamCtrl"><span class="icon icon-speech"></span>学生团队管理</a></li>
+        </ul>
+
+
+
+    </div><!--header-->
+
+    <div class="vernav2 iconmenu">
+    	<ul>
+        <li class="current"><a href="\teacher\Teacher_homeworkpinggu">作业信息</a></li>
+        
+      </ul>
+        <a class="togglemenu"></a>
+        <br /><br />
+    </div><!--leftmenu-->
+
+	<div class="centercontent">
+
+	
+
+		<div id="contentwrapper" class="contentwrapper">
+
+                <div class="contenttitle2">
+                	<h3>作业信息</h3>
+                </div><!--contenttitle-->
+
+		
+            <table name="tables" border="1" width="800"  align="center">
+                
+				<tr align="center"  valign="middle">
+				
+					<th>作业名称</th>
+					<th>&nbsp;</th>
+				</tr>
+                <tbody>
+                    @foreach (assignment ass in Model)
+                    {
+                        <tr align="center">
+                            <td>&nbsp;@ass.assignment_name</td>
+
+                            <td>
+                                    <button class="submit sent tbody-button" id="@ass.assignment_id" type="submit">查看</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+			</table>
+
+
+
+</div><!--bodywrapper-->
+        <script>
+            $(".tbody-button").click(function () {
+                var _this = this;
+                var id = $(_this).attr("id");
+                // alert($(_this).text());
+                $(_this).attr("value");
+                var data = {
+                    "id": id
+                }
+                $.post("/teacher/TT1", data, function (data) {
+                    data = JSON.parse(data);
+                    window.location.href = "/teacher/Teacher_homeworkchakan";
+                })
+            });
+        </script>   
+</body>
+</html>

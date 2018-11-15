@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+
+</head>
+
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>教师</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            工号：
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <li><a href="\teacher\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li><a href="\teacher\Teacher_setClassMessage"><span class="icon icon-flatscreen"></span>设置课程信息</a></li>
+                <li class="current"><a href="\teacher\Teacher_classresource"><span class="icon icon-pencil"></span>课程资源</a>
+                <li><a href="\teacher\Teacher_HomeworkCtrl"><span class="icon icon-message"></span>作业管理界面</a></li>
+                <li><a href="\teacher\Teacher_homeworkpinggu"><span class="icon icon-chart"></span>作业评价</a></li>
+                <li><a href="\teacher\Teacher_chatOL"><span class="icon icon-pencil"></span>学生成绩</a></li>
+                <li><a href="\teacher\Teacher_studentTeamCtrl"><span class="icon icon-speech"></span>学生团队管理</a></li>
+            </ul>
+
+
+
+        </div><!--header-->
+
+        <div class="vernav2 iconmenu">
+            <ul>
+                <li class="current"><a href="\teacher\Teacher_classresource">课程资源</a></li>
+            </ul>
+            <a class="togglemenu"></a>
+            <br /><br />
+        </div><!--leftmenu-->
+        <div align="left"class="centercontent">
+          <div class="pageheader notab">
+              <h1 class="pagetitle">课程资源</h1>
+          </div><!--pageheader-->
+          <div class="contenttitle2">
+                  	<h3>&emsp;课程资源列表</h3>
+                  </div><!--contenttitle-->
+           
+                <table cellpadding="0" cellspacing="0" border="0" class="stdtable" id="show">
+                    <colgroup>
+                        <col class="con0" />
+                        <col class="con1" />
+                        <col class="con0" />
+                        <col class="con1" />
+                        <col class="con0" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="head0">文件名称</th>
+                            <th class="head1">操作</th>
+                        </tr>
+                    </thead>
+                    <!--
+                    <tbody>
+                        <tr>
+                            <td>样例</td>
+                            <td><button class="submit sent" name="delete" value="del">删除</button></td>
+                            <td><button name="download" value="dload" class="submit sent">下载</button></td>
+                        </tr>
+                    </tbody>
+                       -->
+                </table>
+                  <br>
+                  <br>
+
+                   <form>&emsp;&emsp;<input type="button" name="add" value="上传资源" onclick="rec()"></form>
+       </div>
+
+
+</div><!--bodywrapper-->
+    <script src="~/jsp/jquery-1.10.2.min.js"></script>
+    <script>
+        function rec() {
+            window.location.href = "Teacher_getresource";
+        };
+        
+        $('#show').on('click', '.tbody-button', function () {
+           
+            var _this = this;
+            var fn = $(_this).parent().prev().find('a').text();
+
+            //alert(fn);
+            var data = {
+                "filename": fn
+            }
+            $.post("/teacher/deleteClassResource", data, function (data) {
+                //alert("success!");
+                location.href = "Teacher_classresourcelist";
+            })
+        })
+        /*
+        $('.tbody-button').click(function () {
+            alert(1);
+            var _this = this;
+            var fn = $(_this).parent().prev().find('a').text();
+
+            alert(fn);
+            var data = {
+                "filename": fn
+            }
+            $.post("/teacher/deleteClassResource", data, function (data) {
+                alert("success!");
+                location.href = "Teacher_classresourcelist";
+            })
+        });
+        */
+
+    function getResources(j) {
+        
+        var curUrl = window.location.href;
+        //alert(curUrl);
+
+        var hurl = curUrl.split("teacher");
+        var u = hurl[0];
+        //alert(u);
+        var u = u + "Classresources/";
+
+        var data = {
+            "folderPath": j
+        }
+
+        $.post("/teacher/getClassResources", data, function (data) {
+            data = JSON.parse(data);
+            console.log(data["files"]);
+            //alert(data["files"].length);
+
+            var n = document.getElementById("show");
+            var tb = document.createElement('tbody');
+            n.appendChild(tb);
+            for (var i = 0; i < data["files"].length; i++) {
+                var s = data["files"][i].split("ClassResources\\");
+                var filename = s[s.length - 1];
+                //alert(filename);
+                var filepath = u + filename;
+                //alert(filepath);
+                //alert(filename);
+                //var n = document.getElementById("show");
+                var a = document.createElement('a');
+                a.innerHTML = filename;
+                //alert(filepath);
+                a.setAttribute("href", filepath);
+                a.setAttribute("download", filename);
+                a.setAttribute("name", filename);
+                var t = document.createElement('tr');
+                //t.setAttribute("style","border:1px solid #000000");
+                //方法一：document.divs.style.cssText="border:1px solid #000000;color:#FF0000";
+                //方法二：document.divs.setAttribute("style","border:1px solid #000000;color:#FF0000");
+                var tt = document.createElement('td');
+                tt.setAttribute("width","100px");
+                tt.appendChild(a);
+                var ttt = document.createElement('td');
+                var tttbt = document.createElement('button');
+                tttbt.setAttribute("class", "tbody-button");
+                //tttbt.setAttribute("name",filename);
+                //tttbt.onclick = function () { deleteR($(tttbt).attr("name")) };
+                tttbt.innerHTML = "删除";
+                ttt.appendChild(tttbt);
+                t.appendChild(tt);
+                t.appendChild(ttt);
+                tb.appendChild(t);
+                
+                //alert(i+1);
+            }
+        })
+        };
+
+    /*JSON.parse('{"1": 1, "2": 2, "3": {"4": 4, "5": {"6": 6}}}', function (k, v) {
+        document.write(k);// 输出当前属性，最后一个为 ""
+        document.write("<br>");
+        return v;       // 返回修改的值
+    });*/
+
+    $(document).ready(function () {
+        getResources(null);
+    })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@using WebApplication2.Models;
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/dashboard.js"></script>
+    <script type="text/javascript" src="~/js/custom/HtmlPage.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="~/js/plugins/excanvas.min.js"></script><![endif]-->
+    <!--[if IE 9]>
+        <link rel="stylesheet" media="screen" href="~/css/style.ie9.css"/>
+    <![endif]-->
+    <!--[if IE 8]>
+        <link rel="stylesheet" media="screen" href="~/css/style.ie8.css"/>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="~/js/plugins/css3-mediaqueries.js"></script>
+    <![endif]-->
+</head>
+
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>学生</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <!--li><a href="editprofile.html">编辑资料</a></li>
+                            <li><a href="accountsettings.html">账号设置</a></li>
+                            <li><a href="help.html">帮助</a></li>-->
+                            <li><a href="\student\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li class="current"><a href="Student_team"><span class="icon icon-flatscreen"></span>团队</a></li>
+                <li><a href="Student_class"><span class="icon icon-pencil"></span>课程</a></li>
+                <!--li><a href="support"><span class="icon icon-flatscreen"></span>留言</a></!--li>
+                <!--li><a href="messages"><span class="icon icon-message"></span>查看消息</a></li>
+                <li><a href="reports"><span class="icon icon-chart"></span>统计报表</a></li>-->
+            </ul>
+
+
+
+        </div><!--header-->
+        <div class="vernav2 iconmenu">
+            <ul>
+                <li >
+                    <a class="editor" href="Student_createteam">创建团队</a>
+
+                </li>
+                <li class="current">
+                    <a href="Student_checkteam" class="icon icon-flatscreen">查看团队信息</a>
+                    <span class="arrow"></span>
+                    <ul id="formsub">
+                        <li><a href="Student_myteam">我的团队</a></li>
+                        <li class="current"><a href="Student_allteam">所有团队</a></li>
+                        <li><a href="Student_evateam">团队评价</a></li>
+                        <li><a href = "Student_checkTeam">成员审核</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <a class="togglemenu"></a>
+        </div><!--leftmenu-->
+
+
+        <div class="centercontent">
+        <div id="contentwrapper" class="contentwrapper">
+
+                  <div class="contenttitle2">
+                          <h3>团队列表</h3>
+                        </div><!--contenttitle-->
+        <form id="teamform123" action="" method="post">
+            <table id="teamTable" cellpadding="0" cellspacing="0" border="0" class="stdtable" value="1">
+                <colgroup>
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                </colgroup>
+                <thead>
+                    <tr>@if(ViewData["无团队"].ToString()=="无团队")
+                        {
+                            <th class="head0">是否加入</th>
+                        }
+                        <th class="head1">团队名</th>
+                        <th class="head0">团队负责人</th>
+                        <th class="head0">团队人数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(teamlist t in Model)
+                    {
+                    <tr>
+                        @if(ViewData["无团队"].ToString()=="无团队")
+                        {
+                            <td><input type="radio" name="teamno" id="teamno" value="0"></td>
+                        }
+                        <td>@t.teamname</td>
+                        <td>@t.leadername</td>
+                        <td>@t.size</td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table><br>
+            @if (ViewData["无团队"].ToString() == "无团队")
+            {
+                <button id="2" name="teamchoose" type="submit" value="申请加入" onclick="javascript:jiaru()">申请</button>
+            }
+            </form>
+</div>
+        <script language="javascript">
+            function jiaru() {
+
+                console.log("here!!!");
+                var a = document.getElementsByName("teamno");
+                var b;
+                var c = "选中了";
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i].checked) {
+                        b = i;
+                    }
+                }
+                if (b == undefined) {
+                    alert("大佬你没选！");
+                }
+
+                console.log("b:", b);
+                console.log("valueId:", document.getElementById("teamTable"));
+                var valueId = document.getElementById("teamTable").rows[b + 1].cells[1];
+                var getValue = valueId.innerHTML;
+                //getValue
+                console.log("getValue:", getValue);
+                //ViewBag.value = getValue;
+                document.getElementById('2').value = getValue + "申请加入";
+                // return getValue;
+                if (teamexist == 1 || teamexist == 3) {
+                    alert("您的申请正在审核或已加入团队");
+                    location.href("Student_allteam");
+                }
+
+                else {
+
+                    var gg = document.getElementsByName("teamno");
+                    var j = 0;
+                    for (var i = 0; i < gg.length; i++) {
+                        if (gg[i].checked) {
+                            j = 1;
+                        }
+                    }
+                    if (j == 0)
+                        alert("请选择一组队伍");
+                    else {
+
+                        var getrow;
+
+                        for (var i = 0; i < gg.length; i++) {
+                            if (gg[i].checked) {
+                                getrow = i;
+                            }
+                        }
+                        var txt;
+                        var valueTd = document.getElementById("teamTable").rows[getrow + 1].cells[3];
+                        getnum = valueTd.innerHTML;
+                        if (parseInt(getnum) > teammember - 1) {
+                            alert("该团队人数已达上限" + teammember);
+                        }
+                        else {
+                            var radiono = "";
+                            var j = document.getElementsByName("teamno");
+                            for (var i = 0; i < j.length; i++) {
+                                if (j[i].checked == true)
+                                    radiono = j[i].value;
+
+                            }
+
+                            var valueTd1 = document.getElementById("teamTable").rows[getrow + 1].cells[1];
+                            var getnum1 = valueTd1.innerHTML;
+                            alert("已提交申请，请等待老师确认");
+
+                            //提交getnum1;
+                            location.href = "Student_allteam";
+                        }
+
+                    }
+                }
+
+            }
+
+        </script>
+        <style type="text/css">
+        #teamform123 {
+            align-content:center;
+        }
+        #teamTable th,td {
+            width:200px;
+        }
+        </style>
+
+        </div><!-- centercontent -->
+
+
+    </div><!--bodywrapper-->
+
+</body>

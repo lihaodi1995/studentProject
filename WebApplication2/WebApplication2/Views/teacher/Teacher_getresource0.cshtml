@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/dashboard.js"></script>
+    <script type="text/javascript">
+    function rec2()
+    {
+    document.getElementById("form1").submit;
+    alert("提交成功！");
+    location.href = "\teacher\Teacher_classresource";
+
+    }
+    </script>
+    <style type="text/css">
+        .a-upload {
+        padding: 4px 10px;
+        height: 20px;
+        line-height: 20px;
+        position: relative;
+        cursor: pointer;
+        color: #888;
+        background: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1
+        }
+
+
+            </style>
+</head>
+
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>教师</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            工号：
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <li><a href="\teacher\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li><a href="\teacher\Teacher_setClassMessage"><span class="icon icon-flatscreen"></span>设置课程信息</a></li>
+                <li class="current"><a href="\teacher\Teacher_classresource"><span class="icon icon-pencil"></span>课程资源</a>
+                <li><a href="\teacher\Teacher_HomeworkCtrl"><span class="icon icon-message"></span>作业管理界面</a></li>
+                <li><a href="\teacher\Teacher_homeworkpinggu"><span class="icon icon-chart"></span>作业评价</a></li>
+                <li><a href="\teacher\Teacher_chatOL"><span class="icon icon-pencil"></span>学生成绩</a></li>
+                <li><a href="\teacher\Teacher_studentTeamCtrl"><span class="icon icon-speech"></span>学生团队管理</a></li>
+            </ul>
+
+
+
+        </div><!--header-->
+
+        <div class="vernav2 iconmenu">
+            <ul>
+                <li><a href="\teacher\Teacher_classresource">上传资源</a></li>
+
+
+
+            </ul>
+            <a class="togglemenu"></a>
+            <br /><br />
+        </div><!--leftmenu-->
+
+        <div class="centercontent">
+
+            <div class="pageheader notab">
+                <h1 class="pagetitle">上传课程资源</h1>
+            </div><!--pageheader-->
+
+            <div id="contentwrapper" class="contentwrapper">
+
+                <div id="mydiv">
+                    <h5>请选择文件路径</h5><br>
+                </div><!--contenttitle-->
+                <form id="form1" class="a-upload"action="" method="post" enctype="multipart/form-data"  >
+                    <input type="file" name="fileUpload"  /><br><br>
+                    <input type="button" name="submit" value="提交" onclick="rec2()">
+                </form>
+
+            </div><!--bodywrapper-->
+            </div>
+        </div>
+</body>
+</html>

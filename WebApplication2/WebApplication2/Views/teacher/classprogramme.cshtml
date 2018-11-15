@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@using WebApplication2.Models;
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.flot.resize.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/dashboard.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/plugins/excanvas.min.js"></script><![endif]-->
+    <!--[if IE 9]>
+        <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
+    <![endif]-->
+    <!--[if IE 8]>
+        <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="js/plugins/css3-mediaqueries.js"></script>
+    <![endif]-->
+</head>
+
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications.html"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>教师</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            工号：
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <li><a href="\teacher\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li class="current"><a href="\teacher\Teacher_setClassMessage"><span class="icon icon-flatscreen"></span>设置课程信息</a></li>
+                <li><a href="\teacher\Teacher_classresource"><span class="icon icon-pencil"></span>课程资源</a></li>
+                <li><a href="\teacher\Teacher_HomeworkCtrl"><span class="icon icon-message"></span>作业管理界面</a></li>
+                <li><a href="\teacher\Teacher_homeworkpinggu"><span class="icon icon-chart"></span>作业评价</a></li>
+                <li><a href="\teacher\Teacher_chatOL"><span class="icon icon-pencil"></span>学生成绩</a></li>
+                <li><a href="\teacher\Teacher_studentTeamCtrl"><span class="icon icon-speech"></span>学生团队管理</a></li>
+            </ul>
+
+
+
+        </div><!--header-->
+
+        <div class="vernav2 iconmenu">
+            <ul>
+                <li><a href="\teacher\classrequire">课程要求</a></li>
+
+
+
+                <!--<li><a href="filemanager.html" class="gallery">文件管理</a></li>-->
+                <li><a href="\teacher\classprogramme" class="elements">课程大纲</a></li>
+
+            </ul>
+            <a class="togglemenu"></a>
+            <br /><br />
+        </div><!--leftmenu-->
+
+        <div class="centercontent">
+
+            <div class="pageheader notab">
+                <h1 class="pagetitle">课程大纲</h1>
+            </div><!--pageheader-->
+
+            <div id="contentwrapper" class="contentwrapper">
+
+                <div class="contenttitle2">
+                    <h3>课程大纲</h3>
+                </div><!--contenttitle-->
+                <br /><br />
+
+                <table class="table-a">
+                    <tr>
+                        <th>已发布的课程大纲</th>
+                    </tr>
+                    <tr>
+                        <td height="100" width="200">
+                        @ViewData["课程大纲"]
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                </div>
+                <br /><br />
+            <div class="contenttitle2">
+                    <h3>下载课程大纲</h3>
+            </div>
+            <br/>
+            <a id="showpath"></a>
+            <br/>
+                <form>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    <a href="\teacher\setclassprogramme" class="btn btn_book"><span>修改课程大纲<span></span></span></a>
+                </form>
+            </div><!--contentwrapper-->
+
+
+            </div><!--bodywrapper-->
+        </div>
+
+    <script src="~/jsp/jquery-1.10.2.min.js"></script>
+    <script>
+        function rec() {
+            window.location.href = "Teacher_getresource";
+        };
+
+    function getResources(j) {
+        var curUrl = window.location.href;
+        //alert(curUrl);
+
+        var hurl = curUrl.split("teacher");
+        var u = hurl[0];
+        //alert(u);
+        var u = u + "ClassProgram/";
+
+        var data = {
+            "folderPath": j
+        }
+
+        $.post("/teacher/getClassProgram", data, function (data) {
+            data = JSON.parse(data);
+            console.log(data["files"]);
+            //alert(data["files"].length);
+            for (var i = 0; i < data["files"].length; i++) {
+                var s = data["files"][i].split("ClassProgram\\");
+                var filename = s[s.length - 1];
+                var filepath = u + filename;
+                //alert(filepath);
+                //alert(filename);
+
+                var a = document.getElementById("showpath");
+                a.innerHTML = filename;
+                a.setAttribute("href", filepath);
+                a.setAttribute("download", filename);
+                //a.setAttribute("class", "thumbnail");
+            }
+        })
+        
+    };
+
+    /*JSON.parse('{"1": 1, "2": 2, "3": {"4": 4, "5": {"6": 6}}}', function (k, v) {
+        document.write(k);// 输出当前属性，最后一个为 ""
+        document.write("<br>");
+        return v;       // 返回修改的值
+    });*/
+
+    $(document).ready(function () {
+        getResources(null);
+    })
+    </script>
+</body>
+</html>

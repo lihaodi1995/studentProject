@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+           
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/css/fileinput.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.tagsinput.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/charCount.js"></script>
+    <script type="text/javascript" src="~/js/plugins/ui.spinner.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/forms.js"></script>
+    <script>
+        function rec()
+        {
+            var a =document.getElementById("file1").value;
+            if(a == "")
+            {
+                alert("请选择文件!");
+            }
+            else
+            {
+                document.getElementById("form1").submit;
+                alert("提交成功！");
+                location.href = "xueshengminglu";
+            }
+        }
+    </script>
+</head>
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>教务人员</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+                        
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <li><a href="\jiaowu\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li class="current"><a href="jiaowu\Tojiaowu"><span class="icon icon-flatscreen"></span>学期管理</a></li>
+                <li><a href="\jiaowu\Tomanageblog"><span class="icon icon-pencil"></span>课程管理</a></li>
+                <!--li><a href="messages"><span class="icon icon-message"></span>查看消息</a></li>
+            <li><a href="reports"><span class="icon icon-chart"></span>统计报表</a></li>-->
+            </ul>
+            <div class="headerwidget">
+               
+            </div><!--headerwidget-->
+
+        </div><!--header-->
+
+            <div class="vernav2 iconmenu">
+                <ul>
+					<li><a href="\jiaowu\Toxueqixinxi" class="icon icon-pencil">学期信息</a></li>
+                    
+					<li class="current"><a href="\jiaowu\Toxueshengminglu" class="icon icon-pencil">学生名录</a></li>
+					
+                </ul>
+                <a class="togglemenu"></a>
+                <br /><br />
+            </div><!--leftmenu-->
+
+            <div class="centercontent">
+
+                <div class="pageheader">
+                    <h1 class="pagetitle">添加学生信息</h1>
+                    <span></span>
+
+                    <ul class="hornav">
+                        
+                    </ul>
+                </div><!--pageheader-->
+
+                <div id="contentwrapper" class="contentwrapper">
+
+                    <div id="basicform" class="subcontent">
+
+                <div class="contenttitle2">
+                <h3>Form</h3>
+                        </div><!--contenttitle-->
+							<br /><br />
+							
+                            <button type="button" id="createCourseInfo" class="btn btn-danger" onclick="location.href='#'">导入文件</button>
+						
+
+            </div><!-- centercontent -->
+
+
+        </div><!--bodywrapper-->
+    </div>
+        <div id="teacher-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="input-id" type="file" multiple=multiple data-preview-file-type="text" name="file" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/fileinput.min.js"></script>
+        <script src="~/Scripts/zh.js"></script>
+
+<script>
+    $("#input-id").fileinput({
+        language: 'zh', //设置语言
+        uploadUrl: '/jiaowu/batchAddStudents',
+        overwriteInitial: false,
+        maxFileSize: 0,
+        maxFilesNum: 10,
+    });
+    $(document).ready(function () {
+
+        $("#createCourseInfo").click(function () {
+            $("#teacher-modal").modal("show");
+        });
+
+    })
+</script>
+
+</body>
+</html>

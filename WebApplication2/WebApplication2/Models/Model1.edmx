@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="assignment">
+          <Key>
+            <PropertyRef Name="assignment_id" />
+          </Key>
+          <Property Name="assignment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_id" Type="int" />
+          <Property Name="starttime" Type="datetime" />
+          <Property Name="deadline" Type="datetime" />
+          <Property Name="requirement" Type="varchar" MaxLength="255" />
+          <Property Name="sub_max_times" Type="int" />
+          <Property Name="proportion" Type="int" />
+          <Property Name="assignment_name" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="term_id" Type="int" />
+          <Property Name="course_name" Type="varchar" MaxLength="40" />
+          <Property Name="location" Type="varchar" MaxLength="40" />
+          <Property Name="time" Type="varchar" MaxLength="40" />
+          <Property Name="teacher_id" Type="int" />
+          <Property Name="credit" Type="int" />
+          <Property Name="requirement" Type="varchar" MaxLength="255" />
+          <Property Name="outline" Type="varchar" MaxLength="255" />
+          <Property Name="maxsize" Type="int" />
+          <Property Name="minsize" Type="int" />
+        </EntityType>
+        <EntityType Name="jiaowu">
+          <Key>
+            <PropertyRef Name="jiaowu_id" />
+          </Key>
+          <Property Name="jiaowu_id" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="score">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="int" Nullable="false" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="ratio" Type="float" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="student_id" />
+          </Key>
+          <Property Name="student_id" Type="int" Nullable="false" />
+          <Property Name="student_name" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="16" />
+          <Property Name="team_id" Type="int" />
+          <Property Name="course_id" Type="int" />
+          <Property Name="tel" Type="varchar" MaxLength="16" />
+          <Property Name="score" Type="int" />
+          <Property Name="apply" Type="int" />
+          <Property Name="ratio" Type="int" />
+        </EntityType>
+        <EntityType Name="submission">
+          <Key>
+            <PropertyRef Name="submission_id" />
+          </Key>
+          <Property Name="submission_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="assignment" Type="int" />
+          <Property Name="team_id" Type="int" />
+          <Property Name="score" Type="int" />
+          <Property Name="sub_time" Type="datetime" />
+          <Property Name="sub_count" Type="int" />
+          <Property Name="sub_path" Type="varchar" MaxLength="5000" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="int" Nullable="false" />
+          <Property Name="teacher_name" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="16" />
+          <Property Name="course_id" Type="int" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_name" Type="varchar" MaxLength="40" />
+          <Property Name="status" Type="int" />
+          <Property Name="leader_id" Type="int" />
+          <Property Name="teamsize" Type="int" />
+        </EntityType>
+        <EntityType Name="term">
+          <Key>
+            <PropertyRef Name="term_id" />
+          </Key>
+          <Property Name="term_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="term_name" Type="varchar" MaxLength="255" />
+          <Property Name="starttime" Type="datetime" />
+          <Property Name="endtime" Type="datetime" />
+          <Property Name="week" Type="int" />
+          <Property Name="info" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="database1ModelStoreContainer">
+          <EntitySet Name="assignment" EntityType="Self.assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jiaowu" EntityType="Self.jiaowu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="score" EntityType="Self.score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="submission" EntityType="Self.submission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="term" EntityType="Self.term" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="assignment">
+          <Key>
+            <PropertyRef Name="assignment_id" />
+          </Key>
+          <Property Name="assignment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_id" Type="Int32" />
+          <Property Name="starttime" Type="DateTime" Precision="3" />
+          <Property Name="deadline" Type="DateTime" Precision="3" />
+          <Property Name="requirement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="sub_max_times" Type="Int32" />
+          <Property Name="proportion" Type="Int32" />
+          <Property Name="assignment_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="term_id" Type="Int32" />
+          <Property Name="course_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="teacher_id" Type="Int32" />
+          <Property Name="credit" Type="Int32" />
+          <Property Name="requirement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="outline" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="maxsize" Type="Int32" />
+          <Property Name="minsize" Type="Int32" />
+        </EntityType>
+        <EntityType Name="jiaowu">
+          <Key>
+            <PropertyRef Name="jiaowu_id" />
+          </Key>
+          <Property Name="jiaowu_id" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="score">
+          <Key>
+            <PropertyRef Name="course_id" />
+          </Key>
+          <Property Name="course_id" Type="Int32" Nullable="false" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="ratio" Type="Double" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="student_id" />
+          </Key>
+          <Property Name="student_id" Type="Int32" Nullable="false" />
+          <Property Name="student_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="team_id" Type="Int32" />
+          <Property Name="course_id" Type="Int32" />
+          <Property Name="tel" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="score" Type="Int32" />
+          <Property Name="apply" Type="Int32" />
+          <Property Name="ratio" Type="Int32" />
+        </EntityType>
+        <EntityType Name="submission">
+          <Key>
+            <PropertyRef Name="submission_id" />
+          </Key>
+          <Property Name="submission_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="assignment" Type="Int32" />
+          <Property Name="team_id" Type="Int32" />
+          <Property Name="score" Type="Int32" />
+          <Property Name="sub_time" Type="DateTime" Precision="3" />
+          <Property Name="sub_count" Type="Int32" />
+          <Property Name="sub_path" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <Property Name="teacher_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="course_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="leader_id" Type="Int32" />
+          <Property Name="teamsize" Type="Int32" />
+        </EntityType>
+        <EntityType Name="term">
+          <Key>
+            <PropertyRef Name="term_id" />
+          </Key>
+          <Property Name="term_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="term_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="starttime" Type="DateTime" Precision="3" />
+          <Property Name="endtime" Type="DateTime" Precision="3" />
+          <Property Name="week" Type="Int32" />
+          <Property Name="info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="assignment" EntityType="Self.assignment" />
+          <EntitySet Name="course" EntityType="Self.course" />
+          <EntitySet Name="jiaowu" EntityType="Self.jiaowu" />
+          <EntitySet Name="score" EntityType="Self.score" />
+          <EntitySet Name="student" EntityType="Self.student" />
+          <EntitySet Name="submission" EntityType="Self.submission" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" />
+          <EntitySet Name="team" EntityType="Self.team" />
+          <EntitySet Name="term" EntityType="Self.term" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="database1ModelStoreContainer" CdmEntityContainer="database1Entities">
+          <EntitySetMapping Name="assignment">
+            <EntityTypeMapping TypeName="database1Model.assignment">
+              <MappingFragment StoreEntitySet="assignment">
+                <ScalarProperty Name="assignment_id" ColumnName="assignment_id" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="requirement" ColumnName="requirement" />
+                <ScalarProperty Name="sub_max_times" ColumnName="sub_max_times" />
+                <ScalarProperty Name="proportion" ColumnName="proportion" />
+                <ScalarProperty Name="assignment_name" ColumnName="assignment_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="course">
+            <EntityTypeMapping TypeName="database1Model.course">
+              <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="term_id" ColumnName="term_id" />
+                <ScalarProperty Name="course_name" ColumnName="course_name" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="requirement" ColumnName="requirement" />
+                <ScalarProperty Name="outline" ColumnName="outline" />
+                <ScalarProperty Name="maxsize" ColumnName="maxsize" />
+                <ScalarProperty Name="minsize" ColumnName="minsize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jiaowu">
+            <EntityTypeMapping TypeName="database1Model.jiaowu">
+              <MappingFragment StoreEntitySet="jiaowu">
+                <ScalarProperty Name="jiaowu_id" ColumnName="jiaowu_id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="score">
+            <EntityTypeMapping TypeName="database1Model.score">
+              <MappingFragment StoreEntitySet="score">
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="ratio" ColumnName="ratio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="student">
+            <EntityTypeMapping TypeName="database1Model.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="student_name" ColumnName="student_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="apply" ColumnName="apply" />
+                <ScalarProperty Name="ratio" ColumnName="ratio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="submission">
+            <EntityTypeMapping TypeName="database1Model.submission">
+              <MappingFragment StoreEntitySet="submission">
+                <ScalarProperty Name="submission_id" ColumnName="submission_id" />
+                <ScalarProperty Name="assignment" ColumnName="assignment" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="sub_time" ColumnName="sub_time" />
+                <ScalarProperty Name="sub_count" ColumnName="sub_count" />
+                <ScalarProperty Name="sub_path" ColumnName="sub_path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teacher">
+            <EntityTypeMapping TypeName="database1Model.teacher">
+              <MappingFragment StoreEntitySet="teacher">
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="team">
+            <EntityTypeMapping TypeName="database1Model.team">
+              <MappingFragment StoreEntitySet="team">
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="team_name" ColumnName="team_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="leader_id" ColumnName="leader_id" />
+                <ScalarProperty Name="teamsize" ColumnName="teamsize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="term">
+            <EntityTypeMapping TypeName="database1Model.term">
+              <MappingFragment StoreEntitySet="term">
+                <ScalarProperty Name="term_id" ColumnName="term_id" />
+                <ScalarProperty Name="term_name" ColumnName="term_name" />
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
+                <ScalarProperty Name="endtime" ColumnName="endtime" />
+                <ScalarProperty Name="week" ColumnName="week" />
+                <ScalarProperty Name="info" ColumnName="info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

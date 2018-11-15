@@ -1,0 +1,107 @@
+ /******************************/
+        public ActionResult Teacher_setClassProgram()
+        {
+            return View("setclassprogramme");
+        }
+
+        public ActionResult Teacher_classprogram()
+        {
+            return View("classprogramme");
+        }
+
+        public string getResources(string folderPath)
+        {
+            string[] resultFile;
+            var severPath = this.Server.MapPath("~/ClassProgram/");
+
+            Directory.CreateDirectory(severPath);
+            try
+            {
+                resultFile = Directory.GetFiles(severPath);
+                //resultDirectories = Directory.GetDirectories(severPath);
+            }
+            catch (Exception e)
+            {
+                return "error";
+            }
+            TeacherResource resource = new TeacherResource();
+            resource.files = resultFile;
+            //resource.directories = resultDirectories;
+            return JsonConvert.SerializeObject(resource);
+        }
+
+        public class TeacherResource
+        {
+            public string[] files { get; set; }
+            public string[] directories { get; set; }
+        }
+
+        public string batchAddStudents(HttpPostedFileBase file)
+        {
+            var severPath = this.Server.MapPath("~/ClassProgram/");
+            Directory.CreateDirectory(severPath);
+            var savePath = Path.Combine(severPath, file.FileName);
+            string result = "{}";
+            try
+            {
+                file.SaveAs(savePath);
+            }
+            catch (Exception e)
+            {
+                result = "{\"error\":\"在服务器端发生错误请联系管理员\"}";
+            }
+            finally
+            {
+                //System.IO.File.Delete(savePath);
+            }
+            return result;
+        }
+        /*******************************/
+
+ <script>
+
+            function getResources(j) {
+                var curUrl = window.location.href;
+                alert(curUrl);
+                
+                var hurl = curUrl.split("teacher");
+                var u = hurl[0];
+                alert(u);
+                var u = u+"ClassProgram/";
+                var data = {
+                    "folderPath": j
+                }
+                
+                $.post("/teacher/getResources", data, function (data) {
+                    data = JSON.parse(data);
+
+                    console.log(data["files"]);
+                    alert (data["files"].length);
+                    for (var i = 0; i < data["files"].length; i++) {
+                        var s = data["files"][i].split("ClassProgram\\");
+                        var filename = s[s.length - 1];
+                        var f1ilepath = u + filename;
+                        alert(filepath);
+                        alert(filename);
+                        var a = document.getElementById("showpath");
+                        
+                        a.innerHTML = filename;
+
+                        a.setAttribute("href", filepath);
+                        a.setAttribute("download", filename);
+                        //a.setAttribute("class", "thumbnail");
+                    }
+                })                  
+            };
+
+            /*JSON.parse('{"1": 1, "2": 2, "3": {"4": 4, "5": {"6": 6}}}', function (k, v) {
+                document.write(k);// 输出当前属性，最后一个为 ""
+                document.write("<br>");
+                return v;       // 返回修改的值
+            });*/
+
+            $(document).ready(function () {
+                getResources(null);
+            })
+
+        </script>

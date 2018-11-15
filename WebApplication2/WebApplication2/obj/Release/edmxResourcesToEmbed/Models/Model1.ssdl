@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="assignment">
+    <Key>
+      <PropertyRef Name="assignment_id" />
+    </Key>
+    <Property Name="assignment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="course_id" Type="int" />
+    <Property Name="starttime" Type="datetime" />
+    <Property Name="deadline" Type="datetime" />
+    <Property Name="requirement" Type="varchar" MaxLength="255" />
+    <Property Name="sub_max_times" Type="int" />
+    <Property Name="proportion" Type="int" />
+    <Property Name="assignment_name" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="course">
+    <Key>
+      <PropertyRef Name="course_id" />
+    </Key>
+    <Property Name="course_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="term_id" Type="int" />
+    <Property Name="course_name" Type="varchar" MaxLength="40" />
+    <Property Name="location" Type="varchar" MaxLength="40" />
+    <Property Name="time" Type="varchar" MaxLength="40" />
+    <Property Name="teacher_id" Type="int" />
+    <Property Name="credit" Type="int" />
+    <Property Name="requirement" Type="varchar" MaxLength="255" />
+    <Property Name="outline" Type="varchar" MaxLength="255" />
+    <Property Name="maxsize" Type="int" />
+    <Property Name="minsize" Type="int" />
+  </EntityType>
+  <EntityType Name="jiaowu">
+    <Key>
+      <PropertyRef Name="jiaowu_id" />
+    </Key>
+    <Property Name="jiaowu_id" Type="int" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="score">
+    <Key>
+      <PropertyRef Name="course_id" />
+    </Key>
+    <Property Name="course_id" Type="int" Nullable="false" />
+    <Property Name="student_id" Type="int" />
+    <Property Name="ratio" Type="float" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="student_id" />
+    </Key>
+    <Property Name="student_id" Type="int" Nullable="false" />
+    <Property Name="student_name" Type="varchar" MaxLength="20" />
+    <Property Name="password" Type="varchar" MaxLength="16" />
+    <Property Name="team_id" Type="int" />
+    <Property Name="course_id" Type="int" />
+    <Property Name="tel" Type="varchar" MaxLength="16" />
+    <Property Name="score" Type="int" />
+    <Property Name="apply" Type="int" />
+    <Property Name="ratio" Type="int" />
+  </EntityType>
+  <EntityType Name="submission">
+    <Key>
+      <PropertyRef Name="submission_id" />
+    </Key>
+    <Property Name="submission_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="assignment" Type="int" />
+    <Property Name="team_id" Type="int" />
+    <Property Name="score" Type="int" />
+    <Property Name="sub_time" Type="datetime" />
+    <Property Name="sub_count" Type="int" />
+    <Property Name="sub_path" Type="varchar" MaxLength="5000" />
+  </EntityType>
+  <EntityType Name="teacher">
+    <Key>
+      <PropertyRef Name="teacher_id" />
+    </Key>
+    <Property Name="teacher_id" Type="int" Nullable="false" />
+    <Property Name="teacher_name" Type="varchar" MaxLength="20" />
+    <Property Name="password" Type="varchar" MaxLength="16" />
+    <Property Name="course_id" Type="int" />
+  </EntityType>
+  <EntityType Name="team">
+    <Key>
+      <PropertyRef Name="team_id" />
+    </Key>
+    <Property Name="team_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="team_name" Type="varchar" MaxLength="40" />
+    <Property Name="status" Type="int" />
+    <Property Name="leader_id" Type="int" />
+    <Property Name="teamsize" Type="int" />
+  </EntityType>
+  <EntityType Name="term">
+    <Key>
+      <PropertyRef Name="term_id" />
+    </Key>
+    <Property Name="term_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="term_name" Type="varchar" MaxLength="255" />
+    <Property Name="starttime" Type="datetime" />
+    <Property Name="endtime" Type="datetime" />
+    <Property Name="week" Type="int" />
+    <Property Name="info" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityContainer Name="database1ModelStoreContainer">
+    <EntitySet Name="assignment" EntityType="Self.assignment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="jiaowu" EntityType="Self.jiaowu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="score" EntityType="Self.score" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="submission" EntityType="Self.submission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="term" EntityType="Self.term" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

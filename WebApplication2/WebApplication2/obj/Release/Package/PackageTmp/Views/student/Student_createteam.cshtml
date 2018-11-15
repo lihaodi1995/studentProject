@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在线协同教学平台</title>
+    <link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script type="text/javascript" src="~/js/plugins/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="~/js/custom/general.js"></script>
+    <script type="text/javascript" src="~/js/custom/tables.js"></script>
+    <script type="text/javascript" src="~/js/custom/HtmlPage.js"></script>
+    <!--[if IE 9]>
+        <link rel="stylesheet" media="screen" href="~/css/style.ie9.css"/>
+    <![endif]-->
+    <!--[if IE 8]>
+        <link rel="stylesheet" media="screen" href="~/css/style.ie8.css"/>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="~/js/plugins/css3-mediaqueries.js"></script>
+    <![endif]-->
+   
+</head>
+
+<body class="withvernav">
+    <div class="bodywrapper">
+        <div class="topheader">
+            <div class="left">
+                <h1 class="logo">Toy <span>Car</span></h1>
+                <span class="slogan">在线协同教学平台</span>
+
+
+
+                <br clear="all" />
+
+            </div><!--left-->
+
+            <div class="right">
+                <!--<div class="notification">
+                    <a class="count" href="ajax/notifications"><span>9</span></a>
+                </div>-->
+                <div class="userinfo">
+                    <img src="~/images/thumbs/avatar.png" alt="" />
+                    <span>学生</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop">
+                    <div class="avatar">
+                        <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+                        
+                    </div><!--avatar-->
+                    <div class="userdata">
+                        <h4>
+                            @if (Session["CurUser"] != null)
+                            {
+                                @Session["CurUser"].ToString();
+                            }
+                        </h4>
+                        <span>
+                            @if (Session["CurUserName"] != null)
+                            {
+                                @Session["CurUserName"].ToString();
+                            }
+                        </span>
+                        <ul>
+                            <!--li><a href="editprofile.html">编辑资料</a></li>
+                            <li><a href="accountsettings.html">账号设置</a></li>
+                            <li><a href="help.html">帮助</a></li>-->
+                            <li><a href="\student\LogOut">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div><!--right-->
+        </div><!--topheader-->
+
+
+        <div class="header">
+            <ul class="headermenu">
+                <li class="current"><a href="Student_team"><span class="icon icon-flatscreen"></span>团队</a></liclass="current">
+                <li><a href="Student_class"><span class="icon icon-pencil"></span>课程</a></li>
+                <!--li><a href="support"><span class="icon icon-flatscreen"></span>留言</a></!--li>
+                <!--li><a href="messages"><span class="icon icon-message"></span>查看消息</a></li>
+                <li><a href="reports"><span class="icon icon-chart"></span>统计报表</a></li>-->
+            </ul>
+
+
+
+        </div><!--header-->
+
+        <div class="vernav2 iconmenu">
+            <ul>
+                <li class="current" >
+                    <a class="editor" href="Student_createteam">创建团队</a>
+                    
+                </li>
+                <li><a href=#formsub class="icon icon-flatscreen">查看团队信息</a>
+                <span class="arrow"></span>
+                <ul id="formsub">
+                    <li><a href="Student_myteam">我的团队</a></li>
+                    <li><a href="Student_allteam">所有团队</a></li>
+                    <li><a href="Student_evateam">团队评价</a></li>
+                    <li><a href="Student_checkTeam">成员审核</a></li>
+                </ul>
+                </li>
+            </ul>
+            <a class="togglemenu"></a>
+        </div><!--leftmenu-->
+
+        <div class="centercontent">
+
+            <div class="pageheader notab">
+                <h1 class="pagetitle">小组信息</h1>
+                <span class="pagedesc"></span>
+
+            </div><!--pageheader-->
+
+            <div id="contentwrapper" class="contentwrapper">
+
+                <div class="contenttitle2">
+                <h3>请输入团队信息</h3>
+                   
+                </div><!--contenttitle-->
+
+                <br /><br />
+
+
+
+            </div><!--contentwrapper-->
+        <br>
+        <form id="formclass" action="" method="post">
+            <label>团队名称：</label>&emsp;
+            <input name="team1" id="team1" type="text" style="width:400px" maxlength="7"><br><br>
+            <label>团队负责人：</label>
+            <input name="team2" type="text" value="@Session["CurUser"].ToString()" style="width:400px" maxlength="7" readonly><br><br>
+            <input type="submit" value="创建" onclick="chuangjian()">
+        </form>
+        <style type="text/css">
+        #formclass{
+            padding-left :50px;
+        }    
+        </style>
+        <script language="javascript">
+            function chuangjian()
+            {
+                var t1 = document.getElementById("team1").value;
+                if (t1 == "") {
+                    alert("请输入团队名称");
+                }
+                else {
+                    alert("成功发起团队组建");
+
+                    document.getElementById("formclass").submit();
+                    teamexist = 1;
+
+                    $.ajax({
+                        url: '@Url.Action("")',
+                        data: { "": teamexist },
+                        dataType: "json",
+                        type: "POST",
+                        traditional: true,
+                    });
+                    location.href = "Student_team";
+                }
+                
+            }
+        </script>
+        </div><!-- centercontent -->
+
+
+    </div><!--bodywrapper-->
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@using WebApplication2.Models;
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>在线协同教学平台</title>
+<link rel="stylesheet" href="~/css/style.default.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="topheader">
+        <div class="left">
+            <h1 class="logo">Toy <span>Car</span></h1>
+            <span class="slogan">在线协同教学平台</span>
+
+
+
+            <br clear="all" />
+
+        </div><!--left-->
+
+        <div class="right">
+        	<!--<div class="notification">
+                <a class="count" href="ajax/notifications"><span>9</span></a>
+        	</div>-->
+            <div class="userinfo">
+            	<img src="~/images/thumbs/avatar.png" alt="" />
+                <span>教师</span>
+            </div><!--userinfo-->
+
+            <div class="userinfodrop">
+                <div class="avatar">
+                    <a href=""><img src="~/images/thumbs/avatarbig.png" alt="" /></a>
+
+                </div><!--avatar-->
+                <div class="userdata">
+                    <h4>
+                        @if (Session["CurUserName"] != null)
+                        {
+                            @Session["CurUserName"].ToString();
+                        }
+                    </h4>
+                    <span>
+                        工号：
+                        @if (Session["CurUser"] != null)
+                        {
+                            @Session["CurUser"].ToString();
+                        }
+                    </span>
+                    <ul>
+                        <li><a href="\teacher\LogOut">退出</a></li>
+                    </ul>
+                </div><!--userdata-->
+            </div><!--userinfodrop-->
+        </div><!--right-->
+    </div><!--topheader-->
+
+
+    <div class="header">
+    	<ul class="headermenu">
+        	<li><a href="\teacher\Teacher_setClassMessage"><span class="icon icon-flatscreen"></span>设置课程信息</a></li>
+            <li><a href="\teacher\Teacher_classresource"><span class="icon icon-pencil"></span>课程资源</a></li>
+            <li><a href="\teacher\Teacher_HomeworkCtrl"><span class="icon icon-message"></span>作业管理界面</a></li>
+            <li class="current"><a href="Teacher_homeworkpinggu"><span class="icon icon-chart"></span>作业评价</a></li>
+			<li><a href="\teacher\Teacher_chatOL"><span class="icon icon-pencil"></span>学生成绩</a></li>
+			<li><a href="\teacher\Teacher_studentTeamCtrl"><span class="icon icon-speech"></span>学生团队管理</a></li>
+        </ul>
+
+
+
+    </div><!--header-->
+
+    <div class="vernav2 iconmenu">
+    	<ul>
+        <li class="current"><a href="\teacher\Teacher_homeworkpinggu">作业信息</a></li>
+        
+      </ul>
+        <a class="togglemenu"></a>
+        <br /><br />
+    </div><!--leftmenu-->
+
+	<div class="centercontent">
+
+	
+	<form class="stdform" action="" method="post">
+
+		<div id="contentwrapper" class="contentwrapper">
+
+                <div class="contenttitle2">
+                	<h3>团队信息</h3>
+                </div><!--contenttitle-->
+
+		
+            <table name="tables" border="1" width="500"  align="center">
+				<tr align="center"  valign="middle">
+					
+					<th>组名</th>
+					<th>分数</th>
+					<th>&nbsp;</th>
+					<th width="10">&nbsp;</th>
+                    <th>&nbsp;</th>
+				</tr>
+                @foreach (submission sub in Model)
+                {
+				<tr align="center">
+				<td>&nbsp;@sub.team_id</td>
+				<td>&nbsp;@sub.score</td>
+				<td> <input class="tbody-button" id="@sub.team_id" type="button" value="修改分数" name=""></td>
+				<td width="10"> <input class="downBtn" id="@sub.team_id"type="button" value="下载" name="" onclick=""></td>
+                <td><a id="a"></a></td>
+				</tr>
+                }
+			</table>
+           
+            </div>
+	</form>
+
+
+
+</div><!--bodywrapper-->
+    </div>
+    <script src="~/jsp/jquery-1.10.2.min.js"></script>
+    <script>
+            $(".downBtn").click(function () {
+                var curUrl = window.location.href;
+                //alert(curUrl);
+
+                var hurl = curUrl.split("teacher");
+                var u = hurl[0];
+                //alert(u);
+                var u = u + "Homework/";
+
+                var _this = this;
+                var tid = $(_this).attr("id");
+                //alert(tid);
+                
+                var data = {
+                    "Tid": tid
+                }
+                $.post("/teacher/SubFn", data, function (data) {
+                    data = JSON.parse(data);
+                        //alert(data["files"][0]);
+                        var s = data["files"][0].split("Homework\\");
+                        var filename = s[s.length - 1];
+                        
+                        var a = document.getElementById('a');
+                        a.innerHTML = filename;
+                        var filepath = u+filename;
+                        //alert(filepath);
+                        a.setAttribute("href", filepath);
+                        a.setAttribute("download", filename);
+                        a.setAttribute("name", filename);
+                        //a.setAttribute("name", filename);
+                   })
+            });
+            $(".tbody-button").click(function () {
+                var _this = this;
+                var id = $(_this).attr("id");
+                // alert($(_this).text());
+                $(_this).attr("value");
+                var data = {
+                    "id": id
+                }
+                $.post("/teacher/TT5", data, function (data) {
+                    data = JSON.parse(data);
+                    window.location.href = "/teacher/Teacher_homeworkdafen";
+                })
+            });
+    </script>
+</body>
+</html>
