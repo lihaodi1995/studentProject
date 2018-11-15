@@ -1,0 +1,145 @@
+{% extends "base_main.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{{ super() }} - 聊天室{% endblock %}
+
+{% block content_header %}
+    <h1>聊天室</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">聊天室</li>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .direct-chat-msg {
+            display: table;
+
+        }
+        .direct-chat-text {
+            margin: 5px 0 0 10px;
+            display: table;
+        }
+        .right .direct-chat-text {
+            margin-right: 10px;
+            margin-left: auto;
+        }
+        .direct-chat-info, .direct-chat-text {
+            max-width: 400px;
+            word-break: break-all;
+        }
+        .right {
+            margin-left: auto;
+        }
+    </style>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary direct-chat direct-chat-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    聊天内容
+                </h3>
+            </div>
+            <div class="box-body">
+                <div id="message-show" class="direct-chat-messages">
+                    {% for message in cm_list %}
+                        {% if message.student_id == current_user.id or message.teacher_id == current_user.id  %}
+                            <div class="direct-chat-msg right">
+                                <div class="direct-chat-info clearfix">
+                                    <span class="direct-chat-name pull-right">
+                                        {% if message.student_id %}{{ message.student.name }}
+                                        {%- elif message.teacher_id %}{{ message.teacher.name }}{% endif %}
+                                    </span>{% if message.teacher_id %}<span class="badge bg-green">教师</span>{% endif %}
+                                        <span class="direct-chat-timestamp pull-left">{{ moment(message.time, local=True).format('YYYY-MM-DD HH:mm:ss') }}</span>
+                                </div>
+                                <div class="direct-chat-text">
+                                    {{ message.content }}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="direct-chat-msg">
+                                <div class="direct-chat-info clearfix">
+                                    <span class="direct-chat-name pull-left">
+                                        {% if message.student_id %}{{ message.student.name }}
+                                        {%- elif message.teacher_id %}{{ message.teacher.name }}{% endif %}
+                                    </span>'{% if message.teacher_id %}<span class="badge bg-green">教师</span>{% endif %}
+                                    <span class="direct-chat-timestamp pull-right">{{ moment(message.time, local=True).format('YYYY-MM-DD HH:mm:ss') }}</span>
+                                </div>
+                                <div class="direct-chat-text">
+                                    {{ message.content }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="box-footer" style="display: block;">
+                <form id="form" method="post">
+                    <div class="input-group">
+                        <input id="message" type="text" name="message" placeholder="输入消息" class="form-control">
+                        <span class="input-group-btn">
+                            <input type="submit" class="btn btn-warning btn-flat" value="发送">
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </article>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    $('#form').submit(function(ev){
+        ev.preventDefault();
+        if(!$.trim($('#message').val())) return;
+        $.ajax({
+            url: 'post',
+            method: 'POST',
+            data: {
+                'message': $('#message').val()
+            },
+            success: function (){
+                $('#message').val('');
+                console.log( $('#message').val())
+            }
+        });
+    });
+    var source = new EventSource("{{ url_for('sse.stream') }}");
+    source.addEventListener('error', function(event) {
+        alert("Failed to connect to event stream. Is Redis running?");
+    }, false);
+    source.addEventListener('{{ course_id }}', function(event) {
+        var data = JSON.parse(event.data);
+        console.log(data);
+
+        if(data.user_id === {{ current_user.id }}){
+            $('#message-show').append('<div class="direct-chat-msg right">' +
+                '<div class="direct-chat-info clearfix">' +
+                '<span class="direct-chat-name pull-right">' + data.user_name + '</span>' + ((data.identity===1)?'<span class="badge bg-green">教师</span>':'') +
+                '<span class="direct-chat-timestamp pull-left">' + data.time + '</span>' +
+                '</div>' +
+                '<div class="direct-chat-text">' +
+                data.message +
+                '</div>' +
+                '</div>');
+        } else {
+            $('#message-show').append('<div class="direct-chat-msg">' +
+                '<div class="direct-chat-info clearfix">' +
+                '<span class="direct-chat-name pull-left">' + data.user_name + '</span>' + ((data.identity===1)?'<span class="badge bg-green">教师</span>':'') +
+                '<span class="direct-chat-timestamp pull-right">' + data.time + '</span>' +
+                '</div>' +
+                '<div class="direct-chat-text">' +
+                data.message +
+                '</div>' +
+                '</div>');
+        }
+        $('#message-show').scrollTop(10000000);
+    }, false);
+</script>
+{% endblock %}

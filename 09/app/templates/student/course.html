@@ -1,0 +1,74 @@
+{% extends "base_main.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>课程信息</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">课程信息</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary course-box" data-href="#">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    {{ course.name }}<small>{{ semester(course.semester_id) }}</small>
+                </h3>
+            </div>
+            <div class="box-body">
+                <dl class="dl-horizontal">
+                    <dt>课程大纲</dt>
+                    <dd>{{ course.outline }}</dd>
+                    <dt>上课地点</dt>
+                    <dd>{{ course.place }}</dd>
+                    <dt>开课状态</dt>
+                    <dd>{% if course.status %}开课{% else %}结课{% endif %}</dd>
+                    <dt>教师</dt>
+                    <dd>
+                        {% for teacher in course.teachers %}
+                            {{ teacher.name | safe }}
+                        {% endfor %}
+                    </dd>
+                    <dt>学生人数</dt>
+                    <dd>{{ course.students | length }}</dd>
+                </dl>
+                {% if attendance_available %}
+                <button class="btn btn-primary" type="button" onclick="sign_up()">
+                    签到
+                </button>
+                {% endif %}
+            </div>
+        </div>
+        <!-- /.box-primary -->
+    </article>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    $('.form-control').hide();
+    $('#toggleEdit').click(function () {
+        if($(this).hasClass('btn-danger')) {
+            $(this).removeClass('btn-danger');
+            $(this).addClass('btn-primary');
+            $('.form-control').hide();
+            $('.form-data').show();
+        } else {
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-danger');
+            $('.form-control').show();
+            $('.form-data').hide();
+        }
+    });
+    $('#teamsize_min').attr('type', 'number');
+    $('#teamsize_max').attr('type', 'number');
+    function sign_up() {
+        $.form('', {action: 'sign_up'}, 'POST').submit()
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 作业详情{% endblock %}
+
+{% block content_header %}
+    <h1>
+        {{ course.name }}：作业详情
+    </h1>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/datepicker/css/datepicker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.css') }}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li><a href="{{ url_for('student.homework', course_id=course_id) }}"> 作业信息</a></li>
+    <li class="active"> 作业详情</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary" data-href="#">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    {{ homework.name }}
+                </h3>
+            </div>
+            <div class="box-body">
+                {{ homework.base_requirement }}
+            </div>
+            <div class="box-footer">
+                <dl class="dl-horizontal">
+                    <dt>作业时间</dt>
+                    <dd>
+                        <td>
+                            <time>{{ homework.begin_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                            到
+                            <time>{{ homework.end_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                        </td>
+                    </dd>
+                    <dt>权重</dt>
+                    <dd>{{ homework.weight }}</dd>
+                    <dt>提交次数</dt>
+                    <dd><span {% if attempts >= homework.max_submit_attempts %}class="text-danger bg-danger"{% endif %}>
+                        {{ attempts }}</span>/{{ homework.max_submit_attempts }}</dd>
+                </dl>
+            </div>
+        </div>
+    </article>
+    <div class="box box-default" data-href="#">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                提交状况
+                {% if attachment_previous %}
+                    <a href="{{ url_for('student.download_attachment',
+                    course_id=course_id,
+                    homework_id=homework.id,
+                    team_id=team.id,
+                    filename=attachment_previous.file_name) }}" class="badge bg-green">
+                        <i class="fa fa-file"></i> {{ attachment_previous.file_name }}
+                    </a>
+                {% endif %}
+            </h3>
+            <div class="box-body">
+                {% if submission_previous %}
+                    <div class="well">
+                        {{ submission_previous.text_content }}
+                    {% if submission_previous.score %}
+                        <dl class="dl-horizontal">
+                            <dt>分数</dt>
+                            <dd>{{ submission_previous.score }}</dd>
+                            <dt>教师评论</dt>
+                            <dd>{{ submission_previous.comments | safe }}</dd>
+                            {% if teacher_corrected %}
+                                <dt>批改详情</dt>
+                                <dd>
+                                    <a href="?action=download_corrected" class="badge bg-blue">
+                                        <i class="fa fa-file"></i> 批改详情.zip
+                                    </a>
+                                </dd>
+                            {% endif %}
+                        </dl>
+                    {% endif %}
+                    </div>
+                {% elif current_time < begin_time %}
+                    还未到提交时间
+                {% elif current_time > end_time %}
+                    提交时间已过，不能再次提交
+                {% else %}
+                    尚未提交
+                {% endif %}
+            </div>
+            {% if team.owner_id == current_user.id and not submission_previous.score
+                    and begin_time < current_time < end_time %}
+                <div class="box-footer">
+                    <form method="post" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_field(form.text) }}
+                        {{ wtf.form_field(form.homework_up) }}
+                        <input type="submit" value="提交" class="btn btn-primary btn-block">
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+    <!-- bootstrap datepicker -->
+    <script src="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script>
+        $('#time').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY HH:mm'
+            }
+        });
+    </script>
+{% endblock %}

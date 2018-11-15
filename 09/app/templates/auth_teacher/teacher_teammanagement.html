@@ -1,0 +1,62 @@
+{% extends "auth_teacher/index_teacher.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>课程管理
+        <small>课程相关设置</small>
+    </h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">课程管理</li>
+{% endblock %}
+
+{% block content_main %}
+    <article id="semesterWrapper">
+        {% for message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ message[0] }} alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ message[1] }}
+        </div>
+        {% endfor  %}
+        {% for team in team_list %}
+            <div class="box box-primary collapsed-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                          团队名称：{{team.team_name | safe}}
+                    </h3>
+                    <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" data-widget="collapse"><i
+                            class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    状态：{% if team.status==0 %}等待通过{% elif team.status==1 %}已通过{% elif team.status==2 %}已拒绝{% endif %}
+                </div>
+                <div class="box-body">
+                    团队成员：{{ team.member_name | safe }}
+                </div>
+                <div class="box-body">
+                    <form method="post">
+                        {{ wtf.form_field(team.reject_form.reason)}}
+                        <div style="display: none">{{ wtf.form_field(team.reject_form.id)}}</div>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" name="r" value="reject">拒绝</button>
+                    </form>
+                    <form method="post">
+                        <div style="display: none">{{ wtf.form_field(team.reject_form.id)}}</div>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" name="a" value="accept">通过</button>
+                    </form>
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+        {% endfor %}
+        <!-- /.box -->
+    </article>
+{% endblock %}
+

@@ -1,0 +1,72 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>课程选择
+        <small>请选择一节课</small>
+    </h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="active"><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .course-box {
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="row">
+        {% for course in courses %}
+                <div class="col-xs-6">
+                    <div class="box box-{% if course.status %}primary{% else %}default{% endif %} course-box" data-href="/student/{{ course.id }}/course">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                {{ course.name }}
+                                <small>{{ (course.semester_id / 100) | int  }}年第{{ course.semester_id % 100 }}学期</small>
+                            </h3>
+                        </div>
+                        <div class="box-body">
+                            <dl class="dl-horizontal">
+                                <dt>上课地点</dt>
+                                <dd>{{ course.place }}</dd>
+                                <dt>开课状态</dt>
+                                <dd>{% if course.status %}开课{% else %}结课{% endif %}</dd>
+                                <dt>教师</dt>
+                                <dd>
+                                    {% for teacher in course.teachers %}
+                                        {{ teacher.name | safe }}
+                                    {% endfor %}
+                                </dd>
+                                <dt>学生人数</dt>
+                                <dd>{{ course.students | length }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- /.box-primary -->
+                </div>
+            {% if loop.index % 2 == 0 and not loop.last %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endfor %}
+        </div>
+    </article>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $('.course-box').click(function () {
+            window.location.href = $(this).data('href');
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base_main.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>
+        {{ course.name }}：作业信息
+    </h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">作业信息</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary" data-href="#">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    作业列表
+                </h3>
+            </div>
+            <div class="box-body no-padding">
+                <table class="table table-hover table-stripped">
+                    <thead>
+                        <tr>
+                            <th>作业名</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        {% for homework in homeworks %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('student.homework_detail', course_id=course_id, homework_id=homework.id) }}">
+                                        {{ homework.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <time>{{ homework.begin_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                                    到
+                                    <time>{{ homework.end_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </article>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+    <!-- bootstrap datepicker -->
+    <script src="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script>
+        $('#time').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY HH:mm'
+            }
+        });
+    </script>
+{% endblock %}

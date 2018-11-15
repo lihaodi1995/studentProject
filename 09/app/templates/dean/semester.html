@@ -1,0 +1,101 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 学期管理{% endblock %}
+
+{% block content_header %}
+    <h1>学期管理
+        <small>学期相关设置</small>
+    </h1>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/datepicker/css/datepicker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.css') }}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">学期管理</li>
+{% endblock %}
+
+{% block content_main %}
+    <article id="semesterWrapper">
+        {% for semester in semesters %}
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        {{ (semester.id / 100) | int }}学年第{{ semester.id % 100 }}学期
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <div class="btn-group">
+                            <button type="button"
+                                    class="btn btn-sm btn-danger" data-toggle="tooltip" title="结束学期"
+                                    onclick="endSemester({{ semester.id }})">
+                                <i class="fa fa-square"></i></button>
+                            <button type="button"
+                                    class="btn btn-sm btn-info" data-toggle="tooltip" title="开始学期"
+                                    onclick="startSemester({{ semester.id }})">
+                                <i class="fa fa-play"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    {{ semester.base_info | safe }}
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <i class="icon fa fa-calendar"></i> <time>{{ semester.begin_time }}</time>
+                    到
+                    <time>{{ semester.end_time }}</time>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- /.box -->
+        <div class="box box-info collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    添加学期
+                </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <form method="post">
+                    {{ form.hidden_tag() }}
+                    {{ wtf.form_field(form.id) }}
+                    {{ wtf.form_field(form.base_info) }}
+                    {{ wtf.form_field(form.time) }}
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">保存</button>
+                </form>
+            </div>
+        </div>
+    </article>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+    <!-- bootstrap datepicker -->
+    <script src="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <!-- bootstrap inputmask -->
+    <script src="{{ url_for('static', filename='components/inputmask/dist/min/inputmask/inputmask.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='components/inputmask/dist/min/inputmask/jquery.inputmask.min.js') }}"></script>
+    <script>
+        $('#id').inputmask('(1|2)999(01|02)');
+        $('#time').daterangepicker();
+        function endSemester(semester_id) {
+            if(confirm('真的要结束学期吗？')){
+                location.href='{{ url_for("dean.manage_semester") }}?action=end&semester_id=' + semester_id;
+            }
+        }
+        function startSemester(semester_id) {
+            if(confirm('真的要开始学期吗？')){
+                location.href='{{ url_for("dean.manage_semester") }}?action=start&semester_id=' + semester_id;
+            }
+        }
+    </script>
+{% endblock %}

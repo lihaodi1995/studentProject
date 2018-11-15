@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}登陆{% endblock %}
+
+{% block styles %}
+{{super()}}
+    <link rel="stylesheet" href="{{url_for('static', filename='guest_index.css')}}">
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='bg.png') }}')!important;
+        }
+    </style>
+{% endblock %}
+
+{% block body_attribs %} class="hold-transition login-page"{% endblock %}
+
+{% block content %}
+    <div class="login-box">
+        <div class="login-logo">
+            <b>Course</b>Center
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">赶紧登陆吧</p>
+            {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-ban"></i> 出错了！</h4>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endwith %}
+            <form method="post">
+                {{ form.hidden_tag() }}
+                {{ wtf.form_errors(form) }}
+                <div class="row">
+                    {% for radio in form.identity %}
+                        <div class="col-xs-4">
+                            <div class="radio icheck">
+                                <label>
+                                    {{ radio }} {{ radio.label.text }}
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {{ wtf.form_field(form.username) }}
+                {{ wtf.form_field(form.password) }}
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                {{ form.remember_me }} {{ form.remember_me.label.text }}
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">登陆</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+{% endblock %}
+
+
+{% block scripts %}
+{{super()}}
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+{% endblock %}

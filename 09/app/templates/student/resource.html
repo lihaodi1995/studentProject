@@ -1,0 +1,107 @@
+{% extends "base_main.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{{ super() }} - 课程资源管理{% endblock %}
+
+{% block content_header %}
+    <h1>课程资源管理</h1>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .file-control {
+            margin: 10px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">课程信息</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary course-box" data-href="?path=/">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <ol class="breadcrumb">
+                        <li><a href="?path=/">根目录</a></li>
+                        {% for dir in path[1:-1].split('/') %}
+                            <li{% if loop.last %} class="active"{% endif %}>
+                                <a href="?path={{ '/' + '/'.join(path[1:-1].split('/')[:loop.index]) + '/' }}">
+                                    {{ dir }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </h3>
+            </div>
+            <div class="box-body no-padding">
+                <div class="table-responsive file-list">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th width="30"></th>
+                                <th>文件名</th>
+                                <th width="10%">大小</th>
+                                <th width="20%">修改日期</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for file in files if file.is_dir %}
+                                <tr>
+                                    <td><i class="fa fa-folder"></i></td>
+                                    <td>
+                                        <a href="?path={{ path }}{{ file.name }}/">
+                                            {{ file.name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ file.size }}</td>
+                                    <td>{{ file.create_time }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% for file in files if file.is_file %}
+                                <tr>
+                                    <td><i class="fa fa-file"></i></td>
+                                    <td>
+                                        <a href="?path={{ path }}&filename={{ file.name }}&download=true">
+                                            {{ file.name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ file.size }}</td>
+                                    <td>{{ file.create_time }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-primary -->
+    </article>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+    <script>
+        $('#file').change(function () {
+            $('#fileForm').submit();
+        });
+
+        function mkdir() {
+            dirname = prompt('请输入文件夹名');
+            if(dirname){
+                $.form('?path={{ path }}', {dirname: dirname}, 'POST').submit();
+            }
+        }
+
+        function delFile(filename) {
+            if(confirm('确定要删除吗？')){
+                $.form('?path={{ path }}', {action: 'delete', filename: filename}, 'POST').submit();
+            }
+        }
+    </script>
+{% endblock %}

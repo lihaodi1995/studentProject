@@ -1,0 +1,130 @@
+{% extends "base_main.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{{ super() }} - 团队信息{% endblock %}
+
+{% block content_header %}
+    <h1>
+        团队信息
+        <span data-toggle="tooltip" data-original-title="创建团队">
+            <button type="button"
+                    class="btn btn-sm btn-success"
+                    data-toggle="modal"
+                    data-target="#teamModal"
+                    id="toggleEdit" {% if unjoinable %} disabled {% endif %}>
+                <i class="fa fa-plus"></i>
+            </button>
+        </span>
+    </h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">课程信息</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary course-box" data-href="#">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    团队列表
+                </h3>
+            </div>
+            <div class="box-body no-padding">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>组名</th>
+                            <th>组长</th>
+                            <th>人数</th>
+                            <th width="100">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for team in teams %}
+                            <tr>
+                                <td>
+                                    <a href="javascript:$('#members-{{ team.id }}').toggle()">{{ team.team_name }}</a>
+                                </td>
+                                <td>
+                                    {{ team.owner_id }}
+                                </td>
+                                <td>
+                                    {{ team.number_of_members }}
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm"
+                                                data-toggle="tooltip"
+                                                title="加入"
+                                                onclick="joinTeam({{ team.id }})"
+                                                {% if unjoinable %} disabled{% endif %}>
+                                            <i class="fa fa-sign-in"></i>
+                                        </button>
+                                        {% if team.id == pending.team_id %}
+                                            <button class="btn btn-warning btn-sm"
+                                                    data-toggle="tooltip"
+                                                    title="取消申请"
+                                                    onclick="exitTeam()">
+                                                <i class="fa fa-times-circle"></i>
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="members-{{ team.id }}" style="display:none">
+                                <td colspan="4">
+                                    成员：
+                                    <span class="text-warning">{{ team.owner.name }}</span>
+                                    {% for member in team.members %}
+                                        {{ member.student.name }}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.box-primary -->
+    </article>
+    <!-- Modal -->
+    <div class="modal fade" id="teamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="homeworkModalLabel">
+                        创建团队
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="form" action="">
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_field(form.team_name) }}
+                        <input type="submit" value="提交" class="btn btn-primary btn-block">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    function joinTeam(team_id){
+        if(confirm('确定要加入这组吗？')){
+            $.form('', {action: 'join', team_id: team_id}, 'POST').submit()
+        }
+    }
+
+    function exitTeam() {
+        if(confirm('确定要取消申请吗？')){
+            $.form('', {action: 'cancel'}, 'POST').submit()
+        }
+    }
+</script>
+{% endblock %}

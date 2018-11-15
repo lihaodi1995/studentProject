@@ -1,0 +1,116 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>{{ course.name }}：课程信息</h1>
+{% endblock %}
+
+{% block body_attribs %} class="hold-transition skin-black sidebar-mini" {% if form.errors %}onload="edit_state()"
+{% endif %}{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">课程信息</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-{% if course.status %}primary{% else %}default{% endif %} course-box" data-href="#">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    {{ course.name }}
+                    <small>{{ semester(course.semester_id) }}</small>
+                </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip"
+                            data-original-title="编辑" id="toggleEdit">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    {{ wtf.form_field(form.outline) }}
+                    <p class="form-data">
+                        {{ form.outline.data }}
+                        {% if outlet_attachment %}
+                            <a class="badge bg-green" href="?action=download">
+                                <i class="fa fa-file"></i>
+                                {{ '大纲附件' + '.' + outlet_attachment.split('.')[-1] }}
+                            </a>
+                        {% endif %}
+                    </p>
+                    {{ form.outlet_attachment }}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                {{ wtf.form_field(form.teamsize_min, placeholder="下限") }}
+                                <p class="form-data">{{ form.teamsize_min.data }}</p>
+                            </div>
+                            <div class="col-xs-6">
+                                {{ wtf.form_field(form.teamsize_max, placeholder="上限") }}
+                                <p class="form-data">{{ form.teamsize_max.data }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                {{ wtf.form_field(form.no_miss, placeholder="0") }}
+                                <p class="form-data">
+                                    {{ form.no_miss.data }}
+                                </p>
+                            </div>
+                            <div class="col-xs-2">
+                                {{ wtf.form_field(form.miss_1, placeholder="0") }}
+                                <p class="form-data">{{ form.miss_1.data }}</p>
+                            </div>
+                            <div class="col-xs-2">
+                                {{ wtf.form_field(form.miss_2, placeholder="0") }}
+                                <p class="form-data">{{ form.miss_2.data }}</p>
+                            </div>
+                            <div class="col-xs-2">
+                                {{ wtf.form_field(form.miss_3, placeholder="0") }}
+                                <p class="form-data">{{ form.miss_3.data }}</p>
+                            </div>
+                            <div class="col-xs-2">
+                                {{ wtf.form_field(form.miss_4, placeholder="0") }}
+                                <p class="form-data">{{ form.miss_4.data }}</p>
+                            </div>
+                            <div class="col-xs-2">
+                                {{ wtf.form_field(form.miss_5, placeholder="0") }}
+                                <p class="form-data">{{ form.miss_5.data }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="form-control btn btn-primary btn-block">
+                </form>
+            </div>
+        </div>
+        <!-- /.box-primary -->
+    </article>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $('.form-control').hide();
+        $('#outlet_attachment').hide();
+        function toggleState() {
+            if ($(this).hasClass('btn-danger')) {
+                $(this).removeClass('btn-danger');
+                $(this).addClass('btn-primary');
+                $('.form-control').hide();
+                $('#outlet_attachment').hide();
+                $('.form-data').show();
+            } else {
+                $(this).removeClass('btn-primary');
+                $(this).addClass('btn-danger');
+                $('.form-control').show();
+                $('#outlet_attachment').show();
+                $('.form-data').hide();
+            }
+        }
+        $('#toggleEdit').click(toggleState);
+    </script>
+{% endblock %}

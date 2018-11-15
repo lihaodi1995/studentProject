@@ -1,0 +1,82 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>课程选择
+        <small>请选择一节课</small>
+    </h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="active"><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .course-box {
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="row">
+        {% for course in courses %}
+                <div class="col-xs-6">
+                    <div class="box box-{% if course.status %}primary{% else %}default{% endif %} course-box" data-href="/teacher/{{ course.id }}/course">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                {{ course.name }}
+                                <small>{{ (course.semester_id / 100) | int  }}年第{{ course.semester_id % 100 }}学期</small>
+                            </h3>
+                            {% if not course.status %}
+                                <div class="box-tools pull-right">
+                                    <button data-download="{{ url_for('teacher.see_class_before', course_id = course.id) }}"
+                                        class="btn btn-success btn-sm">下载往期课程作业</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="box-body">
+                            <dl class="dl-horizontal">
+                                <dt>上课地点</dt>
+                                <dd>{{ course.place | safe }}</dd>
+                                <dt>开课状态</dt>
+                                <dd>{% if course.status %}开课{% else %}结课{% endif %}</dd>
+                                <dt>教师</dt>
+                                <dd>
+                                    {% for teacher in course.teachers %}
+                                        {{ teacher.name | safe }}
+                                    {% endfor %}
+                                </dd>
+                                <dt>学生人数</dt>
+                                <dd>{{ course.students | length }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- /.box-primary -->
+                </div>
+            {% if loop.index % 2 == 0 and not loop.last %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endfor %}
+        </div>
+    </article>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $('.course-box').click(function () {
+            window.location.href = $(this).data('href');
+        });
+        $('[data-download]').click(function (ev) {
+            ev.stopPropagation();
+            window.location.href = $(this).data('download');
+        });
+    </script>
+{% endblock %}

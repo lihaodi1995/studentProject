@@ -1,0 +1,130 @@
+{% extends "auth_teacher/index_teacher.html" %}
+
+{% block title %}{{ super() }} - 信息{% endblock %}
+
+{% block content_header %}
+    <h1>课程信息<small>课程基本信息</small></h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">Here</li>
+{% endblock %}
+
+{% block content_main %}
+    <article id="Teacher_CourseWrapper">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    2016-2017学年下期
+                </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <dl class="dl-horizontal">
+                    <dt>时间</dt>
+                    <dd>一些时间到另一些时间</dd>
+                    <dt>上课地点</dt>
+                    <dd>一些地点</dd>
+                </dl>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="box-group" id="accordion">
+                    <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+
+                    <div class="panel box box-danger">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed"
+                                   aria-expanded="false">
+                                    教师
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+                            <div class="box-body">
+                                哇
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel box box-success">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                                   class="collapsed" aria-expanded="false">
+                                    学生
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
+                            <div class="box-body">
+                                哇
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for course in courses %}
+            <div class="box box-primary collapsed-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                         课程名称：{{course.name | safe}}
+                    </h3>
+                    <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" data-widget="collapse"><i
+                            class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    状态：{% if course.status %}开课{% else %}结课{% endif %}
+                </div>
+                <div class="box-body">
+                    课程信息：{{ course.course_info | safe }}
+                    <div>
+                        {{ wtf.form_field(form.course_info) }}
+                    </div>
+                    <div>
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_errors(form) }}
+                    </div>
+                </div>
+                <div class="box-body">
+                    时间：{{ (course.semester_id / 100) | int }}学年第{{ course.semester_id % 100 }}学期
+                </div>
+                <div class="box-body">
+                    上课地点：{{ course.place | safe }}
+                </div>
+                <div class="box-body">
+                    课程大纲：{{ course.outline | safe }}
+                    <div>
+                        {{ wtf.form_field(form.outline) }}
+                    </div>
+                    <div>
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_errors(form) }}
+                    </div>
+                </div>
+                <div class="box-body">
+                    学分：{{ course.credit | int }}
+                </div>
+                <div class="box-body">
+                    小组人数：{{ course.teamsize | int }}
+                </div>
+                <div class="box-body">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">提交修改</button>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        {% endfor %}
+        <!-- /.box -->
+        {% for message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ message[0] }} alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ message[1] }}
+        </div>
+        {% endfor  %}
+    </article>
+{% endblock %}

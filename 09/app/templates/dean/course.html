@@ -1,0 +1,170 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>课程管理
+        <small>课程相关设置</small>
+    </h1>
+{% endblock %}
+
+{% block body_attribs %} class="hold-transition skin-black sidebar-mini" {% if form.errors %}onload="edit_state()"{% endif %}{% endblock %}
+
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">课程管理</li>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        [id^=student] {
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        [id^=teacher] {
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    </style>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        {% for course in courses %}
+            <div class="box box-{% if course.status %}primary{% else %}default{% endif %}">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                         {{course.name | safe}}
+                    </h3>
+{#                    <div class="box-tools pull-right">#}
+{#                    <button {% if not course.status %}disabled{% endif %} type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="结束学期"#}
+{#                            onclick="location.href='{{url_for("dean.manage_course")}}?action=end&id={{course.id}}'">#}
+{#                        <i class="fa fa-square"></i></button>#}
+{#                    </div>#}
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    {{ course.course_info | safe }}
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <dl class="dl-horizontal">
+                        <dt>状态</dt>
+                        <dd>{% if course.status %}开课{% else %}结课{% endif %}</dd>
+                        <dt>时间</dt>
+                        <dd>{{ (course.semester_id / 100) | int }}学年第{{ course.semester_id % 100 }}学期</dd>
+                        <dt>上课地点</dt>
+                        <dd>{{ course.place | safe }}</dd>
+                        <dt>课程大纲</dt>
+                        <dd>{{ course.outline | safe }}</dd>
+                        <dt>学分</dt>
+                        <dd>{{ course.credit | int }}</dd>
+                    </dl>
+{#                    <button class="btn btn-primary btn-block btn-flat" onclick="location.href='{{url_for("main.manage_course")}}?action=delete&id={{course.id}}'">删除</button>#}
+{#                    <button class="btn btn-primary btn-block btn-flat" onclick="location.href='{{url_for("main.manage_course")}}?action=end&id={{course.id}}'">结束学期</button>#}
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="panel box box-danger">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#teacher{{ course.id }}"
+                                           class="collapsed"
+                                           aria-expanded="false">
+                                            教师
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="teacher{{ course.id }}" class="panel-collapse collapse" aria-expanded="false">
+                                    <div class="box-body no-padding">
+                                        <table class="table">
+                                            <tbody>
+                                            {% for teacher in stuff[course.id]['teacher_list'] %}
+                                                <tr>
+                                                    <td>{{ teacher.id }}</td>
+                                                    <td>{{ teacher.name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel box box-success">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#student{{ course.id }}"
+                                           class="collapsed" aria-expanded="false">
+                                            学生
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="student{{ course.id }}" class="panel-collapse collapse" aria-expanded="false">
+                                    <div class="box-body no-padding">
+                                        <table class="table">
+                                            <tbody>
+                                            {% for student in stuff[course.id]['student_list'] %}
+                                                <tr>
+                                                    <td>{{ student.id }}</td>
+                                                    <td>{{ student.name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        {% endfor %}
+        <!-- /.box -->
+        <div class="box box-info collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    添加课程
+                </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" id="collapse_button" class="btn btn-sm btn-primary" data-widget="collapse">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    {{ wtf.form_errors(form) }}
+
+                    {{ wtf.form_field(form.name) }}
+                    {{ wtf.form_field(form.semester) }}
+                    {{ wtf.form_field(form.course_info) }}
+                    {{ wtf.form_field(form.place) }}
+                    {{ wtf.form_field(form.credit) }}
+                    {{ wtf.form_field(form.stuff_info) }}
+                    <a href="{{ url_for('static', filename='template.xlsx') }}"><span class="badge bg-blue"><i class="fa fa-file"></i>模板文件，请根据文件说明填写</span></a>
+                    <hr>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">提交</button>
+                </form>
+            </div>
+        </div>
+    </article>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+    <script>
+        $('#credit').attr('type', 'number');
+        function edit_state() {
+            $('#collapse_button').click();
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{% block title %}CourseCenter{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+      page. However, you can choose any other skin. Make sure you
+      apply the skin class to the body tag so the changes take effect.
+   -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='components/AdminLTE/dist/css/skins/skin-black.min.css') }}">
+
+{% endblock %}
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+
+{% block body_attribs %} class="hold-transition skin-black sidebar-mini"{% endblock %}
+
+{% block content %}
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>C</b>CT</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Course</b>Center</span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">
+                                    {% if current_user.user_type() == 0 %}
+                                        <span class="label label-danger">教务</span>
+                                    {% elif current_user.user_type() == 1 %}
+                                        <span class="label label-success">教师</span>
+                                    {% elif current_user.user_type() == 2 %}
+                                        <span class="label label-primary">学生</span>
+                                    {% endif %}
+                                    {{ current_user.name }}
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- Menu Body -->
+{#                                <li class="user-body">#}
+{#                                    {{ current_user.id }}#}
+{#                                </li>#}
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="{{ url_for('auth.change_password') }}" class="btn btn-default btn-flat">修改密码</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="{{ url_for('auth.logout') }}" class="btn btn-default btn-flat">登出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    {% if current_user.user_type() == 0 %}
+                        <li {% if nav == 'manage_semester' %}class="active"{% endif %}><a href="{{ url_for('dean.manage_semester') }}">
+                            <i class="fa fa-calendar"></i> <span>学期管理</span></a>
+                        </li>
+                        <li {% if nav == 'manage_course' %}class="active"{% endif %}>
+                            <a href="{{ url_for('dean.manage_course') }}">
+                                <i class="fa fa-book"></i> <span>课程管理</span></a>
+                        </li>
+                    {% elif current_user.user_type() == 1 and course_id %}
+                        <li {% if nav == 'set_course_info' %}class="active"{% endif %}><a href="{{ url_for('teacher.set_course_info', course_id=course_id) }}">
+                            <i class="fa fa-info"></i> <span>课程信息</span></a>
+                        </li>
+                        <li {% if nav == 'manage_resource' %}class="active"{% endif %}><a href="{{ url_for('teacher.manage_resource', course_id=course_id) }}">
+                            <i class="fa fa-folder"></i> <span>课程资源</span></a>
+                        </li>
+                        <li {% if nav == 'homework' %}class="active"{% endif %}><a href="{{ url_for('teacher.homework', course_id=course_id) }}">
+                            <i class="fa fa-book"></i> <span>课程作业</span></a>
+                        </li>
+                        <li {% if nav == 'team_manage' %}class="active"{% endif %}><a href="{{ url_for('teacher.team_manage', course_id=course_id) }}">
+                            <i class="fa fa-group"></i> <span>团队管理</span></a>
+                        </li>
+                        <li {% if nav == 'manage_attendance' %}class="active"{% endif %}><a href="{{ url_for('teacher.manage_attendance', course_id=course_id) }}">
+                            <i class="fa fa-group"></i> <span>发布签到</span></a>
+                        </li>
+                        <li {% if nav == 'add_plus' %}class="active"{% endif %}><a href="{{ url_for('teacher.add_plus', course_id=course_id) }}">
+                            <i class="fa fa-plus"></i> <span>加分项管理</span></a>
+                        </li>
+                        <li {% if nav == 'chat' %}class="active"{% endif %}><a href="{{ url_for('main.chat', course_id=course_id) }}">
+                            <i class="fa fa-comments"></i> <span>聊天室</span></a>
+                        </li>
+                    {% elif current_user.user_type() == 2 and course_id %}
+                        <li {% if nav == 'show_course_info' %}class="active"{% endif %}><a href="{{ url_for('student.show_course_info', course_id=course_id) }}">
+                            <i class="fa fa-info"></i> <span>课程信息</span></a>
+                        </li>
+                        <li {% if nav == 'show_resource' %}class="active"{% endif %}><a href="{{ url_for('student.show_resource', course_id=course_id) }}">
+                            <i class="fa fa-folder"></i> <span>课程资源</span></a>
+                        </li>
+                        <li {% if nav == 'homework' %}class="active"{% endif %}><a href="{{ url_for('student.homework', course_id=course_id) }}">
+                            <i class="fa fa-book"></i> <span>课程作业</span></a>
+                        </li>
+                        <li class="tree-view {% if nav == 'team_view' or nav == 'my_team' or nav == 'team_grade' %}active{% endif %}">
+                            <a href="#">
+                                <i class="fa fa-group"></i> <span>团队</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li {% if nav == 'team_view' %}class="active"{% endif %}>
+                                    <a href="{{ url_for('student.team_view', course_id=course_id) }}">
+                                        <i class="fa fa-circle-o"></i> 团队组建</a>
+                                </li>
+                                <li {% if nav == 'my_team' %}class="active"{% endif %}>
+                                    <a href="{{ url_for('student.my_team', course_id=course_id) }}">
+                                        <i class="fa fa-circle"></i> 我的团队
+                                    </a>
+                                </li>
+                                <li {% if nav == 'team_grade' %}class="active"{% endif %}>
+                                    <a href="{{ url_for('student.team_grade', course_id=course_id) }}">
+                                        <i class="fa fa-check-circle-o"></i> 团队打分
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li {% if nav == 'chat' %}class="active"{% endif %}><a href="{{ url_for('main.chat', course_id=course_id) }}">
+                            <i class="fa fa-comments"></i> <span>聊天室</span></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                {% block content_header %}
+                <h1>
+                    标题
+                    <small>一些描述</small>
+                </h1>
+                {% endblock %}
+                <ol class="breadcrumb">
+                    {% block breadcrumb %}
+                        <li><a href="/"><i class="fa fa-dashboard"></i> Level</a></li>
+                        <li class="active">Here</li>
+                    {% endblock %}
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                {% for message in get_flashed_messages(with_categories=True) %}
+                    <div class="alert alert-{{ message[0] }} alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        {{ message[1] }}
+                    </div>
+                {% endfor %}
+                {% block content_main %}
+
+                <!-- Your Page Content Here -->
+                {% endblock %}
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+{#            <div class="pull-right hidden-xs">#}
+{#                咕咕咕（这个没啥用的话直接删了也行）#}
+{#            </div>#}
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2016 <a href="#">敏捷组</a>。</strong>保留所有权利。
+        </footer>
+
+    </div>
+    <!-- ./wrapper -->
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <!-- AdminLTE App -->
+    <script src="{{ url_for('static', filename='components/AdminLTE/dist/js/app.min.js') }}"></script>
+    <script>
+        jQuery(function ($) {
+            $.extend({
+                form: function (url, data, method) {
+                    if (method === null) method = 'POST';
+                    if (data === null) data = {};
+
+                    var form = $('<form>').attr({
+                        method: method,
+                        action: url
+                    }).css({
+                        display: 'none'
+                    });
+
+                    var addData = function (name, data) {
+                        if ($.isArray(data)) {
+                            for (var i = 0; i < data.length; i++) {
+                                var value = data[i];
+                                addData(name + '[]', value);
+                            }
+                        } else if (typeof data === 'object') {
+                            for (var key in data) {
+                                if (data.hasOwnProperty(key)) {
+                                    addData(name + '[' + key + ']', data[key]);
+                                }
+                            }
+                        } else if (data != null) {
+                            form.append($('<input>').attr({
+                                type: 'hidden',
+                                name: String(name),
+                                value: String(data)
+                            }));
+                        }
+                    };
+
+                    for (var key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            addData(key, data[key]);
+                        }
+                    }
+
+                    return form.appendTo('body');
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+

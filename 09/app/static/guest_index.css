@@ -1,0 +1,9 @@
+html, body, index-block {
+    height: 100%;
+}
+.index-block {
+    text-align: center;
+    height: 100%;
+    margin: 0;
+    padding-top: 200px;
+}

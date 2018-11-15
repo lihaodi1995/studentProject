@@ -1,0 +1,110 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 课程管理{% endblock %}
+
+{% block content_header %}
+    <h1>
+        {{ course.name }}：作业信息
+        <span data-toggle="modal" data-target="#homeworkModal" data-action="add">
+            <button type="button" class="btn btn-sm btn-success" data-toggle="tooltip"
+                    data-original-title="添加" id="toggleEdit">
+                <i class="fa fa-plus"></i>
+            </button>
+        </span>
+    </h1>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/datepicker/css/datepicker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.css') }}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li class="active">作业信息</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary" data-href="#">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    作业列表
+                </h3>
+                <div class="box-tools pull-right">
+                    <a href="{{ url_for('teacher.get_teamhomework_all',
+                            course_id=course_id) }}"
+                       class="btn btn-dropbox btn-sm">下载完整提交状态</a>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <table class="table table-hover table-stripped">
+                    <thead>
+                        <tr>
+                            <th>作业名</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        {% for homework in homeworks %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('teacher.homework_detail', course_id=course_id, homework_id=homework.id) }}"">
+                                        {{ homework.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <time>{{ homework.begin_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                                    到
+                                    <time>{{ homework.end_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </article>
+    <!-- Modal -->
+    <div class="modal fade" id="homeworkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="homeworkModalLabel">
+                        添加作业
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="form" action="">
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_field(form.name) }}
+                        {{ wtf.form_field(form.base_requirement) }}
+                        {{ wtf.form_field(form.time) }}
+                        {{ wtf.form_field(form.weight, type="number", min="0", max="100") }}
+                        {{ wtf.form_field(form.max_submit_attempts, type="number") }}
+                        <input type="submit" value="提交" class="btn btn-primary btn-block">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+    <!-- bootstrap datepicker -->
+    <script src="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script>
+        $('#time').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY HH:mm'
+            }
+        });
+    </script>
+{% endblock %}

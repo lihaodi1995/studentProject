@@ -1,0 +1,214 @@
+{% extends "base_main.html" %}
+
+{% block title %}{{ super() }} - 作业详情{% endblock %}
+
+{% block content_header %}
+    <h1>
+        {{ course.name }}：作业详情
+    </h1>
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/datepicker/css/datepicker.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.css') }}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="/"><i class="fa fa-dashboard"></i> 主页</a></li>
+    <li><a href="{{ url_for('teacher.homework', course_id=course_id) }}"> 作业信息</a></li>
+    <li class="active"> 作业详情</li>
+{% endblock %}
+
+{% block content_main %}
+    <article>
+        <div class="box box-primary" data-href="#">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    {{ homework.name }}
+                </h3>
+                <div class="box-tools pull-right">
+                    <span data-toggle="modal" data-target="#homeworkModal">
+                        <button type="button"
+                                class="btn btn-sm btn-primary"
+                                data-toggle="tooltip"
+                                title="编辑">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="box-body">
+                {{ homework.base_requirement }}
+            </div>
+            <div class="box-footer">
+                <dl class="dl-horizontal">
+                    <dt>作业时间</dt>
+                    <dd>
+                        <td>
+                            <time>{{ homework.begin_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                            到
+                            <time>{{ homework.end_time.strftime(('%m/%d/%Y %H:%M')) }}</time>
+                        </td>
+                    </dd>
+                    <dt>权重</dt>
+                    <dd>{{ homework.weight }}</dd>
+                    <dt>最大提交次数</dt>
+                    <dd>{{ homework.max_submit_attempts }}</dd>
+                </dl>
+            </div>
+        </div>
+        <!-- /.box-primary -->
+        {% if teams and submission_latest %}
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">学生作业</h3>
+                </div>
+                <div class="box-body">
+                    {% for team in teams %}
+                        <div class="post">
+                            <h4>
+                                <i class="fa fa-group"></i>
+                                {{ team.team_name }}
+                                {% if submission_latest[team.id].attachment %}
+                                    <a href="{{ url_for('teacher.download_attachment',
+                                                    course_id=course_id,
+                                                    homework_id=homework.id,
+                                                    team_id=team.id,
+                                                    filename=submission_latest[team.id].attachment[0].file_name) }}"
+                                       class="badge bg-green">
+                                        <i class="fa fa-file"></i>
+                                        {{ submission_latest[team.id].attachment[0].file_name }}
+                                    </a>
+                                {% endif %}
+                            </h4>
+                            {% set sub = submission_latest[team.id] %}
+                            <div class="well">
+                                {{ sub.text_content }}
+                                {% if sub.score %}
+                                    <dl class="dl-horizontal">
+                                        <dt>分数</dt>
+                                        <dd>{{ sub.score }}</dd>
+                                        <dt>教师评论</dt>
+                                        <dd>{{ sub.comments }}</dd>
+                                    </dl>
+                                {% endif %}
+                            </div>
+                            <form action="" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="" class="col-sm-2">写个评语</label>
+                                    <div class="col-sm-10 ">
+                                        <textarea
+                                                required
+                                                class="form-control"
+                                                type="text"
+                                                data-team-id="{{ team.id }}"
+                                                data-for="comments"
+                                                placeholder="评语">{% if sub.comments -%}
+                                            {{ sub.comments }}{%- endif %}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-2">打分</label>
+                                    <div class="col-sm-10">
+                                        <input type="number"
+                                               class="form-control"
+                                               min="0"
+                                               max="100"
+                                               data-team-id="{{ team.id }}"
+                                               data-for="score"
+                                               required {% if sub.score %}value="{{ sub.score }}"{% endif %}>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="submitAll()">全部提交</button>
+                        <a href="?action=multi_download" class="btn btn-default">下载全部附件</a>
+                        <a href="{{ url_for('teacher.get_homework_report',
+                                course_id=course_id,
+                                homework_id=homework.id) }}"
+                                class="btn btn-default">下载当前作业的报表</a>
+                        <button class="btn btn-default" onclick="$('#file').click()">上传批改后的作业</button>
+                    </div>
+                        {% if teacher_corrected %}
+                            <a href="?action=download_corrected" class="badge bg-blue">
+                                <i class="fa fa-file">
+                                    批改详情.zip
+                                </i>
+                            </a>
+                        {% endif %}
+                    <form id="fileForm" method="post" enctype="multipart/form-data" style="display: none">
+                        <input type="text" name="action" value="multi_upload">
+                        <input type="file" name="file" id="file">
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    </article>
+    <!-- Modal -->
+    <div class="modal fade" id="homeworkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="homeworkModalLabel">
+                        编辑作业
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="form" action="?action=edit&homework_id={{ homework.id }}">
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_field(form.name) }}
+                        {{ wtf.form_field(form.base_requirement) }}
+                        {{ wtf.form_field(form.time) }}
+                        {{ wtf.form_field(form.weight, type="number") }}
+                        {{ wtf.form_field(form.max_submit_attempts, type="number") }}
+                        <input type="submit" value="提交" class="btn btn-primary btn-block">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <!-- bootstrap datepicker -->
+    <script src="{{ url_for('static', filename='components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script>
+        $('#time').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY HH:mm'
+            }
+        });
+        function submitAll() {
+            if (confirm('确定要全部提交吗？')) {
+                var res = {};
+                var inputs = $('[data-team-id]');
+                for (var i = 0; i < inputs.length; i++) {
+                    var input = $(inputs[i]);
+                    if (!res[input.data('team-id')])
+                        res[input.data('team-id')] = {};
+                    res[input.data('team-id')][input.data('for')] = input.val()
+                    if (!input.val()) {
+                        alert('请不要留空！')
+                        return;
+                    }
+                }
+                // console.log(res);
+                $.form('', {action: 'submit', data: JSON.stringify(res)}, 'POST').submit();
+            }
+        }
+        $('#file').change(function () {
+            $('#fileForm').submit();
+        })
+    </script>
+{% endblock %}
