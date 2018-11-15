@@ -1,0 +1,22 @@
+<script type="text/javascript">
+    function btn_click() {
+        var xmlHttp = new XMLHttpRequest();
+        var courseTime = document.getElementById("txt_courseTime").value;
+        var coursePlace = document.getElementById("txt_coursePlace").value;
+
+        xmlHttp.open("get", "TeacherChangeCourseInformation.aspx?courseTime=" + courseTime
+     + "&coursePlace=" + coursePlace);
+        
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+
+                //location.reload(false);
+                window.onload();
+
+
+            }
+        }
+      
+        xmlHttp.send(null);
+    }
+</script>
