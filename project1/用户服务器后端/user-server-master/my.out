@@ -1,0 +1,9 @@
+
+> nodeweb@1.0.0 start /Users/luo/WebstormProjects/node-server-git/user-server
+> node app.js nodeServer
+
+it is running!
+receive body{"email":"1521@123.com","password":"1521"}
+(node:15595) [DEP0095] DeprecationWarning: timers.enroll() is deprecated. Please use setTimeout instead.
+(node:15595) [DEP0096] DeprecationWarning: timers.unenroll() is deprecated. Please use clearTimeout instead.
+(node:15595) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.

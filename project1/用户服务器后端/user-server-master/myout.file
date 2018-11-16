@@ -1,0 +1,35 @@
+nohup: ignoring input
+
+> nodeweb@1.0.0 start /home/ubuntu/NodeServer/user-server
+> node app.js nodeServer
+
+it is running!
+(node:18261) [DEP0096] DeprecationWarning: timers.unenroll() is deprecated. Please use clearTimeout instead.
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+(node:18261) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{"name":"吴星哲","email":"1479792108@qq.com","password":"123456"}
+receive body{}
+receive body{"email":"buaa@edu.cn","password":"buaa"}
