@@ -1,0 +1,198 @@
+
+<html>
+<head>
+
+	<title>学术会议网站</title>
+	<meta charset="UTF-8">
+    <link rel="icon" href="assets/images/icon.png">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/now-ui-kit.css">
+    <script src="assets/js/jquery.min.js"></script>
+
+    <script src="assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
+
+    <script src="assets/js/modernizr.custom.53451.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="assets/js/cookie.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/popup-box.css">
+
+
+
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Sign In And Sign Up Forms  Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+ <script>
+     function toValid() {
+         var val=document.getElementById("userName").value;
+         var rename=new RegExp("[a-zA-Z_][a-zA-Z_0-9]{0,}","");
+         var isname=rename.test(val);
+         if(isname==true){
+             return true;
+         }
+         else{
+             alert('用户名必须为字母数字下划线的组合，且不能以数字开头');
+             return false;
+         }
+     }
+     function getIdentity(name) {
+        console.log(name)
+         $.ajax({
+             type:'GET',
+             url:'/userInfo/'+name,
+             contenType:'application/json; charset=utf-8',
+             dataType:'json',
+             success:function (data) {
+                console.log(data)
+                 if(data){
+                     if(data[0].identity==1){
+                        console.log('before')
+                         window.location.href="primaryInfo"
+                         console.log('after')
+                     }
+                     else{
+                         window.location.href="index.html"
+                     }
+                 }
+             },
+             error: function () {
+                console.log('error')
+             }
+
+         })
+     }
+
+     function Login() {
+         console.log($('#password').val())
+         $.ajax({
+             type: 'POST',
+             url: '/loginAPI',
+             contenType: 'application/json; charset=utf-8',
+             data: {"name": $('#name').val(), "password": $('#password').val()},
+             dataType: "json",
+             success: function (data) {
+                console.log(data);
+                var t=new Date();
+                t.setTime(t.getTime()+2400000000);
+                if(data.result!=0){
+                    document.cookie="identity="+(data.result).toString()+";expires="+t.toGMTString()+";path=/";
+                    document.cookie="id="+(data.id).toString()+";expires="+t.toGMTString()+";path=/";
+
+                    document.cookie="name="+$("#name").val()+";expires="+t.toGMTString()+";path=/";
+                }
+
+                if(data.result=='1'){
+                    window.location.href="/index"
+                }else if(data.result=='2'){
+                    window.location.href="index"
+                }else{
+                    console.log(333)
+                    alert('用户名或密码错误')
+                }
+             },
+             error: function () {
+                console.log('login error')
+             }
+         })
+
+     }
+
+     function register() {
+         console.log($('#userName').val());
+         console.log($('#realName').val());
+         console.log($('#institude').val());
+         console.log($('#Email').val());
+         console.log($("input[name='identity'][checked]").val());
+         console.log($('#Password1').val());
+         //var testdata = {'userName':"1",'realName':"1","institude":"2",'email':"2@1.com",'identity':1,'password':"1"}
+
+         $.ajax({
+             type:'POST',
+             url:'/register',
+             contenType:'application/json; charset=utf-8',
+             //data:testdata,
+
+             data:{"userName":$('#userName').val(),
+                 "realName":$('#realName').val(),
+                 "institude":$('#institude').val(),
+                 "email":$('#Email').val(),
+                 "identity":parseInt($("input[name='identity'][checked]").val()),
+                 "password":$('#Password1').val()},
+             dataType: "json",
+             success:function(){
+                 alert("发送成功");
+             },
+             error:function(){
+                 alert("发送失败");
+             }
+         })
+     }
+     $(document).ready(function() {
+         $('.popup-with-zoom-anim').magnificPopup({
+             type: 'inline',
+             fixedContentPos: false,
+             fixedBgPos: true,
+             overflowY: 'auto',
+             closeBtnInside: true,
+             preloader: false,
+             midClick: true,
+             removalDelay: 300,
+             mainClass: 'my-mfp-zoom-in'
+         });
+
+     });
+</script>
+<style>
+.bodystyle{
+	width:70%;
+	margin:0 auto;
+}</style>
+</head>
+<body>
+	<h1>学术会议平台</h1>
+	<div class="bodystyle" >
+		<div class="singnin-new" >
+	       <h2>注册失败（该用户名已存在）</h2>
+            <a href="login">重新注册</a>
+		</div>
+
+	</div>
+
+
+	<div class="footer-w3l">
+		<p class="agileinfo"></p>
+	</div>
+	<div class="pop-up">
+		<div id="small-dialog" class="mfp-hide book-form">
+			<h3>用户注册</h3>
+			<form method="post" enctype='multipart/form-data' action="/registerAPI" onsubmit="return toValid()">
+				<input type="text" id="userName" name="userName" placeholder="用户名" required="" class="form-control" style="width: 100%"/>
+				<input type="text" id="realName" name="realName" placeholder="姓名" required="" class="form-control" style="width: 100%"/>
+				<input type="text" id= "institude" name="institude" placeholder="所属机构" required="" class="form-control" style="width: 100%"/>
+				<input type="text" id="Email" name="Email" placeholder="邮箱" required="" class="form-control" style="width: 100%"/>
+				<input type="password" id="Password1" name="Password1" class="password" placeholder="密码" required="" class="form-control" style="width: 100%"/>
+				<input type="password" id="Password2" name="Password2" class="password" placeholder="确认密码" required="" class="form-control" style="width: 100%"/>
+				<input type="radio" id="identity1" value="2" name="identity" />单位机构
+				<input type="radio" id="identity2" checked="checked" value="1" name="identity" />个人用户</span>
+
+                <br></br>
+                 <input type="file" name="file" required>
+                <input type="submit" value="注册">
+                <!--<form enctype='multipart/form-data' method='POST'>
+                    <input type="file" name="file">
+                    <input type="submit" value="注册" onclick="register()">
+                </form>
+				<input type="submit" value="注册" onclick="register()">-->
+			</form>
+		</div>
+
+	</div>
+<body>
+</html>
