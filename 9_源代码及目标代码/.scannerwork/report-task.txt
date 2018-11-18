@@ -1,0 +1,7 @@
+organization=lihaodi1995-github
+projectKey=1718-09key
+serverUrl=https://sonarcloud.io
+serverVersion=7.5.0.19140
+dashboardUrl=https://sonarcloud.io/dashboard?id=1718-09key
+ceTaskId=AWcnHg15zAimCQCrPypn
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWcnHg15zAimCQCrPypn
