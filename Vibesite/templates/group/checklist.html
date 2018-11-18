@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="card">
+      <div class="card-header" style="text-align: center">
+          审核组织
+      </div>
+      <div class="card-body">
+        <div class="row" style="text-align: center;">
+            <div class="col">
+                <div class="row">
+                    <table class="table table-hover" style="text-align: center">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 15%;">认证ID</th>
+                                <th scope="col" style="width: 25%;">性质</th>
+                                <th scope="col" style="width: 25%;">服务领域</th>
+                                <th scope="col" style="width: 15%;">详情</th>
+                                <th scope="col" style="width: 20%;">提交</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% if authorizations %}
+                            {% for authorization in authorizations %}
+                            <tr>
+                                <td style="width: 15%;">{{authorization.authorization_id}}</td>
+                                <td style="width: 25%;">{{authorization.nature}}</td>
+                                <td style="width: 25%;">{{authorization.service}}</td>
+                                <td style="width: 15%;"><a href="/group/authorization/{{ authorization.authorization_id }}/info">详情</a></td>
+                                <td style="width: 20%;">
+                                    <div class="input-group">
+                                        <select class="custom-select" id="select{{authorization.authorization_id}}">
+                                            {% if authorization.status == 'g' %}
+                                            <option value="g" selected>通过</option>
+                                            <option value="r">不通过</option>
+                                            <option value="p">评审中</option>
+                                            {% endif %}
+        
+                                            {% if authorization.status == 'r' %}
+                                            <option value="g">通过</option>
+                                            <option value="r" selected>不通过</option>
+                                            <option value="p">评审中</option>
+                                            {% endif %}
+        
+                                            {% if authorization.status == 'p' %}
+                                            <option value="g">通过</option>
+                                            <option value="r">不通过</option>
+                                            <option value="p" selected>评审中</option>
+                                            {% endif %}
+                                        </select>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="result('{{authorization.authorization_id}}')">确定</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5">无数据</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  {% else %}
+    <meta http-equiv="REFRESH" content="0;url=/">
+  {% endif %}
+  <script type="text/javascript">
+    
+    
+    function result(authorization){
+        re = $("#select"+authorization).val();
+        $.post({
+           url:"/group/authorization/"+authorization+"/record",
+           datatype:"JSON",
+           data:{
+               re:re
+           },
+           success:function(data){
+               alert(data);
+               location.reload()
+           },
+           error:function(err){
+               alert(err);
+           }
+       });
+    }
+    </script>
+{% endblock %}

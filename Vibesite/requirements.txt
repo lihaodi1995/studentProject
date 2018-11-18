@@ -1,0 +1,2 @@
+Django>=2.0.5
+pymysql>=0.8.1

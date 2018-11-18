@@ -1,0 +1,82 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<html>
+    <head>
+        {% block title %}
+          <title>
+              会议管理平台
+          </title>
+        {% endblock title %}
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link rel="shortcut icon" type="image/png" href="/static/favicon/favicon.ico">
+
+    </head>
+    <body>
+        {% block basearea %}
+          
+        {% endblock basearea %}
+        {% include "navbar.html" %}
+        <div class="col-sm-9 container" style="margin-left:10%;margin-top: 5em">
+        {% block content %}
+            <h1>
+                
+            </h1>
+        {% endblock content %}
+        {% if user.is_authenticated %}
+        </div>
+        <div id="dg" style="z-index: 9999; position: fixed ! important; right: 5%; top: 80%;">
+            <table width=""100% style="position: absolute; width:260px; right: 0px; top: 0px;">
+                <button type="button" class="btn btn-primary btn-circle btn-lg" style="background-color: red" onclick="javascrtpt:window.location.href='/group/checklist'">
+                    <img src="/static/pics/baseline_group_white_18dp.png" style="padding-right: 10px; ">            
+                </button>
+            </table>
+        </div>
+        {% endif %}
+    </body>
+        
+
+    
+    <style type="text/css">
+        .table td,.table th{
+            vertical-align: middle;
+        }
+        .custom-file-label:after {
+            content: '浏览';
+        }
+
+        .mt-10{
+            margin-top: 10px;
+        }
+        
+        .btn-circle {
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          font-size: 12px;
+          line-height: 1.428571429;
+          border-radius: 15px;
+        }
+        .btn-circle.btn-lg {
+          width: 50px;
+          height: 50px;
+          padding: 6px 8px;
+          font-size: 18px;
+          line-height: 1.33;
+          border-radius: 25px;
+        }
+
+        body {
+            /*background-color: #eee;*/
+            background:url(/static/pics/bg_loginandregister.jpeg) no-repeat center center fixed;
+            background-attachment: fixed;
+            background-size:cover;
+            -moz-background-size:cover;
+            -o-background-size:cover;
+            -webkit-background-size:cover;
+            font-family:Verdana ;
+        }
+    </style>
+</html>

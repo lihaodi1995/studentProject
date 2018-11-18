@@ -1,0 +1,28 @@
+<div class="row" style="text-align: center;">
+    <div class="col-md-12">  
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"><h4>注册编号</h4></th>
+                    <th scope="col"><h4>论文题目</h4></th>
+                    <th scope="col"><h4>论文作者</h4></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if reg_contributions %}
+                {% for item in reg_contributions %}
+                <tr>
+                    <th scope="row">{{ item.contib_reg_id }}</th>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.author }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">无数据</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>

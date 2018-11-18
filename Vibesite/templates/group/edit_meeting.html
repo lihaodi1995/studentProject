@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/group_create_meeting.css">
+<div class="container">
+   <h3 class="offset-md-5 col-md-2">编辑会议</h3>
+   <div class="row">
+       <div class="col-md-8 offset-md-2">
+           <form action="/group/meeting/{{data.id}}/update" method="POST" class="needs-validation">
+            {% csrf_token %}
+            <div class="md-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="title">会议标题</label>
+                        <div class="input-group">
+                            <input type="text" value="{{ data.title }}" class="form-control" id="title" name="title" placeholder="会议标题" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                            <label for="contribution_deadline">投稿截止日期</label>
+                            <div class="input-group">
+                            <input type="datetime-local" value="{{ data.contribution_deadline }}" class="form-control" id="contribution_deadline" name="contribution_deadline" required>
+                            </div>
+                    </div>
+                </div>
+               </div>
+               <div class="md-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="inform_date">通知日期</label>
+                            <div class="input-group">
+                            <input type="datetime-local" value="{{ data.inform_date }}" class="form-control" id="inform_date" name="inform_date" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="register_date">注册日期</label>
+                            <div class="input-group">
+                                <input type="datetime-local" value="{{ data.register_date }}" class="form-control" id="register_date" name="register_date"  required>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+               <div class="md-3">
+                   <div class="row">
+                        <div class="col-md-6">
+                                <label for="conference_date">开会日期</label>
+                                <div class="input-group">
+                                <input type="datetime-local" value="{{ data.conference_date }}" class="form-control" id="conference_date" name="conference_date" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fee">费用</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="{{ data.fee }}" id="fee" name="fee"  required>
+                                </div>
+                            </div>
+                   </div>
+               </div>
+               <div class="md-3">
+                   <div class="form-group">
+                      <label for="introduction">会议介绍</label>
+                      <input type="text" class="form-control" value="{{ data.introduction }}" name="introduction" id="introduction">
+                   </div>
+               </div>
+               <div class="md-3">
+                    <div class="form-group">
+                        <label for="arrangement">会议安排</label>
+                        <input type="text" class="form-control" value="{{ data.arrangement }}" name="arrangement" id="arrangement">
+                     </div>
+               </div>
+               <div class="md-3">
+                    <div class="form-group">
+                        <label for="logistic">住宿交通</label>
+                        <input type="text" class="form-control" value="{{ data.logistics }}" name="logistic" id="logistic">
+                     </div>
+               </div>
+               <div class="md-3">
+                    <div class="form-group">
+                        <label for="contact">联络方式</label>
+                        <input type="text" class="form-control" value="{{ data.contact }}" name="contact" id="contact" required>
+                     </div>
+               </div>
+               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+           </form>
+       </div>
+   </div>
+</div>
+{% endblock content %}

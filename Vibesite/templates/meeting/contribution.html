@@ -1,0 +1,165 @@
+<div class="row">
+	<div class="col">
+		<div class="row">
+			<table class="table table-hover">
+				<thead>
+                    <tr>
+                        <th scope="col" style="width: 10%;"><h4>稿件</h4></th>
+                        <th scope="col" style="width: 35%;"><h4>题目</h4></th>
+                        <th scope="col" style="width: 25%;"><h4>作者</h4></th>
+                        <th scope="col" style="width: 10%;"></th>
+                        <th scope="col" style="width: 20%; text-align: center;"><a href="{% url 'UserContrib:zipdownload' meeting.conf_id %}"><button class="btn btn-outline-secondary">全部下载</button></a></th>
+                    </tr>
+                </thead>
+				<tbody id="contribution">
+				{% if contributions %}
+					{% for contribution in contributions %}
+					<tr>
+						<td>{{contribution.contribution_id}}</td>
+						<td>{{contribution.title}}</td>
+						<td>{{contribution.author}}</td>
+						<td style="text-align: center;"><button class="btn btn-link" value="{{contribution.contribution_id}}" data-toggle="modal" data-target="#modal">详细</button></td>
+						<td>
+							<div class="input-group">
+								<select class="custom-select" id="select{{contribution.contribution_id}}" onchange="commentShow(this,'{{contribution.contribution_id}}')">
+									{% if contribution.result == 'g' %}
+									<option value="g" selected>通过</option>
+									<option value="r">不通过</option>
+									{% endif %}
+
+									{% if contribution.result == 'r' %}
+									<option value="g">通过</option>
+									<option value="r" selected>不通过</option>
+									{% endif %}
+
+									{% if contribution.result == 'p' %}
+									<option value="g">通过</option>
+									<option value="r">不通过</option>
+									<option value="p" selected>评审中</option>
+									{% endif %}
+								</select>
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button" id="trigger{{contribution.contribution_id}}" onclick="buttonShow('{{contribution.contribution_id}}')">确定</button>
+								</div>
+								
+							</div>
+						</td>
+					</tr>
+					<tr class="collparent" style="display: none;" id="collparent{{contribution.contribution_id}}">
+						<td colspan="5">
+							<div id="collapse{{contribution.contribution_id}}" class="collapse" data-parent="#contribution">
+						      <div class="card-body">
+						      	{% if contribution.comment %}
+						     		<textarea rows="3" style="width: 100%;" placeholder="请输入评审意见">{{contribution.comment}}</textarea>
+						     	{% else %}
+						     		<textarea rows="3" style="width: 100%;" placeholder="请输入评审意见"></textarea>
+						     	{% endif %}
+						      </div>
+						    </div>
+						</td>
+					</tr>
+					{% endfor %}
+				{% endif %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content" >
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+$('#modal').on('show.bs.modal', function (e) {
+	var button = e.relatedTarget;
+	var url = "/contrib/" + button.value + "/info/";
+	$.get({
+		url: url,
+		success: (data) => {
+			$('.modal-content').html(data);
+		},
+		error: (err) => {
+			alert(err);
+		}
+	})
+	
+})
+$('#modal').on('hidden.bs.modal', function (e) {
+	$('.modal-content').html("");
+})
+
+function select_file(obj) {
+  $('#uploadfile').click();
+  $(obj).val($('#uploadfile').val());
+}
+
+function result(contribution_id){
+	var re = $("#select"+contribution_id).val();
+	var collapse = $('#collapse'+contribution_id);
+	var comment = collapse.children("div").children("textarea").val();
+	$.post({
+       url:"/contribution/"+contribution_id+"/record",
+       datatype:"JSON",
+       data:{
+           re:re,
+           comment:comment
+       },
+       success:function(data){
+           alert(data);
+           window.location.reload();
+       },
+       error:function(err){
+           alert(err);
+       }
+   });
+}
+
+function commentShow(select,contribution_id){
+
+	if( $(select).val() == 'r')
+		$('#collapse'+contribution_id).collapse("show");
+	else
+		$('#collapse'+contribution_id).collapse("hide");
+}
+
+function buttonShow(contribution_id){
+
+	var select = $("#select"+contribution_id);
+	if(select.val() == 'r' || select.val() == 'g' ){
+		var collapse = $('#collapse'+contribution_id);
+		if(collapse.hasClass("show")){
+			var comment = collapse.children("div").children("textarea");
+			if(comment.val() == "")
+				alert("请输入评审意见");
+			else
+				result(contribution_id);
+		}
+		else 
+			collapse.collapse("show");
+	}
+	else
+		alert("未评审，不可提交");
+}
+
+$(function(){
+	$('.collapse').on('hidden.bs.collapse', function () {
+		var a = $(this).parent();
+		var b = $(a).parent();
+		b.css("display","none");
+	});
+
+	$('.collapse').on('show.bs.collapse', function () {
+		var a = $(this).parent();
+		var b = $(a).parent();
+		b.css("display","table-row");
+	});
+
+})
+
+</script>

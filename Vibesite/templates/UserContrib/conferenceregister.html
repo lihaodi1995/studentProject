@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block title %}
+        <title>
+            注册会议
+        </title>
+        <style>
+            .left_td{
+                width:25%;
+            }
+            
+            .hidden_var{
+                display:none;
+            }
+        </style>
+        <script>
+            var tableNode,td_id = 0,td_name = 0;
+            var arr = [];
+            function createTable()
+            {
+                var tab=document.getElementById("table");
+	            if(tab==null){
+                    tableNode=document.createElement("table");
+		            tableNode.setAttribute("id","table");
+                }
+                var row = 1;
+                for (var x = 0; x<row; x++)
+                {
+                    var trNode=tableNode.insertRow(); 
+                    var tdNode=trNode.insertCell(); 
+                    td_id++;
+                    td_name++;
+                    tdNode.innerHTML='<input style="width:90px;" id="' + td_id + '" name="' + td_name + '" type="text" /> ';
+                    var tdNode=trNode.insertCell(); 
+                    td_id++;
+                    td_name++;
+                    tdNode.innerHTML='<select style="width:45px" type="text" id="' + td_id + '" name="' + td_name + '"><option value="男" selected = "selected">男</option><option value="女">女</option></select> ';
+                    var tdNode=trNode.insertCell(); 
+                    td_id++;
+                    td_name++;
+                    tdNode.innerHTML='<input style="width:150px" id="' + td_id + '" name="' + td_name + '" type="text" /> ';
+                    var tdNode=trNode.insertCell(); 
+                    td_id++;
+                    td_name++;
+                    tdNode.innerHTML='<select style="width:45px" type="text" id="' + td_id + '" name="' + td_name + '"><option value="True">是</option><option value="False">否</option></select>';
+                    var tdNode=trNode.insertCell(); 
+                    for (var i = td_id-3; i<=td_id; i++) arr[i] = td_name - (td_id - i);
+                    td_id++;
+                    tdNode.innerHTML='<input class="btn btn-link" style="width:90px" type=button id='+td_id+' value="删除" onclick="delRow(this)" /> ';
+                }
+                document.getElementById("people_list").appendChild(tableNode);
+                document.getElementById("id").value = Number(td_name);
+            }
+            function delRow(obj)
+            {
+                var row = 0;
+                for (var x = 1; x<=obj.id; x++) 
+                    if (arr[x]>0) row ++;
+                row = row / 4;
+                var tmp = obj.id;
+                var tab=document.getElementById("table");
+                tab.deleteRow(row-1);
+                for (var i = tmp; i>=tmp-4; i--) arr[i] = 0;
+                for (var i = tmp+1; i<=td_id; i++)
+                {
+                    arr[i] = arr[i] - 4;
+                    document.getElementById(i).name=arr[i];
+                }
+                td_name = td_name - 4;
+            }
+            function CheckPost()
+            {
+                if (td_id==0) 
+                {
+                    alert("请填写参会人员");
+                    return false;
+                }
+                for (var i = 1; i<=td_id; i++)
+                {
+                    if (i % 5>0 && arr[i]>0 && (i % 4==1 || i % 4==3))
+                    {
+                        if (document.getElementById(i).value=="" || document.getElementById(i).value==null)
+                        {
+                            alert("请将信息填写完整");
+                            return false;
+                        }
+                    }
+                }
+                alert("注册成功！");
+				return true;
+            }
+        </script>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+    {% if not showform %}
+        
+        <script>
+            alert("不在注册时间范围！");
+            history.go(-1);
+        </script>
+
+    {% else %}
+        <form id="paper_register" name="paper_register" method="post" 
+        enctype="multipart/form-data" onsubmit="return CheckPost()"
+        action={% url 'UserContrib:register_into_conference' conf_id contrib_id%}>
+            {% csrf_token %}
+            <div style="table-layout: fixed; width:800px; word-wrap: break-word;">
+                    <table class="table table-condensed" style="width:100%; table-layout:fixed; word-wrap:break-all;overflow:auto;">
+                    {% if contrib_id %}
+                        <tr>
+                            <td class="left_td">论文标题</td>
+                            <td>{{title}}</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">论文ID</td>
+                            <td>{{contrib_id}}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="left_td">参会人员</td>
+                        <td>
+                            <div>
+                                <div overflown:hidden>
+                                    <table style="width:100%; table-layout:fixed; word-wrap:break-all;overflow:auto;">
+                                        <tr>
+                                            <td>姓名</td>
+                                            <td>性别</td>
+                                            <td>联系方式</td>
+                                            <td>是否住宿</td>
+                                            <td>操作</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <input type="text" id="id" name="id" class="hidden_var"/>
+                                <div id="people_list">
+                                    
+                                </div>
+                            </div>
+                            <input class="btn btn-link" type="button" onclick="createTable()" value="添加参会人员"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_td">缴费凭证</td>
+                        <td>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input type="file" id="firstname" name="upload" accept="image/png,image/jpeg,image/gif" required="required">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div>
+                <input  class="btn btn-primary" type="submit" value="注册参会" />
+            </div>
+        </form>
+    {% endif %}
+    {% endblock content %}
+</body>

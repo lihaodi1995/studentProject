@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+<head>
+    {% block title %}
+        <script>
+        function addInput()
+        {
+            var input = $("<div class=\"pair form-row\" >\n" +
+                "\t<div class=\"form-group col-md-4\">\n" +
+                "\t\t<div class=\"col-sm-12\" id=\"addauthor\">\n" +
+                "\t\t<input type=\"text\" class=\"form-control\" name=\"author\" required=\"required\" placeholder=\"请输入作者\">\n" +
+                "\t\t</div>\n" +
+                "\t</div>\n" +
+                "\t<div class=\"form-group col-md-4\">\n" +
+                "\t\t<div class=\"col-sm-12\" id=\"addorg\">\n" +
+                "\t\t<input type=\"text\" class=\"form-control\" name=\"organization\" required=\"required\" placeholder=\"请输入单位\">\n" +
+                "\t\t</div>\n" +
+                "\t</div>\n" +
+                "\t<div class=\"form-group col-md-1\">\n" +
+                "\t\t<div class=\"col-sm-12\">\n" +
+                "\t\t<input class=\"removeclass btn btn-danger\" type=\"button\" onclick=\"rm(this)\" value=\"删除\">\n" +
+                "\t\t</div>\n" +
+                "\t</div>\n" +
+                "</div>");
+            $(".pair").last().after(input);
+        }
+        function rm(obj){
+                 // remove text box
+                if($(".pair").length<=1)
+                {
+                    return ;
+                }
+                 $(obj).parent().parent().parent().remove();
+            }
+            //覆盖提示
+        function _confirm() {
+            if(confirm("将覆盖原提交，确定吗？"))
+            {
+                return true;
+            }
+            return false;
+        }
+        </script>
+    {% endblock title %}
+</head>
+<body>
+
+{% block content %}
+
+    {% if not contribution %}
+        {% if contributeShow %}
+            <h1>投稿</h1>
+        {% else %}
+        {% endif %}
+    {% else %}
+        {% if modifyShow %}
+            <h1>修改投稿</h1>
+        {% else %}
+        {% endif %}
+    {% endif %}
+    <br>
+    <!-- 加上了覆盖提示 -->
+    {% if contribution %}
+        {% if modifyShow %}
+        <form action={% url 'UserContrib:submit' conf_id contribution.contribution_id%} method="post" enctype="multipart/form-data" class="form-horizontal" role="form" onsubmit="delhistory();return _confirm()">
+        {% endif %}    
+    {% else %}
+        {% if contributeShow %}
+        <form action={% url 'UserContrib:submit' conf_id%} method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+        {% endif %}
+    {% endif %}
+    {% csrf_token %}
+
+{% if contribution and not modifyShow %}
+    <script>
+        alert("不在修改稿件时间内");
+        history.go(-1);
+    </script>
+{% elif not contribution and not contributeShow %}
+    <script>
+        alert("不在投稿时间内");
+        history.go(-1);
+    </script>
+{% else %}
+    <div class="form-group">
+		<label for="firstname" class="col-sm-2 control-label">论文标题</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="firstname" name="title" required="required"
+				   placeholder="请输入标题" value= {{ contribution.title }}>
+		</div>
+	</div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label class="col-sm-6 control-label">作者</label>
+	    </div>
+        <div class="form-group col-md-4">
+            <label class="col-sm-6 control-label">单位</label>
+        </div>
+        <div class="form-group col-md-1">
+            <div class="col-sm-5">
+                <input class="addclass btn btn-primary" type="button" value="添加" onclick="addInput();">
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加与删除按钮不同样式 -->
+    {% if not contribution %}
+
+        <div class="pair form-row">
+            <div class="form-group col-md-4">
+                <div class="col-sm-12" id="addauthor">
+                    <input type="text" class="form-control" name="author" required="required"
+                           placeholder="请输入作者" >
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="col-sm-12" id="addorg">
+                    <input type="text" class="form-control" name="organization" required="required"
+                           placeholder="请输入单位" >
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <div class="col-sm-12">
+                <input class="removeclass btn btn-danger" type="button" onclick="rm(this)" value="删除">
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+
+        {% for author,org in contribution.tolist %}
+            <div class="pair form-row" >
+                <div class="form-group col-md-4">
+                    <div class="col-sm-12" id="addauthor">
+                        <input type="text" class="form-control" name="author" required="required"
+                               placeholder="请输入作者" value={{ author }}>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="col-sm-12" id="addorg">
+                        <input type="text" class="form-control" name="organization" required="required"
+                               placeholder="请输入单位" value={{ org }}>
+                    </div>
+                </div>
+                <div class="form-group col-md-1">
+		            <div class="col-sm-12">
+		                <input class="removeclass btn btn-danger" type="button" onclick="rm(this)" value="删除">
+		            </div>
+	            </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+
+
+     <div class="form-group">
+		<label for="lastname" class="col-sm-2 control-label">摘要</label>
+		<div class="col-sm-10">
+            <textarea class="form-control" name="abstract" required="required" rows="5"
+				   placeholder="请输入摘要" >{{ contribution.abstract }}</textarea>
+		</div>
+     </div>
+
+        <div class="form-group">
+		<label for="firstname" class="col-sm-2 control-label">上传论文</label>
+		<div class="col-sm-10">
+			<input type="file" class="form-control" id="firstname" name="upload" accept="application/pdf" required="required">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">提交</button>
+		</div>
+	</div>
+    </form>
+{% endif %}
+{% endblock %}
+</body>

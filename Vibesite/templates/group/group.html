@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	{% csrf_token %}
+	{% if messages %}
+		{% for msg in messages %}
+		  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+		     {% if forloop.last %}
+			    <div class="alert alert-info">{{ msg }}</div>
+			 {% endif %} 
+		  {% endif %}
+		{% endfor %}
+	{% endif %}
+	<nav>
+		<div class="nav nav-tabs" id="nav-tab" role="tablist">
+			<a class="nav-item nav-link" id="nav-group-tab" data-toggle="tab" href="#nav-group" role="tab" aria-controls="nav-home" aria-selected="true">组织信息</a>
+			<a class="nav-item nav-link" id="nav-member-tab" data-toggle="tab" href="#nav-member" role="tab" aria-controls="nav-profile" aria-selected="false">组成员</a>
+			<a class="nav-item nav-link" id="nav-conf-tab" data-toggle="tab" href="#nav-conference" role="tab" aria-controls="nav-contact" aria-selected="false">会议管理</a>
+		</div>
+	</nav>
+	<div class="tab-content" id="nav-tabContent">
+		<div class="tab-pane fade" id="nav-group" role="tabpanel" aria-labelledby="nav-home-tab">
+			{% include "group/groupinfo.html" %}
+		</div>
+		<div class="tab-pane fade" id="nav-member" role="tabpanel" aria-labelledby="nav-profile-tab">
+			{% include "group/members.html" %}
+		</div>
+		<div class="tab-pane fade" id="nav-conference" role="tabpanel" aria-labelledby="nav-contact-tab">
+			{% include "group/meetings.html" %}
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function () {
+		{% if label == 'groupinfo' %}
+			$("#nav-group-tab").addClass("active");
+			$("#nav-group").addClass("show");
+			$("#nav-group").addClass("active");
+		{% elif label == 'members' %}
+			$("#nav-member-tab").addClass("active");
+			$("#nav-member").addClass("show");
+			$("#nav-member").addClass("active");
+		{% endif %}
+	})
+</script>
+{% endblock content %}

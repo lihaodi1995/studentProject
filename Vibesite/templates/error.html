@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block title %}
+        <title>
+            错误
+        </title>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+        <div style="font-size: 32px">
+            对不起，您访问的页面不存在！
+        </div>
+        <p style="margin-top:40px;margin-bottom:40px">温馨提示：</p>
+        <p style="margin-left:40px">请检查您访问的网址是否正确</p>
+        <p style="margin-left:40px">
+            如果您不能确认访问的网址，推荐进入  
+            <a href="/index/">首页</a>
+            进行查询
+        </p>
+    {% endblock content %}
+</body>

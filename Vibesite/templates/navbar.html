@@ -1,0 +1,48 @@
+<nav class="navbar navbar-light bg-light fixed-top" style="background-color: #ffffffe8!important">
+    <a class="navbar-brand" href="/index/">CONF</a>
+    {% if user_render %}
+    <div>
+        <a class= "btn btn-secondary" href={% url 'UserFunction:subscribedlist'%} >收藏夹</a>
+        <span class="dropdown nav-item">
+            <button class="btn btn-secondary dropdown-toggle nav-item" type="button" id="dropdownMenuButtonMyOrgs" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" href="">组织管理</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonMyOrgs">
+                {% for org in user_render.orgs  %}
+                  <a href="/group/{{ org.id }}" class="dropdown-item">{{  org.name  }}</a>
+                {% endfor %}
+                {% if not user_render.orgs %}
+                    <a href="/group/create" class="dropdown-item">新建组织</a>
+                {% endif %}
+            </div>
+        </span>
+        <span class="nav-item">Hello, {{ user_render.name }}</span>
+        <a class="nav-item" data-letters="{{ user_render.namefirst }}" href="/userinfo/"></a> <!-- 点击头像跳转个人信息页-->
+        <a href="/logout/" class="btn btn-light">注销</a>
+    </div>
+    {% else %}
+    <div style="width: 20%">
+        <a href="/login/" class="btn btn-secondary" style="width: 35%; margin-right: 10%">登录</a>
+        <a href="/register/" class="btn btn-success " style="width: 35%">注册</a>
+    </div>
+    {% endif %}
+</nav>
+<style>
+    [data-letters]:before {
+        content: attr(data-letters);
+        display: inline-block;
+        font-size: 1em;
+        width: 2.5em;
+        height: 2.5em;
+        line-height: 2.5em;
+        text-align: center;
+        border-radius: 50%;
+        background: plum;
+        vertical-align: middle;
+        margin-right: 1em;
+        color: white;
+    }
+
+    .nav-item {
+        margin-left: 1em;
+    }
+</style>

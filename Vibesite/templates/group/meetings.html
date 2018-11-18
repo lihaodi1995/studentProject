@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"><h4>会议名称</h4></th>
+                    <th scope="col"><h4>会议状态</h4></th>
+                    <th scope="col"><h4>编辑</h4></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if list_data %}
+                {% for item in list_data %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.state }}</td>
+                    <td><a href="/meeting/{{ item.conf_id }}">更多</a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">无数据</td>
+                </tr>
+                {% endif %}
+            </tbody>
+         </table>
+         <div class="row">
+            <div class="offset-md-9">
+                <a class="btn btn-outline-secondary" href="create">发布会议</a>
+            </div>
+        </div>
+    </div>
+</div>

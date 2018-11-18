@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h4 class="offset-md-5 col-md-2">创建组织</h4>
+    <div class="col-md-10 offset-md-1">
+        <form action="/group/api/add" method="POST" enctype="multipart/form-data" class="needs-validation">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                <label for="group_name">组织名称</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="group_name" name="group_name"  required="required">
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                <label for="abstract">简介</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="abstract" name="abstract"  required="required">
+                </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nature">性质</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="nature" name="nature" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="service">领域</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="service" name="service"  required="required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="register_code">登记证号</label>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="register_code" name="register_code" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="organ_code">等级机构代码</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="organ_code" name="organ_code"  required="required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="found_date">成立时间</label>
+                    <div class="input-group">
+                    <input type="date" class="form-control" id="found_date" name="found_date" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="fund">注册资金</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="fund" name="fund" min="1" max="1000000000"  required="required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="legal_person">法人</label>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="legal_person" name="legal_person" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="legal_person_contact">法人联系方式</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="legal_person_contact" name="legal_person_contact"  required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="fund_source">经费来源</label>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="fund_source" name="fund_source" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="active_area">活动地域</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="active_area" name="active_area"  required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="location">组织地址</label>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="location" name="location" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="zipcode">组织邮编</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="zipcode" name="zipcode"  required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="tele">电话</label>
+                    <div class="input-group">
+                    <input type="tel" class="form-control" id="tele" name="tele" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="cert_file">证书文件</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" accept="image/png, image/jpeg" onchange="upload(this)" class="custom-file-input" id="cert_file" name="cert_file"  required="required">
+                            <label id="filename" class="custom-file-label"  for="cert_file"></label>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="validate_start">证书起始日期</label>
+                    <div class="input-group">
+                    <input type="date" class="form-control" id="validate_start" name="validate_start" required="required">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="Validate_end">证书结束日期</label>
+                    <div class="input-group">
+                        <input type="date" class="form-control" id="Validate_end" name="Validate_end" required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 12px">
+                <div class="col-md-12">
+                    <button class="btn btn-outline-secondary btn-lg btn-block" type="submit">提交申请</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script >
+    function upload(obj){
+        $("#filename").text(obj.files[0].name)
+    }
+</script>
+{% endblock content %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/group_create_meeting.css">
+{% if messages %}
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div class="alert alert-danger"> {{ message }} </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<div class="card">
+    <div class="card-header align-center">
+          组织认证
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form action="/group/authorize" method="POST"class="needs-validation">
+                     {% csrf_token %}
+                     <div class="form-group">
+                         <label for="nature">性质</label>
+                         <hr>
+                         <input type="text" name = "nature" class="form-control">
+                     </div>
+                     <div class="form-row">
+                         <div class="form-group col-md-4">
+                            <label for="service">服务领域</label>
+                            <hr>
+                            <input type="text" name = "service" class="form-control">
+                         </div>
+                         <div class="form-group col-md-4">
+                            <label for="register_code">登记证号</label>
+                            <hr>
+                            <input type="text" name = "register_code" class="form-control">
+                         </div>
+                         <div class="form-group col-md-4">
+                                <label for="organ_code">组织机构代码</label>
+                                <hr>
+                                <input type="text" name = "organ_code" class="form-control">
+                        </div>
+                     </div>
+                    <div class="form-row">
+                            <div class="form-group col-md-4">
+                               <label for="found_date">成立时间</label>
+                               <hr>
+                               <input type="datetime-local" name = "found_date" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                               <label for="legal_person">法人</label>
+                               <hr>
+                               <input type="text" name = "legal_person" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                   <label for="fund">注册资金</label>
+                                   <hr>
+                                   <input type="text" name = "fund" class="form-control">
+                           </div>
+                    </div>
+                    <div class="form-row">
+                            <div class="form-group col-md-6">
+                               <label for="legal_person_contact">法人联系方式</label>
+                               <hr>
+                               <input type="text" name = "legal_person_contact" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                               <label for="fund_source">经费来源</label>
+                               <hr>
+                               <input type="text" name = "fund_source" class="form-control">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="active_area">活动地域</label>
+                            <hr>
+                            <input type="text" name = "active_area" class="form-control">
+                    </div>
+                    <div class="form-group">
+                            <label for="location">组织地址</label>
+                            <hr>
+                            <input type="text" name = "location" class="form-control">
+                    </div>
+                    <div class="form-row">
+                            <div class="form-group col-md-6">
+                               <label for="zipcode">地址邮编</label>
+                               <hr>
+                               <input type="text" name = "zipcode" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                               <label for="tele">电话</label>
+                               <hr>
+                               <input type="text" name = "tele" class="form-control">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="cert_url">证书地址</label>
+                            <hr>
+                            <input type="text" name = "cert_url" class="form-control">
+                    </div>
+                    <div class="form-row">
+                            <div class="form-group col-md-6">
+                               <label for="validate_start">证书起始日期</label>
+                               <hr>
+                               <input type="datetime-local" name = "validate_start" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                               <label for="validate_end">证书结束日期</label>
+                               <hr>
+                               <input type="datetime-local" name = "validate_end" class="form-control">
+                            </div>
+                    </div>
+                    
+                        <button class="btn btn-outline-secondary btn-lg btn-block" type="submit">申请认证</button>
+                    </form>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+<style>
+    .m-b-0{
+        margin-bottom:0rem;
+    }
+    hr{
+        margin-top:0rem;
+        margin-bottom: 0.5rem;
+    }
+    .mh-2{
+       height:2rem
+    }
+    .align-center{
+        text-align:center
+    }
+</style>
+{% endblock content %}

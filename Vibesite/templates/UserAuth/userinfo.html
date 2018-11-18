@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+ 
+{% block title %}
+<title>
+    个人信息
+</title>    
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+              <div style="float: left; font-size:30px;margin-right: 8%">个人信息</div>
+              <div><a href="/infoedit/"><img src="/static/pics/edit.png" style="height: 28px; width: 28px; margin-top: 2.5%"></a></div>
+        </div>
+        <div class="userinfo" style="clear: both; margin-top: 5%">
+            <table id="table1" class="table table-hover">
+              <tr>
+                  <td scope="col">用户ID号</td>
+                  <td>{{user_id}}</td>
+              </tr>
+              <tr>
+                  <td scope="col">用户名</td>
+                  <td>{{ user_name }}</td>
+              </tr>
+              <tr>
+                  <td scope="col">邮箱</td>
+                  <td>{{email}}</td>
+              </tr>
+              <tr>
+                  <td scope="col">组织</td>
+                  {% if group_name is None%}
+                    <td>您尚未加入任何组织，请联系您所在组织管理员或新建组织！</div>
+                {% else %}
+                    <td>{{group_name}}</div>
+                {% endif %}
+              </tr>
+          </table>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

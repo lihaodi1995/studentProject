@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>我收藏的会议</h1><br>
+
+    {% csrf_token %}
+    <div class="row">
+            <div class="col" style="word-break:break-all; word-wrap:break-all;">
+            {% for item in conferences %}
+
+                <div style="width: 100%;min-width:850px;padding: 15px 5%;overflow-y: hidden">
+                    <div style="background: rgba(251,233,248,0.95);border-radius: 5px;overflow-y: hidden;box-shadow: 3px 3px 5px rgba(0,0,0,0.5);padding:15px 30px">
+                        <div style="width: 65%;float: left">
+                            <p><span style="font-size: larger;font-weight: bold"><a href="/usercontrib/contriblist/{{ item.conf_id }}">{{ item.title }}</a></span></p>
+                            <p><span style="color:#000;font-weight: bold;margin-bottom: 0px">主办方：</span><span style="color: inherit">{{ item.group.group_name }}</span></p>
+                            <p><span style="color:#000;font-weight: bold;margin-bottom: 0px">会议简介: </span><span style="color: inherit">{{ item.introduction }} </span></p>
+                        </div>
+                        <div style="width:35%;float: left;text-align: right">
+                            <p style="font-size: larger;margin-top: 5px">会议时间：{{ item.conference_date|date:"Y-m-d H:i" }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+{% endblock content %}

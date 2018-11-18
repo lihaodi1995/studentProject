@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="card">
+    <div class="card-header" style="text-align: center">
+      组织认证信息
+    </div>
+    <div class="card-body" >
+      <div class="row"  >
+        <div class="col-md-8 offset-md-2">
+          <table class="table" style="text-align: center">
+            <tbody>
+              <tr>
+                <th>性质</th>
+                <td>{{ authorization.nature }}</td>
+              </tr>
+              <tr>
+                  <th>服务领域</th>
+                  <td>{{ authorization.service }}</td>
+              </tr>
+              <tr>
+                  <th>登记证号</th>
+                  <td>{{ authorization.register_code }}</td>
+              </tr>
+              <tr>
+                  <th>组织机构代码</th>
+                  <td>{{ authorization.organ_code }}</td>
+              </tr>
+              <tr>
+                  <th>成立时间</th>
+                  <td>{{ authorization.found_date|date:'Y-m-d H:i' }}</td>
+              </tr>
+              <tr>
+                  <th>法人</th>
+                  <td>{{ authorization.legal_person }}</td>
+              </tr>
+              <tr>
+                  <th>法人联系方式</th>
+                  <td>{{ authorization.legal_person_contact }}</td>
+              </tr>
+              <tr>
+                  <th>注册资金</th>
+                  <td>{{ authorization.fund }}</td>
+              </tr>
+              <tr>
+                  <th>经费来源</th>
+                  <td>{{ authorization.fund_source }}</td>
+              </tr>
+              <tr>
+                  <th>活动地域</th>
+                  <td>{{ authorization.active_area }}</td>
+              </tr>
+              <tr>
+                  <th>组织地址</th>
+                  <td>{{ authorization.location }}</td>
+              </tr>
+              <tr>
+                  <th>地址邮编</th>
+                  <td>{{ authorization.zipcode }}</td>
+              </tr>
+              <tr>
+                  <th>电话</th>
+                  <td>{{ authorization.tele }}</td>
+              </tr>
+              <tr>
+                    <th>证书起始日期</th>
+                    <td>{{ authorization.validate_start|date:'Y-m-d H:i' }}</td>
+              </tr>
+              <tr>
+                    <th>证书结束日期</th>
+                    <td>{{ authorization.Validate_end|date:'Y-m-d H:i' }}</td>
+             </tr>
+            <tr>
+                  <th colspan="2">证书URL</th>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <img style="width:10rem; height:10rem"src="{{ authorization.cert_url }}">
+                </th>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% else %}
+    <meta http-equiv="REFRESH" content="0;url=/">
+  {% endif %}
+  {% endblock %}

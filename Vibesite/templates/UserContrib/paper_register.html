@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block title %}
+        <title>
+            论文参会
+        </title>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+        <form id="paper_register" name="paper_register" method="post" action="">
+            <table>
+                <tr>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>联系方式</td>
+                    <td>是否住宿</td>
+                </tr>
+            </table>
+        </form>
+    {% endblock content %}
+</body>

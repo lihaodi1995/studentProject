@@ -1,0 +1,133 @@
+<div class="row" style="text-align: center;">
+	<div class="col">
+		<div class="row">
+			<table class="table table-hover">
+				<thead>
+	                <tr>
+	                <th scope="col" style="width: 40%;"><h4>管理员</h4></th>
+	                <th scope="col" style="width: 40%;"></th>
+	                <th scope="col" style="width: 10%;"></th>
+	                <th scope="col" style="width: 10%;"></th>
+	                </tr>
+	            </thead>
+				<tbody>
+					{% if admin %}
+					<tr>
+						<td>{{admin.user_name}}</td>
+						<td>{{admin.email}}</td>
+						<td></td>
+						<td></td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+
+			<table class="table table-hover mt-10">
+				<thead>
+	                <tr>
+	                <th scope="col" style="width: 40%;"><h4>组成员</h4></th>
+	                <th scope="col" style="width: 40%;"></th>
+	                <th scope="col" style="width: 10%;"></th>
+	                <th scope="col" style="width: 10%;"></th>
+	                </tr>
+	            </thead>
+				<tbody id = "member">
+					{% if user_id == admin.user_id %}
+						{% for member in members %}
+						{% if member.user_id != admin.user_id %}
+						<tr>
+							<td>{{member.user_name}}</td>
+							<td>{{member.email}}</td>
+							<td><button class="btn btn-link" onclick="kickMember('{{member.user_id}}')">移除</button></td>
+							<td><button class="btn btn-link" onclick="changeAdmin('{{admin.user_id}}','{{member.user_id}}')">转让</button></td>
+						</tr>
+						{% endif %}
+						{% endfor %}
+					{% else %}
+						{% for member in members %}
+						{% if member.user_id != admin.user_id %}
+						<tr>
+							<td>{{member.user_name}}</td>
+							<td>{{member.email}}</td>
+							<td><button class="btn btn-link" onclick="kickMember('{{member.user_id}}')">移除</button></td>
+							<td></td>
+						</tr>
+						{% endif %}
+						{% endfor %}
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+		{% if user_id == admin.user_id %}
+		<div class="row">
+			<div class="col-md-5 offset-md-7">
+				<form class="form-inline">
+					<div class="input-group mb-3">
+						<input type="eamil" class="form-control" placeholder="成员邮箱" name="addmanager" id="addmember"required/>
+						<div class="input-group-append">
+							<input class="btn btn-outline-secondary" type="button" value="添加" onclick="addMember()">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+<script type="text/javascript">
+	function addMember(argument) {
+		email = $("#addmember").val();
+
+		$.post({
+           url:"/group/{{group.group_id}}/addMember",
+           datatype:"JSON",
+           data:{
+               email:email
+           },
+           success:function(data){
+               alert(data);
+               window.location.reload();
+           },
+           error:function(err){
+               alert(err);
+           }
+       })
+	}
+
+	function kickMember(user_id) {
+
+		$.post({
+           url:"/group/{{group.group_id}}/kickMember",
+           datatype:"JSON",
+           data:{
+               user_id:user_id
+           },
+           success:function(data){
+               alert(data);
+               window.location.reload();
+           },
+           error:function(err){
+               alert(err);
+           }
+       })
+	}
+
+	function changeAdmin(admin_id,user_id) {
+		$.post({
+           url:"/group/{{group.group_id}}/changeAdmin",
+           datatype:"JSON",
+           data:{
+               user_id:user_id,
+               admin_id:admin_id
+           },
+           success:function(data){
+               alert(data);
+               window.location.reload();
+           },
+           error:function(err){
+               alert(err);
+           }
+       })
+	}
+</script>

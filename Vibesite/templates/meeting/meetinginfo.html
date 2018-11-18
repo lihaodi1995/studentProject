@@ -1,0 +1,244 @@
+<div>
+	<table id="table1" class="table table-hover">
+	<thead>
+	    <tr>
+	        <th style="width:30%"><h4>会议信息</h4></th>
+	        <th style="width:60%"></th>
+	        <th style="width:10%"></th>
+	    </tr>
+	</thead>
+		<tbody>
+			<tr>
+			    <td scope="col">会议名称</td>
+			    <td>{{ meeting.title }}</td>
+			    <td><button onclick="update(this,1)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+			<tr>
+			    <td scope="col">会议介绍</td>
+			    <td>{{ meeting.introduction }}</td>
+			    <td><button onclick="update(this,2)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+			<tr>
+		        <td scope="col">投稿开始日期</td>
+		        <td>{{ meeting.submit_date_start|date:"Y-m-d H:i" }}</td>
+		        <td><button onclick="update(this,3)" type="button" class="btn btn-outline-secondary">修改</button></td>
+		    </tr>
+			<tr>
+			    <td scope="col">投稿截止日期</td>
+			    <td>{{ meeting.submit_date_end|date:"Y-m-d H:i" }}</td>
+			    <td><button onclick="update(this,4)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+			<tr>
+			    <td scope="col">修改开始日期</td>
+			    <td>{{ meeting.modify_date_start|date:"Y-m-d H:i" }}</td>
+			    <td><button onclick="update(this,5)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+			<tr>
+			    <td scope="col">修改截止日期</td>
+			    <td>{{ meeting.modify_date_end|date:"Y-m-d H:i" }}</td>
+			    <td><button onclick="update(this,6)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+			<tr>
+			    <td scope="col">注册开始日期</td>
+			    <td>{{ meeting.register_date_start|date:"Y-m-d H:i" }}</td>
+			    <td><button onclick="update(this,7)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+			<tr>
+			    <td scope="col">注册截止日期</td>
+			    <td>{{ meeting.register_date_end|date:"Y-m-d H:i" }}</td>
+			    <td><button onclick="update(this,8)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+
+			<tr>
+			    <td scope="col">会议日期</td>
+			    <td>{{ meeting.conference_date|date:"Y-m-d H:i" }}</td>
+			    <td><button onclick="update(this,9)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+
+			<tr>
+			    <td scope="col">安排</td>
+			    <td>{{ meeting.arrangement }}</td>
+			    <td><button onclick="update(this,10)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+			<tr>
+			    <td scope="col">花费</td>
+			    <td>{{ meeting.fee }}</td>
+			    <td><button onclick="update(this,11)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+
+			<tr>
+			    <td scope="col">后勤</td>
+			    <td>{{ meeting.logistics }}</td>
+			    <td><button onclick="update(this,12)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+
+			<tr>
+			    <td scope="col">联系方式</td>
+			    <td>{{ meeting.contact }}</td>
+			    <td><button onclick="update(this,13)" type="button" class="btn btn-outline-secondary">修改</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="row">
+			<div class="col">
+				<form>
+					<div class="input-group mb-3">
+						<div class="custom-file">
+							<input type="file" onchange="$('#papername').text(this.files[0].name)" class="custom-file-input" id="templatefile" accept=".pdf,.doc,.docx">
+							<label id="papername" class="custom-file-label" for="resultfile">修改论文模板</label>
+						  </div>
+						  <div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" onclick="submittemplate()">提交</button>
+						  </div>
+					</div>
+				</form>
+			</div>
+            <div>
+                <a href={% url 'UserContrib:templatedownload' meeting.conf_id %}>
+                    <button class="btn btn-outline-secondary" type="button" >下载论文模板</button>
+                </a>
+            </div>
+			<div class="col">
+				<button  class="btn btn-outline-secondary offset-md-9" onclick="dissolveMeeting()" >解散会议</button>
+			</div>
+		</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">解散会议</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>确认解散该会议！！！</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
+          <button id="sure" type="button" class="btn btn-outline-secondary" onclick="dissolveMeeting()">确认</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	function dissolveMeeting(){
+		$("#sure").attr('disabled',true);
+		$.get({
+			url:'/meeting/{{meeting.conf_id}}/dissolve',
+			success:function(data){
+				alert(data);
+				$("#sure").attr('disabled',false);
+				location.href="/index/";
+			},
+			error:function(err){alert(err)}
+		})
+	}
+
+// 对Date的扩展，将 Date 转化为指定格式的String
+// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+Date.prototype.format = function (fmt) { //author: meizz 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}   
+
+function update(obj,x){
+    var table = document.getElementById("table1");
+    var text = table.rows[x].cells[1].innerHTML;
+    table.rows[x].cells[1].innerHTML = '<input class="input" name="input'+ x + '">';
+    var input = document.getElementsByName("input" + x);
+    switch(x){
+        case 3:
+        case 4: 
+        case 5:
+        case 6:
+		case 7:
+		case 8:
+		case 9:
+            input[0].type = "datetime-local";
+			var time = new Date(text);
+			input[0].value = time.format('yyyy-MM-ddThh:mm');
+            break;
+        case 11:
+            input[0].type = "number";
+			input[0].value = text;
+			break;
+		default:
+			input[0].type = "text";
+			input[0].value = text;
+    } 
+    input[0].focus();
+
+    obj.innerHTML = "确定";
+    obj.onclick = function onclick(event) {
+        update_success(this,x)
+    };
+}
+
+function update_success(obj,x){
+	var table = document.getElementById("table1");
+    var input = document.getElementsByName("input" + x);
+    var value = input[0].value;
+	$.post({
+       url:"/meeting/{{meeting.conf_id}}/updateInfo",
+       datatype:"JSON",
+       data:{
+           type:x,
+           value:value
+       },
+       success:function(data){   	// 页面恢复成表格
+			if(x>=3&&x<=9){
+				var time = new Date(value);
+				table.rows[x].cells[1].innerHTML = time.format('yyyy-MM-dd hh:mm');
+			}
+			else
+				table.rows[x].cells[1].innerHTML = value;
+			obj.innerHTML = "修改";
+			obj.onclick = function onclick(event) {
+				update(this,x);
+			};
+			alert(data);
+			window.location.reload();
+       },
+       error:function(err){
+           alert(err)
+       }
+   })
+}
+
+function submittemplate(){
+	var file = $("#templatefile").prop('files');
+	var formdata = new FormData();
+	formdata.append('file',file[0]);	
+	$.post({
+       url:"/meeting/{{meeting.conf_id}}/contribtemplate",
+       datatype:"JSON",
+       processData:false,
+       contentType: false,
+       cache:false,
+       data:formdata,
+       success:function(data){   	// 页面恢复成表格
+			alert(data);
+			window.location.reload();
+       },
+       error:function(err){
+           alert(err)
+       }
+   })
+}
+
+
+
+</script>

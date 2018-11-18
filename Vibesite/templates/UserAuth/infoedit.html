@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+ 
+{% block title %}
+<title>
+    个人信息修改
+</title>    
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+          <form class='form-register' action="/infoedit/" method="post">
+ 
+              {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+ 
+              {% csrf_token %}
+ 
+              <h2 class="text-center">个人信息修改</h2>
+              <div class="form-group">
+                  {{ edit_form.user_name.label_tag }}
+                  {{ edit_form.user_name}}
+              </div>
+              <div class="form-group">
+                  {{ edit_form.password1.label_tag }}
+                  {{ edit_form.password1 }}
+              </div>
+              <div class="form-group">
+                  {{ edit_form.password2.label_tag }}
+                  {{ edit_form.password2 }}
+              </div>
+              <div class="form-group">
+                  {{ edit_form.email.label_tag }}
+                  {{ edit_form.email }}
+              </div>
+ 
+              <button type="reset" class="btn btn-default pull-left" style="float: left; width: 40%; margin-top: 5%">重置</button>
+              <button type="submit" class="btn btn-primary pull-right" style="float: right; width: 40%; margin-top: 5%">提交</button>
+ 
+          </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/group_create_meeting.css">
+<div class="card">
+    <div class="card-header align-center">
+           创建会议
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form action="/group/meeting/add" method="POST" class="needs-validation" enctype="multipart/form-data">
+                     {% csrf_token %}
+                     <input type="text" value="{{group_id}}" name="group_id" style="display:none">
+                     <div class="form-group">
+                         <label for="title">会议标题</label>
+                         <hr>
+                         <input type="text" name = "title" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                         <label for="introduction">会议介绍</label>
+                         <hr>
+                         <textarea class="form-control" name ="introduction" id="introduction" rows="3" required></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="title">投稿初始稿件日期</label>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <label class="col-sm-4" for="submit_date_start">开始日期</label>
+                                    <input type="datetime-local" class="form-control col-sm-8 mh-2" id ="submit_date_start" onchange="checksubmitdate()" name = "submit_date_start" required>
+                                </div>
+                             </div>
+                            <div class="col">
+                                    <div class="row">
+                                            <label class="col-sm-4" for="submit_date_end">截止日期</label>
+                                            <input type="datetime-local" class="form-control col-sm-8 mh-2" id = "submit_date_end" onchange="checksubmitdate();checksubmitmodifydate()" name = "submit_date_end" required>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="title">投稿修改稿件日期</label>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <label class="col-sm-4" for="modify_date_start">开始日期</label>
+                                        <input type="datetime-local" class="form-control col-sm-8 mh-2" id="modify_date_start" onchange="checkmodifydate();checksubmitmodifydate()" id = "modify_start_date" name = "modify_date_start" required>
+                                    </div>
+                                 </div>
+                                <div class="col">
+                                        <div class="row">
+                                                <label class="col-sm-4" for="modify_date_end">截止日期</label>
+                                                <input type="datetime-local" class="form-control col-sm-8 mh-2" id = "modify_date_end" onchange="checkmodifydate();checkmodifyregisterdate()" id = "modify_start_date" name = "modify_date_end" required> 
+                                        </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="title">稿件录用通知日期</label>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <label class="col-sm-4" for="modify_date_start">最晚通知</label>
+                                        <input type="datetime-local" class="form-control col-sm-8 mh-2" id="inform_date" onchange="checkmodifydate();checksubmitmodifydate()" name = "inform_date" required>
+                                    </div>
+                                 </div>
+                                <div class="col">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="title">会议注册日期</label>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <label class="col-sm-4" for="register_date_start">开始日期</label>
+                                        <input type="datetime-local" class="form-control col-sm-8 mh-2" id= "register_date_start" onchange="checkregisterdate();checkmodifyregisterdate()"  id = "register_date_start" name = "register_date_start" required>
+                                    </div>
+                                 </div>
+                                <div class="col">
+                                        <div class="row">
+                                                <label class="col-sm-4" for="submit_date_end">截止日期</label>
+                                                <input type="datetime-local" class="form-control col-sm-8 mh-2" id="register_date_end" onchange="checkregisterdate();checkregisterholddate()" id="register_date_start" name = "register_date_end" required>
+                                        </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-row">
+                            <div class="form-group col-md-5">
+                              <label for="conference_date">会议举行时间</label>
+                              <input type="datetime-local" id="conference_date" onchange= "checkregisterholddate()"name="conference_date" class="form-control"  required>
+                            </div>
+                            <div class="form-group col-md-4">
+
+                            </div>
+                            <div class="form-group col-md-3">
+                              <label for="fee">注册费用</label>
+                              <input type="text" name ="fee" class="form-control" id="inputZip">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="title">会议安排</label>
+                            <hr>
+                        <textarea name="arrangement" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                            <label for="logistics">住宿交通</label>
+                            <hr>
+                        <textarea name = "logistics" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                            <label for="contact">联系方式</label>
+                            <hr>
+                        <textarea name = "contact" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                            <label for="">论文模板</label>
+                        <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" accept=".pdf,.doc,.docx" onchange="$('#filename').text(this.files[0].name)" class="custom-file-input" name="template"  required="required">
+                            <label id="filename" class="custom-file-label"  for="cert_file"></label>
+                        </div>
+                    </div>
+                    </div>
+
+                    
+                        <button class="btn btn-outline-secondary btn-lg btn-block" id="submit1" type="submit">创建会议</button>
+                    </form>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+<style>
+    .m-b-0{
+        margin-bottom:0rem;
+    }
+    hr{
+        margin-top:0rem;
+        margin-bottom: 0.5rem;
+    }
+    .mh-2{
+       height:2rem
+    }
+    .align-center{
+        text-align:center
+    }
+    
+</style>
+<script>
+    function checksubmitdate() {
+        var submit1 = document.getElementById("submit_date_start");
+        var submit2 = document.getElementById("submit_date_end");
+        if (submit1.value >= submit2.value && submit2.value)
+            submit2.setCustomValidity("初稿截止日期应该大于初稿开始日期");
+        else
+            submit2.setCustomValidity("");
+     }
+    function checksubmitmodifydate()
+    {
+        var submit1 = document.getElementById("submit_date_end");
+        var submit2 = document.getElementById("modify_date_start");
+        if (submit1.value >= submit2.value && submit2.value)
+            submit2.setCustomValidity("修改稿开始日期应该大于初始稿截止日期");
+        else
+            submit2.setCustomValidity("");
+    }
+    function checkmodifydate() {
+        var submit1 = document.getElementById("modify_date_start");
+        var submit2 = document.getElementById("modify_date_end");
+        if (submit1.value >= submit2.value && submit2.value )
+            submit2.setCustomValidity("修改稿截止日期应该大于修改稿开始日期");
+        else
+            submit2.setCustomValidity("");
+    }
+    function checkmodifyregisterdate()
+    {
+        var submit1 = document.getElementById("modify_date_end");
+        var submit2 = document.getElementById("register_date_start");
+        if (submit1.value >= submit2.value && submit2.value)
+            submit2.setCustomValidity("注册开始日期应该大于修改稿截止日期");
+        else
+            submit2.setCustomValidity("");
+    }
+    function checkregisterdate() {
+        var submit1 = document.getElementById("register_date_start");
+        var submit2 = document.getElementById("register_date_end");
+        if (submit1.value >= submit2.value && submit2.value)
+            submit2.setCustomValidity("注册截止日期应该大于注册开始日期");
+        else
+            submit2.setCustomValidity("");
+    }
+    function checkregisterholddate()
+    {
+        var submit1 = document.getElementById("register_date_end");
+        var submit2 = document.getElementById("conference_date");
+        if (submit1.value >= submit2.value && submit2.value)
+            submit2.setCustomValidity("会议举办日期应该大于注册截止日期");
+        else
+            submit2.setCustomValidity("");
+    }
+
+    
+</script>
+{% endblock content %}

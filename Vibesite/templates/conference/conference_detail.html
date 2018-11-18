@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    {% csrf_token %}
+    <div>
+  <table id="table1" class="table table-hover">
+      <thead>
+          <tr>
+              <th style="width:30%"><h4>会议信息</h4></th>
+              <th style="width:60%"></th>
+              <th style="width:10%"></th>
+          </tr>
+      </thead>
+      <tr>
+          <td scope="col">会议标题</td>
+          <td>{{ conf.title }}</td>
+      </tr>
+      <tr>
+          <td scope="col">会议简介</td>
+          <td>{{ conf.introduction }}</td>
+      </tr>
+      <tr>
+          <td scope="col">截稿日期</td>
+          <td>{{ conf.contribution_deadline }}</td>
+      </tr>
+      <tr>
+          <td scope="col">录用通知日期</td>
+          <td>{{ conf.inform_date }}</td>
+      </tr>
+      <tr>
+          <td scope="col">注册日期</td>
+          <td>{{ conf.register_date }}</td>
+      </tr>
+      <tr>
+          <td scope="col">会议日期</td>
+          <td>{{ conf.conference_date }}</td>
+      </tr>
+      <tr>
+          <td scope="col">日程安排</td>
+          <td>{{ conf.arrangement }}</td>
+      </tr>
+      <tr>
+          <td scope="col">组织机构</td>
+          <td>{{ conf.group.group_name }}</td>
+      </tr>
+      <tr>
+          <td scope="col">注册费用</td>
+          <td>{{ conf.fee }}</td>
+      </tr>
+      <tr>
+          <td scope="col">住宿交通</td>
+          <td>{{ conf.logistics }}</td>
+      </tr>
+      <tr>
+          <td scope="col">联系我们</td>
+          <td>{{ conf.contact }}</td>
+      </tr>
+  </table>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,34 @@
+<div class="row" style="text-align: center;">
+    <div class="col-md-12">  
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"><h4>编号</h4></th>
+                    <th scope="col"><h4>姓名</h4></th>
+                    <th scope="col"><h4>种类</h4></th>
+                    <th scope="col"><h4>凭证</h4></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if part_people %}
+                {% for item in part_people %}
+                <tr>
+                    <td scope="row">{{ item.registration_id }}</td>
+                    <td>{{ item.name }}</td>
+                    {% if item.type == 'a' %}
+                    <td>旁听</td>
+                    {% else %}
+                    <td>投稿</td>  
+                    {% endif %}
+                    <td><a href="/meeting/download/{{item.payment}}">预览</a></td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">无数据</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>

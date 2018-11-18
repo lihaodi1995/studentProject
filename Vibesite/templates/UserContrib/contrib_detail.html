@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block title %}
+        <title>
+            论文详情
+        </title>
+    {% endblock title %}
+</head>
+<body>
+    {% block content %}
+        <style>
+            .left_td{
+                width:25%;
+            }
+        </style>
+        <a href={%  url 'UserContrib:contriblist' conf_id %}>
+                <button class="btn btn-primary">
+                    返回列表
+                </button>
+        </a>
+        <div style="width:800px">
+            <div style="height: 15px; width: 100%; float:left;"></div>
+            <div>
+                <h1>{{ detail_list.title }}</h1>
+            </div>
+            <div style="height: 15px; width: 100%; float:left;"></div>
+            <div style="width: 100%; float: left;">
+                <div style="width:10%; float:left;"><b>作者</b></div>
+                <div style="width:90%; float:right;">
+                    {% for auth,org in detail_list.tolist %}
+                    {{ auth }}({{ org }})<br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div style="height: 15px; width: 100%; float:left;"></div>
+            <div style="width: 100%; float: left;">
+                <div style="width:10%; float:left;"><b>摘要</b></div>
+                <div style="width:90%; float:right;  word-break:break-all; word-wrap:break-word;">
+                    {{detail_list.abstract}}
+                </div>
+            </div>
+            {% ifnotequal detail_list.result 'p' %}
+                <div style="height: 15px; width: 100%; float:left;"></div>
+                <div style="width: 100%; float: left;">
+                    <div style="width:10%; float:left;"><b>论文评价</b></div>
+                    <div style="width:90%; float:right;  word-break:break-all; word-wrap:break-word;">
+                        {{detail_list.comment}}
+                    </div>
+                </div>
+            {% endifnotequal %}
+            <div style="height: 30px; width: 100%; float:left;"></div>
+            <div style="width:100%; float: left;" >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a target=blank href={%  url 'UserContrib:download' detail_list.contribution_id %}><button class="btn btn-success">预览原文</button></a>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a href={% url 'UserContrib:form' detail_list.conference_id detail_list.contribution_id %}><button class="btn btn-info">修改稿件</button></a>
+
+            </div>
+        </div>
+    {% endblock content %}
+</body>

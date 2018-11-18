@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+	{% csrf_token %}
+	<nav>
+		<div class="nav nav-tabs" id="nav-tab" role="tablist">
+			
+			<a class="nav-item nav-link" id="nav-conf-tab" data-toggle="tab" href="#nav-conf" role="tab" aria-controls="nav-home" aria-selected="true">会议信息</a> 
+			<a class="nav-item nav-link" id="nav-contribution-tab" data-toggle="tab" href="#nav-contribution" role="tab" aria-controls="nav-profile" aria-selected="false">投稿</a>
+			<a class="nav-item nav-link" id="nav-member-tab" data-toggle="tab" href="#nav-member" role="tab" aria-controls="nav-contact" aria-selected="false">参会论文</a>
+			<a class="nav-item nav-link" id="nav-part-member-tab" data-toggle="tab" href="#nav-part-member" role="tab" aria-controls="nav-contact" aria-selected="false">参会人员</a>
+		</div>
+	</nav>
+
+	<div class="tab-content" id="nav-tabContent">
+		<div class="tab-pane fade" id="nav-conf" role="tabpanel" aria-labelledby="nav-home-tab">
+			{% include "meeting/meetinginfo.html" %}
+		</div>
+		<div class="tab-pane fade" id="nav-contribution" role="tabpanel" aria-labelledby="nav-profile-tab">
+			{% include "meeting/contribution.html" %}
+		</div>
+		<div class="tab-pane fade" id="nav-member" role="tabpanel" aria-labelledby="nav-contact-tab">
+			{% include "meeting/participants.html" %}
+		</div>
+		<div class="tab-pane fade" id="nav-part-member" role="tabpanel" aria-labelledby="nav-contact-tab">
+			{% include "meeting/participantspeople.html" %}
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function () {
+		{% if label == 'meetinginfo' %}
+			$("#nav-conf-tab").addClass("active");
+			$("#nav-conf").addClass("show");
+			$("#nav-conf").addClass("active");
+		{% elif label == 'contribution' %}
+			$("#nav-contribution-tab").addClass("active");
+			$("#nav-contribution").addClass("show");
+			$("#nav-contribution").addClass("active");
+		{% endif %}
+	})
+</script>
+{% endblock content %}

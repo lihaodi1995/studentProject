@@ -1,0 +1,205 @@
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<script src="/static/js/bootstrap.min.js"></script>
+{% extends "base.html" %}
+{% block content %}
+ <!--这是一段注释。注释不会在浏览器中显示。-->
+<div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-10"><h1>{{ meeting.title }}</h1></div>
+            <div class="col-sm-2"> <a onclick="subscribe()" id="sub_frame"></a></div>
+        </div>
+        <table id="table1" class="table table-sm" style="word-break:break-all; word-wrap:break-all;">
+            <thead>
+                <tr>
+                    <th style="width:30%"></th>
+                    <th style="width:60%"></th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+            <tr>
+                <td scope="col">会议简介</td>
+                <td>{{ meeting.introduction }}</td>
+            </tr>
+            <tr>
+                <td scope="col">投稿时间</td>
+                <td>{{ meeting.submit_date_start|date:"Y-m-d H:i" }}&nbsp;至 &nbsp;{{ meeting.submit_date_end |date:"Y-m-d H:i"}}</td>
+            </tr>
+            <tr>
+                <td scope="col">修稿时间</td>
+                <td>{{ meeting.modify_date_start|date:"Y-m-d H:i" }}&nbsp;至 &nbsp;{{ meeting.modify_date_end |date:"Y-m-d H:i"}}</td>
+            </tr>
+            <tr>
+                <td scope="col">录用通知日期</td>
+                <td>{{ meeting.inform_date|date:"Y-m-d H:i" }}</td>
+            </tr>
+            <tr>
+                <td scope="col">注册时间</td>
+                <td>{{ meeting.register_date_start |date:"Y-m-d H:i"}}&nbsp;至 &nbsp;{{ meeting.register_date_end|date:"Y-m-d H:i" }}</td>
+            </tr>
+            <tr>
+                <td scope="col">会议举办日期</td>
+                <td>{{ meeting.conference_date|date:"Y-m-d H:i" }}</td>
+            </tr>
+        
+            <tr>
+                <td scope="col">日程安排</td>
+                <td>{{ meeting.arrangement }}</td>
+            </tr>
+            <tr>
+                <td scope="col">注册费用</td>
+                <td>{{ meeting.fee }}</td>
+            </tr>
+        
+            <tr>
+                <td scope="col">住宿交通</td>
+                <td>{{ meeting.logistics }}</td>
+            </tr>
+        
+            <tr>
+                <td scope="col">联系我们</td>
+                <td>{{ meeting.contact }}</td>
+            </tr>
+
+            <tr>
+                <td scope="col">论文模板</td>
+                <td><a href={% url 'UserContrib:templatedownload' meeting.conf_id %}>下载论文模板</a></td>
+            </tr>
+
+        </table>
+    </div>
+    </div>
+    <div style="height:30px;"></div>
+    {% if request.session.is_login %}
+        {% if not registered %}
+            <a style="color:white" href={% url 'UserContrib:listen' meeting.conf_id %}>
+                <button class="btn btn-info"> 
+                    聆听会议注册
+                </button>
+            </a>
+        {% else %}
+        会议已注册
+        {% endif %}
+    <div style="height:30px;"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h4>个人投稿</h4>
+            {% if latest_contributions %}
+                <table class="table table-bordered" style="word-break:break-all; word-wrap:break-all;" >
+                    <tr>
+                        <th width="50%">论文名</th>
+                        <th>最后修改时间</th>
+                        <th>审核状态</th>
+                        <th>注册状态</th>
+                    </tr>
+                    {% for contribution in latest_contributions %}
+                    <tr>
+                        <td><li><a href={% url 'UserContrib:contrib_detail' meeting.conf_id contribution.contribution_id %}>{{ contribution.title }}</a></li></td>
+                        <td>{{contribution.last_modified|date:"Y-m-d H:i"}}</td>
+                        <td>
+                            {% ifequal contribution.result "p" %}
+                                未审核
+                            {% endifequal %}
+                            {% ifequal contribution.result "r" %}
+                                <p>未通过</p>
+                                <p></p>
+                            {% endifequal %}
+                            {% ifequal contribution.result "g" %}
+                                已通过
+                            {% endifequal %}
+                        </td>
+                        <td>
+                            {% ifequal contribution.result "p" %}
+                                /
+                            {% else %}
+                                {% ifequal contribution.result "r" %}
+                                    /
+                                {% else %}
+                                    {% if contribution.register_status %}
+                                        已注册
+                                    {% else %}
+                                    未注册,<a href={% url 'UserContrib:paper_register' meeting.conf_id contribution.contribution_id%}>点击注册</a></p>
+                                    {% endif %}
+                                {% endifequal %}
+                            {% endifequal %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <a style="color:white" href={% url 'UserContrib:form' meeting.conf_id %}>
+                <button class="btn btn-info">
+                    +投稿
+                </button> 
+            </a><!--a放在button外面--> 
+        </div>
+    </div>
+    {% else %}
+        <p>投稿请<a href="/login/">登录</a></p>
+    {% endif %}
+</div>
+
+<p id="pp"></p>
+<script type="text/javascript">
+    {% if request.session.is_login %}
+    init();
+    {% endif %}
+    function subscribe() {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function (){ // 状态发生变化时，函数被回调
+            if (request.readyState === 4) {
+                //动态添加收藏按钮
+                if(!document.getElementById("subscribe"))
+                {
+                    var img=document.createElement('img');
+                    img.id="subscribe";
+                    img.height=50;
+                    img.width=50;
+                    img.class="img-circle";
+                    document.getElementById("sub_frame").appendChild(img);
+                }
+                if(request.responseText==='1') {
+                    document.getElementById("subscribe").src="/static/favicon/sub.jpg";
+                }
+                else {
+                    document.getElementById("subscribe").src="/static/favicon/unsub.png";
+                }
+            }
+        };
+        // 发送请求:
+        request.open('GET', "{% url 'UserContrib:subscribe' meeting.conf_id %}");
+        request.send();
+    }
+    function init() {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function () { // 状态发生变化时，函数被回调
+            if (request.readyState === 4) {
+                //动态添加收藏按钮
+                if(!document.getElementById("subscribe"))
+                {
+                    var img=document.createElement('img');
+                    img.id="subscribe";
+                    img.height=50;
+                    img.width=50;
+                    img.class="img-circle";
+                    document.getElementById("sub_frame").appendChild(img);
+                }
+                if(request.responseText==='1') {
+                    document.getElementById("subscribe").src="/static/favicon/sub.jpg";
+                }
+                else {
+                    document.getElementById("subscribe").src="/static/favicon/unsub.png";
+                }
+            }
+        };
+        // 发送请求:
+        request.open('GET', "{% url 'UserContrib:ifsubscribe' meeting.conf_id %}");
+        request.send();
+    }
+</script>
+{% endblock content %}

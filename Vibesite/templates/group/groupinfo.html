@@ -1,0 +1,110 @@
+<div>
+  <table id="table1" class="table table-hover">
+      <thead>
+          <tr>
+              <th style="width:30%"><h4>组织信息</h4></th>
+              <th style="width:60%"></th>
+              <th style="width:10%"></th>
+          </tr>
+      </thead>
+      <tr>
+          <td scope="col">组名称</td>
+          <td>{{ group.group_name }}</td>
+          {% if user_id == admin.user_id %}
+          <td><button onclick="update(this,1)" type="button" class="btn btn-outline-secondary">修改</button></td>
+          {% else%}
+          <td></td>
+          {% endif %}
+      </tr>
+      <tr>
+          <td scope="col">管理员</td>
+          <td>{{ group.admin_name }}</td>
+          {% if user_id == admin.user_id %}
+          <td></td>
+          {% else%}
+          <td></td>
+          {% endif %}
+      </tr>
+      
+  </table>
+  {% if user_id == admin.user_id %}
+  <button class="btn btn-outline-secondary offset-md-9" type="button" data-toggle="modal" data-target="#exampleModal">
+    解散组织
+  </button>
+  {% endif %}
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">解散组织</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>确认解散该组织！！！</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
+          <button id="sure" type="button" class="btn btn-outline-secondary" onclick="dissolveGroup()">确认</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+    function dissolveGroup(){
+        $("#sure").attr('disabled',true);
+        $.get({
+            url:'/group/{{group.group_id}}/dissolve',
+            success:function(data){
+                alert(data);
+                $("#sure").attr('disabled',false);
+                location.href="/index/";
+            },
+            error:function(err){alert(err)}
+        })
+    }
+
+    function update(obj,x){
+        var table = document.getElementById("table1");
+        var text = table.rows[x].cells[1].innerHTML;
+        table.rows[x].cells[1].innerHTML = '<input class="input" name="input'+ x + '">';
+        var input = document.getElementsByName("input" + x);
+        input[0].value = text;
+        input[0].focus();
+ 
+        obj.innerHTML = "确定";
+        obj.onclick = function onclick(event) {
+            update_success(this,x)
+        };
+    }
+
+    function update_success(obj,x){
+        var table = document.getElementById("table1");
+        var input = document.getElementsByName("input" + x);
+        var value = input[0].value;
+        $.post({
+            url:"/group/{{group.group_id}}/updateInfo",
+            datatype:"JSON",
+            data:{
+                type:x,
+                value:value
+            },
+            success:function(data){      // 页面恢复成表格
+                table.rows[x].cells[1].innerHTML = value;
+                obj.innerHTML = "修改";
+                obj.onclick = function onclick(event) {
+                    update(this,x);
+                };
+                alert(data);
+                window.location.reload();
+            },
+            error:function(err){
+                alert(err)
+           }
+       })
+    } 
+</script>
