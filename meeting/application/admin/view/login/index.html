@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/assets/js/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <title>学术会议-管理员登录</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link " href="/index/index/index">首页</a>
+                    </li>
+                    
+                </ul>
+                
+                
+            </div>
+        </nav>
+    </div>
+
+    <div class="container mt-5">
+            <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6">
+                            <label for="account">账号：</label>
+                            <input type="text" class="form-control" name="" id="unit_account" aria-describedby="helpId_ac1" placeholder="管理账户">
+                            <small id="helpId_ac1" class="form-text text-muted">此栏填写管理员账号</small>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container单位账号-->
+
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6">
+                            <label for="password">密码：</label>
+                            <input type="password" class="form-control" name="" id="unit_pwd" aria-describedby="helpId_pwd1" placeholder="密码">
+                            <small id="helpId_pwd1" class="form-text text-muted"></small>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container单位密码-->
+
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6 text-center">
+                            <button id="unit_button" class="btn btn-lg btn-primary" onclick="admin_login()">登录</button>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container单位登录按钮-->
+    </div>
+
+
+    <footer id="footer" class="pt-5" >
+        <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+            <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+        </div>
+        <div class="container" >
+            <div class="row hidden-xs">
+                <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                    <dt class=" pb-1">小组信息：</dt>
+                    
+                    <dd>善良之队</dd>
+                    <dd>组号：12组</dd>
+                    <dd>成员：9名</dd>
+                    
+                </dl>
+                
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">赞助商:</dt>
+                    
+                    <dd>北航软院教师：THB</dd>
+                    
+                </dl>
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">相关协作系统</dt>
+                    
+                    <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                    <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                    
+                </dl>
+
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">联系我们</dt>
+                    
+                    <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                    <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                    <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright container text-center">
+                Copyright  2018 善良之队 12组<br><br>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        function admin_login()
+        {
+            var ac_id = document.getElementById("unit_account");
+            var account = ac_id.value;
+            var pwd_id = document.getElementById("unit_pwd");
+            var password = pwd_id.value;
+            if(account=="" || password=="")
+            {
+                alert("请输入账号或密码");
+                return;
+            }
+            var jsonData = {account: account, password: password};//
+            $.ajax({
+                    url: "/admin/login/adminLogin",
+                    type: "post",
+                    dataType: "json",
+                    //contentType: "application/json",
+                    data: jsonData,
+                    success: function(data){
+                        if (data['errNo'] == 0) {
+                            alert('登录成功');
+                            window.location.href = "/admin/index/index.html";
+                        }
+                        else {
+                            $("#textWarning").empty();
+                            $("#textWarning").append(data['msg']);
+                            alert(data['msg']);
+                            //$("#textWarning").append("<br />");
+                            //alert('注册成功');
+                        }
+                    },
+                    error: function(data){
+                        console.log('error');
+                        /*
+                        $("#textWarning").empty();
+                        $("#textWarning").append("data['msg']");
+                        var status = data['status']
+                        alert(status);
+                        */
+                    }
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+    /*
+    Interface: 判断用户是否能以参会者注册
+    Function: ifsubmit
+    Url: meeting\register\ifsubmit
+    Type: post
+    Input: {meetingId}
+    Output: {errNo, msg, data: {submission}}
+        errNo: 0, msg: '查询成功', data: {submission}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以会员身份登录', data: null
+    */
+
+    /*
+    Interface: 注册会议
+    Function: createRegister
+    Url: meeting\register\createRegister
+    Type: post
+    Input: {meetingId}
+    Output: {errNo, msg, data: {registerId, type}}
+        errNo: 0, msg: '注册成功', data: {registerId, type}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以会员身份登录', data: null
+        errNo: 10, msg: '会员不存在', data: null
+        errNo: 10, msg: '会议不存在', data: null
+        errNo: 10, msg: '不在注册时间内', data: null
+    NOTE: type: 1-投稿参会, 2-聆听参会
+    */
+
+    /*Interface: 删除会议注册信息
+    Function: deleteRegister
+    Url: meeting/register/deleteRegister
+    Type: post
+    Input: {registerId}
+    Output: {errNo, msg}
+        errNo: 0, msg: '删除成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 10, msg: '注册信息不存在'
+    */
+
+    /*Interface: 创建注册人信息
+    Function: createRegisterPerson
+    Url: meeting/register/createRegisterPerson
+    Type: post
+    Input: {registerId, registerPersonList: array of {name, gender, accomodation}}
+    Output: {errNo, msg}
+        errNo: 0, msg: '创建成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 10, msg: '注册信息不存在'
+        errNo: 10, msg: '姓名不能为空'
+        errNo: 10, msg: '性别不能为空'
+        errNo: 10, msg: '住宿信息不能为空'
+    */
+
+    /*Interface: 上传缴费凭证信息
+    Function: uploadReigsterAddition
+    Url: meeting/register/uploadReigsterAddition
+    Type: post
+    Input: formData: {file, registerId, fileName}
+    Output: {errNo, msg}
+        errNo: 0, msg: '上传成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 10, msg: '注册信息不存在'
+    */
+
+    /*Interface: 获取会议注册数量
+    Function: getRegisterCount
+    Url: meeting\register\getRegisterCount
+    Type: post
+    Input: {meetingId, check}
+    Output: {errNo, msg, data: {count}}
+        errNo: 0, msg: '获取成功', data: {count}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '会议不存在', data: null
+    NOTE: check: 1-未审核, 2-审核通过, 3-审核未通过
+    */
+
+    /*Interface: 获取会议注册列表
+    Function: getRegisterList
+    Url: meeting\register\getRegisterList
+    Type: post
+    Input: {meetingId, check, limit, page}
+    Output: {errNo, msg, data: {registerList: array of {registerId, userId, meetingId, manuscriptId, type, createTime, updateTime,name,num}}
+        errNo: 0, msg: '获取成功', data: {registerList: array of {registerId, userId, meetingId, manuscriptId, type, createTime, updateTime,name,num}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 3, msg: '分页信息错误', data: null
+        errNo: 10, msg: '会议不存在', data: null
+    NOTE: check: 1-未审核, 2-审核通过, 3-审核未通过
+    */
+
+    /*Interface: 获取注册详细信息
+    Function: getRegisterDetail
+    Url: meeting\register\getRegisterDetail
+    Type: post
+    Input: {registerId}
+    Output: {errNo, msg, data: {registerId, userId, meetingId, manuscriptId, type, createTime, updateTime, name, num, url}}
+        errNo: 0, msg: '获取成功', data: {registerId, userId, meetingId, manuscriptId, type, createTime, updateTime, name, num, url}
+        errNo: 1, msg: '参数错误', data: null
+        errNO: 10, msg: '注册信息不存在', data: null
+        errNO: 10, msg: '注册缴费信息不存在', data: null
+    */
+
+    /*Interface: 获取注册信息中注册人列表
+    Function: getRegisterPersonList
+    Url: meeting/register/getRegisterPersonList
+    Type: post
+    Input: {registerId}
+    Output: {errNo, msg, data: {registerPersonList: array of {registerPersonId, registerId, name, gender, accomodation}}}
+        errNo: 0, msg: '获取成功', data: {registerPersonList: array of {registerPersonId, registerId, name, gender, accomodation}}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '注册信息不存在', data: null
+    */
+
+    /*Interface: 审核注册信息
+    Function: checkRegister
+    Url: meeting\register\checkRegister
+    Type: post
+    Input: {registerId, check}
+    Output: {errNo, msg, data: null}
+        errNo: 0, msg: '修改成功', data: null
+        errNo: 1, msg: '参数错误', data: null
+        errNO: 10, msg: '注册信息不存在', data: null
+    */
+

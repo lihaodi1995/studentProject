@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="style.css"> .
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <title>Title</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="#">首页</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">链接</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">发现</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">链接</a>
+                    </li>
+                    <li class="nav-item dropdown ml-4">
+                        <a class="nav-link dropdown-toggle" style="font-size:20px;" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">功能选择</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">选择</a>
+                            <a class="dropdown-item" href="#">选择</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2">登陆</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2">注册</button>
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container mt-5">
+        <form class="form-inline col-md-6  offset-md-3 ">
+            <input class="form-control mr-sm-2" type="text" placeholder="请输入所要搜索的会议" style="width: 25em;">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+        </form>
+        <div class="row p-4">
+            <div class="card col-md-3 " onmouseover="this.style.background='#c4c4c4'" onmouseout="this.style.background='#ffffff'">
+                <img class="card-img-top" src="holder.js/100px180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                    <p class="card-text">Body</p>
+                </div>
+            </div>
+            <div class="card col-md-3 offset-md-1" onmouseover="this.style.background='#c4c4c4'" onmouseout="this.style.background='#ffffff'">
+                <img class="card-img-top" src="holder.js/100px180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                    <p class="card-text">Body</p>
+                </div>
+            </div>
+            <div class="card col-md-3 offset-md-1" onmouseover="this.style.background='#c4c4c4'" onmouseout="this.style.background='#ffffff'">
+                <img class="card-img-top" src="holder.js/100px180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                    <p class="card-text">Body</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer  page-footer font-small unique-color-dark mt-4">
+        <div style="background-color: #868383;">
+            <div class="container">
+                <div class="row py-4 d-flex align-items-center">
+                    <div class="col-md-6 offset-md-3 col-lg-5 text-center text-md-left mb-4 mb-md-0 text-uppercase">
+                        <h6 class="mb-0 text-center">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center text-md-left mt-5">
+            <div class="row mt-3">
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">小组信息</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>小组名称：善良之队</p>
+                    <p>小组成员 9名</p>
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">我们所在</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p> 学院路 37号，海淀区</p>
+                    <p> 北京航空航天大学</p>
+                    <p> 软件学院</p>
+
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">有关会议平台</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="http://www.medmeeting.org/">会务通</a>
+                    </p>
+                    <p>
+                        <a href="http://www.meeting163.com/index.asp">中国会议网</a>
+                    </p>
+                    <p>
+                        <a href="http://apsec2018.org/">Apsec2018</a>
+                    </p>
+                    <p>
+                        <a href="http://211.71.15.42:9011/">小组登录</a>
+                    </p>
+
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase font-weight-bold">联系我们</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fa fa-home mr-3"></i> 北京航空航天大学</p>
+                    <p>
+                        <i class="fa fa-envelope mr-3"></i> info@example.com</p>
+                    <p>
+                        <i class="fa fa-phone mr-3"></i> 12345678</p>
+                    <p>
+                        <i class="fa fa-print mr-3"></i>123577818</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

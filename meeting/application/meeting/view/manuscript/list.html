@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    
+    <title>会议投稿列表</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                    <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="/company/index/index.html">用户中心</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+                    
+                    <div id="login_after" class="d-flex flex-row-reverse" >     
+                        <div id="login_after1" class="p-2"><button class="btn btn-outline-success" onclick=logout() >注销</button></div>
+
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container mt-5">
+
+        <div class="form-inline">
+                <div class="dropdown open mr-3">
+                        <button id="status" class="btn btn-outline-success dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                    未审核
+                                </button>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            <button class="dropdown-item" href="#" onclick="change(1)">未审核</button>
+                            <button class="dropdown-item " href="#" onclick="change(2)" >未录用</button>
+                            <button class="dropdown-item " href="#" onclick="change(3)" >录用</button>
+                            <button class="dropdown-item " href="#" onclick="change(4)" >修改后录用</button>
+                        </div>
+                </div>
+
+            <h5>投稿总数:</h5>
+            <h5 id="script_num" class="text-danger"></h5>
+            <button class="btn btn-outline-success my-2 my-sm-0 ml-4" onclick="download()">全部下载</button>
+            <button class="btn btn-outline-success my-2 my-sm-0 ml-4" onclick="export_excel()">导出汇总表</button>
+            
+
+        </div>
+
+        <div id="lists" class="col p-4">            
+        </div>
+
+        
+
+        		    			
+        <form class="form-inline col-md-6  offset-md-4 ">
+                <ul id='pages' class="center-block"></ul> 	
+        </form>
+    
+
+
+    </div>
+    <footer id="footer" class="pt-5" >
+        <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+            <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+        </div>
+        <div class="container" >
+            <div class="row hidden-xs">
+                <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                    <dt class=" pb-1">小组信息：</dt>
+                    
+                    <dd>善良之队</dd>
+                    <dd>组号：12组</dd>
+                    <dd>成员：9名</dd>
+                    
+                </dl>
+                
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">赞助商:</dt>
+                    
+                    <dd>北航软院教师：THB</dd>
+                    
+                </dl>
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">相关协作系统</dt>
+                    
+                    <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                    <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                    
+                </dl>
+
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">联系我们</dt>
+                    
+                    <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                    <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                    <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright container text-center">
+                Copyright  2018 善良之队 12组<br><br>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-paginator.js"></script>
+    <script>
+        function getUrlParam (name) {
+            let url = decodeURIComponent(window.location.href);
+            name = name.replace(/[\[\]]/g, "\\$&");
+            let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+            let results = regex.exec(url);
+            if (!results||!results[2]) {
+                return '';
+            }
+            return results[2].replace(/\+/g, " ");
+        }
+        
+        var meetingId = getUrlParam('meetingId')
+
+        function export_excel()
+        {
+            var strUrl = "{:url('meeting/manuscript/exportMeetingManuscriptExcel')}";
+            strUrl += '?meetingId='+meetingId;
+            window.location.href = strUrl;
+        }
+
+        function jump(id)
+        {
+            console.log("jump to meeting " + id)
+            window.location.href='/meeting/manuscript/detail?manuscriptId='+id;
+        }
+
+        function logout()
+        {
+            $.post('/index/login/logout',function(result){
+                location.reload();
+            });
+        }
+        function login()
+        {
+            window.location.href='/index/login/index'
+        }
+        function sign_up()
+        {
+            window.location.href='/index/login/signup'
+        }
+        function download()
+        {
+            $.ajax({ 
+                type : "post", 
+                url : "/meeting/manuscript/packMeetingManuscripts", 
+                data:{
+                    "meetingId":meetingId
+                },
+                async : false, 
+                success : function(result){ 
+                    if(result.errNo==0)
+                    {
+                        var url =result.data.url
+                        var fileName = '投稿';
+                        strUrl = "{:url('/index/index/download')}";
+                        strUrl += '?fileUrl=' + encodeURIComponent(url);
+                        window.location.href = strUrl;
+
+                    }
+                    else
+                    {
+                        alert(result.msg)
+                    }
+                } 
+                });
+        }
+        
+
+        
+        function addlist(data){
+            var str = `
+ 
+            <div class="card col-md-12 " onmouseover="this.style.background='#c4c4c4'" onmouseout="this.style.background='#ffffff'" >
+                    <div class="row">
+                        <div class="card-body">
+                            <p class="card-text">
+                                    ${data['title']}
+                            </p>
+                        </div >
+                        
+                        <div class="card-body pull-right col-md-2">
+                            <button class="btn btn-outline-success " type="submit" onclick=jump('${data['id']}')>详细信息</button>
+                        </div>
+                    </div>
+                </div>
+                
+            `            
+            var contain = document.getElementById("lists")
+            contain.innerHTML +=str
+        }
+        
+        function load_list(page,check)
+        {
+            $.post('/meeting/manuscript/getMeetingManuscriptList',{"limit":10,"page":page,"meetingId":meetingId+"","inputType":check},function(result){
+                console.log (result)
+                infos = result.data.manuscriptList
+                for(i=0;i<infos.length;i++)
+                {
+                    data={
+                        'title':infos[i].title,
+                        'id':infos[i].manuscriptId+""
+                    }
+                    addlist(data)
+                }
+            });
+        }
+
+        function pager_init(num,check)
+        {
+            $(function(){
+                            options = {
+                                bootstrapMajorVersion:3, //对应的bootstrap版本
+                                currentPage: 1, //当前页数，这里是用的EL表达式，获取从后台传过来的值
+                                numberOfPages: 10, //每页页数
+                                totalPages:num/10+1, //总页数，这里是用的EL表达式，获取从后台传过来的值
+                                shouldShowPage:true,//是否显示该按钮
+                                pageUrl:function(type,page,current){
+                                    return "#top"
+                                },
+                            itemTexts: function (type, page, current) {
+                                switch (type) {
+                                    case "first":
+                                        return "首页";
+                                    case "prev":
+                                        return "上一页";
+                                    case "next":
+                                        return "下一页";
+                                    case "last":
+                                        return "末页";
+                                    case "page":
+                                        return page;
+                                }
+                            },
+                    //点击事件
+                    onPageClicked: function (event, originalEvent, type, page) {
+                        $("#lists").html("");
+                        load_list(page,check)
+
+                    }
+                };
+                $("#pages").bootstrapPaginator(options);
+            });
+        }
+        function paper_list(check)
+        {
+            var contain = document.getElementById("lists")
+            contain.innerHTML =""
+
+            var page = document.getElementById("pages")
+            page.innerHTML =""
+
+            $.ajax({ 
+                type : "post", 
+                url : "/meeting/manuscript/getMeetingManuscriptCount", 
+                async : false, 
+                data:{
+                    "meetingId":meetingId+"",
+                    "inputType":check
+                },
+                success : function(result){ 
+                    if(result.errNo==0)
+                    {
+                        console.log("count:"+result.data.count)
+                        pager_init(result.data.count,check)
+                        load_list(1,check)
+                    }
+                    else
+                    {
+                        console.log(result.msg)
+                    }
+                    
+                } 
+                });
+        }
+        function change(check)
+        {
+            if(check==1)
+            {
+                $("#status").html("未审核")
+                
+            }
+            else if(check==2)
+            {
+                $("#status").html("未录用")
+            }
+            else if(check==3)
+            {
+                $("#status").html("录用")
+            }
+            else if (check==4)
+            {
+                $("#status").html("修改后录用")
+            }
+            
+            paper_list(check)
+
+        }
+        function init()
+        {
+            var status
+            //是否登陆
+            $.ajax({ 
+                type : "post", 
+                url : "/index/index/getLoginStatus", 
+                async : false, 
+                success : function(result){ 
+                    status = result.data.status
+                } 
+                });
+            console.log(status)
+            if(status!=2 &&status!=3)
+            {
+                window.location.href='/index/index/index'
+            }
+            if(status!=0){
+                var myurl = null;
+                switch(status){
+                    case 1:myurl='/index/user/getUserDetail'
+                    break
+                    case 2:myurl='/company/index/getCompanyDetail'
+                    break
+                    case 3:myurl='/company/index/getCompanyUnitDetail'
+                    break
+                }
+                console.log(myurl)
+                $.ajax({ 
+                type : "post", 
+                url : myurl,
+                async : false, 
+                success : function(result){ 
+                    var str_user=` <div id="login_after2" class="p-2">
+                            <button class="btn btn-outline-success border-0"  id='username' ><h5>${result.data.name}<h5></button>
+                        </div>`
+                    document.getElementById('login_after').innerHTML+=str_user
+                    $("#login_before").hide()
+                } 
+                });
+            }
+            else
+            {   
+                $("#login_after1").hide()
+                $("#login_after2").hide()
+            }
+
+            
+
+
+            $.ajax({ 
+                type : "post", 
+                url : "/meeting/manuscript/getMeetingManuscriptCount", 
+                async : false, 
+                data:{
+                    "meetingId":meetingId+"",
+                    "inputType":"0"
+                    },
+                success : function(result){ 
+                    if(result.errNo==0)
+                    {
+                        console.log("count:"+result.data.count)
+                        $("#script_num").text(result.data.count)
+                    }
+                    
+                } 
+                });
+                
+                     
+            paper_list(1)
+            
+        }
+        init()
+    </script>
+</body>
+
+</html>

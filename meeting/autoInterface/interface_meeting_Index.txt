@@ -1,0 +1,25 @@
+    /*Interface: 查看会议详细信息
+    Function: getMeetingDetail
+    Url: meeting\index\getMeetingDetail
+    Type: post
+    Input:{meetingId}
+    Output: {errNo, msg, data: {meetingId, companyId, templateId, title, description, solicitInfo, agenda, organization, manuscriptTemplateUrl, fee, accomTraffic, contactUs, place, status, manuscriptDate, manuscriptModifyDate, informDate, registerBeginDate, registerEndDate, meetingBeginDate, meetingEndDate}}
+        errNo: 0, msg: '创建成功'，data: {meetingId, companyId, templateId, title, description, solicitInfo, agenda, organization, manuscriptTemplateUrl, fee, accomTraffic, contactUs, place, status, manuscriptDate, manuscriptModifyDate, informDate, registerBeginDate, registerEndDate, meetingBeginDate, meetingEndDate}
+        errNo: 1, msg: '参数错误'，data: null
+        errNo: 10, msg: '会议不存在', data: null
+        errNo: 10, msg: '会议日程不存在', data: null
+    NOTE: status: 0-截稿日期之前, 1-修改稿截止日期之前, 2-录用通知日期之前, 3-注册开始日期之前, 4-注册结束日期之前, 5-会议开始日期之前, 6-会议结束日期之前, 7-会议结束日期之后
+    */
+
+    /*Interface: 修改会议信息
+    Function: modifyMeetingDetail
+    Url: meeting/index/modifyMeetingDetail
+    Type: post
+    Input: {meetingId, templateId, title, description, solicitInfo, agenda, organization, manuscriptTemplateUrl, fee, accomTraffic, contactUs, place, manuscriptDate, manuscriptModifyDate, informDate, registerBeginDate, registerEndDate, meetingBeginDate, meetingEndDate}
+        Output: {errNo, msg}
+        errNo: 0, msg: '修改成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 10, msg: '会议不存在'
+        errNo: 10, msg: '会议日程不存在'
+    */
+

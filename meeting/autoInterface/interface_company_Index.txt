@@ -1,0 +1,115 @@
+    /*Interface: 获取单位信息
+    Function: getCompanyDetail
+    Url: company/index/getCompanyDetail
+    Type: post
+    Input: {}
+    Output: {errNo, msg, data: {companyId, account, name, confirm}}
+        errNo: 0, msg: '获取成功', data: {companyId, account, name, confirm}
+        errNo: 2, msg: '未以单位身份登录', data: null
+        errNo: 10, msg: '单位不存在', data: null
+    NOTE: confirm: 0-审核中, 1-通过审核, 2-未通过审核
+    */
+
+    /*Interface: 修改单位信息
+    Function: modifyCompanyDetail
+    Url: company/index/modifyCompanyDetail
+    Type: post
+    Input: {name}
+    Output: {errNo, msg}
+        errNo: 0, msg: '修改成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 2, msg: '未以单位身份登录'
+        errNo: 10, msg: '单位不存在'
+    */
+
+    /*Interface: 获取单位个人帐号信息
+    Function: getCompanyUnitDetail
+    Url: company/index/getCompanyUnitDetail
+    Type: post
+    Input: {}
+    Output: {errNo, msg, data: {companyUnitId, companyId, account, password, name}}
+        errNo: 0, msg: '获取成功', data: {companyUnitId, companyId, account, password, name}
+        errNo: 2, msg: '未以单位个人帐号身份登录', data: null
+        errNo: 10, msg: '单位个人帐号不存在', data: null
+    */
+
+    /*Interface: 获取单位中单位个人帐号数量
+    Function: getCompanyUnitCount
+    Url: company/index/getCompanyUnitCount
+    Type: post
+    Input: {}
+    Output: {errNo, msg, data: {count}}
+        errN0: 0, msg: '获取成功', data: {count}
+        errNo: 2, msg: '未以单位身份登录', data: null
+        errNo: 10, msg: '单位不存在', data: null
+    */
+
+    /*Interface: 获取单位中单位个人帐号列表
+    Function: getCompanyUnitList
+    Url: company/index/getCompanyUnitList
+    Type: post
+    Input: {limit, page}
+    Output: {errNo, msg, data: {companyUnitList: array of {companyUnitId, account, password, name}}}
+        errNo: 0, msg: '获取成功', data: {companyUnitList: array of {companyUnitId, account, password, name}}
+        errNo: 1, msg: '参数错误'，data: null
+        errNo: 2, msg: '未以单位身份登录', data: null
+        errNo: 3, msg: '分页信息错误', data: null
+        errNo: 10, msg: '单位不存在', data: null
+    */
+
+    /*Interface: 创建会议
+    Function: createMeeting
+    Url: company/index/createMeeting
+    Type: post
+    Input: {templateId, title, description, solicitInfo, agenda, organization, manuscriptTemplateUrl, fee, accomTraffic, contactUs, place, manuscriptDate, manuscriptModifyDate, informDate, registerBeginDate, registerEndDate, meetingBeginDate, meetingEndDate}}
+    Output: {errNo, msg, data: {meetingId}}
+        errNo: 0, msg: '创建成功', data: {meetingId}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以单位或单位个体账号身份登录', data: null
+        errNo: 10, msg: '单位或单位个体账号不存在', data: null
+        errNo: 10, msg: '标题不能为空', data: null
+        errNo: 10, msg: '描述不能为空', data: null
+        errNo: 10, msg: '日程信息不能为空', data: null
+        errNo: 10, msg: '组织机构不能为空', data: null
+        errNo: 10, msg: '费用信息不能为空', data: null
+        errNo: 10, msg: '住宿交通信息不能为空', data: null
+        errNo: 10, msg: '联系我们信息不能为空', data: null
+        errNo: 10, msg: '地点不能为空', data: null
+    */
+
+    /*Interface: 上传论文模版
+    Function: uploadManuscriptTemplate
+    Url: company/index/uploadManuscriptTemplate
+    Type: post
+    Input: formData: {file, fileName}
+    Output: {errNo, msg, data: {url}}
+        errNo: 0, msg: '上传成功', data: {url}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以单位或单位个体账号身份登录', data: null
+        errNo: 10, msg: '单位或单位个体账号不存在', data: null
+        errNo: 10, msg: '文件名不能为空', data: null
+    */
+
+    /*Interface: 获取单位会议数量
+    Function: getCompanyMeetingCount
+    Url: company/index/getCompanyMeetingCount
+    Type: post
+    Input: {}
+    Output: {errNo, msg, data: {count}}
+        errNo: 0, msg: '获取成功', data: {count}
+        errNo: 2, msg: '未以单位或单位个体账号身份登录', data: null
+        errNo: 10, msg: '单位或单位个体账号不存在', data: null
+    */
+
+    /*Interface: 获取单位会议列表
+    Function: getCompanyMeetingList
+    Url: company/index/getCompanyMeetingList
+    Type: post
+    Input: {limit, page}
+    Output: {errNo, msg, data: {meetingList: array of {meetingId, companyId, templateId, title, description, solicitInfo, agenda, organization, manuscriptTemplateUrl, fee, accomTraffic, contactUs, place, status, manuscriptDate, manuscriptModifyDate, informDate, registerBeginDate, registerEndDate, meetingBeginDate, meetingEndDate}}}
+        errNo: 0, msg: '获取成功', data: {meetingList: array of {meetingId, companyId, title, description, solicitInfo, agenda, organization, manuscriptTemplateUrl, fee, accomTraffic, contactUs, place, status, manuscriptDate, manuscriptModifyDate, informDate, registerBeginDate, registerEndDate, meetingBeginDate, meetingEndDate}}
+        errNo: 2, msg: '未以单位或单位个体账号身份登录', data: null
+        errNo: 3, msg: '分页信息错误', data: null
+        errNo: 10, msg: '单位或单位个体账号不存在', data: null
+    */
+

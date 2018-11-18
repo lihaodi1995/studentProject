@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <!--link rel="stylesheet" href="/static/css/font-awesome.min.css"-->
+    <title>发布会议</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link"  href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link  h4 " id="user_center" style="font-weight: bold" href="/company/index/index.html">用户中心</a>
+                    </li>
+                    <!--
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">发现</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">链接</a>
+                    </li>
+                    <li class="nav-item dropdown ml-4">
+                        <a class="nav-link dropdown-toggle" style="font-size:20px;" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">功能选择</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">选择</a>
+                            <a class="dropdown-item" href="#">选择</a>
+                        </div>
+                    </li>
+                    -->
+                </ul>
+
+                <div class="form-inline my-2  mr-5 my-lg-0 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+                    
+                    <div id="login_after" class="d-flex flex-row-reverse" >     
+                            <div id="login_after1" class="p-2"><button class="btn btn-outline-success" onclick=logout() >注销</button></div>
+                            
+
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--
+    <div class="d-flex align-items-center justify-content-center " style="min-height: 500px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/testbackground.jpg) no-repeat;background-size:100%;color:#ffffff ">
+        <div id="meetheader" class="text-center text-justify">
+
+        </div>
+    </div>
+    -->
+    <div>
+        <div class="d-flex">
+            <div class=" col-lg-6 offset-md-0 pl-5 pt-3">
+                <div class="d-flex justify-content-left pt-2">
+                    <h2>已选模板：</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-warning" style="height: 1px"></div>
+        <div id="modules" class="d-flex">
+            <!--
+            <div class=" col-lg-12 offset-md-0 pl-5 pt-1">
+                <div class="d-flex justify-content-left pt-2">
+                    <h5 >模板1</h5>
+                </div>
+                <div class="d-flex pt-1">
+                    <p  class="text-left">
+                        <div style="min-height: 500px; width:100%;background: #765784 ;background:transparent url(/static/src/images/testbackground.jpg) no-repeat;background-size:100%;color:#ffffff "></div>
+                    </p>
+                </div>
+            </div>
+            -->
+        </div>
+        <div class="d-flex">
+            <div class=" col-lg-6 offset-md-0 pl-5 pt-3">
+                <div class="d-flex justify-content-left pt-2">
+                    <h2>填写会议信息：</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-warning" style="height: 1px"></div>
+        <div class="container-fluid "><!-- - - - - - - - - -填写会议信息- - - - - - - - -->
+            <form>
+            <div class="row pt-4">
+                <div class="col-lg-5 offset-md-1"><!-- - - - - - - - - -会议信息左边栏目- - - - - - - - -->
+                    <div class="d-flex">
+                        <div class=" col-lg-8 offset-md-0 pl-0 pt-3">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h2>基本信息：</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid bg-warning" style="height: 1px"></div>
+                    <div class="d-flex pt-3 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fas fa-info    "></i><label for="meeting_info">会议标题：</label>
+                                    <input type="text" class="form-control" name="" id="title" required aria-describedby="helpId_pwd2" placeholder="填写会议标题">
+                                    
+                            </div>
+                        </p>
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fa fa-comment" aria-hidden="true"></i><label for="meeting_info">会议简介：</label>
+                                    <!--input type="text" class="form-control" name="" id="new_pwd" aria-describedby="helpId_pwd2" placeholder="会议简介信息"-->
+                                    <textarea class="form-control" rows="5" cols="50" id="description" required  placeholder="会议简单介绍信息……"></textarea>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fa fa-file-text" aria-hidden="true"></i><label for="meeting_info">征文信息：</label>
+                                <textarea class="form-control" rows="5" cols="50" id="solicit_info" required  placeholder="征文要求与说明……"></textarea>
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                <i class="fa fa-file-word-o" aria-hidden="true"></i>
+                                <i class="fa fa-file-zip-o" aria-hidden="true"></i>
+                                <label for="meeting_info">论文模板与征稿详情：</label>
+                                <input type="file" class="form-control" name="" id="essay" required  aria-describedby="helpId_pwd3" placeholder="选择文件路径">
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i><label for="meeting_info">日程安排：</label>
+                                <textarea class="form-control" rows="5" cols="50" id="agenda" required  placeholder="会议开办期间，每天的开会与休息时间……"></textarea>
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fas fa-home    "></i></i><label for="meeting_info">组织机构：</label>
+                                <input type="text" class="form-control" name="" id="organization" required  aria-describedby="helpId_pwd3" placeholder="举办方信息">
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fa fa-hotel" aria-hidden="true"></i><label for="meeting_info">住宿交通：</label>
+                                <textarea class="form-control" rows="5" cols="50" id="accom_traffic" required  placeholder="住宿酒店信息与交通情况……"></textarea>
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fa fa-phone" aria-hidden="true"></i><label for="meeting_info">联系方式：</label>
+                                <input type="tel" class="form-control" name="" id="contact_us" required  aria-describedby="helpId_pwd3" placeholder="电话">
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <i class="fas fa-location-arrow    "></i><label for="meeting_info">地点：</label>
+                                <input type="text" class="form-control" name="" id="place" required  aria-describedby="helpId_pwd3" placeholder="举办地点">
+                            </div>
+                        </p>  
+                    </div>
+                </div>
+
+                <div class="col-lg-5 offset-md-0">          <!-- - - - - - - - - -会议信息右边边栏目- - - - - - - - -->
+                    <div class="d-flex">
+                        <div class=" col-lg-8 offset-md-0 pl-0 pt-3">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h2>投稿与修改时间：</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid bg-warning" style="height: 1px"></div>
+                    <div class="d-flex pt-3 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">投稿截止日期：</label>
+                                    <input type="datetime-local" class="form-control" name="" id="solicit_end" required  aria-describedby="helpId_pwd2" placeholder="">
+                                    
+                            </div>
+                        </p>
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">修改截止日期：</label>
+                                    <input type="datetime-local" class="form-control" name="" id="modify_end" required  aria-describedby="helpId_pwd2" placeholder="">
+                                    
+                            </div>
+                        </p>
+                    </div>
+                    <div class="d-flex">
+                        <div class=" col-lg-8 offset-md-0 pl-0 pt-3">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h2>确认录用结果时间：</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid bg-warning" style="height: 1px"></div>
+                    <div class="d-flex pt-3 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">录用通知日期：</label>
+                                <input type="datetime-local" class="form-control" name="" id="inform_date" required  aria-describedby="helpId_pwd3" placeholder="">
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex">
+                        <div class=" col-lg-8 offset-md-0 pl-0 pt-3">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h2>注册会议时间：</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid bg-warning" style="height: 1px"></div>
+                    <div class="d-flex pt-3 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">注册开始日期：</label>
+                                <input type="datetime-local" class="form-control" name="" id="register_start" required  aria-describedby="helpId_pwd2" placeholder="">
+                                    
+                            </div>
+                        </p>
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">注册结束日期：</label>
+                                <input type="datetime-local" class="form-control" name="" id="register_end"  required aria-describedby="helpId_pwd3" placeholder="">
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex">
+                        <div class=" col-lg-8 offset-md-0 pl-0 pt-3">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h2>正式会议时间：</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid bg-warning" style="height: 1px"></div>
+                    <div class="d-flex pt-3 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">会议开始日期：</label>
+                                <input type="datetime-local" class="form-control" name="" id="congress_start" required  aria-describedby="helpId_pwd2" placeholder="">
+                                    
+                            </div>
+                        </p>
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">会议结束日期：</label>
+                                <input type="datetime-local" class="form-control" name="" id="congress_end" required  aria-describedby="helpId_pwd3" placeholder="">
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex">
+                        <div class=" col-lg-8 offset-md-0 pl-0 pt-3">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h2>费用相关：</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid bg-warning" style="height: 1px"></div>
+                    <div class="d-flex pt-3 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">参会注册费用：</label>
+                                <input type="number" class="form-control" name="" id="fee_attend" required aria-describedby="helpId_pwd3" placeholder="参会费用（元）">
+                            </div>
+                        </p>  
+                    </div>
+                    <div class="d-flex pt-1 text-left">
+                        <p class="text-left">
+                            <div class="form-group">
+                                <label for="meeting_info">听会注册费用：</label>
+                                <input type="number" class="form-control" name="" id="fee_listen" required aria-describedby="helpId_pwd3" placeholder="听会费用（元）">
+                            </div>
+                        </p>  
+                    </div>
+                </div>      <!--右边栏目结束-->
+            </div>      <!-- class = row-->
+            </form>
+        </div>      <!--填写会议信息div结束-->
+        <div class="container-fluid bg-warning mt-3" style="height: 1px"></div>
+        <div class="container-fluid text-center pt-3" >
+            <button class=" btn btn-outline-warning btn-lg" onclick="publish()">发布会议</button>
+        </div>                              <!--发布会议按钮-->
+    </div>
+
+    <footer id="footer" class="pt-5">
+        <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+            <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+        </div>
+        <div class="container" >
+            <div class="row hidden-xs">
+                <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                    <dt class=" pb-1">小组信息：</dt>
+                    
+                    <dd>善良之队</dd>
+                    <dd>组号：12组</dd>
+                    <dd>成员：9名</dd>
+                    
+                </dl>
+                
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">赞助商:</dt>
+                    
+                    <dd>北航软院教师：THB</dd>
+                    
+                </dl>
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">相关协作系统</dt>
+                    
+                    <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                    <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                    
+                </dl>
+
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">联系我们</dt>
+                    
+                    <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                    <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                    <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright container text-center">
+                Copyright © 2018 善良之队 12组<br><br>
+        </div>
+    </footer>
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src = "/static/js/bootstrap-paginator.js"></script>
+<script>
+    function logout()
+    {
+        $.post("{:url('/index/login/logout')}",function(result1){
+            location.reload();
+        });
+    }
+    function login()
+    {
+        window.location.href='/index/login/index';
+    }
+    function sign_up()
+    {
+        window.location.href='/index/login/signup';
+    }
+    
+    var fileUrl;
+    function upload() 
+    {
+        var file = document.getElementById('essay').files[0];
+        if (file == null) 
+        {
+            alert('请选择上传的文件。');
+            return false;
+        }
+        var fileName = file.name.trim();
+        console.log('fileName: ' + fileName);
+        var fileExtension = fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase();
+        var acceptFileExtension = new Array('.pdf', '.doc', '.docx', '.caj', '.zip', '.rar', '.gz', '.tgz', '.7z');
+        if (acceptFileExtension.indexOf(fileExtension) == -1)
+        {
+            alert('请上传pdf/doc/docx/caj/zip/rar/gz/tgz/7z格式的审核信息。');
+            return;
+        }
+    
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('fileName', fileName);
+        var flag = true;
+        $.ajax({
+            type: 'post',
+            url: "{:url('company/index/uploadManuscriptTemplate')}",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                if(data.errNo==0)
+                {
+                    fileUrl = data['data']['url'];
+                    console.log('fileUrl: ' + fileUrl);
+                }
+                else if(data.errNo==10)
+                {
+                    alert(data.msg);
+                    flag = false;
+                }
+                else
+                {
+                    console.log(data.msg);
+                }
+            },
+            error : function(result)
+            {
+                console.log("Server Error");
+                flag = false;
+            }
+        });
+
+        // var jsonData = {originUrl: fileUrl, fileDir: 'meetingId', fileName: 'userId'};
+        // $.ajax({
+        //     type: "post",
+        //     url: "{:url('test/upload/uploadRename')}",
+        //     dataType: "json",
+        //     data: jsonData,
+        //     success: function(data) {
+        //         fileUrl = (String)(data['data']['fileUrl']).replace("\\", "/");
+        //     }
+        // })
+        return flag;
+    }
+    function UrlSearch() 
+    {
+        var name,value;
+        var str=location.href; //取得整个地址栏
+        var num=str.indexOf("?");
+        str=str.substr(num+1); //取得所有参数   stringvar.substr(start [, length ]
+
+        var arr=str.split("&"); //各个参数放到数组里
+            console.log(arr);
+        for(var i=0;i < arr.length;i++){
+                num=arr[i].indexOf("=");
+                if(num>0){
+                    name=arr[i].substring(0,num);
+                    value=arr[i].substr(num+1);
+                    this[name]=value;
+                }
+            }
+    }
+    function getUrlParam(name) 
+    {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return (r[2]); return null;
+    }
+    function check()
+    {
+        //var title = $("#title").val();
+        // alert(title);
+        //
+        // var time = document.getElementById("solicit_end");
+        var time;
+        var _time;
+
+        var time = $("#solicit_end").val();
+        var _time = time.replace(/-/g,'/').replace('T',' ');
+        var solicit_end = new Date(_time);
+         console.log(time);
+         console.log(_time);
+         ///*
+         console.log(solicit_end.getDate());
+         console.log(solicit_end.getMonth());
+         console.log(solicit_end.getFullYear());
+         console.log(solicit_end.getHours());
+         console.log(solicit_end.getMinutes());
+         console.log(solicit_end.getSeconds());
+         //console.log("123\n\r456\r\n789\r321\n654\t987");
+         //*/
+         
+        var time = $("#modify_end").val();
+        var _time = time.replace(/-/g,'/').replace('T',' ');
+        var modify_end = new Date(_time);
+        // alert(solicit_end.getHours());
+        // console.log(solicit_end.toTimeString());
+        // console.log(solicit_end.getMonth());
+        var time = $("#inform_date").val();
+        var _time = time.replace(/-/g,'/').replace('T',' ');
+        var inform_date = new Date(_time);
+
+        var time = $("#register_start").val();
+        var _time = time.replace(/-/g,'/').replace('T',' ');
+        var register_start = new Date(_time);
+
+        var time = $("#register_end").val();
+        var _time = time.replace(/-/g,'/').replace('T',' ');
+        var register_end = new Date(_time);
+
+        var time = $("#congress_start").val();
+        var _time = time.replace(/-/g,'/').replace('T',' ');
+        var congress_start = new Date(_time);
+
+        var time = $("#congress_end").val();
+        var _time = time.replace(/-/g,'/').replace('T',' ');
+        var congress_end = new Date(_time);
+
+        if(congress_end>congress_start && congress_start>register_end && register_end>register_start )
+        {
+            if(register_start>inform_date && inform_date>modify_end && modify_end > solicit_end)
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    function publish()
+    {
+        if( 0 != check() )
+        {
+            alert("会议各项事宜时间顺序先后有误，请检查输入。");
+            return ;
+        }
+        if(upload()==false)
+            return ;
+        var title           =   $("#title").val();
+        var description     =   $("#description").val();
+        var solicit_info    =   $("#solicit_info").val();
+        var agenda          =   $("#agenda").val();
+        var organization    =   $("#organization").val();
+        // var essay           =   $("#essay").val();
+        // alert(essay);
+        var accom_traffic    =   $("#accom_traffic").val();
+        //var traffic         =   $("#traffic").val();
+        var contact_us      =   $("#contact_us").val();
+        var place           =   $("#place").val();
+        var fee_attend      =   $("#fee_attend").val();
+        var fee_listen      =   $("#fee_listen").val();
+        var fee = {
+            '1' : fee_listen, 
+            '2' : fee_attend
+        };
+        fee = JSON.stringify(fee);
+        var accomTraffic = accom_traffic;
+        var time;
+
+        var time = $("#solicit_end").val();
+        var solicit_end = time.replace(/-/g,'/').replace('T',' ');
+
+        var time = $("#modify_end").val();
+        var modify_end = time.replace(/-/g,'/').replace('T',' ');
+
+        var time = $("#inform_date").val();
+        var inform_date = time.replace(/-/g,'/').replace('T',' ');
+
+        var time = $("#register_start").val();
+        var register_start = time.replace(/-/g,'/').replace('T',' ');
+        //var register_start = new Date(_time);
+
+        var time = $("#register_end").val();
+        var register_end = time.replace(/-/g,'/').replace('T',' ');
+        //var register_end = new Date(_time);
+
+        var time = $("#congress_start").val();
+        var congress_start = time.replace(/-/g,'/').replace('T',' ');
+        //var congress_start = new Date(_time);
+
+        var time = $("#congress_end").val();
+        var congress_end = time.replace(/-/g,'/').replace('T',' ');
+        //var congress_end = new Date(_time);
+        var templateId = getUrlParam('id');
+        var jsondata = {
+            templateId : templateId,
+            title : title,
+            description : description,
+            solicitInfo : solicit_info,
+            agenda : agenda,
+            organization : organization,
+            manuscriptTemplateUrl : fileUrl,
+            fee : fee,
+            accomTraffic : accomTraffic,
+            contactUs : contact_us,
+            place : place,
+            manuscriptDate : solicit_end,
+            manuscriptModifyDate : modify_end,
+            informDate : inform_date,
+            registerBeginDate : register_start,
+            registerEndDate : register_end,
+            meetingBeginDate : congress_start,
+            meetingEndDate : congress_end
+        };
+        console.log(jsondata);
+        $.ajax({ 
+            url : "{:url('/company/index/createMeeting')}", 
+            type : "post", 
+            async : false, 
+            dataType: "json",
+            data : jsondata,
+            success : function(result){ 
+                // alert(result1);
+                // status = result.data.status;
+                if(result.errNo==0)
+                {
+                    alert(result.msg);
+                    window.location.href = "/meeting/index/index?meetingId=" + result.data.meetingId;
+                }
+                else if(result.errNo == 10)
+                {
+                    alert(result.msg);
+                }
+                else
+                {
+                    console.log(result.msg);
+                }
+            },
+            error: function(data){
+                console.log("Server Error");
+                /*
+                $("#textWarning").empty();
+                $("#textWarning").append("data['msg']");
+                var status = data['status']
+                alert(status);
+                */
+            }
+        });
+
+    }
+    function load_choosed_module()
+    {
+        var templateId = getUrlParam('id');
+        $.ajax({ 
+            url : "{:url('/admin/template/getTemplateDetail')}", 
+            type : "post", 
+            async : false, 
+            dataType: "json",
+            data : {templateId : templateId},
+            success : function(result1){ 
+                //alert(result1);
+                if(result1.errNo == 0)
+                {
+                    var t = result1.data;
+                    var html_code = 
+                    `
+                        <div class=" col-lg-12 offset-md-0 pl-5 pt-1">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h5 >${t['name']}</h5>
+                            </div>
+                            <div class="d-flex pt-1">
+                                <p  class="text-left">
+                                    <div style="min-height: 500px; width:100%;background: #765784 ;background:transparent url('/${t['imgUrl']}') no-repeat;background-size:100%;color:#ffffff " ></div>
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    var modules = document.getElementById("modules");
+                    modules.innerHTML = "";
+                    modules.innerHTML += html_code;
+                }
+                else
+                {
+                    console.log(result1.msg);
+                }
+            },
+            error : function(result)
+            {
+                console.log("Server Error");
+            }
+        });
+    }
+    function init()
+    {
+        //是否登陆
+        var status;
+        $.ajax({ 
+            url : "{:url('/index/index/getLoginStatus')}", 
+            type : "post", 
+            async : false, 
+            dataType: "json",
+            data : {},
+            success : function(result1){ 
+                //alert(result1);
+                status = result1.data.status;
+            }
+        });
+        console.log(status);
+        if( status != 0)
+        {
+            var myurl = null;
+            switch(status)
+            {
+                case 1:myurl= "{:url('/index/user/getUserDetail')}"
+                    window.location.href="/index/user/index";
+                break;
+                case 2:myurl="{:url('/company/index/getCompanyDetail')}"
+                break;
+                case 3:myurl="{:url('/company/index/getCompanyUnitDetail')}"
+                break;
+            }
+            console.log(myurl)
+            $.ajax({ 
+            type : "post", 
+            url : myurl, 
+            async : false, 
+            success : function(result1){ 
+                var str_user=` <div id="login_after2" class="p-2">
+                        <button class="btn btn-outline-success border-0"  id='username' ><h5>${result1.data.name}<h5></button>
+                    </div>`
+                document.getElementById('login_after').innerHTML+=str_user;
+                $("#login_before").hide();
+            } 
+            });
+        }
+        else
+        {   
+            window.location.href = "/index/index/index";
+            console.log($("#login_after").html);
+            $("#login_after1").hide();
+            $("#login_after2").hide();
+        }
+        load_choosed_module();
+    }
+    init();
+</script>
+</html>

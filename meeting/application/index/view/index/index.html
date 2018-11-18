@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    
+    <title>学术会议平台</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                    <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="/company/index/index.html">用户中心</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+                    
+                    <div id="login_after" class="d-flex flex-row-reverse" >     
+                            <div id="login_after1" class="p-2"><button class="btn btn-outline-success" onclick=logout() >注销</button></div>
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="d-flex align-items-center justify-content-center " style="min-height: 300px;;width:100%;background:transparent url(/static/src/images/timg.jpg) no-repeat;background-size:100%;color:#050505 ">
+        <div id="meetheader" class="text-center text-justify">
+            <h1 >学术会议平台 V1.0</h1>
+        </div>
+    </div>
+    <div class="container mt-5">
+            
+        
+        <div class="form-inline col-md-6  offset-md-3 mt-3"> 
+            <input id="searching_text" class="form-control mr-sm-2" type="text" placeholder="请输入所要搜索的会议" style="width: 25em;">
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="searching1()">搜索</button>
+        </div>
+
+        <div id="lists" class="d-flex row ">            
+        </div>		
+        <form class="form-inline col-md-6  offset-md-4 ">
+                <ul id='pages' class="center-block"></ul> 	
+        </form>
+    </div>
+    <footer id="footer" class="pt-5" >
+            <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+                <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+            </div>
+            <div class="container" >
+                <div class="row hidden-xs">
+                    <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                        <dt class=" pb-1">小组信息：</dt>
+                        
+                        <dd>善良之队</dd>
+                        <dd>组号：12组</dd>
+                        <dd>成员：9名</dd>
+                        
+                    </dl>
+                    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">赞助商:</dt>
+                        
+                        <dd>北航软院教师：THB</dd>
+                        
+                    </dl>
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">相关协作系统</dt>
+                        
+                        <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                        <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                        
+                    </dl>
+    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">联系我们</dt>
+                        
+                        <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                        <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                        <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                    </dl>
+                </div>
+            </div>
+            <hr>
+            <div class="copyright container text-center">
+                    Copyright  2018 善良之队 12组<br><br>
+            </div>
+        </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-paginator.js"></script>
+    <script>
+        function jump(id)
+        {
+            console.log("jump to meeting " + id)
+            window.location.href='/meeting/index/index?meetingId='+id;
+        }
+
+        function logout()
+        {
+            $.post('/index/login/logout',function(result){
+                location.reload();
+            });
+        }
+        function login()
+        {
+            window.location.href='/index/login/index'
+        }
+        function sign_up()
+        {
+            window.location.href='/index/login/signup'
+        }
+        function addlist(data){
+            var str = `
+            <div class="card col-md-8 offset-2 mt-2" onmouseover="this.style.background='#c4c4c4'" onmouseout="this.style.background='#ffffff'">
+            <div class="row mt-2">
+                <div class="card-body col-md-6 ml-3">
+                    <div class="row d-flex">
+                        <h4 class="card-title" style="overflow: hidden;text-overflow:ellipsis;white-space:nowrap">
+                            <i class="fa fa-navicon mr-2"></i>
+                            <a onclick=jump('${data['id']}') style="color:#000000" href='#'>${data['name']}</a>
+                        </h4>
+                    </div>
+                    <div class="row mt-2">
+                        <h6 class="card-title ">
+                            <i class="fa fa-calendar mr-2"></i>
+                            ${data['time']}
+                        </h6>
+                    </div>
+                    <div class="row mt-2">
+                        <h6 class="card-title">
+                            <i class="fa fa-hourglass-start mr-2" aria-hidden="true"></i>
+                            当前状态:
+                            <font class="text-danger">${data['state']}</font>
+                        </h6>
+                    </div>
+                    <div class="row mt-2">
+                        <h6 class="card-title ">
+                            <i class="fa fa-university mr-2" aria-hidden="true"></i>
+                            主办方:${data['org']}
+                        </h6>
+                    </div>
+                </div>
+                <div class="card-body col-md-5">
+                    <div class="row mt-2">
+                        <h6 class="card-title">
+                            <i class="fa fa-globe mr-2"></i>会议地点：${data['place']}</h6>
+                    </div>
+                    <div class="row mt-5">
+                        <button type="button" class="btn btn-block btn-warning" onclick=jump('${data['id']}')>
+                            <h3>进入主页</h3>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+            `  
+            var contain = document.getElementById("lists")
+            contain.innerHTML +=str
+        }
+        
+        function load_list(page)
+        {
+            $.post('/index/index/getMeetingListStatusSolicit',{"limit":10,"page":page},function(result){
+                infos = result.data.meetingList
+                for(i=0;i<infos.length;i++)
+                {
+                    var meetingBeginDate = new Date(infos[i].meetingBeginDate)
+                    var meetingEndDate = new Date(infos[i].meetingEndDate)
+                    date = meetingBeginDate.getFullYear()+"年"+(meetingBeginDate.getMonth()+1)+"月"+meetingBeginDate.getDate()+"日--"+meetingEndDate.getFullYear()+"年"+(meetingEndDate.getMonth()+1)+"月"+meetingEndDate.getDate()+"日"
+                    map = {
+                        0:"投稿中",
+                        1:"修稿中",
+                        2:"审查中",
+                        3:"注册准备中",
+                        4:"注册中",
+                        5:"会议准备中",
+                        6:"正在进行",
+                        7:"会议已结束"
+                    }
+                    
+                    data={
+                        'name':infos[i].title,
+                        'time':date,
+                        'state':map[infos[i].status],
+                        'org':infos[i].organization,
+                        'place':infos[i].place,
+                        'id':infos[i].meetingId+""
+                    }
+                    addlist(data)
+                }
+            });
+        }
+
+
+        function load_searching_list(page,str)
+        {
+            
+            $.ajax({ 
+                type : "post", 
+                url : "/index/index/searchMeetings", 
+                async : false,
+                data:{
+                    "searchString":str,
+                    "limit":10,
+                    "page":page
+                } ,
+                success :function(result){
+                        console.log(result)
+                       
+                        infos = result.data.meetingList
+                        for(i=0;i<infos.length;i++)
+                        {
+                            var meetingBeginDate = new Date(infos[i].meetingBeginDate)
+                            var meetingEndDate = new Date(infos[i].meetingEndDate)
+                            date = meetingBeginDate.getFullYear()+"年"+(meetingBeginDate.getMonth()+1)+"月"+meetingBeginDate.getDate()+"日--"+meetingEndDate.getFullYear()+"年"+(meetingEndDate.getMonth()+1)+"月"+meetingEndDate.getDate()+"日"
+                            map = {
+                                0:"投稿中",
+                                1:"修稿中",
+                                2:"审查中",
+                                3:"注册准备中",
+                                4:"注册中",
+                                5:"会议准备中",
+                                6:"正在进行",
+                                7:"会议已结束"
+                            }
+                            
+                            data={
+                                'name':infos[i].title,
+                                'time':date,
+                                'state':map[infos[i].status],
+                                'org':infos[i].organization,
+                                'place':infos[i].place,
+                                'id':infos[i].meetingId+""
+                            }
+                            addlist(data)
+                        }
+                    }
+
+            });
+            
+           
+        }
+
+        function pager_init(num)
+        {
+            $(function(){
+                            options = {
+                                bootstrapMajorVersion:3, //对应的bootstrap版本
+                                currentPage: 1, //当前页数，这里是用的EL表达式，获取从后台传过来的值
+                                numberOfPages: 10, //每页页数
+                                totalPages:num/10+1, //总页数，这里是用的EL表达式，获取从后台传过来的值
+                                shouldShowPage:true,//是否显示该按钮
+                                pageUrl:function(type,page,current){
+                                    return "#top"
+                                },
+                            itemTexts: function (type, page, current) {
+                                switch (type) {
+                                    case "first":
+                                        return "首页";
+                                    case "prev":
+                                        return "上一页";
+                                    case "next":
+                                        return "下一页";
+                                    case "last":
+                                        return "末页";
+                                    case "page":
+                                        return page;
+                                }
+                            },
+                    //点击事件
+                    onPageClicked: function (event, originalEvent, type, page) {
+                        $("#lists").html("");
+                        load_list(page)
+
+                    }
+                };
+                $("#pages").bootstrapPaginator(options);
+            });
+        }
+
+         function searching_pager_init(num,str)
+        {
+            $(function(){
+             
+                            options = {
+                                bootstrapMajorVersion:3, //对应的bootstrap版本
+                                currentPage: 1, //当前页数，这里是用的EL表达式，获取从后台传过来的值
+                                numberOfPages: 10, //每页页数
+                                totalPages:num/10+1, //总页数，这里是用的EL表达式，获取从后台传过来的值
+                                shouldShowPage:true,//是否显示该按钮
+                                pageUrl:function(type,page,current){
+                                    return "#top"
+                                },
+                            itemTexts: function (type, page, current) {
+                                switch (type) {
+                                    case "first":
+                                        return "首页";
+                                    case "prev":
+                                        return "上一页";
+                                    case "next":
+                                        return "下一页";
+                                    case "last":
+                                        return "末页";
+                                    case "page":
+                                        return page;
+                                }
+                            },
+                    //点击事件
+                    onPageClicked: function (event, originalEvent, type, page) {
+                        $("#lists").html("");
+                        load_searching_list(page,str)
+                    }
+                };
+               
+                $("#pages").bootstrapPaginator(options);
+            });
+        }
+
+        function searching1()
+        {
+            var str = $("#searching_text").val()
+            $.ajax({ 
+                type : "post", 
+                url : "/index/index/getSearchMeetingNumber", 
+                async : false,
+                data:{
+                    "searchString":str
+                } ,
+                success : function(result){ 
+                    console.log(result)
+                    $("#pages").html("")
+                    $("#lists").html("")
+                   var str_null=`
+                    <div class="col-md-8 offset-md-2 d-flex justify-content-center mt-3 mb-3">
+                        <h2 >未找到相关结果</h2>
+                    </div>
+                   `
+                    searching_pager_init(result.data.number,str)
+                    load_searching_list(1,str)    
+                    if(result.data.number==0){
+                        $("#lists").html(str_null);
+                    }
+                } 
+            });
+        }
+        
+        function init()
+        {
+           
+            $.ajax({ 
+                type : "post", 
+                url : "/index/index/getMeetingCountStatusSolicit", 
+                async : true, 
+                success : function(result){ 
+                    pager_init(result.data.count)
+                } 
+                });
+            
+            load_list(1)
+            //是否登陆
+            var status
+            $.ajax({ 
+                type : "post", 
+                url : "/index/index/getLoginStatus", 
+                async : false, 
+                success : function(result){ 
+                    status = result.data.status
+                } 
+                });
+            console.log(status)
+            if(status!=0){
+                var myurl = null;
+                switch(status){
+                    case 1:myurl='/index/user/getUserDetail'
+                    break
+                    case 2:myurl='/company/index/getCompanyDetail'
+                    break
+                    case 3:myurl='/company/index/getCompanyUnitDetail'
+                    break
+                }
+                console.log(myurl)
+                $.ajax({ 
+                type : "post", 
+                url : myurl, 
+                async : false, 
+                success : function(result){ 
+                    
+                    var str_user=` <div id="login_after2" class="p-2">
+                            <button class="btn btn-outline-success border-0"  id='username' ><h5>${result.data.name}<h5></button>
+                        </div>`
+                    document.getElementById('login_after').innerHTML+=str_user
+                    $("#login_before").hide()
+                } 
+                });
+            }
+            else
+            {   
+                $("#login_after1").hide()
+                $("#login_after2").hide()
+            }
+        }
+        init()
+    </script>
+</body>
+
+</html>

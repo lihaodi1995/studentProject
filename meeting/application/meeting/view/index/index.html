@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <title>会议主页</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="http://123.206.34.20/#">首页</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="/company/index/index">用户中心</a>
+                    </li>
+                </ul>
+
+                <div id="top_right" class="form-inline my-2  mr-5 my-lg-0 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+
+                    <div id="login_after" class="d-flex flex-row-reverse">
+                        <div id="subscribe" class="p-2">
+                            <button class="btn btn-outline-success" onclick=subcribe()>收藏</button>
+                        </div>
+                        <div id="cancel_subscribe" class="p-2">
+                            <button class="btn btn-outline-success" onclick=cancel_subscribe()>取消收藏</button>
+                        </div>
+                        <div id="login_after1" class="p-2">
+                            <button class="btn btn-outline-success" onclick=logout()>注销</button>
+                        </div>
+                    </div>
+
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="d-flex align-items-center justify-content-center " style="height: 350px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/testbackground.jpg) no-repeat;background-size:100%;color:#ffffff ">
+        <div id="meetheader" class="text-center text-justify">
+
+        </div>
+    </div>
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs " id="myTab">
+                <li class="nav-item pl-5 active">
+                    <a class="active nav-link text-muted " data-toggle="tab" href="#welcome">Welcome</a>
+
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link text-muted" data-toggle="tab" href="#date">日程安排</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link text-muted" data-toggle="tab" href="#register">注册参加</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content mb-5">
+            <div class="tab-pane active container-fluid" id="welcome">
+
+            </div>
+            <div class=" tab-pane fade" id="date">
+
+            </div>
+            <div class=" tab-pane fade" id="register">
+
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="pt-5" >
+            <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+                <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+            </div>
+            <div class="container" >
+                <div class="row hidden-xs">
+                    <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                        <dt class=" pb-1">小组信息：</dt>
+                        
+                        <dd>善良之队</dd>
+                        <dd>组号：12组</dd>
+                        <dd>成员：9名</dd>
+                        
+                    </dl>
+                    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">赞助商:</dt>
+                        
+                        <dd>北航软院教师：THB</dd>
+                        
+                    </dl>
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">相关协作系统</dt>
+                        
+                        <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                        <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                        
+                    </dl>
+    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">联系我们</dt>
+                        
+                        <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                        <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                        <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                    </dl>
+                </div>
+            </div>
+            <hr>
+            <div class="copyright container text-center">
+                    Copyright  2018 善良之队 12组<br><br>
+            </div>
+        </footer>
+    <script>
+        function subcribe() {
+            $.post('/index/user/subscribeMeeting', { "meetingId": GetRequest(), "type": 1 }, function (result) {
+                console.log(result)
+                alert(result.msg)
+                if (result.errNo == 0) {
+                    $("#subscribe").hide()
+                    $("#cancel_subscribe").show();
+                }
+            })
+
+        }
+        function cancel_subscribe() {
+            $.post('/index/user/unsubscribeMeeting', { "meetingId": GetRequest() }, function (result) {
+                console.log(result)
+                alert(result.msg)
+                if (result.errNo == 0) {
+                    $("#subscribe").show()
+                    $("#cancel_subscribe").hide();
+                }
+            })
+        }
+        function getsubscirbestatus() {
+            $.post('/index/user/getSubscribeMeetingStatus', { "meetingId": GetRequest() }, function (result) {
+                console.log(result)
+                status = result.data.status
+                if (status != 0) {
+                    $("#subscribe").hide()
+                }
+                else {
+                    $("#cancel_subscribe").hide()
+                }
+            })
+        }
+        function init() {
+            $.post('/meeting/index/getMeetingDetail', { "meetingId": GetRequest() }, function (result) {
+                info = result.data;
+                var meetingBeginDate = new Date(info.meetingBeginDate)
+                var meetingEndDate = new Date(info.meetingEndDate)
+                date = meetingBeginDate.getFullYear() + "年" + (meetingBeginDate.getMonth() + 1) + "月" + meetingBeginDate.getDate() + "日—" + meetingEndDate.getFullYear() + "年" + (meetingEndDate.getMonth() + 1) + "月" + meetingEndDate.getDate() + "日"
+
+                var str = `<h1>${info.title}</h1>
+                    <h2>&nbsp;</h2>
+                    <h5>${info.place}</h5>
+                    <h5>${date}</h5>`;
+
+                document.getElementById("meetheader").innerHTML = str;
+                var registerBeginDate = new Date(info.registerBeginDate);
+                var manuscriptDate = new Date(info.manuscriptDate);
+                var manuscriptModifyDate = new Date(info.manuscriptModifyDate);
+                var informDate = new Date(info.informDate);
+                var registerEndDate = new Date(info.registerEndDate);
+
+                var str_welcome = `<div class="d-flex mt-3 ml-1 row">
+                        <div class="col-md-2 card bg-light p-0 m-3 ml-2" onmouseout="this.style.background='#ffffff'">
+                            <div class="d-flex justify-content-left align-content-center card-header " style="background-color:#f0e68c">
+                                <h2 class="card-title">重要日期</h2>
+                            </div>
+                            <div class="d-flex row card-body">
+                                <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning" >
+                                    <span class="text-primary" style="font-size: 1em;">${monthConvert(registerBeginDate.getMonth() + 1)}</span>
+                                    <br>
+                                    <span class="text-warning" style="font-size: 2em;">${registerBeginDate.getDate()}</span>
+                                    <br>
+                                    <span class="text-secondary" style="font-size: 1em;">${registerBeginDate.getFullYear()}</span>
+                                </div>
+                                <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                                    <h5>会议注册开放</h5>
+                                </div>
+                            </div>
+                            <div class="d-flex row card-body">
+                                <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning">
+                                    <span class="text-primary" style="font-size: 1em;">${monthConvert(meetingBeginDate.getMonth() + 1)}</span>
+                                    <br>
+                                    <span class="text-warning" style="font-size: 2em;">${meetingBeginDate.getDate()}</span>
+                                    <br>
+                                    <span class="text-secondary" style="font-size: 1em;">${meetingBeginDate.getFullYear()}</span>
+                                </div>
+                                <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                                    <h5>会议正式开始</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-md-3 card  bg-light p-0 m-3" onmouseout="this.style.background='#ffffff'">
+                            <div class="d-flex justify-content-left align-content-center card-header bg-warning">
+                                <h2 class="card-title">会议简介</h2>
+                            </div>
+                            <div class="d-flex pt-3 card-body">
+                                <p class="text-left">${info.description}
+                                </p>
+                            </div>
+                        </div>
+                        <div class=" col-md-3 card  bg-light p-0 m-3" onmouseout="this.style.background='#ffffff'">
+                            <div class="d-flex justify-content-left align-content-center card-header "style="background-color:#d2691e">
+                                <h2>征文要求</h2>
+                            </div>
+                            <div class="pt-3  card-body pb-0">
+                                <div class="mb-5">
+                                    <p class="text-left col-md-12">${info.solicitInfo}</p>
+                                </div>
+                                <div class=" m-2 p-2 row ">
+                                <button type="button" class="col-md-12 mt-5 btn btn-outline-warning rounded" onclick="download('${info.manuscriptTemplateUrl}')">
+                                    <h6>模板下载</h6>
+                                </button>
+                                <button id="hand_in_button"  type="button" class=" col-md-12 mt-5 btn btn-outline-warning rounded" onclick=hand_in()>
+                                    <h6>论文投递</h6>
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+                        <div class=" col-md-3 ">
+                            <div class="card  bg-light p-0 m-3" onmouseout="this.style.background='#ffffff'"> 
+                                <div class="d-flex justify-content-left card-header "style="background-color:#ff4500">
+                                    <h2>主办机构</h2>
+                                </div>
+                                <div class="d-flex pt-3 card-body">
+                                    <p class="text-left">${info.organization}</p>
+                                </div>
+                            </div>
+                            <div class="card  bg-light p-0 m-3" onmouseout="this.style.background='#ffffff'"> 
+                                <div class="d-flex justify-content-left card-header "style="background-color:#ff4500">
+                                    <h2>联系方式</h2>
+                                </div>
+                                <div class="d-flex pt-3 card-body">
+                                    <i class="fa fa-phone fa-2x mr-3"></i>
+                                    <p class="text-left">${info.contactUs}</p>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>`;
+                document.getElementById("welcome").innerHTML += str_welcome;
+                var status = result.data.status;
+                console.log("status" + status)
+                if (status == 0) {
+                    submit_str = `<h6>论文投递</h6>`
+                    document.getElementById("hand_in_button").innerHTML = submit_str;
+                }
+                else if (status == 1) {
+                    $.post('/meeting/manuscript/getUserMeetingManuscriptStatus', { "meetingId": GetRequest() }, function (result) {
+                        console.log("result.data.status" + result.data.status);
+                        switch (result.data.status) {
+                            case 0:
+                                submit_str = `<h6>您未投稿</h6>`
+                                document.getElementById("hand_in_button").innerHTML = submit_str;
+                                document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                                break;
+                            case 1:
+                                submit_str = `<h6>初稿审核中</h6>`
+                                document.getElementById("hand_in_button").innerHTML = submit_str;
+                                document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                                break;
+                            case 2:
+                                submit_str = `<h6>初稿未录用</h6>`
+                                document.getElementById("hand_in_button").innerHTML = submit_str;
+                                document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                                break;
+                            case 3:
+                                submit_str = `<h6>初稿已录用</h6>`
+                                document.getElementById("hand_in_button").innerHTML = submit_str;
+                                document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                                break;
+                            case 4:
+                                submit_str = `<h6>投递修改稿</h6>`
+                                document.getElementById("hand_in_button").innerHTML = submit_str;
+                                document.getElementById("hand_in_button").disabled = false;
+                                break;
+                        }
+                    })
+
+                }
+                else if (status == 2) {
+                    $.post('/meeting/manuscript/getUserMeetingManuscriptStatus', { "meetingId": GetRequest() }, function (result) {
+                        console.log(result.data.status);
+                        if (result.data.status == 5) {
+                            submit_str = `<h6>修改稿审核中</h6>`
+                            document.getElementById("hand_in_button").innerHTML = submit_str;
+                            document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                        }
+                        else if (result.data.status == 6) {
+                            submit_str = `<h6>修改稿未录用</h6>`
+                            document.getElementById("hand_in_button").innerHTML = submit_str;
+                            document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                        }
+                        else if (result.data.status == 7) {
+                            submit_str = `<h6>修改稿已录用</h6>`
+                            document.getElementById("hand_in_button").innerHTML = submit_str;
+                            document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                        }
+                    })
+
+                }
+                else {
+                    submit_str = `<h6>不在投稿时间内</h6>`
+                    document.getElementById("hand_in_button").innerHTML = submit_str;
+                    document.getElementById("hand_in_button").setAttribute("disabled", "true");
+                }
+                var str_date = `<div class="d-flex mt-3 ml-1 row">
+                <div class="col-md-2 card bg-light p-0 m-3 ml-2" onmouseout="this.style.background='#ffffff'">
+                    <div class="d-flex justify-content-left align-content-center card-header " style="background-color:#f0e68c">
+                        <h2 class="card-title">投稿有关</h2>
+                    </div>
+                    <div class="d-flex row card-body">
+                        <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning" >
+                            <span class="text-primary" style="font-size: 1em;">${monthConvert(manuscriptDate.getMonth() + 1)}</span>
+                            <br>
+                            <span class="text-warning" style="font-size: 2em;">${manuscriptDate.getDate()}</span>
+                            <br>
+                            <span class="text-secondary" style="font-size: 1em;">${manuscriptDate.getFullYear()}</span>
+                        </div>
+                        <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                            <h5>截稿日期</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex row card-body" >
+                        <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning">
+                            <span class="text-primary" style="font-size: 1em;">${monthConvert(manuscriptModifyDate.getMonth() + 1)}</span>
+                            <br>
+                            <span class="text-warning" style="font-size: 2em;">${manuscriptModifyDate.getDate()}</span>
+                            <br>
+                            <span class="text-secondary" style="font-size: 1em;">${manuscriptModifyDate.getFullYear()}</span>
+                        </div>
+                        <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                            <h5>修改稿截止日期</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 card bg-light p-0 m-3 ml-2">
+                    <div class="d-flex justify-content-left align-content-center card-header bg-warning" onmouseout="this.style.background='#ffffff'">
+                        <h2>录稿通知</h2>
+                    </div>
+                    <div class="d-flex row card-body">
+                        <div class="d-flex col-md-4 pl-4 mt-4 justify-content-left align-items-center border-right pr-0 border-warning">
+                            <div class="align-items-center">
+                                <span class="text-primary" style="font-size: 1em;">${monthConvert(informDate.getMonth() + 1)}</span>
+                                <br>
+                                <span class="text-warning" style="font-size: 2em;">${informDate.getDate()}</span>
+                                <br>
+                                <span class="text-secondary" style="font-size: 1em;">${informDate.getFullYear()}</span>
+                            </div>
+                        </div>
+                        <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4" height="50%">
+                            <h5>录用通知日期</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 card bg-light p-0 m-3 ml-2"onmouseout="this.style.background='#ffffff'">
+                    <div class="d-flex justify-content-left align-content-center card-header " style="background-color:#d2691e">
+                        <h2>注册有关</h2>
+                    </div>
+                    <div class="d-flex row card-body">
+                        <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning">
+                            <span class="text-primary" style="font-size: 1em;">${monthConvert(registerBeginDate.getMonth() + 1)}</span>
+                            <br>
+                            <span class="text-warning" style="font-size: 2em;">${registerBeginDate.getDate()}</span>
+                            <br>
+                            <span class="text-secondary" style="font-size: 1em;">${registerBeginDate.getFullYear()}</span>
+                        </div>
+                        <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                            <h5>注册开始日期</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex row card-body">
+                        <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning">
+                            <span class="text-primary" style="font-size: 1em;">${monthConvert(registerEndDate.getMonth() + 1)}</span>
+                            <br>
+                            <span class="text-warning" style="font-size: 2em;">${registerEndDate.getDate()}</span>
+                            <br>
+                            <span class="text-secondary" style="font-size: 1em;">${registerEndDate.getFullYear()}</span>
+                        </div>
+                        <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                            <h5>注册截止日期</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 card bg-light p-0 m-3 ml-2"onmouseout="this.style.background='#ffffff'">
+                    <div class="d-flex justify-content-left align-content-center card-header " style="background-color:#ff4500">
+                        <h2>正式会议</h2>
+                    </div>
+                    <div class="d-flex row card-body">
+                        <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning">
+                            <span class="text-primary" style="font-size: 1em;">${monthConvert(meetingBeginDate.getMonth() + 1)}</span>
+                            <br>
+                            <span class="text-warning" style="font-size: 2em;">${meetingBeginDate.getDate()}</span>
+                            <br>
+                            <span class="text-secondary" style="font-size: 1em;">${meetingBeginDate.getFullYear()}</span>
+                        </div>
+                        <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                            <h5>会议开始日期</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex row card-body">
+                        <div class="col-md-4 pl-4 mt-4 border-right pr-0 border-warning">
+                            <span class="text-primary" style="font-size: 1em;">${monthConvert(meetingEndDate.getMonth() + 1)}</span>
+                            <br>
+                            <span class="text-warning" style="font-size: 2em;">${meetingEndDate.getDate()}</span>
+                            <br>
+                            <span class="text-secondary" style="font-size: 1em;">${meetingEndDate.getFullYear()}</span>
+                        </div>
+                        <div class=" d-flex justify-content-left align-items-center col-md-7 pt-4 pl-4">
+                            <h5>会议结束日期</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+                document.getElementById("date").innerHTML = str_date;
+                fee = info.fee.split(",");
+                var str_register = `            <div class="d-flex container-fluid">
+                        <div class="col-md-5 offset-md-2 pl-5">
+                            <div class="d-flex justify-content-left pt-5">
+                                <h2>会议地址</h2>
+                            </div>
+                            <div class="d-flex pt-3">
+                                <i class="fa fa-map-marker fa-2x mr-3"></i>
+                                <p class="text-left">${info.place}</p>
+                            </div>
+                            <div class="d-flex justify-content-left pt-5">
+                                <h2>住宿交通</h2>
+                            </div>
+                            <div class="d-flex pt-3">
+                                <i class="fa fa-car  mr-3"></i>
+                                <p class="text-left">${info.accomTraffic}
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-left pt-5">
+                                <h2>日程安排</h2>
+                            </div>
+                            <div class="d-flex pt-3">
+                                <i class="fa fa-calendar-check-o  mr-3"></i>
+                                <p class="text-left">${info.agenda}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="d-flex col-md-6">
+                                <button type="button" class=" mt-5 btn btn-outline-warning rounded"onclick=join_in()>
+                                    <h2>&nbsp;&nbsp;&nbsp;注册参会&nbsp;&nbsp;&nbsp;</h2>
+                                </button>
+                            </div>
+                            <div class="d-flex justify-content-left pt-5">
+                                <h2>注册费用</h2>
+                            </div>
+                            <div class="d-flex pt-3">
+                                <i class="fa fa-database fa-2x  mr-3"></i>
+                                <p class="text-left">
+                                    仅参会(无报告) $${fee[0].substring(6, fee[0].length - 1)}
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="d-flex pt-3 ">
+                                <i class="fa fa-money fa-2x mr-3"></i>
+                                <p class="text-left">
+                                    参会+全文发表+报告 $${fee[1].substring(5, fee[1].length - 2)}
+                                </p>
+                            </div>
+                            <div class="d-flex pt-3 text-info">
+                                <p class="text-left">
+                                    参会费包含内容：
+                                    <br> 1. 可参加所有会场
+                                    <br>2. 会议期间午餐
+                                    <br> 3. 会议期间晚餐
+                                    <br> 4. 会议期间茶歇
+                                    <br> 5. 会议指南及会议期刊各一本
+                                </p>
+                            </div>
+                        </div>
+                    </div>`
+                document.getElementById("register").innerHTML = str_register;
+                console.log(info.accomTraffic)
+            });
+            
+            var status
+            $.ajax({
+                type: "post",
+                url: '/index/index/getLoginStatus',
+                async: false,
+                success: function (result) {
+                    status = result.data.status
+                }
+            });
+
+            if (status != 0) {
+                var myurl = null;
+                switch (status) {
+                    case 1: myurl = '/index/user/getUserDetail'
+                        getsubscirbestatus()
+                        break
+                    case 2: myurl = '/company/index/getCompanyDetail'
+                        $("#subscribe").hide()
+                        $("#cancel_subscribe").hide()
+                        break
+                    case 3: myurl = '/company/index/getCompanyUnitDetail'
+                        $("#subscribe").hide()
+                        $("#cancel_subscribe").hide()
+                        break
+                }
+
+                $.ajax({
+                    type: "post",
+                    url: myurl,
+                    async: false,
+                    success: function (result) {
+                        var str_user = ` <div id="login_after2" class="p-2">
+                            <button class="btn btn-outline-success border-0"  id='username' ><h5>${result.data.name}<h5></button>
+                        </div>`
+                        document.getElementById('login_after').innerHTML += str_user
+                        $("#login_before").hide()
+                    }
+                });
+            }
+            else {
+                $("#login_after1").hide()
+                $("#login_after2").hide()
+                $("#subscribe").hide()
+                $("#cancel_subscribe").hide()
+            }
+
+        }
+
+        init();
+        function GetRequest() {
+            var url = location.search;
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("=");
+                return strs[1];
+            }
+        }
+        function hand_in() {
+            var status
+            $.ajax({
+                type: "post",
+                url: '/index/index/getLoginStatus',
+                async: false,
+                success: function (result) {
+                    status = result.data.status
+                }
+            });
+            if (status != 1) {
+                var myurl = null;
+                switch (status) {
+                    case 0:
+                    case 2:
+                    case 3:
+                        alert("请以个人用户身份登录，方可进行投稿")
+                        break
+                }
+            }
+            else {
+                window.location.href = '/meeting/manuscript/index?meetingId=' + GetRequest();
+            }
+        }
+
+        function join_in() {
+            var status1
+            var status2
+            $.ajax({
+                type: "post",
+                url: '/meeting/index/getMeetingDetail',
+                async: false,
+                data: { "meetingId": GetRequest() },
+                success: function (result) {
+                    status1 = result.data.status
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: '/index/index/getLoginStatus',
+                async: false,
+                success: function (result) {
+                    status2 = result.data.status
+                }
+            });
+            if (status2 != 1) {
+                var myurl = null;
+                switch (status2) {
+                    case 0:
+                    case 2:
+                    case 3:
+                        alert("请以个人用户身份登录，方可注册参会")
+                        break
+                }
+            }
+            else if (status1 != 4) {
+                alert("不在注册时间内")
+            }
+            else {
+                window.location.href = '/meeting/register/index?meetingId=' + GetRequest();
+            }
+        }
+
+        function login() {
+            window.location.href = '/index/login/index'
+        }
+        function sign_up() {
+            window.location.href = '/index/login/signup'
+        }
+        function logout() {
+            $.post('/index/login/logout', function (result) {
+                location.reload();
+            });
+        }
+        function monthConvert(month) {
+            switch (month) {
+                case 1:
+                    return 'JAN';
+                case 2:
+                    return 'FEB';
+                case 3:
+                    return 'MAR';
+                case 4:
+                    return 'APR';
+                case 5:
+                    return 'MAY';
+                case 6:
+                    return 'JUNE';
+                case 7:
+                    return 'JULY';
+                case 8:
+                    return 'AUG';
+                case 9:
+                    return 'SEP';
+                case 10:
+                    return 'OCT';
+                case 11:
+                    return 'NOV';
+                case 12:
+                    return 'DEC';
+            }
+        }
+        function download(fileUrl) {
+            var fileName = 'newFileName';
+            strUrl = "{:url('index/index/download')}";
+            strUrl += '?fileUrl=' + encodeURIComponent(fileUrl);
+            window.location.href = strUrl;
+        }
+    </script>
+
+</body>
+
+</html>
+<style>
+    div.card {
+        box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.014), 0 6px 20px 0 rgba(0, 0, 0, 0.048);
+        text-align: center;
+        border: 0px
+    }
+
+    div.card:hover {
+        box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.104), 0 6px 20px 0 rgba(0, 0, 0, 0.048);
+    }
+    p {
+        white-space:pre-line;
+    }
+</style>

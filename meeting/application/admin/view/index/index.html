@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    
+    <title>学术会议平台管理页</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                    <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="/index/index/index.html">首页</a>
+                    </li>
+
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">           
+                    <div id="login_after" class="d-flex flex-row-reverse" >     
+                            <div id="login_after1" class="p-2"><button class="btn btn-outline-success" onclick=logout() >注销</button></div>
+                            
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container mt-5 text-center">
+        <a href="/admin/template/index.html">
+            <button class="btn btn-outline-success" >进入添加模板页面</button>
+        </a>
+
+    </div>
+
+    <div class="container mt-5">
+
+
+        <div id="lists" class="col p-4">            
+        </div>
+
+        
+
+        		    			
+        <form class="form-inline col-md-6  offset-md-4 ">
+                <ul id='pages' class="center-block"></ul> 	
+        </form>
+    
+
+
+    </div>
+
+    <footer id="footer" class="pt-5" >
+        <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+            <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+        </div>
+        <div class="container" >
+            <div class="row hidden-xs">
+                <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                    <dt class=" pb-1">小组信息：</dt>
+                    
+                    <dd>善良之队</dd>
+                    <dd>组号：12组</dd>
+                    <dd>成员：9名</dd>
+                    
+                </dl>
+                
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">赞助商:</dt>
+                    
+                    <dd>北航软院教师：THB</dd>
+                    
+                </dl>
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">相关协作系统</dt>
+                    
+                    <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                    <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                    
+                </dl>
+
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">联系我们</dt>
+                    
+                    <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                    <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                    <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright container text-center">
+                Copyright  2018 善良之队 12组<br><br>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-paginator.js"></script>
+    <script>
+        function jump(id)
+        {
+            console.log("jump to meeting " + id)
+            window.location.href='/admin/index/verify?companyId='+id;
+        }
+
+        function logout()
+        {
+            $.post('/admin/login/logout',function(result){
+                console.log("注销成功")
+                window.location.href="/index/index/index"
+            });
+        }
+        function addlist(data){
+            var str = `
+            <div class="card col-md-12 " onmouseover="this.style.background='#c4c4c4'" onmouseout="this.style.background='#ffffff'" >
+                    <div class="row">
+                        <div class="card-body">
+                            <p class="card-text">
+                                    ${data['name']}
+                            </p>
+                        </div >
+                        
+                        <div class="card-body pull-right col-md-2">
+                            <button class="btn btn-outline-success " type="submit" onclick=jump('${data['companyId']}')>详细信息</button>
+                        </div>
+                    </div>
+                </div>
+                
+            
+            `
+            
+            var contain = document.getElementById("lists")
+            contain.innerHTML +=str
+        }
+        
+        function load_list(page)
+        {
+            $.post('/admin/index/getVerifyList',{"limit":10,"page":page},function(result){
+                infos = result.data.verifyList
+                for(i=0;i<infos.length;i++)
+                {               
+                    addlist(infos[i])
+                }
+            });
+        }
+
+        function pager_init(num)
+        {
+            $(function(){
+                            options = {
+                                bootstrapMajorVersion:3, //对应的bootstrap版本
+                                currentPage: 1, //当前页数，这里是用的EL表达式，获取从后台传过来的值
+                                numberOfPages: 10, //每页页数
+                                totalPages:num/10+1, //总页数，这里是用的EL表达式，获取从后台传过来的值
+                                shouldShowPage:true,//是否显示该按钮
+                                pageUrl:function(type,page,current){
+                                    return "#top"
+                                },
+                            itemTexts: function (type, page, current) {
+                                switch (type) {
+                                    case "first":
+                                        return "首页";
+                                    case "prev":
+                                        return "上一页";
+                                    case "next":
+                                        return "下一页";
+                                    case "last":
+                                        return "末页";
+                                    case "page":
+                                        return page;
+                                }
+                            },
+                    //点击事件
+                    onPageClicked: function (event, originalEvent, type, page) {
+                        $("#lists").html("");
+                        load_list(page)
+
+                    }
+                };
+                $("#pages").bootstrapPaginator(options);
+            });
+        }
+        
+        function init()
+        {
+           
+            $.ajax({ 
+                type : "post", 
+                url : "/admin/index/getVerifyCount", 
+                async : true, 
+                success : function(result){ 
+                    pager_init(result.data.count)
+                } 
+                });
+            
+            load_list(1)
+
+
+
+            //是否登陆
+
+            var status
+            $.ajax({ 
+                type : "post", 
+                url : "/admin/index/checkAdminStatus", 
+                async : false, 
+                success : function(result){ 
+                    if(result.errNo==2)
+                    {
+                        alert("请以管理员身份登陆")
+                        window.location.href="/admin/login/index"
+                    }
+                } 
+                });
+        }
+        init()
+    </script>
+</body>
+
+</html>

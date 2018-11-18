@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/assets/js/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <title>投稿评审</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="/company/index/index.html">用户中心</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+
+                    <div id="login_after" class="d-flex flex-row-reverse">
+                        <div id="login_after1" class="p-2">
+                            <button class="btn btn-outline-success" onclick=logout()>注销</button>
+                        </div>
+
+
+                    </div>
+                    <!-- <script type="text/javascript">  
+                            $(document).ready(function()
+                            {
+                                $.ajax({
+                                    url:,
+                                    type:"post",
+                                    success:function(data){
+                                    $(login_before)
+                                    }
+                                })
+                            
+                            })
+                        </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container" style="margin-top: 30px;">
+        <div class="card col-md-8 offset-md-2 text-left" style="padding: 30px">
+            <div class="container">
+                <h3>评审投稿</h3>
+            </div>
+            <div id="review_title" class="container" style="margin-top: 20px">
+                <div>
+                    <span id="manuscript_name">manuscript_name</span>
+                </div>
+            </div>
+            <div class="container" style="margin-top: 50px">
+                <!--选择评审结果 0未录用 1录用 2修改后录用-->
+                <h4>评审结果</h3>
+                    <div style="margin-top: 20px">
+                        <input type="radio" name="result" value="0" />未录用
+                        <input type="radio" name="result" value="1" />录用
+                        <input type="radio" name="result" value="2" />修改后录用
+                    </div>
+            </div>
+            <div class="container" style="margin-top: 60px">
+                <h4>评审建议</h3>
+                    <textarea id="suggestion" style="width: 100%;height: 200px;resize: none" placeholder="请填写评审建议"></textarea>
+            </div>
+            <div class="container">
+                <button class="btn btn-outline-primary" id="submit">提交</button>
+                <button class="btn btn-outline-danger" id="reset">重置</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!--
+    <script>
+        function getResult() {
+            var result = document.getElementsByName("result");
+            for (i = 0; i < 3; i++) {
+                if (result[i].checked) {
+                    alert(result[i].value);
+                }
+            }
+        }
+    </script>
+    -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+<!--
+
+function for_title(){
+     $.post('/meeting/Manuscript/getManuscriptDetail',{"manuscriptId":GetRequest()},function(result){
+            var info=result.data;
+            var manuscript_name=info.title;
+            var review_titil_html = `
+                <div>
+                    <span id="manuscript_name">${manuscript_name}</span>
+                </div>
+            `
+            document.getElementById("review_title").innerHTML=review_titil_html;
+        })
+}
+-->
+
+<script>
+    function GetRequest() {
+        var url = location.search;
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("=");
+            return strs[1];
+        }
+    }
+    function GetMeeting(get_meeting) {
+        var meetingId;
+        $.ajax({
+            type: "post",
+            url: "/meeting/manuscript/getManuscriptDetail",
+            dataType: "json",
+            data: get_meeting,
+            success: function (data) {
+                meetingId=data.data.meetingId;
+            }
+        })
+        return meetingId;
+    }
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            var resultls = document.getElementsByName("result");
+            var suggestion = document.getElementById("suggestion").value;
+            var manuscriptId = GetRequest();
+            var temp = false;
+            var result = -1;
+            for (i = 0; i < 3; i++) {
+                if (resultls[i].checked) {
+                    result = resultls[i].value;
+                    temp = true;
+                    break;
+                }
+            }
+            if (!temp) {
+                alert("请选择评审结果");
+            }
+            else if (suggestion == "") {
+                alert("请填写评审建议");
+            }
+            else {
+                console.log(result);
+                console.log(suggestion);
+                console.log(manuscriptId);
+                var data_review = { manuscriptId: manuscriptId, result: result, suggestion: suggestion };
+                var get_meeting = { manuscriptId: manuscriptId };
+                var meetingId = GetMeeting(get_meeting);
+                console.log("jump to meeting " + meetingId);
+                jQuery.noConflict();
+
+                $.ajax({
+                    type: "post",
+                    url: "/company/review/createReview",
+                    dataType: "json",
+                    data: data_review,
+                    success: function (data) {
+                        console.log("success");
+                        if (data['errNo'] == 0) {
+                            alert("评审结果录入成功");
+                            console.log("jump to meeting " + GetMeeting(get_meeting) );
+                            window.location.href="/company/index/index"
+                        }
+                        else {
+                            alert(data['msg']);
+                        }
+                    }
+                })
+            }
+        })
+
+        $("#reset").click(function () {
+            for (i = 0; i < 3; i++) {
+                document.getElementsByName("result")[i].checked = false;
+            }
+            document.getElementById("suggestion").value = "";
+        })
+    })
+    function logout() {
+        $.post('/index/login/logout', function (result) {
+            location.reload();
+        });
+    }
+    function login() {
+        window.location.href = '/index/login/index'
+    }
+    function sign_up() {
+        window.location.href = '/index/login/signup'
+    }
+    function for_title() {
+        $.post('/meeting/Manuscript/getManuscriptDetail', { "manuscriptId": GetRequest() }, function (result) {
+            var info = result.data;
+            var manuscript_name = info.title;
+            var review_titil_html = `
+                <div>
+                    <span id="manuscript_name">投稿名称：${manuscript_name}</span>
+                </div>
+            `
+            document.getElementById("review_title").innerHTML = review_titil_html;
+        })
+    }
+
+    function init() {
+        for_title()
+        //是否登陆
+        var status
+        $.ajax({
+            type: "post",
+            url: "/index/index/getLoginStatus",
+            async: false,
+            success: function (result) {
+                status = result.data.status
+            }
+        });
+        console.log(status)
+        if (status != 2 && status != 3) {
+            window.location.href = '/index/index/index'
+        }
+        if (status != 0) {
+            var myurl = null;
+            switch (status) {
+                case 1: myurl = '/index/user/getUserDetail'
+                    break
+                case 2: myurl = '/company/index/getCompanyDetail'
+                    break
+                case 3: myurl = '/company/index/getCompanyUnitDetail'
+                    break
+            }
+            console.log(myurl)
+            $.ajax({
+                type: "post",
+                url: myurl,
+                async: false,
+                success: function (result) {
+
+                    var str_user = ` <div id="login_after2" class="p-2">
+                            <button class="btn btn-outline-success border-0"  id='username' ><h5>${result.data.name}<h5></button>
+                        </div>`
+                    document.getElementById('login_after').innerHTML += str_user
+                    $("#login_before").hide()
+
+                }
+            });
+        }
+        else {
+            $("#login_after1").hide()
+            $("#login_after2").hide()
+        }
+    }
+    init()
+</script>
+<style>
+    div.card {
+        box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.014), 0 6px 20px 0 rgba(0, 0, 0, 0.075);
+        text-align: center;
+        border: 0px
+    }
+</style>
+
+</html>

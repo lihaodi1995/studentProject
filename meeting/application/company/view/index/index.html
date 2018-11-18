@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <!--link rel="stylesheet" href="/static/css/font-awesome.min.css"-->
+    <title>主办方管理</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link"  href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link  h4 " id="user_center" style="font-weight: bold" href="/company/index/index.html">用户中心</a>
+                    </li>
+                    <!--
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">发现</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">链接</a>
+                    </li>
+                    <li class="nav-item dropdown ml-4">
+                        <a class="nav-link dropdown-toggle" style="font-size:20px;" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">功能选择</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">选择</a>
+                            <a class="dropdown-item" href="#">选择</a>
+                        </div>
+                    </li>
+                    -->
+                </ul>
+
+                <div class="form-inline my-2  mr-5 my-lg-0 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+                    
+                    <div id="login_after" class="d-flex flex-row-reverse" >     
+                            <div id="login_after1" class="p-2"><button class="btn btn-outline-success" onclick=logout() >注销</button></div>
+                            
+
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--
+    <div class="d-flex align-items-center justify-content-center " style="min-height: 500px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/testbackground.jpg) no-repeat;background-size:100%;color:#ffffff ">
+        <div id="meetheader" class="text-center text-justify">
+
+        </div>
+    </div>
+    -->
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs " id="myTab">
+                <li class="nav-item pl-5">
+                    <a class="nav-link text-muted " data-toggle="tab" href="#welcome">我的机构</a>
+                </li>
+                <li class="nav-item pl-5 active">
+                    <a class="active nav-link text-muted" data-toggle="tab" href="#congressList">我的会议</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a id="nav_publish" class="nav-link text-muted" data-toggle="tab" href="#publish_meeting" >发布会议</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a id="nav_config" class="nav-link text-muted" data-toggle="tab" href="#register"  >账号配置管理</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link text-muted" data-toggle="tab" href="#info">申请审核</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content mb-5">
+
+            <div class="tab-pane fade container-fluid" id="welcome"><!-- First    1st      column -->
+                <div class="d-flex">
+                    <!--div class=" col-md-4">
+                        <div class="d-flex justify-content-left pt-5 pl-4  ">
+                            <h2>重要日期</h2>
+                        </div>
+                        <div class="d-flex row">
+                            <div class="col-md-3 pl-4 mt-4 border-right pr-0 border-warning">
+                                <span class="text-primary" style="font-size: 1em;">FEB</span>
+                                <br>
+                                <span class="text-warning" style="font-size: 2em;">05</span>
+                                <br>
+                                <span class="text-secondary" style="font-size: 1em;">2018</span>
+                            </div>
+                            <div class=" d-flex justify-content-left align-items-center col-md-8 pt-4 pl-4">
+                                <h5>会议注册开放</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex row">
+                            <div class="col-md-3 pl-4 mt-4 border-right pr-0 border-warning">
+                                <span class="text-primary" style="font-size: 1em;">MAY</span>
+                                <br>
+                                <span class="text-warning" style="font-size: 2em;">21</span>
+                                <br>
+                                <span class="text-secondary" style="font-size: 1em;">2018</span>
+                            </div>
+                            <div class=" d-flex justify-content-left align-items-center col-md-8 pt-4 pl-4">
+                                <h5>会议正式开始</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-6 ">
+                        <div class="d-flex justify-content-left pt-5  ">
+                            <h2>会议简介</h2>
+                        </div>
+                        <div class="d-flex pt-3">
+                            <p class="text-left">2018年第五届凝聚态物理学最新进展国际学术研讨会 (NACMP 2018)将于2018年8月21日至23日于中国昆明举行。本届大会是由武汉大学、工程信息研究院、千人智库等多家单位共同协办。目前已经在上海，北京，苏州，深圳等城市成功举办过四届。
+                                【出版检索】 NACMP 2018旨在为业内专家学者分享技术进步和业务经验，聚焦凝聚态物理学相关领域的前沿研究，提供一个交流的平台。会议将集聚来自世界各地的科研人员、工程师、学者及业界专家，展示他们在凝聚态物理学相关领域的最新研究成果及活动进展，诚邀您同聚昆明，共襄盛会。
+                            </p>
+                        </div>
+                    </div-->
+                    <div class=" col-lg-6 offset-md-0 pl-5 pt-5">
+                        <div class="d-flex justify-content-left pt-2">
+                            <h4>您好！</h4>
+                        </div>
+                        <div class="d-flex pt-1">
+                            <p id="company_name" class="text-left">
+                                北京航空航天大学
+                                <br>
+                            </p>
+                        </div>
+                        
+                        <div class="d-flex justify-content-left pt-5">
+                                <h4>审核情况：</h4>
+                        </div>
+                        <div class="d-flex pt-1">
+                            <p id="verify" class="text-left"></p>
+                        </div>
+                    </div>
+                    <div class=" col-lg-6 offset-md-0 pl-5 pt-5 mr-0">
+                        <div class="d-flex justify-content-left pt-1">
+                            <h4>修改密码：</h4>
+                        </div>
+                        <div class="d-flex pt-1 text-left">
+                            <p class="text-left">
+                                <div class="form-group">
+                                    <label for="password">原密码：</label>
+                                        <input type="password" class="form-control" name="" id="old_pwd" aria-describedby="helpId_pwd2" placeholder="输入原密码">
+                                        
+                                </div>
+                            </p>
+                        </div>
+                        <div class="d-flex pt-1 text-left">
+                            <p class="text-left">
+                                <div class="form-group">
+                                    <label for="password">新密码：</label>
+                                        <input type="password" class="form-control" name="" id="new_pwd" aria-describedby="helpId_pwd2" placeholder="输入新密码">
+                                        
+                                </div>
+                            </p>
+                        </div>
+                        <div class="d-flex pt-1 text-left">
+                            <p class="text-left">
+                                <div class="form-group">
+                                    <label for="password">重复新密码：</label>
+                                    <input type="password" class="form-control" name="" id="re_pwd" aria-describedby="helpId_pwd3" placeholder="重复新密码">
+                                </div>
+                            </p>
+                                   
+                        </div>
+                        <div class="d-flex pt-1 text-left">
+                                <p class="text-center">
+                                        <button id="unit_button" class="btn btn-lg btn-primary" onclick="change_pwd()">修改</button>
+                                </p>
+                        </div>
+                        <script type="text/javascript">
+                                function change_pwd()
+                                {
+                                    var old_pwd = $("#old_pwd").val();
+                                    var new_pwd = $("#new_pwd").val();
+                                    var re_pwd = $("#re_pwd").val();
+                                    $.ajax({  
+                                        url : "{:url('/index/login/companyModifyPassword')}",
+                                        type : "post", 
+                                        async : true,
+                                        dataType : "json",
+                                        data : {
+                                            originalPassword : old_pwd,
+                                            password : new_pwd,
+                                            rePassword : re_pwd 
+                                        }, 
+                                        success : function(result){ 
+                                            console.log(result);
+                                            if(result.errNo == 0)
+                                            {
+                                                alert(result.msg);
+                                                logout();
+                                            }
+                                            else if(result.errNo == 10)
+                                            {
+                                                alert(result.msg);
+                                            }
+                                            else
+                                            {
+                                                console.log(result.msg);
+                                            }
+                                        },
+                                        error : function(result)
+                                        {
+                                            console.log("Server Error");
+                                        }
+                                    });
+                                }
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class=" tab-pane active container text-left" id="congressList">        <!-- Second    2nd      column -->
+                <div id="myCongress" class=" col p-4">
+                    <!--
+                    <div class=" col-md-6 offset-md-2 pl-5">
+                        <div class="d-flex justify-content-left pt-5">
+                            <h2>征文要求</h2>
+                        </div>
+                        <div class="d-flex pt-3">
+                            <p class="text-left">温馨提示：该会是国际会议，会议语言是英语，现场没有同声传译。
+                                <br>该会议征文涉及领域包括（但不限于）：
+                                <br> Atom -Surface Interactions
+                                <br> Biological Physics
+                                <br> Biological Systems & Liquid Crystals
+                                <br> Bose-Einstein condensation (BEC)
+                                <br> Cluster physics</p>
+                        </div>
+                    </div>
+                    <div class=" col-md-2 btn-group-vertical">
+                        <button type="button" class=" mt-5 btn btn-outline-warning rounded">
+                            <h2>模板下载</h2>
+                        </button>
+                        <button type="button" class=" mt-5 btn btn-outline-warning rounded">
+                            <h2>论文投递</h2>
+                        </button>
+                    </div>
+                    -->
+                    
+
+                </div>
+                <form class="form-inline col-md-6  offset-md-4 ">
+                        <ul id='pages' class="center-block"></ul> 	
+                </form>
+            </div>
+            <div class=" tab-pane fade" id="publish_meeting">          <!--           Third   3rd      column -->
+                <div class="d-flex">
+                    <div class=" col-lg-6 offset-md-0 pl-5 pt-3">
+                        <div class="d-flex justify-content-left pt-2">
+                            <h2>选择模板:</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid bg-warning" style="height: 1px"></div>
+                <div id="modules" class="container">
+                    <div class="d-flex">
+                        <!--
+                        <div class=" col-lg-12 offset-md-0 pl-5 pt-1">
+                            <div class="d-flex justify-content-left pt-2">
+                                <h5 >模板1</h5>
+                            </div>
+                            <div class="d-flex pt-1">
+                                <p  class="text-left">
+                                    <div style="min-height: 500px; width:100%;background: #765784 ;background:transparent url(/static/src/images/testbackground.jpg) no-repeat;background-size:100%;color:#ffffff "></div>
+                                </p>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                    <div class="container-fluid bg-warning" style="height: 1px"></div>
+                </div>
+            </div>
+            <div class=" tab-pane fade" id="register"> <!-- - - - - - - - Fourth    4th      column           -->
+                <div class="d-flex container-fluid">
+                    <div class="col-md-6 offset-md-0 pl-3">
+                        <div class="d-flex justify-content-left pt-5 pl-3">
+                            <h2>账号列表</h2>
+                        </div>
+                        <hr>
+                        <div  class="container text-left">
+                            <div class="container-fluid" >
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h5>账户</h5>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h5>密码</h5>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <h5>姓名</h5>
+                                    </div>
+                                    <div class="col-lg-3">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="container-fluid" id="account_list_div">
+                                
+                            </div>
+                        </div>
+                        <div  class="container text-left" >
+                            <div class="container-fluid" id="account_list_div">
+                                
+                            </div>
+                            <form class="form-inline col-md-12  ">
+                                    <ul id='account_pages' class="center-block"></ul> 	
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 container">
+                        <div class="d-flex justify-content-left pt-5 pl-3">
+                            <h2>配置账号</h2>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-7">
+                                    <div class=" pt-1 text-left">
+                                        <p class="text-left">
+                                            <div class="form-group">
+                                                <label for="unit_ac">账号：</label>
+                                                    <input type="text" class="form-control" name="" id="unit_account" aria-describedby="helpId_pwd1" placeholder="配置单位账户">
+                                                    
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div class=" pt-1 text-left">
+                                        <p class="text-left">
+                                            <div class="form-group">
+                                                <label for="unit_account">密码：</label>
+                                                    <input type="password" class="form-control" name="" id="unit_pwd" aria-describedby="helpId_pwd2" placeholder="输入密码">
+                                                    
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div class=" pt-1 text-left">
+                                        <p class="text-left">
+                                            <div class="form-group">
+                                                <label for="unit_account">重复密码：</label>
+                                                    <input type="password" class="form-control" name="" id="unit_re_pwd" aria-describedby="helpId_pwd3" placeholder="重复密码">
+                                                    
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div class=" pt-1 text-left">
+                                        <p class="text-left">
+                                            <div class="form-group">
+                                                <label for="unit_account">姓名：</label>
+                                                    <input type="text" class="form-control" name="" id="unit_name" aria-describedby="helpId_pwd4" placeholder="使用者姓名">
+                                            </div>
+                                        </p>
+                                                
+                                    </div>
+                            </div>
+                            <div class=" col-md-5">
+                                <button type="button" class=" mt-5 btn btn-outline-warning rounded" onclick="addUnitAccount()">
+                                    <h2>&nbsp;&nbsp;&nbsp;添加账号&nbsp;&nbsp;&nbsp;</h2>
+                                </button>
+                                <script type="text/javascript">
+                                    function addUnitAccount()
+                                    {
+                                        // alert("function start");
+                                        var account = $("#unit_account").val();
+                                        var pwd = $("#unit_pwd").val();
+                                        var repwd = $("#unit_re_pwd").val();
+                                        var nickName = $("#unit_name").val();
+                                        // alert(account);
+                                        $.ajax({ 
+                                            url : "{:url('/index/login/companyCreateUnit')}", 
+                                            type : "post", 
+                                            async : false, 
+                                            dataType: "json",
+                                            data : {account : account,password : pwd,rePassword : repwd, name :nickName},
+                                            success : function(result){
+                                                if(result.errNo == 0)
+                                                {
+                                                    alert(result['msg']);
+                                                    account_init();
+                                                }
+                                                else
+                                                {
+                                                    alert(result['msg']);
+                                                }
+                                                console.log(result.errNo);
+                                                console.log(result.msg);
+                                            },
+                                            error: function(data){
+                                                console.log("Server Error");
+                                            }
+                                        });
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div  class=" tab-pane fade" id="info">                  <!-- Fifth    5th      column -->
+                <div class="container mt-5">
+                        <h5 id="verify2"></h5>                     
+                </div>
+                <div id="uploader" class="container mt-4">
+
+                </div>
+            </div>
+        
+        
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+            <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+        </div>
+        <div class="container" >
+            <div class="row hidden-xs">
+                <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                    <dt class=" pb-1">小组信息：</dt>
+                    
+                    <dd>善良之队</dd>
+                    <dd>组号：12组</dd>
+                    <dd>成员：9名</dd>
+                    
+                </dl>
+                
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">赞助商:</dt>
+                    
+                    <dd>北航软院教师：THB</dd>
+                    
+                </dl>
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">相关协作系统</dt>
+                    
+                    <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                    <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                    
+                </dl>
+
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">联系我们</dt>
+                    
+                    <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                    <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                    <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright container text-center">
+                Copyright © 2018 善良之队 12组<br><br>
+        </div>
+    </footer>
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src = "/static/js/bootstrap-paginator.js"></script>
+<script>
+    function jump(id)
+    {
+        console.log("jump to meeting " + id);
+        window.location.href='/meeting/index/index?meetingId='+id;
+    }
+
+    function delete_unit(id)
+    {
+        var tbd = document.getElementById(id);
+        $.ajax({ 
+            url : "{:url('/index/login/companyDeleteUnit')}", 
+            type : "post", 
+            async : false, 
+            dataType: "json",
+            data : {companyUnitId : id},
+            success : function(result){
+                if(result.errNo == 0)
+                {
+                    alert(result['msg']);
+                    account_init();
+                }
+                else
+                {
+                    alert(result['msg']);
+                }
+                console.log(result.errNo);
+                console.log(result.msg);
+            },
+            error: function(data){
+                console.log("Server Error");
+            }
+        });
+        //var tbd = document.getElementById(id);
+        //tbd.parentNode.removeChild(tbd);
+        //$("#unit_info").html("");
+        
+    }
+    function logout()
+    {
+        $.post("{:url('/index/login/logout')}",function(result1){
+            location.reload();
+        });
+    }
+    function login()
+    {
+        window.location.href='/index/login/index';
+    }
+    function sign_up()
+    {
+        window.location.href='/index/login/signup';
+    }
+    function file_change(target)
+        {
+            var fileSize = 0;
+            var isIE=false    
+            if (isIE && !target.files) 
+            {       
+                var filePath = target.value;       
+                var fileSystem = new ActiveXObject("Scripting.FileSystemObject");          
+                var file = fileSystem.GetFile (filePath);       
+                fileSize = file.Size;      
+            } 
+            else 
+            {      
+                fileSize = target.files[0].size;       
+             }     
+            var size = fileSize / 1024;
+                  
+            if(size>1024*5)
+            {    
+                alert("附件不能大于5M");
+                target.value="";  
+                return  
+            }  
+        }
+    function submit_verify()
+    {
+        var file = document.getElementById('file').files[0];
+            if (file == null) {
+                alert('请选择上传的文件。');
+                return;
+            }
+            var fileName = file.name.trim();
+            console.log('fileName: ' + fileName);
+            var fileUrl =null
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('fileName', fileName);
+            $.ajax({
+                type: 'post',
+                url: "{:url('company/verify/uploadCompanyAddition')}",
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                async: false,
+                success: function(data) {
+                    if(data.errNo==0)
+                    {
+                        alert("审核信息上传成功")
+                        window.location.reload()
+                    }
+                }
+            })
+    }
+    function addUnit(data)
+    {
+        var html_code = 
+        `
+            <div id="${data['num']}" class="row">
+                <div class="col-lg-3">
+                    ${data['account']}
+                </div>
+                <div  class="col-lg-3">
+                    ${data['pwd']}
+                </div>
+
+                <div class="col-lg-3">
+                    ${data['name']}
+                </div>
+                <div class="col-lg-2 offset-md-1">
+                    <button class="btn btn-outline-warning btn-sm" onclick="delete_unit('${data['num']}')">删除</button>
+                </div>
+            </div>
+        `;
+        var ac_list_div = document.getElementById("account_list_div");
+        ac_list_div.innerHTML += html_code;
+    }
+    function check_solicit(id)
+    {
+        window.location.href = "/meeting/manuscript/list?meetingId=" + id;
+    }
+    function check_register(id)
+    {
+        window.location.href = "/meeting/register/list?meetingId=" + id;
+    }
+    function edit_meeting(id)
+    {
+        window.location.href = "/company/index/edit?meetingId=" + id;
+    }
+    function addlist(data){
+        var str = `
+            
+            <div class="card col-md-8 offset-2 mt-2" onmouseover="this.style.background='#c4c4c4'" onmouseout="this.style.background='#ffffff'">
+            <div class="row mt-2">
+                <div class="card-body col-md-6 ml-3">
+                    <div class="row d-flex">
+                        <h4 class="card-title" style="overflow: hidden;text-overflow:ellipsis;white-space:nowrap">
+                            <i class="fa fa-navicon mr-2"></i>
+                            <a onclick=jump('${data['id']}') style="color:#000000" href='#'>${data['name']}</a>
+                        </h4>
+                    </div>
+                    <div class="row mt-2">
+                        <h6 class="card-title ">
+                            <i class="fa fa-calendar mr-2"></i>
+                            ${data['time']}
+                        </h6>
+                    </div>
+                    <div class="row mt-2">
+                        <h6 class="card-title">
+                            <i class="fa fa-hourglass-start mr-2" aria-hidden="true"></i>
+                            当前状态:
+                            <font class="text-danger">${data['state']}</font>
+                        </h6>
+                    </div>
+                    <div class="row mt-2">
+                        <h6 class="card-title ">
+                            <i class="fa fa-university mr-2" aria-hidden="true"></i>
+                            主办方:${data['org']}
+                        </h6>
+                    </div>
+                </div>
+                <div class="card-body col-md-5">
+                    <div class="row mt-2">
+                        <h6 class="card-title">
+                            <i class="fa fa-globe mr-2"></i>会议地点：${data['place']}</h6>
+                    </div>
+                    <div class="row mt-2">
+                        <button class="btn bg-warning btn-md" onclick="check_solicit('${data['id']}')">投稿情况</button>
+                    </div>
+                    <div class="row mt-2">
+                        <button class="btn bg-warning btn-md" onclick="check_register('${data['id']}')">注册人信息</button>
+                    </div>
+                    <div class="row mt-2">
+                        <button class="btn btn-primary btn-md" onclick="edit_meeting('${data['id']}')">编辑会议</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        `;
+        
+        var contain = document.getElementById("myCongress");
+        contain.innerHTML += str;
+    }
+    function load_account_list(page)
+    {
+        $.ajax({ 
+            url : "{:url('/company/index/getCompanyUnitList')}", 
+            type : "post", 
+            async : false, 
+            dataType: "json",
+            data : {limit : 5,page : page},
+            success : function(result){ 
+                // alert(result1);
+                // status = result.data.status;
+                var UnitList = result.data.companyUnitList;
+                for(var i = 0; i < UnitList.length; i++)
+                {
+                    var data = {
+                        'num'     : UnitList[i].companyUnitId,
+                        'account' : UnitList[i].account,
+                        'pwd'     : UnitList[i].password,
+                        'name'    : UnitList[i].name
+                    }
+                    addUnit(data);
+                }
+                if(UnitList.length == 0)
+                {
+                    var contain = document.getElementById("account_list_div");
+                    contain.innerHTML += "列表是空的";
+                }
+            },
+            error: function(data){
+                console.log("Server Error");
+                /*
+                $("#textWarning").empty();
+                $("#textWarning").append("data['msg']");
+                var status = data['status']
+                alert(status);
+                */
+            }
+        });
+    }
+    function load_list(page)
+    {
+        $.post("{:url('/company/index/getCompanyMeetingList')}",{"limit":10,"page":page},function(result1){
+            //{:url('company/index/getCompanyMeetingList')};;;;;
+            var infos = result1.data.meetingList;
+            for(i=0;i<infos.length;i++)
+            {
+                var meetingBeginDate = new Date(infos[i].meetingBeginDate);
+                var meetingEndDate = new Date(infos[i].meetingEndDate);
+                date = meetingBeginDate.getFullYear()+"年"+meetingBeginDate.getMonth()+"月"+meetingBeginDate.getDate()+"日--"+meetingEndDate.getFullYear()+"年"+meetingEndDate.getMonth()+"月"+meetingEndDate.getDate()+"日";
+                map = {
+                    0:"投稿中",
+                    1:"修稿中",
+                    2:"审查中",
+                    3:"注册准备中",
+                    4:"注册中",
+                    5:"会议准备中",
+                    6:"正在进行",
+                    7:"会议已结束"
+                }
+                
+                data={
+                    'name':infos[i].title,
+                    'time':date,
+                    'state':map[infos[i].status],
+                    'org':infos[i].organization,
+                    'place':infos[i].place,
+                    'id':infos[i].meetingId + ""
+                }
+
+                addlist(data);
+            }
+        });
+    }
+    function unit_pager_init(num)
+    {
+        $(function(){
+                        options = {
+                            bootstrapMajorVersion:3, //对应的bootstrap版本
+                            currentPage: 1, //当前页数，这里是用的EL表达式，获取从后台传过来的值
+                            numberOfPages: 5, //每页页数
+                            totalPages:num/5+1, //总页数，这里是用的EL表达式，获取从后台传过来的值
+                            shouldShowPage:true,//是否显示该按钮
+                            pageUrl:function(type,page,current){
+                                return "#top";
+                            },
+                        itemTexts: function (type, page, current) {
+                            switch (type) {
+                                case "first":
+                                    return "首页";
+                                case "prev":
+                                    return "上一页";
+                                case "next":
+                                    return "下一页";
+                                case "last":
+                                    return "末页";
+                                case "page":
+                                    return page;
+                            }
+                        },
+                //点击事件
+                onPageClicked: function (event, originalEvent, type, page) {
+                    $("#account_list_div").html("");
+                    load_account_list(page);
+
+                }
+            };
+            $("#account_pages").bootstrapPaginator(options);
+        });
+    }
+    function pager_init(num)
+    {
+        $(function(){
+                        options = {
+                            bootstrapMajorVersion:3, //对应的bootstrap版本
+                            currentPage: 1, //当前页数，这里是用的EL表达式，获取从后台传过来的值
+                            numberOfPages: 10, //每页页数
+                            totalPages:num/10+1, //总页数，这里是用的EL表达式，获取从后台传过来的值
+                            shouldShowPage:true,//是否显示该按钮
+                            pageUrl:function(type,page,current){
+                                return "#top";
+                            },
+                        itemTexts: function (type, page, current) {
+                            switch (type) {
+                                case "first":
+                                    return "首页";
+                                case "prev":
+                                    return "上一页";
+                                case "next":
+                                    return "下一页";
+                                case "last":
+                                    return "末页";
+                                case "page":
+                                    return page;
+                            }
+                        },
+                //点击事件
+                onPageClicked: function (event, originalEvent, type, page) {
+                    $("#myCongress").html("");
+                    load_list(page);
+
+                }
+            };
+
+            $("#pages").bootstrapPaginator(options);
+        });
+    }
+    function account_init()
+    {
+        $.ajax({  
+            url : "{:url('/company/index/getCompanyUnitCount')}",
+            type : "post", 
+            async : true,
+            dataType : "json",
+            data : {}, 
+            success : function(result1){ 
+                console.log(result1);
+                unit_pager_init(result1.data.count);
+            } 
+        });
+        $("#account_list_div").html("");
+        load_account_list(1);
+        
+    }
+    function toMeetingPublish(t_id)
+    {
+        window.location.href = "/company/index/meeting?id=" + t_id;
+    }
+    function add_modules(data)
+    {
+        var html_code = 
+        `
+            <div class="d-flex">
+                <div class=" col-lg-12 offset-md-0 pl-5 pt-1">
+                    <div class="d-flex justify-content-left pt-2">
+                        <h5 >${data['name']}</h5>
+                    </div>
+                    <div class="d-flex pt-1">
+                        <p  class="text-left">
+                            <div style="min-height: 500px; width:100%;background: #765784 ;background:transparent url('/${data['img_url']}') no-repeat;background-size:100%;color:#ffffff " onclick="toMeetingPublish('${data['id']}')"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid bg-warning" style="height: 1px"></div>
+        `;
+        var modules = document.getElementById("modules");
+        modules.innerHTML += html_code;
+
+    }
+    function load_modules()
+    {
+        $.ajax({  
+            url : "{:url('/admin/template/getTemplateList')}",
+            type : "post", 
+            async : false,
+            dataType : "json",
+            data : {}, 
+            success : function(result1){ 
+                // console.log(result1);
+                // unit_pager_init(result1.data.count);
+                console.log(result1);
+                if(result1.errNo == 0)
+                {
+                    console.log(result1.data);
+                    for(var i = 0; i < result1.data.templateList.length; i++)
+                    {
+                        var module_data ={
+                            'id' : result1.data.templateList[i].templateId,
+                            'name' : result1.data.templateList[i].name,
+                            'img_url' : result1.data.templateList[i].imgUrl
+                        };
+                        console.log(module_data['img_url']);
+                        add_modules(module_data);
+                    }
+                    
+                }
+                
+            },
+            error : function(result)
+            {
+                console.log("Server Error");
+            }
+        });
+    }
+    function init_account_state(state)
+    {
+        if(state==0)
+        {
+            $("#verify").text("审核中");
+            $("#verify2").text("您的账号正在审核中，请等待");
+            var nav_publish = document.getElementById("nav_publish");
+            nav_publish.setAttribute("href","return false;");
+            nav_publish.setAttribute("style","opacity: 0.2;");
+            var nav_config = document.getElementById("nav_config");
+            nav_config.setAttribute("href","return false");
+            nav_config.setAttribute("style","opacity: 0.2;");
+        }
+        else if (state==1)
+        {
+            $("#verify").text("审核已通过");
+            $("#verify2").text("您的账号已审核通过，无需操作");
+        }
+        else if (state==2)
+        {
+            $("#verify").text("未审核");
+            $("#verify2").text("您的账号需要审核，请上传审信息（pdf文件或者jpg文件）");
+            str =`
+            <input id="file" type="file"  name="fileUpload" accept="application/pdf,image/*" required onchange="file_change(this);" >
+                        <button class="btn btn-outline-success" onclick="submit_verify()">提交审核信息</button>
+                    
+                        `;
+            
+            $("#uploader").html(str);
+
+            var nav_publish = document.getElementById("nav_publish");
+            nav_publish.setAttribute("href","return false;");
+            nav_publish.setAttribute("style","opacity: 0.2;");
+            var nav_config = document.getElementById("nav_config");
+            nav_config.setAttribute("href","return false");
+            nav_config.setAttribute("style","opacity: 0.2;");
+        }
+    }
+    function init()
+    {
+       
+        
+        //是否登陆
+        var status;
+        $.ajax({ 
+            url : "{:url('/index/index/getLoginStatus')}", 
+            type : "post", 
+            async : false, 
+            dataType: "json",
+            data : {},
+            success : function(result1){ 
+                //alert(result1);
+                status = result1.data.status;
+            }
+        });
+        console.log(status);
+        if( status != 0)
+        {
+            var myurl = null;
+            switch(status)
+            {
+                case 1:myurl= "{:url('/index/user/getUserDetail')}"
+                    window.location.href="/index/user/index";
+                break;
+                case 2:myurl="{:url('/company/index/getCompanyDetail')}"
+                break;
+                case 3:myurl="{:url('/company/index/getCompanyUnitDetail')}"
+                break;
+            }
+            console.log(myurl)
+            $.ajax({ 
+            type : "post", 
+            url : myurl, 
+            async : false, 
+            success : function(result1){ 
+                console.log("Company_Detail")
+                console.log(result1.data)
+                var str_user=` <div id="login_after2" class="p-2">
+                        <button class="btn btn-outline-success border-0"  id='username' ><h5>${result1.data.name}<h5></button>
+                    </div>`
+                document.getElementById('login_after').innerHTML+=str_user;
+                $("#login_before").hide();
+                var company_name = document.getElementById("company_name");
+                company_name.innerHTML = "";
+                company_name.innerHTML += result1.data.name;
+                init_account_state(result1.data.confirm);
+            } 
+            });
+        }
+        else
+        {   
+            window.location.href = "/index/index/index";
+            console.log($("#login_after").html);
+            $("#login_after1").hide();
+            $("#login_after2").hide();
+        }
+
+        $.ajax({  
+            url : "{:url('/company/index/getCompanyMeetingCount')}",
+            type : "post", 
+            async : true,
+            dataType : "json",
+            data : {}, 
+            success : function(result1){ 
+                console.log(result1);
+                pager_init(result1.data.count);
+            } 
+        });
+        load_list(1);
+        account_init();
+        var modules = document.getElementById("modules");
+        modules.innerHTML = "";
+        load_modules();
+    }
+    init();
+</script>
+</html>

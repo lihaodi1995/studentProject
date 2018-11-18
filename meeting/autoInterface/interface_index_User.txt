@@ -1,0 +1,112 @@
+    /*Interface: 获取会员信息
+    Function: getUserDetail
+    Url: index/user/getUserDetail
+    Type: post
+    Input: {}
+    Output: {errNo, msg, data: {userId, email, name, confirm}}
+        errNo: 0, msg: '获取成功', data: {userId, email, name, confirm}
+        errNo: 2, msg: '未以会员身份登录', data: null
+        errNo: 10, msg: '会员不存在', data: null
+    */
+
+    /*Interface: 修改会员信息
+    Function: modifyUserDetail
+    Url: index/user/modifyUserDetail
+    Type: post
+    Input: {name}
+    Output: {errNo, msg}
+        errNo: 0, msg: '修改成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 2, msg: '未以会员身份登录'
+        errNo: 10, msg: '会员不存在'
+    */
+
+    /*Interface: 会员收藏会议
+    Function: subscribeMeeting
+    Url: index/user/subscribeMeeting
+    Type: post
+    Input: {meetingId, type}
+    Output: {errNo, msg}
+        errNo: 0, msg: '收藏成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 2, msg: '未以会员身份登录'
+        errNo: 10, msg: '会员不存在'
+        errNo: 10, msg: '已收藏该会议'
+    NOTE: type: 1-主动收藏, 2-投稿收藏, 3-注册收藏
+    */
+
+    /*Interface: 会员取消收藏会议
+    Function: unsubscribeMeeting
+    Url: index/user/unsubscribeMeeting
+    Type: post
+    Input: {meetingId}
+    Output: {errNo, msg}
+        errNo: 0, msg: '取消收藏成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 2, msg: '未以会员身份登录'
+        errNo: 10, msg: '会员不存在'
+        errNo: 10, msg: '未收藏该会议'
+    */
+
+    /*Interface: 获取会员收藏会议数量
+    Function: getSubscribeMeetingCount
+    Url: index/user/getSubscribeMeetingCount
+    Type: post
+    Input: {type}
+    Output: {errNo, msg, data: {count}}
+        errNo: 0, msg: '获取成功', data: {count}
+        errNo: 2, msg: '未以会员身份登录', data: null
+        errNo: 10, msg: '会员不存在', data: null
+    */
+
+    /*Interface: 获取会员收藏会议列表
+    Function: getSubscribeMeetingList
+    Url: index/user/getSubscribeMeetingList
+    Type: post
+    Input: {limit, page}
+    Output: {errNo, msg, data: {meetingList: array of {meetingId, title, organization, solicitInfo, meetingBeginDate, type, status, place}}}
+        errNo: 0, msg: '获取成功', data: {meetingList: array of {meetingId, title, organization, solicitInfo, meetingBeginDate, type, status, place}}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以会员身份登录', data: null
+        errNo: 3, msg: '分页信息错误', data: null
+        errNo: 10, msg: '会员不存在', data: null
+    NOTE: status: 0-截稿日期之前, 1-修改稿截止日期之前, 2-录用通知日期之前, 3-注册开始日期之前, 4-注册结束日期之前, 5-会议开始日期之前, 6-会议结束日期之前, 7-会议结束日期之后
+    */
+
+    /*Interface: 获取会员收藏会议状态
+    Function: getSubscribeMeetingStatus
+    Url: index/user/getSubscribeMeetingStatus
+    Type: post
+    Input: {meetingId}
+    Output: {errNo, msg, data: {status}}
+        errNo: 0, msg: '获取成功', data: {status}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以会员身份登录', data: null
+        errNo: 10, msg: '会员不存在', data: null
+    NOTE: status: 0-未收藏, 1-主动收藏, 2-投稿收藏, 3-注册收藏
+    */
+
+    /*Interface: 获取会员投稿信息
+   Function: getSubmissionDeatil
+   Url: index/user/getSubmissionDeatil
+   Type: post
+   Input: {}
+   Output: {errNo, msg, data: { submissionDeatil:array of {userId,manuscriptId,meetingId,manuscriptInfoId,type,url,createTime,updateTime,author,title,organization,abstract,modifyInfo,result,suggestion}}
+       errNo: 0, msg: '获取成功', data: {submissionDeatil:array of {userId,manuscriptId,meetingId,manuscriptInfoId,type,url,createTime,updateTime,author,title,organization,abstract,modifyInfo,result,suggestion}}
+       errNo: 2, msg: '未以会员身份登录', data: null
+       errNo: 10, msg: '会员不存在', data: null
+
+   */
+
+    /*Interface: 获取会员注册信息
+   Function: getRegisterDeatil
+   Url: index/user/getRegisterDeatil
+   Type: post
+   Input: {}
+   Output: {errNo, msg, data: { registerDeatil:array of {userId,manuscriptId,meetingId,manuscriptInfoId,type,url,createTime,updateTime,author,title,organization,abstract,modifyInfo,result,suggestion}}
+       errNo: 0, msg: '获取成功', data: {registerDeatil:array of {userId,manuscriptId,meetingId,manuscriptInfoId,type,url,createTime,updateTime,author,title,organization,abstract,modifyInfo,result,suggestion}}
+       errNo: 2, msg: '未以会员身份登录', data: null
+       errNo: 10, msg: '会员不存在', data: null
+
+   */
+

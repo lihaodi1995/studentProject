@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    
+    <title>会议注册详情</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                    <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="/company/index/index.html">用户中心</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+                    
+                    <div id="login_after" class="d-flex flex-row-reverse" >     
+                            <div id="login_after1" class="p-2"><button class="btn btn-outline-success" onclick=logout() >注销</button></div>
+                            
+
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container mt-5">
+    
+    <button  class="btn btn-outline-success mr-3" onclick="download()">下载注册凭证</button>
+    <button  class="btn btn-outline-success mr-3" onclick="submit(2)">同意注册审核</button>
+    <button  class="btn btn-outline-danger" onclick="submit(3)">拒绝注册审核</button>
+    <form class="mt-3">
+        
+            <div class="form-group">
+                <h5 class="mr-5">发起人姓名:  </h5>
+                <input  id="name"  type="text"  class="form-control"  readonly>
+            </div>
+            <div  class="form-group">
+                    <h5 class="mr-5">注册类型 </h5>
+                    <input  id="type"  type="text"  class="form-control"  readonly>
+            </div>
+            <div  class="form-group">
+                <h5 class="mr-5">具体注册者信息:  </h5>
+            </div>
+
+            <div id="authors" class="container">
+                
+            </div>
+            <div class="form-group" >
+                    <h5 class="mr-5">申请日期:  </h5>
+                    <input id="date" type="text" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                    
+            </div>
+            
+    </form>
+    
+
+        
+    </div>
+    <footer id="footer" class="pt-5" >
+        <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+            <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+        </div>
+        <div class="container" >
+            <div class="row hidden-xs">
+                <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                    <dt class=" pb-1">小组信息：</dt>
+                    
+                    <dd>善良之队</dd>
+                    <dd>组号：12组</dd>
+                    <dd>成员：9名</dd>
+                    
+                </dl>
+                
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">赞助商:</dt>
+                    
+                    <dd>北航软院教师：THB</dd>
+                    
+                </dl>
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">相关协作系统</dt>
+                    
+                    <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                    <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                    
+                </dl>
+
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">联系我们</dt>
+                    
+                    <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                    <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                    <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright container text-center">
+                Copyright  2018 善良之队 12组<br><br>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-paginator.js"></script>
+    <script>
+
+        function getUrlParam (name) {
+            let url = decodeURIComponent(window.location.href);
+            name = name.replace(/[\[\]]/g, "\\$&");
+            let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+            let results = regex.exec(url);
+            if (!results||!results[2]) {
+                return '';
+            }
+            return results[2].replace(/\+/g, " ");
+        }
+
+        var registerId=getUrlParam('registerId')
+        var file_url 
+        var meetingId
+        function submit(status)
+        {
+            $.ajax({
+                type: 'post',
+                url: "{:url('meeting/register/checkRegister')}",
+                data:{
+                    "registerId":registerId,
+                    "check":status
+                },
+                success:function(result){
+                    if(result.errNo==0){
+                        if(status==2)
+                        {
+                            alert("已同意注册会议")
+                        }
+                        else if (status==3)
+                        {
+                            alert("已拒绝注册会议")
+                        }
+                        window.location.href="/meeting/register/list?meetingId="+meetingId
+                        
+                    }
+
+                }
+            }) 
+        }
+        function download()
+        {
+            console.log(file_url)
+            var url =file_url
+            strUrl = "{:url('/index/index/download')}";
+            strUrl += '?fileUrl=' + encodeURIComponent(url);
+            window.location.href = strUrl;
+        }
+
+        
+        function logout()
+        {
+            $.post('/index/login/logout',function(result){
+                location.reload();
+            });
+        }
+        function login()
+        {
+            window.location.href='/index/login/index'
+        }
+        function sign_up()
+        {
+            window.location.href='/index/login/signup'
+        }
+        
+        function init_detail()
+        {
+            $.ajax({
+                type: 'post',
+                url: "{:url('meeting/register/getRegisterDetail')}",
+                data:{
+                    "registerId":registerId
+                },
+                success:function(result){
+                    if(result.errNo==0){
+                        
+                        $("#name").val(result.data.name)
+                        $("#date").val(result.data.createTime)
+                        if(result.data.type==1)
+                        {
+                            $("#type").val("投稿参会")
+                        }
+                        else(result.data.type==2)
+                        {
+                            $("#type").val("聆听参会")
+                        }
+                        meetingId = result.data.meetingId
+                        file_url=result.data.url
+                    }
+                    else
+                    {
+                        alert(result.msg)
+                    }
+                }
+            }) 
+            $.ajax({
+                type: 'post',
+                url: "{:url('meeting/register/getRegisterPersonList')}",
+                data:{
+                    "registerId":registerId
+                },
+                success:function(result){
+                    if(result.errNo==0){
+                        var infos=result.data.registerPersonList
+                        for(var i=0;i<infos.length;i++)
+                        {
+                            var str =  `
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">姓名</span>
+                                </div>
+                                <input class="form-control" type="text" value="${infos[i].name}" readonly>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">性别</span>
+                                </div>
+                                <input  class="form-control" type="text" value="${infos[i].gender}" readonly>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">是否住宿</span>
+                                </div>
+                                <input  class="form-control" type="text" value="${infos[i].accomodation}" readonly>
+                            `
+                            var temp =document.createElement("div")
+                            temp.setAttribute("class","input-group mb-3")
+                            temp.innerHTML = str
+                            author_content =document.getElementById('authors')
+                            author_content.appendChild(temp)
+                        }
+                    }
+
+                }
+            }) 
+        }
+        
+        function init()
+        {       
+            //是否登陆
+            var status
+            $.ajax({ 
+                type : "post", 
+                url : "/index/index/getLoginStatus", 
+                async : false, 
+                success : function(result){ 
+                    status = result.data.status
+                } 
+                });
+            console.log(status)
+            if(status!=2 &&status!=3)
+            {
+                window.location.href='/index/index/index'
+            }
+            if(status!=0){
+                var myurl = null;
+                switch(status){
+                    case 1:myurl='/index/user/getUserDetail'
+                    break
+                    case 2:myurl='/company/index/getCompanyDetail'
+                    break
+                    case 3:myurl='/company/index/getCompanyUnitDetail'
+                    break
+                }
+                console.log(myurl)
+                $.ajax({ 
+                type : "post", 
+                url : myurl, 
+                async : false, 
+                success : function(result){ 
+                    var str_user=` <div id="login_after2" class="p-2">
+                            <button class="btn btn-outline-success border-0"  id='username' ><h5>${result.data.name}<h5></button>
+                        </div>`
+                    document.getElementById('login_after').innerHTML+=str_user
+                    $("#login_before").hide()
+                    init_detail()
+                } 
+                });
+            }
+            else
+            {   
+                $("#login_after1").hide()
+                $("#login_after2").hide()
+            }
+
+            
+        }
+        init()
+    </script>
+</body>
+
+</html>

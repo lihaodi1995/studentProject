@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/assets/js/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <title>学术会议-登录</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link " href="/index/index/index">首页</a>
+                    </li>
+                    <li class="nav-item ml-2" >
+                        <a class="nav-link h4" style="font-weight: bold" href="#">用户中心</a>
+                    </li>
+                    <!--
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">发现</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="#">链接</a>
+                    </li>
+                    <li class="nav-item dropdown ml-4">
+                        <a class="nav-link dropdown-toggle" style="font-size:20px;" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">功能选择</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">选择</a>
+                            <a class="dropdown-item" href="#">选择</a>
+                        </div>
+                    </li>
+                    -->
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">
+                    <div id="login_before">
+                        <!--button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2">登录</button-->
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick="jumpToLogin()">注册</button>
+                    </div>
+                    <script type="text/javascript">
+                        function jumpToLogin()
+                        {
+                            window.location.href='/index/login/signup';
+                        }
+                    </script>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div role="tabpanel" class="card">
+        <!-- Nav tabs -->
+        <div class="card-header">
+            <ul class="nav nav-tabs mb-0 mt-0 " role="tablist">
+                <li id="unit_outer" role="presentation" class="active col-lg-3 offset-md-3 nav-item text-center"  >
+                    <a id="unit_li" class="active text-muted nav-link mb-0 mt-0 pt-3 pb-1" href="#unit" aria-controls="unit" role="tab" data-toggle="tab"  onclick="">单位登录</a>
+                </li>
+                <!--<li role="presentation" class="col-lg-2 "></li>-->
+                <li id="person_outer" role="presentation" class="col-lg-3 nav-item text-center" >
+                    <a  id="person_li" class="nav-link text-muted mb-0 mt-0 pt-3 pb-1" href="#person" aria-controls="person" role="tab" data-toggle="tab"  onclick="">个人登录</a>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            function changeColor(id)
+            {
+                var unit_li = document.getElementById("unit_outer");
+                var person_li = document.getElementById("person_outer");
+                
+                unit_li.setAttribute("style","background-color: lightslategrey");
+                person_li.setAttribute("style","background-color: lightslategrey");
+                if(id == 1)
+                {
+                    unit_li.setAttribute("style","background-color: steelblue");
+                }
+                else
+                {
+                    person_li.setAttribute("style","background-color: steelblue");
+                }
+                //var click_li = document.getElementById(id);
+                //alert(click_li);
+                //click_li.setAttribute("style","background-color: steelblue");
+            }
+        </script>
+    
+        <!-- Tab panes -->
+        <div class="container tab-content pt-2 mt-4">
+            <!--单位登录部分-->
+            <div role="tabpanel" class="tab-pane active" id="unit">
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6">
+                            <label for="account">账号：</label>
+                            <input type="text" class="form-control" name="" id="unit_account" aria-describedby="helpId_ac1" placeholder="单位账户">
+                            <small id="helpId_ac1" class="form-text text-muted">此栏填写单位注册时的账号或单位分配的账号</small>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container单位账号-->
+
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6">
+                            <label for="password">密码：</label>
+                            <input type="password" class="form-control" name="" id="unit_pwd" aria-describedby="helpId_pwd1" placeholder="密码">
+                            <small id="helpId_pwd1" class="form-text text-muted"></small>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container单位密码-->
+
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6 text-center">
+                            <button id="unit_button" class="btn btn-lg btn-primary">登录</button>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container单位登录按钮-->
+                <script type="text/javascript">
+                    $(function(){
+		                $("#unit_button").click(function(){
+                        // function unitLogin()
+                        // {
+                        var ac_id = document.getElementById("unit_account");
+                        var account = ac_id.value;
+                        var pwd_id = document.getElementById("unit_pwd");
+                        var password = pwd_id.value;
+                        //alert(ac);
+                        //alert(pwd);
+                        var jsonData = {account: account, password: password};//
+			            //alert(JSON.stringify(jsonData));
+                        jQuery.noConflict();
+                        // 使用 jQuery
+                        jQuery("div p").hide();
+                        $.ajax({
+                                url: "http://123.206.34.20/index/login/companyLogin",
+                                type: "post",
+                                dataType: "json",
+                                //contentType: "application/json",
+                                data: jsonData,
+                                success: function(data){
+                                    if (data['errNo'] == 0) {
+                                        $("#textWarning").empty();
+                                        $("#textWarning").append("<br />");
+                                        alert('登录成功');
+                                        window.location.href = "/company/index/index.html";
+                                    }
+                                    else {
+                                        $("#textWarning").empty();
+                                        $("#textWarning").append(data['msg']);
+                                        alert(data['msg']);
+                                        //$("#textWarning").append("<br />");
+                                        //alert('注册成功');
+                                    }
+                                },
+                                error: function(data){
+                                    console.log('error');
+                                    /*
+                                    $("#textWarning").empty();
+                                    $("#textWarning").append("data['msg']");
+                                    var status = data['status']
+                                    alert(status);
+                                    */
+                                }
+                            });                       
+                        })
+                    });
+                    //}
+                </script>
+            </div><!--单位登录部分结束-->
+
+            <!--个人登录部分-->
+            <div role="tabpanel" class="tab-pane" id="person">
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6">
+                            <label for="account">账号：</label>
+                            <input type="email" checked class="form-control" name="" id="person_account" aria-describedby="helpId_ac2" placeholder="邮箱">
+                            <small id="helpId2" class="form-text text-muted">此栏填写邮箱账号</small>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container个人账户-->
+                
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6">
+                            <label for="password">密码：</label>
+                            <input type="password" class="form-control" name="" id="person_pwd" aria-describedby="helpId_pwd2" placeholder="密码">
+                            <small id="helpId_pwd1" class="form-text text-muted"></small>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container个人密码-->
+                
+                <div class ="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="form-group col-md-6 text-center">
+                            <button class="btn btn-lg btn-primary" onclick="personLogin()">登录</button>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div><!--row-->
+                </div><!--container个人登录按钮-->
+                <script>
+                    function personLogin()
+                    {
+                        var ac_id = document.getElementById("person_account");
+                        var email = ac_id.value;
+                        var pwd_id = document.getElementById("person_pwd");
+                        var password = pwd_id.value;
+                        //alert(ac);
+                        //alert(pwd);
+                        var jsonData = {email: email, password: password};//
+			            //alert(JSON.stringify(jsonData));
+                        jQuery.noConflict();
+                        jQuery("div p").hide();
+                        $.ajax({
+                        url: "http://123.206.34.20/index/login/userLogin",
+                        type: "post",
+                        dataType: "json",
+                        //contentType: "application/json",
+                        data: jsonData,
+                        success: function(data){
+                            if (data['errNo'] == 0) {
+                                $("#textWarning").empty();
+                                $("#textWarning").append("<br />");
+                                alert('登录成功');
+                                window.location.href = "/index/user/index.html"; 
+                                // 应该到用户页 ; 
+                            }
+                            else {
+                                $("#textWarning").empty();
+                                $("#textWarning").append(data['msg']);
+                                alert(data['msg']);
+                                //$("#textWarning").append("<br />");
+                                //alert('注册成功');
+                            }
+                        },
+                        error: function(data){
+                            console.log('error');
+                            /*
+                            $("#textWarning").empty();
+                            $("#textWarning").append("data['msg']");
+                            var status = data['status']
+                            alert(status);
+                            */
+                            }
+                        })
+                    }
+                </script>
+            </div><!--个人登录部分结束-->
+
+        </div>
+    </div>
+    <footer id="footer" class="pt-5" >
+            <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+                <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+            </div>
+            <div class="container" >
+                <div class="row hidden-xs">
+                    <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                        <dt class=" pb-1">小组信息：</dt>
+                        
+                        <dd>善良之队</dd>
+                        <dd>组号：12组</dd>
+                        <dd>成员：9名</dd>
+                        
+                    </dl>
+                    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">赞助商:</dt>
+                        
+                        <dd>北航软院教师：THB</dd>
+                        
+                    </dl>
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">相关协作系统</dt>
+                        
+                        <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                        <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                        
+                    </dl>
+    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">联系我们</dt>
+                        
+                        <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                        <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                        <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                    </dl>
+                </div>
+            </div>
+            <hr>
+            <div class="copyright container text-center">
+                    Copyright  2018 善良之队 12组<br><br>
+            </div>
+        </footer>
+<!--
+    <div class="footer  page-footer font-small unique-color-dark mt-4">
+        <div style="background-color: #868383;">
+            <div class="container">
+                <div class="row py-4 d-flex align-items-center">
+                    <div class="col-md-6 offset-md-3 col-lg-5 text-center text-md-left mb-4 mb-md-0 text-uppercase">
+                        <h6 class="mb-0 text-center">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center text-md-left mt-5">
+            <div class="row mt-3">
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">小组信息</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>小组名称：善良之队</p>
+                    <p>小组人数：9名</p>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">我们所在</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p> 学院路 37号，海淀区</p>
+                    <p> 北京航空航天大学</p>
+                    <p> 软件学院</p>
+
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">有关会议平台</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="http://www.medmeeting.org/">会务通</a>
+                    </p>
+                    <p>
+                        <a href="http://www.meeting163.com/index.asp">中国会议网</a>
+                    </p>
+                    <p>
+                        <a href="http://apsec2018.org/">Apsec2018</a>
+                    </p>
+                    <p>
+                        <a href="http://211.71.15.42:9011/">小组登录</a>
+                    </p>
+
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase font-weight-bold">联系我们</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fa fa-home mr-3"></i>北京航空航天大学</p>
+                    <p>
+                        <i class="fa fa-envelope mr-3"></i>info@example.com</p>
+                    <p>
+                        <i class="fa fa-phone mr-3"></i>12345678</p>
+                    <p>
+                        <i class="fa fa-print mr-3"></i>123577818</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

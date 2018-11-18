@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    
+    <title>投稿</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                    <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="/company/index/index.html">用户中心</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 mr-5 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+                    
+                    <div id="login_after" class="d-flex flex-row-reverse" >     
+                            <div id="login_after1" class="p-2"><button class="btn btn-outline-success" onclick=logout() >注销</button></div>
+                            
+
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container mt-5">
+    <iframe name="formsubmit" style="display:none;">    
+    </iframe>
+    <form onsubmit="return post_data()" target="formsubmit">
+        
+            <div class="form-group">
+                <h5 class="mr-5">标题:  </h5>
+                <input  id="title"  type="text"  class="form-control" required>
+                </div>
+            <div  class="form-group">
+                <h5 class="mr-5">作者信息:  </h5>
+            </div>
+
+            <div id="authors" class="container">
+
+                <div id="1" class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">第一作者姓名</span>
+                      </div>
+                    <input id="name-1" class="form-control" type="text" required>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">第一作者邮箱</span>
+                      </div>
+                    <input id="email-1" class="form-control" type="email" required>
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">第一作者单位</span>
+                      </div>
+                    <input id="org-1" class="form-control" type="text" required>
+                    <button  id='add_button' class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=add_author()>+</button>
+                </div>
+            </div>
+            <div class="form-group" >
+                    <h5 class="mr-5">投稿单位:  </h5>
+                    <input id="organization" type="text" class="form-control" required>
+            </div>
+            <div class="form-group" >
+                    <h5 class="mr-5">摘要:  </h5>
+                    <textarea  id="abstract"  rows="5" class="form-control" required ></textarea>
+            </div>
+            <div  id="verify_status" class="form-group" >
+                    <h5  class="mr-5">更改信息:  </h5>
+                    <textarea  id="verifier"  rows="5" class="form-control" required placeholder="请在此处填入修改处" ></textarea>
+            </div>
+            <div class="form-group" >
+                    <input id="file" type="file"  name="fileUpload" accept="application/pdf,application/doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required onchange="file_change(this);" >
+            </div>
+            <div class="form-group">
+                    <button type="submit" class="btn btn-outline-success" >提交</button>
+            </div>
+            
+    </form>
+
+        
+    </div>
+
+    <footer id="footer" class="pt-5" >
+        <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+            <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+        </div>
+        <div class="container" >
+            <div class="row hidden-xs">
+                <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                    <dt class=" pb-1">小组信息：</dt>
+                    
+                    <dd>善良之队</dd>
+                    <dd>组号：12组</dd>
+                    <dd>成员：9名</dd>
+                    
+                </dl>
+                
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">赞助商:</dt>
+                    
+                    <dd>北航软院教师：THB</dd>
+                    
+                </dl>
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">相关协作系统</dt>
+                    
+                    <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                    <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                    
+                </dl>
+
+                <dl class="col-lg-3 site-link pb-1">
+                    <dt class=" pb-1">联系我们</dt>
+                    
+                    <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                    <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                    <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="copyright container text-center">
+                Copyright  2018 善良之队 12组<br><br>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src = "/static/js/bootstrap-paginator.js"></script>
+    <script>
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return (r[2]); return null;
+        }
+        
+        var authors_num = 1
+        var chnNumChar = ["零","一","二","三","四","五","六","七","八","九"];
+        var chnUnitSection = ["","万","亿","万亿","亿亿"];
+        var chnUnitChar = ["","十","百","千"]; 
+        var verifierstatus=false
+        var meetingId=getUrlParam('meetingId')
+        function SectionToChinese(section){
+            var strIns = '', chnStr = '';
+            var unitPos = 0;
+            var zero = true;
+            while(section > 0){
+                var v = section % 10;
+                if(v === 0){
+                    if(!zero){
+                        zero = true;
+                        chnStr = chnNumChar[v] + chnStr;
+                    }
+                }else{
+                    zero = false;
+                    strIns = chnNumChar[v];
+                    strIns += chnUnitChar[unitPos];
+                    chnStr = strIns + chnStr;
+                }
+                unitPos++;
+                section = Math.floor(section / 10);
+            }
+            return chnStr;
+        }
+        function file_change(target)
+        {
+            var fileSize = 0;
+            var isIE=false    
+            if (isIE && !target.files) 
+            {       
+                var filePath = target.value;       
+                var fileSystem = new ActiveXObject("Scripting.FileSystemObject");          
+                var file = fileSystem.GetFile (filePath);       
+                fileSize = file.Size;      
+            } 
+            else 
+            {      
+                fileSize = target.files[0].size;       
+             }     
+            var size = fileSize / 1024;
+                  
+            if(size>1024*5)
+            {    
+                alert("附件不能大于5M");
+                target.value="";  
+                return  
+            }  
+        }
+        function post_data()
+        {   
+            var file = document.getElementById('file').files[0];
+            if (file == null) {
+                alert('请选择上传的文件。');
+                return;
+            }
+            var fileName = file.name.trim();
+            console.log('fileName: ' + fileName);
+            var fileUrl =null
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('meetingId', meetingId);
+            formData.append('fileName', fileName);
+            $.ajax({
+                type: 'post',
+                url: "{:url('meeting/manuscript/uploadManuscript')}",
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                async: false,
+                success: function(data) {
+                    fileUrl = data['data']['url'];
+                    console.log('fileUrl: ' + fileUrl);
+                }
+            })
+
+            
+
+            var authors = new Array(authors_num)
+            for(var i=1;i<=authors_num;i++)
+            {
+                var temp ={
+                    "name":$("#name-"+i).val(),
+                    "email":$("#email-"+i).val(),
+                    "org":$("#org-"+i).val(),
+                }
+                authors[i-1]=(temp)
+            }
+            authors = JSON.stringify(authors);
+            var temp
+            if(verifierstatus)
+            {
+                temp = {
+                    "meetingId":meetingId,
+                    "type":2,
+                    "url":fileUrl,
+                    "author":authors,
+                    "title":$("#title").val(),
+                    "organization":$("#organization").val(),
+                    "abstract":$("#abstract").val(),
+                    "modify_info":$("#verifier").val()
+                }
+            }
+            else
+            {
+                temp = {
+                    "meetingId":meetingId,
+                    "type":1,
+                    "url":fileUrl,
+                    "author":authors,
+                    "title":$("#title").val(),
+                    "organization":$("#organization").val(),
+                    "abstract":$("#abstract").val()
+                }
+            }
+            
+           
+            $.ajax({
+                type: 'post',
+                url: "{:url('meeting/manuscript/createManuscript')}",
+                data:temp,
+                success:function(result){
+                    if(result.errNo==0){
+                        alert("投稿成功!")
+                        $.ajax({
+                            type: 'post',
+                            url: "{:url('index/user/subscribeMeeting')}",
+                            data:{
+                                "meetingId":meetingId,
+                                "type":"2"
+                            },
+                            success:function(result){
+                                window.history.go(-1);
+                            }
+                        })
+                        
+                    }
+                    else{
+                        alert(result.msg)
+                    }
+                }
+
+            })   
+                
+            
+            return false
+        }
+        function logout()
+        {
+            $.post('/index/login/logout',function(result){
+                location.reload();
+            });
+        }
+        function login()
+        {
+            window.location.href='/index/login/index'
+        }
+        function sign_up()
+        {
+            window.location.href='/index/login/signup'
+        }
+        
+        function add_author()
+        {   
+            authors_num+=1
+            $('#add_button').remove()
+            $('#remove_button').remove()
+            var str =  `
+                <div class="input-group-prepend">
+                    <span class="input-group-text">第${SectionToChinese(authors_num)}作者姓名</span>
+                </div>
+                <input id=${"name-"+authors_num} class="form-control" type="text" required>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">第${SectionToChinese(authors_num)}作者邮箱</span>
+                </div>
+                <input id=${"email-"+authors_num} class="form-control" type="email" required>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">第${SectionToChinese(authors_num)}作者单位</span>
+                </div>
+                <input id=${"org-"+authors_num} class="form-control" type="text" required>
+                <button id='add_button' class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=add_author()>+</button>
+                <button id='remove_button' class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=remove_author()>-</button>
+            `
+            var temp =document.createElement("div")
+            temp.setAttribute("id",authors_num)
+            temp.setAttribute("class","input-group mb-3")
+            temp.innerHTML = str
+            author_content =document.getElementById('authors')
+            author_content.appendChild(temp)
+        }
+        function remove_author()
+        {
+            $("#"+authors_num).remove()
+            authors_num-=1
+            if (authors_num>1)
+            {
+                var str =`<button id='add_button' class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=add_author()>+</button>
+                <button id='remove_button' class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=remove_author()>-</button>
+                `
+                var button_add = document.createElement("button")
+                button_add.setAttribute("id","add_button")
+                button_add.setAttribute("class","btn btn-outline-success my-2 my-sm-0 ml-1 pt-2")
+                button_add.setAttribute("onclick","add_author()")
+                button_add.innerHTML="+"
+                
+                var button_remove = document.createElement("button")
+                button_remove.setAttribute("id","remove_button")
+                button_remove.setAttribute("class","btn btn-outline-success my-2 my-sm-0 ml-1 pt-2")
+                button_remove.setAttribute("onclick","remove_author()")
+                button_remove.innerHTML="-"
+
+                author_content =document.getElementById(authors_num)
+                author_content.appendChild(button_remove)
+            }
+            else
+            {
+                var str =`<button id='add_button' class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=add_author()>+</button>
+                `
+                var button_add = document.createElement("button")
+                button_add.setAttribute("id","add_button")
+                button_add.setAttribute("class","btn btn-outline-success my-2 my-sm-0 ml-1 pt-2")
+                button_add.setAttribute("onclick","add_author()")
+                button_add.innerHTML="+"
+
+                author_content =document.getElementById(authors_num)
+                author_content.appendChild(button_add)
+            }
+            
+            
+        }
+        function init_detail()
+        {
+            $("#verify_status").hide()
+            $.ajax({
+                type:'post',
+                url:'/meeting/index/getMeetingDetail',
+                data:{
+                    "meetingId":meetingId
+                },
+                async : false, 
+                success:function(result){
+                    console.log(result)
+                    if(result.errNo==0)
+                    {
+                        if(result.data.status==1 )
+                        {
+                            verifierstatus=true
+                        }
+                    }
+                }
+            })  
+            console.log(verifierstatus)
+            if(verifierstatus)
+            {
+                $("#verify_status").show()
+            }
+            else
+            {
+                $("#verify_status").remove()
+            }
+            $.ajax({
+                type: 'post',
+                url: "{:url('meeting/manuscript/getUserMeetingManuscriptDetail')}",
+                data:{
+                    "meetingId":meetingId
+                },
+                success:function(result){
+                    if(result.errNo==0){
+                        data = result.data
+                        console.log(data)
+                        $("#title").attr("value",data.title)
+                        $("#abstract").val(data.abstract)
+                        if(verifierstatus)
+                        {
+                            $("#verifier").val(data.modify_info)
+                        }
+                        
+                        $("#organization").attr("value",data.organization)
+
+                        authors=JSON.parse(data.author)
+                        $("#name-1").attr("value",authors[0].name)
+                        $("#email-1").attr("value",authors[0].email)
+                        $("#org-1").attr("value",authors[0].org)
+                        for(var i=2;i<=authors.length;i++)
+                        {
+                            add_author()
+                            $("#name-"+i).attr("value",authors[i-1].name)
+                            $("#email-"+i).attr("value",authors[i-1].email)
+                            $("#org-"+i).attr("value",authors[i-1].org)
+                        }
+                        
+                    }
+
+                }
+            }) 
+        }
+        function init()
+        {       
+            //是否登陆
+            var status
+            $.ajax({ 
+                type : "post", 
+                url : "/index/index/getLoginStatus", 
+                async : false, 
+                success : function(result){ 
+                    status = result.data.status
+                } 
+                });
+            console.log(status)
+            if(status!=1)
+            {
+                window.location.href='/index/login/index'
+            }
+            if(status!=0){
+                var myurl = null;
+                switch(status){
+                    case 1:myurl='/index/user/getUserDetail'
+                    break
+                    case 2:myurl='/company/index/getCompanyDetail'
+                    break
+                    case 3:myurl='/company/index/getCompanyUnitDetail'
+                    break
+                }
+                console.log(myurl)
+                $.ajax({ 
+                type : "post", 
+                url : myurl, 
+                async : false, 
+                success : function(result){ 
+                    
+                    var str_user=` <div id="login_after2" class="p-2">
+                            <button class="btn btn-outline-success border-0"  id='username' ><h5>${result.data.name}<h5></button>
+                        </div>`
+                    document.getElementById('login_after').innerHTML+=str_user
+                    $("#login_before").hide()
+                    init_detail()
+                } 
+                });
+            }
+            else
+            {   
+                $("#login_after1").hide()
+                $("#login_after2").hide()
+            }
+
+            
+        }
+        init()
+    </script>
+</body>
+
+</html>

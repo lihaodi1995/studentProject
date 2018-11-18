@@ -1,0 +1,48 @@
+    /*Interface: 创建评审信息
+    Function: createReview
+    Url: company/review/createReview
+    Type: post
+    Input: {manuscriptId, result, suggestion}
+    Output: {errNo, msg}
+        errNo: 0, msg: '创建成功'
+        errNo: 1, msg: '参数错误;
+        errNo: 10, msg: '稿件不存在'
+        errNo: 10, msg: '邮件发送失败'
+    NOTE: result: 0-未录用, 1-录用, 2-修改后录用
+    */
+
+    /*Interface: 通过稿件ID获取评审信息
+    Function: getReviewDetailByManuscriptId
+    Url: company/review/getReviewDetailByManuscriptId
+    Type: post
+    Input: {manuscriptId}
+    Output: {errNo, msg, data: {reviewId, manuscriptId, result, suggestion, createTime, updateTime}}
+        errNo: 0, msg: '获取成功', data: {reviewId, manuscriptId, result, suggestion, createTime, updateTime}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '评审信息不存在', data: null
+    */
+
+    /*Interface: 获取评审信息
+    Function: getReviewDetail
+    Url: company/review/getReviewDetail
+    Type: post
+    Input: {reviewId}
+    Output: {errNo, msg, data: {reviewId, manuscriptId, result, suggestion, createTime, updateTime}}
+        errNo: 0, msg: '获取成功', data: {reviewId, manuscriptId, result, suggestion, createTime, updateTime}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '稿件不存在', data: null
+        errNo: 10, msg: '评审信息不存在', data: null
+    */
+
+    /*Interface: 通过稿件ID通过邮件向用户评审信息(已改为对内接口）
+    Function: sendReviewResult
+    Url: company/review/sendReviewResult
+    Type: post
+    Input: {manuscriptId}
+    Output: {errNo, msg, data }
+        errNo: 0, msg: '发送成功', data: null
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '稿件不存在', data: null
+        errNo: 10, msg: '评审信息不存在', data: null
+    */
+

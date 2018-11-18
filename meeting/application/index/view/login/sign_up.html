@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/assets/js/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <!--link rel="stylesheet" href="https://baidu/css/bootstrap.min.css" type="text/css" /-->
+    <title>注册</title>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-2">
+                        <a class="nav-link h4 " style="font-weight: bold" href="http://123.206.34.20/#">首页</a>
+                    </li>
+                </ul>
+
+                <div class="form-inline my-2  mr-5 my-lg-0 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                    </div>
+                    <!-- <script type="text/javascript">  
+                        $(document).ready(function()
+                        {
+                            $.ajax({
+                                url:,
+                                type:"post",
+                                success:function(data){
+                                $(login_before)
+                                }
+                            })
+                        
+                        })
+                    </script>  -->
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container" style="margin-top: 50px;">
+        <div class="col-md-6 offset-md-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    <ul class="nav nav-tabs " id="myTab">
+                        <li class="nav-item pl-5 active">
+                            <a class="active nav-link text-muted " data-toggle="tab" href="#company">单位用户注册</a>
+                        </li>
+                        <li class="nav-item pl-5">
+                            <a class="nav-link text-muted" data-toggle="tab" href="#user">个人用户注册</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content mb-5">
+                    <div class="tab-pane active container" id="company">
+                        <div>
+                            <h2 class="form-signin-heading">单位注册</h2>
+                            <div class="form-group">
+                                <label for="inputName">单位名称</label>
+                                <input type="text" id="inputName" class="form-control" placeholder="单位名称">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAccount">用户名</label>
+                                <input type="text" id="inputAccount" class="form-control" placeholder="用户名" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword">密码</label>
+                                <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reinputPassword">再次输入密码</label>
+                                <input type="password" id="reinputPassword" class="form-control" placeholder="再次输入密码" required>
+                            </div>
+                            <div class="form-group">
+                                <button id="companySend" class="btn btn-lg btn-primary btn-block">注册</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $(function () {
+                            $("#companySend").click(function () {
+                                var account = document.getElementById("inputAccount").value;
+                                var password = document.getElementById("inputPassword").value;
+                                var rePassword = document.getElementById("reinputPassword").value;
+                                var name = document.getElementById("inputName").value;
+                                var company_data = { account: account, password: password, rePassword: rePassword, name: name };
+                                jQuery.noConflict();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "http://123.206.34.20/index/login/companyRegister",
+                                    dataType: "json",
+                                    data: company_data,
+                                    success: function (data) {
+                                        if (data['errNo'] == 0) {
+                                            alert('注册成功');
+                                            window.location.href = "/company/index/index.html";
+                                        }
+                                        else {
+                                            alert(data['msg']);
+                                        }
+                                    },
+                                    error: function (data) {
+                                        console.log(data['errNo']);
+                                    }
+                                });
+                            });
+                        })
+                    </script>
+                    <div class=" tab-pane fade container" id="user">
+                        <div>
+                            <h2 class="form-signin-heading">个人注册</h2>
+                            <div class="form-group">
+                                <label for="inputEmail2">注册邮箱</label>
+                                <input type="email" id="inputEmail2" class="form-control" placeholder="邮箱" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword2">密码</label>
+                                <input type="password" id="inputPassword2" class="form-control" placeholder="密码" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reinputPassword2">再次输入密码</label>
+                                <input type="password" id="reinputPassword2" class="form-control" placeholder="再次输入密码" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName2">姓名</label>
+                                <input type="text" id="inputName2" class="form-control" placeholder="姓名">
+                            </div>
+                            <div class="form-group">
+                                <button id="userSend" class="btn btn-lg btn-primary btn-block">注册
+                                    <tton>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        $(function () {
+                            $("#userSend").click(function () {
+                                var email = document.getElementById("inputEmail2").value;
+                                var password = document.getElementById("inputPassword2").value;
+                                var rePassword = document.getElementById("reinputPassword2").value;
+                                var name = document.getElementById("inputName2").value;
+                                var data_user = { email: email, password: password, rePassword: rePassword, name: name };
+                                jQuery.noConflict();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "http://123.206.34.20/index/login/userRegister",
+                                    dataType: "json",
+                                    data: data_user,
+                                    success: function (data) {
+                                        if (data['errNo'] == 0) {
+                                            alert('注册成功');
+                                            window.location.href = "http://123.206.34.20/#";
+                                        }
+                                        else {
+                                            alert(data['msg']);
+                                        }
+                                    },
+                                    error: function (data) {
+                                        console.log(data['errNo']);
+                                    }
+                                });
+                            });
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="pt-5" >
+            <div class="container-fluid text-center text-muted pb-1" style="height: 115px;;width:100%;background: #765784 ;background:transparent url(/static/src/images/footer.jpg) no-repeat;background-size:100%;color:#ffffff ">
+                <h6 class="pt-5 mb-4">这是一个面向会议组织机构和参会人员的通用学术会议管理平台，旨在为会议主办方和学者之间搭建一个沟通的渠道</h6>
+            </div>
+            <div class="container" >
+                <div class="row hidden-xs">
+                    <dl class="col-lg-2 offset-md-1 site-link pb-1">
+                        <dt class=" pb-1">小组信息：</dt>
+                        
+                        <dd>善良之队</dd>
+                        <dd>组号：12组</dd>
+                        <dd>成员：9名</dd>
+                        
+                    </dl>
+                    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">赞助商:</dt>
+                        
+                        <dd>北航软院教师：THB</dd>
+                        
+                    </dl>
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">相关协作系统</dt>
+                        
+                        <dd><a href="http://211.71.15.42:9011/" >在线协同团队教学系统</a></dd>
+                        <dd><a href="/admin/index/index" >系统管理员页面</a></dd>
+                        
+                    </dl>
+    
+                    <dl class="col-lg-3 site-link pb-1">
+                        <dt class=" pb-1">联系我们</dt>
+                        
+                        <dd><i class="fas fa-phone    "></i>电话：15043079731</dd>
+                        <dd><i class="fa fa-envelope" aria-hidden="true"></i>邮箱：li609754893@163.com</dd>
+                        <dd><i class="fas fa-location-arrow    "></i>学院路 北京航空航天大学</dd>
+                    </dl>
+                </div>
+            </div>
+            <hr>
+            <div class="copyright container text-center">
+                    Copyright  2018 善良之队 12组<br><br>
+            </div>
+        </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    function login() {
+        window.location.href = '/index/login/index'
+    }
+    function sign_up() {
+        window.location.href = '/index/login/signup'
+    }
+    function logout() {
+        $.post('/index/login/logout', function (result) {
+            location.reload();
+        });
+    }
+    $(document).ready(function () {
+
+
+
+
+
+        $("#reinputPassword").blur(function () {
+            var password = $("#inputPassword").val();
+            var repassword = $("#reinputPassword").val();
+            if (password != repassword || repassword == "") {
+                $("#reinputPassword").css("border-color", "red");
+            }
+            else {
+                $("#reinputPassword").css("border-color", "green");
+            }
+        });
+        $("#reinputPassword2").blur(function () {
+            var password2 = $("#inputPassword2").val();
+            var repassword2 = $("#reinputPassword2").val();
+            if (password2 != repassword2 || repassword2 == "") {
+                $("#reinputPassword2").css("border-color", "red");
+            }
+            else {
+                $("#reinputPassword2").css("border-color", "green");
+            }
+        });
+    });
+</script>
+<style>
+</style>

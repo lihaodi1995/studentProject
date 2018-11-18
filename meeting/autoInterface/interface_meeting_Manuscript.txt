@@ -1,0 +1,153 @@
+    /*Interface: 创建稿件
+    Function: createManuscript
+    Url: meeting/manuscript/createManuscript
+    Type: post
+    Input: {meetingId, type, url, author, title, organization, abstract, modify_info}
+    Output: {errNo, msg}
+        errNo: 0, msg: 创建成功
+        errNo: 1, msg: 参数错误
+        errNo: 2, msg: 未以用户身份登录
+        errNo: 10, msg: 会员不存在
+        errNo: 10, msg: 会议不存在
+    NOTE: type: 1-投稿, 2-修改稿
+    NOTE: type为1不传入修改信息, type为2必须传入修改信息
+    NOTE: author: json(array of {name, email, org})
+    */
+
+    /*Interface: 获取稿件详细信息
+    Function: getManuscriptDetail
+    Url: meeting/manuscript/getManuscriptDetail
+    Type: post
+    Input: {manuscriptId}
+    Output: {errNo, msg, data: {manuscriptId, userId, meetingId, type, valid, url, author, title, organization, abstract, modify_info}}
+        errNo: 0, msg: '获取成功', data: {manuscriptId, userId, meetingId, type, valid, url, author, title, organization, abstract, modify_info}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '稿件不存在', data: null
+        errNo: 10, msg: '稿件信息不存在', data: null
+    */
+
+    /*Interface: 获取用户会议投稿状态
+    Function: getUserMeetingManuscriptStatus
+    Url: meeting/manuscript/getUserMeetingManuscriptStatus
+    Type: post
+    Input: {meetingId}
+    Output: {errNo, msg, data: {status}}
+        errNo: 0, msg: '获取成功', data: {status}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以会员身份登录', data: null
+        errNo: 10, msg: '会员不存在', data: null
+        errNo: 10, msg: '会议不存在', data: null
+    NOTE: status: 0-未投稿, 1-已投稿未审核, 2-已投稿且审核结果为未录用, 3-已投稿且审核结果为录用, 4-已投稿且审核结果为修改后录用, 5-已投修改稿未审核, 6-已投修改稿审核结果为未录用, 7-已投修改稿审核结果为录用
+    */
+
+    /*Interface: 获取当前用户在某会议投稿的稿件详细信息
+    Function: getUserMeetingManuscriptDetail
+    Url: meeting/manuscript/getUserMeetingManuscriptDetail
+    Type: post
+    Input: {meetingId}
+    Output: {errNo, msg, data: {manuscriptId, userId, meetingId, type, valid, url, author, title, organization, abstract, modify_info}}
+        errNo: 0, msg: '获取成功', data: {manuscriptId, userId, meetingId, type, valid, url, author, title, organization, abstract, modify_info}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 2, msg: '未以会员身份登录', data: null
+        errNo: 10, msg: '会员不存在', data: null
+        errNo: 10, msg: '会议不存在', data: null
+        errNo: 10, msg: '稿件不存在', data: null
+        errNo: 10, msg: '稿件信息不存在', data: null
+    */
+
+    /*Interface: 获取会议稿件数量
+    Function: getMeetingManuscriptCount
+    Url: meeting/manuscript/getMeetingManuscriptCount
+    Type: post
+    Input: {meetingId, inputType}
+    Output: {errNo, msg, data: {count}}
+        errNo: 0, msg: '获取成功', data: {count}
+        errNo: 1, msg: '传入参数错误', data: null
+        errNo: 10, msg: '会议不存在', data: null
+    NOTE: inputType: 0-全部, 1-未审核, 2-未录用, 3-录用, 4-修改后录用
+    */
+
+    /*Interface: 获取会议稿件列表
+    Function: getMeetingManuscriptList
+    Url: meeting/manuscript/getMeetingManuscriptList
+    Type: post
+    Input: {meetingId, limit, page, inputType}
+    Output: {errNo, msg, data: {manuscriptList: array of {manuscriptId, userId, meetingId, type, valid, url, author, title, organization, abstract, modify_info, type}}}
+        errNo: 0, msg: '获取成功', data: {manuscriptList: array of {manuscriptId, userId, meetingId, type, valid, url, author, title, organization, abstract, modify_info, type}}
+        errNo: 1, msg: '传入参数错误', data: null
+        errNo: 3, msg: '分页信息错误', data: null
+        errNo: 10, msg: '会议不存在', data: null
+    NOTE: type: 1-未审核, 2-未录用, 3-录用, 4-修改后录用
+    */
+
+    /*Interface: 上传稿件
+    Function: uploadManuscript
+    Url: meeting/manuscript/uploadManuscript
+    Type: post
+    Input: formData: {file, meetingId, fileName}
+    Output: {errNo, msg, data: {url}}
+        errNo: 0, msg: '上传成功', data: {url}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '会员不存在', data: null
+        errNo: 10, msg: '会议不存在', data: null
+        errNo: 10, msg: '文件名不能为空', data: null
+
+    Sample:
+    
+        var file = document.getElementById('inputUpload').files[0];
+        if (file == null) {
+            alert('请选择上传的文件。');
+            return;
+        }
+        var fileName = file.name.trim();
+        console.log('fileName: ' + fileName);
+        // var fileExtension = fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase();
+        // var acceptFileExtension = new Array('.pdf', '.jpg', '.jpeg', '.png');
+        // if (acceptFileExtension.indexOf(fileExtension) == -1){
+        //     alert('请上传pdf/jgp/jpeg/png格式的审核信息。');
+        //     return;
+        // }
+    
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('meetingId', 'L3ZOOUwzUzNRNlcrZUVKekJLZytJdz09');
+        formData.append('fileName', fileName);
+        $.ajax({
+            type: 'post',
+            url: "{:url('meeting/manuscript/uploadManuscript')}",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                fileUrl = data['data']['url'];
+                console.log('fileUrl: ' + fileUrl);
+            }
+        })
+        
+    */
+
+    /*Interface: 打包会议投稿
+    Function: packMeetingManuscripts
+    Url: meeting/manuscript/packMeetingManuscripts
+    Type: post
+    Input: {meetingId}
+    Output: {errNo, msg, data: {url}}
+        errNo: 0, msg: '打包成功', data: {url}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '会议不存在', data: null
+    */
+
+    /*Interface: 导出会议稿件Excel
+    Function: exportMeetingManuscriptExcel
+    Url: meeting/manuscript/exportMeetingManuscriptExcel
+
+    Sample:
+    function export() {
+        strUrl = "{:url('meeting/manuscript/exportMeetingManuscriptExcel')}";
+        strUrl += '?meetingId=L3ZOOUwzUzNRNlcrZUVKekJLZytJdz09';
+        window.location.href = strUrl;
+    }
+    */
+

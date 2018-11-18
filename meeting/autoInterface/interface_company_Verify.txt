@@ -1,0 +1,43 @@
+    /*Interface: 上传单位审核信息
+    Function: uploadCompanyAddition
+    Url: company/verify/uploadCompanyAddition
+    Type: post
+    Input: formData: {file, fileName}
+    Output: {errNo, msg}
+        errNo: 0, msg: '上传成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 2, msg: '未以单位身份登录'
+        errNo: 10, msg: '单位不存在'
+        errNo: 10, msg: '单位已审核通过'
+    */
+
+    /*Interface: 删除单位审核信息
+    Function: deleteCompanyAddition
+    Url: company/verify/deleteCompanyAddition
+    Input: {companyAdditionId}
+    Output: {errNo, msg}
+        errNo: 0, msg: '删除成功'
+        errNo: 1, msg: '参数错误'
+        errNo: 10, msg: '审核信息不存在'
+    */
+
+    /*Interface: 获取单位审核信息列表
+    Function: getCompanyAdditionList
+    Url: company/verify/getCompanyAdditionList
+    Input: {companyId}
+    Output: {errNo, msg, data: {companyAdditionList: array of {companyAdditionId, companyId, url}}}
+        errNo: 0, msg: '获取成功', data: {companyAdditionList: array of {companyAdditionId, companyId, url}}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '单位不存在', data: null
+    */
+
+    /*Interface: 打包单位审核信息
+    Function: packCompanyAddition
+    Url: company/verify/packCompanyAddition
+    Input: {companyId}
+    Output: {errNo, msg, data: {url}}
+        errNo: 0, msg: '打包成功', data: {url}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 10, msg: '单位不存在', data: null
+    */
+

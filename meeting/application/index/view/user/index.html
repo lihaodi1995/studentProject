@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maxium-scale=1.0 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <title>个人中心</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+            <a class="navbar-brand h4">
+                <img src="/static/src/images/logo.png">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-4 mt-lg-0 pt-2">
+                    <li class="nav-item ml-4" style="font-size:20px;">
+                        <a class="nav-link" href="/index/index/index.html">首页</a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link  h4 " id="user_center" style="font-weight: bold" href="/company/index/index.html">用户中心</a>
+                    </li>
+                </ul>
+
+                <div class="form-inline my-2  mr-5 my-lg-0 pt-2">
+                    <div id="login_before">
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-4 pt-2" onclick=login()>登录</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0 ml-1 pt-2" onclick=sign_up()>注册</button>
+                    </div>
+
+                    <div id="login_after" class="d-flex flex-row-reverse">
+                        <div id="login_after1" class="p-2">
+                            <button class="btn btn-outline-success" onclick=logout()>注销</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="text-center" style="padding-bottom: 30px">
+        <div class="card-header" style="background-color: white">
+            <ul class="nav nav-tabs " id="myTab" style="background-color: white">
+                <li class="nav-item pl-5 active">
+                    <a class="active nav-link text-muted " data-toggle="tab" href="#myinfo">个人信息</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link text-muted" data-toggle="tab" href="#myfavorite">我的投稿</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link text-muted" data-toggle="tab" href="#myregister">我的注册</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link text-muted" data-toggle="tab" href="#resetpwd">修改密码</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content mb-6" style="border-top-color: white">
+            <div class="tab-pane active container-fluid" id="myinfo">
+                <!--个人中心个人信息-->
+                <div class="mt-3">
+                    <h3>个人信息</h34>
+                </div>
+                <div class="row mt-3">
+                    <div class="card col-md-2 offset-md-1">
+                        <div class="mt-5" style="width: 100%">
+                            <img src="/static/src/images/user.png" style="width: 60%">
+                        </div>
+                        <div class="mt-4" id="user_name">
+                            <p>用户名：</p>
+                        </div>
+                        <div class="mt-4" id="count_favorite">
+                            <p>收藏会议： 个</p>
+                        </div>
+                    </div>
+                    <div class="card col-md-7 ml-2 text-center">
+
+                        <div class="mt-3">
+                            <p>我的收藏</p>
+                        </div>
+                        <div id="lists" class="row">
+                            <!--收藏会议列表-->
+                            
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade container-fluid" id="myfavorite">
+                <div class="mt-3">
+                    <h3>我的投稿</h2>
+                </div>
+
+                <div class="container center">
+                        <div class="row d-flex justify-content-center" id="manu_lists">
+
+                            <!--我的投稿-->
+                            
+                            
+
+                        </div>
+                </div>
+            </div>
+            <div class="tab-pane fade container-fluid" id="myregister">
+                <div class="mt-3">
+                    <h3>我的注册</h2>
+                </div>
+
+                <div class="container center">
+
+                        <div class="row d-flex justify-content-center" id="reg_lists">
+
+                            <!--我的注册-->
+
+
+                        </div>
+                </div>
+            </div>
+            <div class="tab-pane fade container-fluid" id="resetpwd">
+                <div class="d-flex justify-content-center pt-1">
+                    <h4>修改密码</h4>
+                </div>
+                <div class="d-flex pt-1 text-left justify-content-center">
+                    <p class="text-left">
+                        <div class="form-group">
+                            <label for="password">原密码：</label>
+                            <input type="password" class="form-control" name="" id="old_pwd" aria-describedby="helpId_pwd2" placeholder="输入原密码">
+                        </div>
+                    </p>
+                </div>
+                <div class="d-flex pt-1 text-left justify-content-center">
+                    <p class="text-left">
+                        <div class="form-group">
+                            <label for="password">新密码：</label>
+                            <input type="password" class="form-control" name="" id="new_pwd" aria-describedby="helpId_pwd2" placeholder="输入新密码">
+                        </div>
+                    </p>
+                </div>
+                <div class="d-flex pt-1 text-left justify-content-center">
+                    <p class="text-left">
+                        <div class="form-group">
+                            <label for="password">重复新密码：</label>
+                            <input type="password" class="form-control" name="" id="re_pwd" aria-describedby="helpId_pwd3" placeholder="重复新密码">
+                        </div>
+                    </p>
+                </div>
+                <div class="d-flex pt-1 text-left justify-content-center">
+                    <p class="text-center">
+                        <button id="unit_button" class="btn btn-lg btn-primary" onclick="change_pwd()">修改</button>
+                    </p>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function change_pwd() {
+                    var old_pwd = $("#old_pwd").val();
+                    var new_pwd = $("#new_pwd").val();
+                    var re_pwd = $("#re_pwd").val();
+                    $.ajax({
+                        url: "{:url('/index/login/userModifyPassword')}",
+                        type: "post",
+                        async: true,
+                        dataType: "json",
+                        data: {
+                            originalPassword: old_pwd,
+                            password: new_pwd,
+                            rePassword: re_pwd
+                        },
+                        success: function (result) {
+                            console.log(result);
+                            if (result.errNo == 0) {
+                                alert(result.msg);
+                                logout();
+                            }
+                            else if (result.errNo == 10) {
+                                alert(result.msg);
+                            }
+                            else {
+                                console.log(result.msg);
+                            }
+                        },
+                        error: function (result) {
+                            console.log("Server Error");
+                        }
+                    });
+                }
+            </script>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap-paginator.js"></script>
+</body>
+
+</html>
+<script>
+    function addlist(data) {
+        var str = `
+ 
+        <div class="card col-md-3  m-4 text-left " onmouseout="this.style.background='#ffffff'">
+        <div class="row">
+            <div class="card-body">
+                <p class="card-text" style="font-size: 13px;width: 100%;text-overflow: ellipsis">
+                    <i class="fa fa-navicon mr-2"></i>
+                    会议名称：
+                    <a onclick=jump('${data['id']}') href="javascript:void(0)" style="text-decoration:none;">${data['title']}</a>
+                </p>
+                <p class="card-text">
+                    <p class="card-text" style="font-size: 13px">
+                        <p style="font-size: 13px">
+                            <i class="fa fa-hourglass-start mr-2" aria-hidden="true"></i>状态:
+                            <font class="text-danger" style="font-size: 13px">${data['status']}</font>
+                        </p>
+                        <p style="font-size: 13px;text-overflow: ellipsis;width: 100%">
+                            <i class="fa fa-university mr-2" aria-hidden="true"></i>主办方:${data['organization']}</p>
+                        <p style="font-size: 13px">
+                            <i class="fa fa-tags mr-2" aria-hidden="true"></i>tag:${data['type']}</p>
+                    </p>
+            </div>
+
+        </div>
+    </div>
+            
+            `
+        var contain = document.getElementById("lists")
+        contain.innerHTML += str
+    }
+
+    function load_list(page) {
+        $.post('/index/user/getSubscribeMeetingList', { "limit": 20, "page": page }, function (result) {
+            infos = result.data.meetingList
+            for (i = 0; i < infos.length; i++) {
+                map = {
+                    0: "投稿中",
+                    1: "修稿中",
+                    2: "审查中",
+                    3: "注册准备中",
+                    4: "注册中",
+                    5: "会议准备中",
+                    6: "正在进行",
+                    7: "会议已结束"
+                }
+                map2 = {
+                    1: "主动收藏",
+                    2: "投稿收藏",
+                    3: "注册收藏"
+                }
+                data = {
+                    'title': infos[i].title,
+                    'id': infos[i].meetingId + "",
+                    'type': map2[infos[i].type],
+                    'status': map[infos[i].status],
+                    'organization': infos[i].organization
+                }
+                console.log(data)
+                addlist(data)
+            }
+        });
+    }
+    function jump(id) {
+        console.log("jump to meeting " + id)
+        window.location.href = '/meeting/index/index?meetingId=' + id;
+    }
+    function logout() {
+        $.post('/index/login/logout', function (result) {
+            location.reload();
+            window.location.href = '/index/index/index'
+
+        });
+    }
+    function login() {
+        window.location.href = '/index/login/index'
+    }
+    function sign_up() {
+        window.location.href = '/index/login/signup'
+    }
+
+    function manu_addlist(data) {
+        var str = `
+ 
+                    <div class="card col-md-3  m-4 text-left " onmouseout="this.style.background='#ffffff'">
+                        <div class="row">
+                            
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 13px;width: 100%;text-overflow: ellipsis">
+                                        <i class="fa fa-navicon mr-2"></i>
+                                        投稿会议：<a onclick=jump('${data['meetingId']}') href="javascript:void(0)" style="text-decoration:none;">${data['meeting_name']}</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <p class="card-text" style="font-size: 13px">
+                                            <p style="font-size: 13px;text-overflow: ellipsis;width: 100%">
+                                                <i class="fa fa-tags mr-2" aria-hidden="true"></i>投稿名称：${data['title']}</p>
+                                            <p style="font-size: 13px">
+                                                <i class="fa fa-hourglass-start mr-2" aria-hidden="true"></i>状态：
+                                                <font class="text-danger" style="font-size: 13px">${data['result']}</font>
+                                            </p>
+                                            
+                                        </p>
+                                </div>
+                        </div>
+                    </div>
+            
+            `
+        var contain = document.getElementById("manu_lists")
+        contain.innerHTML += str
+    }
+
+    function load_manulist(page) {
+        $.post('/index/user/getSubmissionDeatil', function (result) {
+            manuinfos = result.data.submissionDeatil
+            for (i = 0; i < manuinfos.length; i++) {
+                var meeting_name = getmeeting(manuinfos[i].meetingId);
+                var tmp = manuinfos[i].result;
+                var result1;
+                if (tmp == 0) {
+                    result1 = "未录用"
+                }
+                else if (tmp == 1) {
+                    result1 = "录用"
+                }
+                else if (tmp == 2) {
+                    result1 = "修改后录用"
+                }
+                else {
+                    result1 = "待审核"
+                }
+                data = {
+                    'title': manuinfos[i].title,
+                    'result': result1,
+                    'organization': manuinfos[i].organization,
+                    'meetingId': manuinfos[i].meetingId,
+                    'meeting_name': meeting_name
+                }
+                console.log(data['title'])
+                console.log(data['result'])
+                console.log(data['organization'])
+                console.log(data['meeting_name'])
+                manu_addlist(data)
+            }
+        });
+    }
+    function register_addlist(data) {
+        var str = `
+ 
+                    <div class="card col-md-3  m-4 text-left " onmouseout="this.style.background='#ffffff'">
+                        <div class="row">
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 13px;width: 100%;text-overflow: ellipsis">
+                                        <i class="fa fa-navicon mr-2"></i>
+                                        注册会议：<a onclick=jump('${data['meetingId']}') href="javascript:void(0)" style="text-decoration:none;">${data['title']}</a>
+                                    </p>
+                                    <p class="card-text">
+                                        <p class="card-text" style="font-size: 13px">
+                                            <p style="font-size: 13px">
+                                                <i class="fa fa-hourglass-start mr-2" aria-hidden="true"></i>状态：
+                                                <font class="text-danger" style="font-size: 13px">${data['status']}</font>
+                                            </p>
+                                        </p>
+                                    </p>
+                                </div>
+                        </div>
+                    </div>
+            
+            `
+        var contain = document.getElementById("reg_lists")
+        contain.innerHTML += str
+    }
+
+    function load_reglist(page) {
+        $.post('/index/user/getRegisterDeatil', function (result) {
+            reginfos = result.data.registerDeatil
+            for (i = 0; i < reginfos.length; i++) {
+                map = {
+                    1: "未审核",
+                    2: "审核通过",
+                    3: "未通过"
+                }
+                data = {
+                    'meetingId': reginfos[i].meetingId,
+                    'title': reginfos[i].title,
+                    'status': map[reginfos[i].status]
+                }
+                console.log(data['title'])
+                console.log(data['status'])
+                console.log(data['meetingId'])
+                register_addlist(data)
+            }
+        });
+    }
+    function getmeeting(id) {
+        var meeting_name;
+        $.ajax({
+            type: "post",
+            url: "/meeting/index/getMeetingDetail",
+            data: { meetingId: id },
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                console.log(result.data.title)
+                meeting_name = result.data.title;
+            }
+        })
+        return meeting_name;
+    }
+
+    function init() {
+        var type1 = 1;
+        $.ajax({
+            type: "post",
+            url: "/index/user/getSubscribeMeetingCount",
+            data: { type: type1 },
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                console.log(result.data.count)
+                console.log("get count")
+                //pager_init(result.data.count)
+
+                var str = `
+                <p>收藏会议:  ${result.data.count} 个</p>
+ 
+
+`
+                var contain = document.getElementById("count_favorite")
+                contain.innerHTML = str
+            }
+
+        })
+        load_list(1)
+        load_manulist(1)
+        load_reglist(1)
+        //是否登陆
+        var status
+        $.ajax({
+            type: "post",
+            url: "/index/index/getLoginStatus",
+            async: false,
+            success: function (result) {
+                status = result.data.status
+            }
+        });
+        console.log(status)
+        if (status != 0) {
+            var myurl = null;
+            switch (status) {
+                case 1: myurl = '/index/user/getUserDetail'
+                    break
+                case 2: myurl = '/company/index/getCompanyDetail'
+                    break
+                case 3: myurl = '/company/index/getCompanyUnitDetail'
+                    break
+            }
+            console.log(myurl)
+            $.ajax({
+                type: "post",
+                url: myurl,
+                async: false,
+                success: function (result) {
+
+                    var str_user = ` <div id="login_after2" class="p-2">
+                            <button class="btn btn-outline-success border-0"  id='username' ><h5>${result.data.name}<h5></button>
+                        </div>`
+                    document.getElementById('login_after').innerHTML += str_user
+                    $("#login_before").hide()
+                    var str_user_name = `
+                            <p>${result.data.name}</p>
+                    `
+                    document.getElementById('user_name').innerHTML = str_user_name
+                }
+            });
+        }
+        else {
+            $("#login_after1").hide()
+            $("#login_after2").hide()
+        }
+    }
+    init()
+</script>
+<style>
+    div.card {
+        box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.014), 0 6px 20px 0 rgba(0, 0, 0, 0.048);
+        text-align: center;
+        border: 0px
+    }
+
+    div.card:hover {
+        box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.104), 0 6px 20px 0 rgba(0, 0, 0, 0.048);
+    }
+</style>

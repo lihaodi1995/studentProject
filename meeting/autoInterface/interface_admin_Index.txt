@@ -1,0 +1,68 @@
+    /*Interface: 获取审核单位数量
+    Function: getVerifyCount
+    Url: admin\index\getVerifyCount
+    Type: post
+    Input: {}
+    Output: {errNo, msg, data: {count}
+        errNo: 0, msg: '获取成功', data:{count}
+    */
+
+    /*Interface: 获取审核单位列表
+    Function: getVerifyList
+    Url: admin\index\getVerifyList
+    Type: post
+    Input: {page, limit}
+    Output: {errNo, msg, data: {verifyList: array of {companyId, account, name, companyAdditionList:{array of {companyAdditionId, type, url}}}
+        errNo: 0, msg: '获取成功', data: {verifyList: array of {companyId, account, name, companyAdditionList:{array of {companyAdditionId, type, url}}
+        errNo: 1, msg: '参数错误', data: null
+        errNo: 3, msg: '分页信息错误', data: null
+    */
+
+    /*Interface: 获取审核详细信息
+    Function: getVerifyDetail
+    Url: admin\index\getVerifyDetail
+    Type: post
+    Input:{companyId}
+    Output: {errNo, msg, data: {companyId, account, name, companyAdditionList: {array of {companyAdditionId, type, url}}
+        errNo: 0, msg: '获取成功', data: {companyId, account, name, companyAdditionList: {array of {companyAdditionId, type, url}}
+        errNo: 1, msg: '参数错误', data: null
+        errNo; 10, msg: '单位不存在', data: null
+    */
+
+    /*
+    Interface: 邮件提醒
+    Function: endInform
+    Url: admin\index\endInform
+    Type: post
+    Input:{leads,frequency,status} 提前量 （秒）/ 调用间隔（秒）/ 状态
+    Output: {errNo, msg, data: null}
+        errNo: 0, msg: '发送成功', data: null
+        errNo: 1, msg: '参数错误', data: null
+
+    status :
+    截稿日期之前：0
+    修改稿截止日期之前：1,
+    注册结束日期之前：4,
+
+    */
+
+    /*Interface: 判断是否是管理员
+    Function: checkAdminStatus
+    Url: admin/index/checkAdminStatus
+    Type: post
+    Input: {}
+    Output: {errNo, msg}
+        errNo: 0, msg: '是管理员身份'
+        errNo: 2, msg: '未以管理员身份登录'
+    */
+
+    /*Interface: 更改审核状态
+    Function: changeConfirmStatus
+    Url: admin/index/changeConfirmStatus
+    Type: post
+    Input: {confirm,companyId}
+    Output: {errNo, msg}
+        errNo: 0, msg: '修改成功'
+        errNo: 1, msg: '参数错误'
+    */
+
