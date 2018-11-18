@@ -1,0 +1,7 @@
+{% if latest_question_list %}
+    <ul>
+        <li><a href="/polls/{{ question.id }}/">{{ latest_question_list }}</a></li>
+    </ul>
+{% else %}
+    <p>No datas are available.</p>
+{% endif %}

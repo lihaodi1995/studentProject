@@ -1,0 +1,143 @@
+{% load staticfiles %}
+<html>
+
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            text-align: center !important;
+            height: 100%;
+            display:flex;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-size: cover;
+        }
+        .flatbox {
+            width: 100%;
+            max-width: 350px;
+            background-color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            margin: auto;
+            box-shadow: 4px 4px 6px #aaaaaa;
+        }
+        .gslogen {
+            font-family: Consolas;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .lbot {
+            background-color: #eeeeee;
+            height: 50px;
+            line-height: 50px;
+        }
+    </style>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Login</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+        <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+        <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+
+        <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+        <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    </head>
+
+    <body background="{% static 'images/gxm.jpg' %}">
+        <form class="flatbox">
+            <div class="gslogen mb-4"><em>CMS</em></div>
+            <h1 class="h3 mb-3 font-weight-normal">登录</h1>
+            <label class="sr-only" for="username">用户名</label>
+            <input class="form-control" id="username" autofocus="autofocus" required="required" type="text" placeholder="用户名" />
+            <p></p>
+            <div class="input-group" id="main">
+                <!--<label class="sr-only" for="inputPassword">密码</label>-->
+                <input class="form-control" id="password"  required="required" type="password" placeholder="密码" v-model="password" v-show="!showPass"/>
+                <input class="form-control" required="required" type="text" v-model="password" v-show="showPass"/>
+                <button type="button" @click="showPass = !showPass" class="btn btn-light">
+                    <i v-show="!showPass" class="fa fa-eye-slash"></i>
+                    <i v-show="showPass" class="fa fa-eye"></i>
+                </button>
+
+            </div>
+            <p></p>
+            <div class="form-group" style="color:#111111">
+                <label class="radio-inline">
+                    <input name="user_type" id="unit_user" type="radio" value="0" checked="true">
+                    单位用户
+                </label>
+                &nbsp&nbsp&nbsp&nbsp&nbsp
+                <label class="radio-inline">
+                    <input name="user_type" id="user"  type="radio" value="1">
+                    个体用户
+                </label>
+
+            </div>
+            <button class="btn btn-lg btn-primary btn-block mt-4 mb-2" type="button" onclick="up()" >登录</button>
+            <a href="#">忘记密码</a>
+            <div class="lbot mb-2 mt-2"><a href="/institution_register">单位用户注册</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="/user_register">用户注册</a></div>
+        </form>
+
+    <script >
+    new Vue({
+        el:"#main",
+        data:{
+            showPass : false
+        },
+        methods:{
+        }
+    });
+
+    function up(){
+        var type
+        var radio = document.getElementsByName("user_type");
+	    for (var i=0; i<radio.length; i++) {
+		    if (radio[i].checked) {
+			    type = i
+		    }
+	    }
+        var url = '/user/login/';
+        if(type == 0) {
+            url = '/institution/employee/login/';
+        }
+        var data = {
+            "username" : document.getElementById("username").value,
+            "password" : document.getElementById("password").value
+        }
+        $.ajax({
+            url : url,
+            type : 'POST',
+            data : data,
+            dataType : 'json',
+            success : function(response) {
+                if(response['errorInfo'] != null){
+                    alert(response['errorInfo']);
+                    document.getElementById("username").value = null;
+                    document.getElementById("password").value = null;
+                }else{
+                    window.location.href='/base/';
+                }
+
+            }
+        });
+
+    }
+    </script>
+    </body>
+
+</html>

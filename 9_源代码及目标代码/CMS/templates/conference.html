@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    test
+{% endblock %}
+
+{% block content %}
+    <div class="modal fade" id="postPaper" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">投稿</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data" class="form-horizontal" action="/user/contribute/" method="post"
+                          id="postPaperForm">
+                        <div class="form-group">
+                            <div class="col-4">
+                                <label for="author_1" class="col-form-label">第一作者:</label>
+                                <input type="text" class="form-control" id="author_1" name="author_1">
+                            </div>
+                            <div class="col-4">
+                                <label for="author_2" class="col-form-label">第二作者:</label>
+                                <input type="text" class="form-control" id="author_2" name="author_2">
+                            </div>
+                            <div class="col-4">
+                                <label for="author_3" class="col-form-label">第三作者:</label>
+                                <input type="text" class="form-control" id="author_3" name="author_3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">标题:</label>
+                            <input class="form-control" id="title" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="keyword" class="keyword">关键字:</label>
+                            <input class="form-control" id="keyword" name="keyword">
+                        </div>
+                        <div class="form-group">
+                            <label for="abstract" class="keyword">摘要:</label>
+                            <textarea class="form-control" id="abstract" name="abstract" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" name="content" class="custom-file-input" id="content">
+                                <label class="custom-file-label" for="content">选择文件</label>
+                            </div>
+                        </div>
+                        <div style="display: none">
+                            <input type="hidden" name="meeting_id" id="meeting_id" value="{{ conference.meeting_id }}">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button form="postPaperForm" type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-lg-9">
+                            <div class="display-3">{{ conference.title }}</div>
+                            <hr class="my-4">
+                            <h4 class="font-weight-normal"><i class="fa fa-info-circle"></i>
+                                会议简介</h4>
+                            <p>{{ conference.intro }}</p>
+                            <hr class="my-4">
+                            <h4 class="font-weight-normal"><i class="fa fa-question-circle"></i>
+                                征文信息</h4>
+                            <p>{{ conference.essay_request }}</p>
+                            <hr class="my-4">
+                            <h4 class="font-weight-normal"><i class="fa fa-calendar"></i>
+                                日程安排</h4>
+                            <p>{{ conference.schedule }}</p>
+                            <div>
+                                <ul class="timeline font-weight-normal" id="timeline">
+                                    <li class="li complete">
+                                        <div class="timestamp">
+                                            <span class="date">{{ conference.ddl_date|date:'Y/m/d' }}</span>
+                                            <span class="date">截至投稿</span>
+                                        </div>
+                                        <div class="status"></div>
+                                    </li>
+                                    <li class="li complete">
+                                        <div class="timestamp">
+                                            <span class="date">{{ conference.result_notice_date|date:'Y/m/d' }}</span>
+                                            <span class="date">录用通知</span>
+                                        </div>
+                                        <div class="status">
+                                        </div>
+                                    </li>
+                                    <li class="li complete">
+                                        <div class="timestamp">
+                                            <span class="date">{{ conference.regist_attend_date |date:'Y/m/d'}}</span>
+                                            <span class="date">会议注册</span>
+                                        </div>
+                                        <div class="status">
+                                        </div>
+                                    </li>
+                                    <li class="li">
+                                        <div class="timestamp">
+                                            <span class="date">{{ conference.meeting_date|date:'Y/m/d'}}</span>
+                                            <span class="date">会议开始</span>
+                                        </div>
+                                        <div class="status">
+                                        </div>
+                                    </li>
+                                    <li class="li">
+                                        <div class="timestamp">
+                                            <span class="date">{{ conference.meeting_end_date|date:'Y/m/d' }}</span>
+                                            <span class="date">会议结束</span>
+                                        </div>
+                                        <div class="status">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item"
+                                        src="http://www.google.cn/maps/embed?pb=!1m18!1m12!1m3!1d3056.9929457378166!2d116.34156131546445!3d39.986262979417525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35f0540c167927b9%3A0x7cb0436769146c66!2z5YyX6Iiq!5e0!3m2!1szh-CN!2scn!4v1530410518979"
+                                        allowfullscreen></iframe>
+                            </div>
+                            <hr class="my-4">
+                            <div>
+                                <div class="col-3" data-toggle="modal" data-target="#postPaper">
+                                    <a href="#">
+                                        <i class="fa fa-map"></i>
+                                        投稿
+                                    </a>
+                                </div>
+                                {% if isfavorite %}
+                                    <div class="col-3">
+                                    <a href="#">
+                                        <i class="fa text-danger fa-heart"></i>
+                                        已收藏
+                                    </a>
+                                {% else %}
+                                    <div class="col-3" onclick="favorite()">
+                                    <a href="#">
+                                        <i class="fa fa-heart"></i>
+                                        收藏
+                                    </a>
+                                </div>
+                                {% endif %}
+                                <div class="col-3" onclick="fuck()">
+                                    <a href="#">
+                                        <i class="fa fa-phone"></i>
+                                        聆听
+                                    </a>
+                                </div>
+                                <div class="col-3" onclick="fuck()">
+                                    <a href="#">
+                                        <i class="fa fa-download"></i>
+                                        下载模板
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted">会议主办方</span>
+                            </h4>
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">组织机构</h6>
+                                        <small class="text-muted">{{ conference.organization }}</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">住宿交通</h6>
+                                        <small class="text-muted">{{ conference.support }}</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">联系我们</h6>
+                                        <small class="text-muted">{{ conference.about_us }}</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <span>注册费用</span>
+                                    <strong>￥{{ conference.receipt }}</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+    <style>
+        .timeline {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .li {
+            transition: all 200ms ease-in;
+        }
+
+        .timestamp {
+            margin-bottom: 20px;
+            padding: 0px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .status {
+            padding: 0px 40px;
+            display: flex;
+            justify-content: center;
+            border-top: 2px solid #D6DCE0;
+            position: relative;
+            transition: all 200ms ease-in;
+        }
+
+        .status:before {
+            content: "";
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            position: absolute;
+            top: -15px;
+            left: 42%;
+            transition: all 200ms ease-in;
+        }
+
+        .li.complete .status {
+            border-top: 2px solid #66DC71;
+        }
+
+        .li.complete .status:before {
+            background-color: #66DC71;
+            border: none;
+            transition: all 200ms ease-in;
+        }
+
+        .li.complete .status h4 {
+            color: #66DC71;
+        }
+
+        @media (min-device-width: 320px) and (max-device-width: 700px) {
+            .timeline {
+                list-style-type: none;
+                display: block;
+            }
+
+            .li {
+                transition: all 200ms ease-in;
+                display: flex;
+                width: inherit;
+            }
+
+            .timestamp {
+                width: 100px;
+            }
+
+            .status:before {
+                left: -8%;
+                top: 30%;
+                transition: all 200ms ease-in;
+            }
+        }
+    </style>
+    <script>
+        function favorite() {
+            var user_id = 1;
+            var meeting_id = {{ conference.meeting_id }};
+            $.ajax({
+                url: '/user/favorite/',
+                type: 'POST',
+                data: {'user_id': user_id, 'meeting_id': meeting_id}, // Request body
+                dataType: 'json',
+                success: function (response) {
+                },
+                error: function (msg) {
+                }
+            });
+        }
+    </script>
+{% endblock %}
