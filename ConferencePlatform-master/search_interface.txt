@@ -1,0 +1,55 @@
+path: search/
+input:
+    GET
+        keywords
+        subject
+        organization
+output:
+    输入错误时
+    {'message':'format error'}
+    使用到 keywords进行查询时
+    {
+    "data": [
+        {
+            "pk": 4,
+            "relativity": 2,
+            "status": 2
+        },
+        {
+            "pk": 6,
+            "relativity": 2,
+            "status": 2
+        },
+        {
+            "pk": 5,
+            "relativity": 1,
+            "status": 2
+        }
+    ],
+    "ammount": 3
+    }
+    
+    没有使用到keywords进行查询时
+    {
+    "data": [
+        {
+            "pk": 2,
+            "status": 2
+        },
+        {
+            "pk": 3,
+            "status": 2
+        }
+    ],
+    "ammount": 2
+    }
+
+
+not_started = 1
+accepting_submission = 2
+reviewing_accepting_modification = 3
+reviewing = 4 # 结束接受修改后和开始会议注册前
+accepting_register = 5
+register_ended = 6
+meeting = 7
+over = 8 # 

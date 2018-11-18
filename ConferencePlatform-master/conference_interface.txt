@@ -1,0 +1,171 @@
+conference模块接口文档：
+
+有一些通用的错误信息讲道理每个请求里都可能遇到，写在这，不再在下面给出：
+    'permission error' 账号行为与其身份不匹配, 'anonymous user' 用户没有登录
+
+url: conference/add_conference/
+method: post
+from 前端：
+    使用post方法向后端
+    传送数据如下：
+    title 会议名称， 
+    subject 学科， 
+    introduction 简介，
+    soliciting_requirement 投稿要求说明， 
+    register_requirement 注册会议要求说明，    
+    accept_due 投稿截止时间 (开始投稿时间用当前时间)
+    register_start 开始会议注册时间， 
+    register_due 截止
+    conference_start （到场）开会时间，   
+    conference_due 闭会时间
+    paper_template  文件，论文的模板
+    activities  序列化的json数组，数组元素为    
+    {'start_time':<datetime>, 'end_time':<datetime>, 'place':<str>, 'activity':<str>}
+    形式的对象
+    创建会议使用的模板的编号 template_no
+    *****新添加*****:  
+    venue 会议地点 
+
+to 前端：
+    json对象，{'message': <str>}, 数据成员'message'表示错误信息，有如下取值：
+    'success', 'invalid uploaded data', 
+    'timepoints not reasonable' 那些会议时间点设立不合理
+
+url: conference/conference/<会议的主键id>/paper_submit/
+method: post
+说明：普通用户提交论文
+from 前端：
+    post: authors 作者们 institute 机构  paper_name paper_abstract  paper 上传的论文文件
+    其中，authors 应为如下格式的json对象序列化后得到的字符串：
+    {'<角色名>': {'name': <str>, 'institute': <str>}, ...}
+    其中，<角色名> 代表第几作者，取值应为如下形式：
+    'A<int>' 代表按顺序排的作者，
+    如 A1 是第一作者: {"A1": {"name": shiletong, "institute":"BUAA"}, ...}
+    最多到 A5
+    'CA' 是通讯作者。
+to 前端:    
+    json对象，{'message': <str>}, 数据成员'message'表示错误信息，有如下取值：
+    'success', 'invalid uploaded data', 'invalid conference pk' 不正确的会议主键
+    'multiple submission'  该用户在该会议已经提交过论文了
+    'wrong time range' 不在可以提交论文的时间范围内
+
+url: conference/conference/<会议的主键id>/register/
+method: post
+说明：普通用户注册
+from 前端：
+    post: listen_only  仅仅聆听会议  传字符串 true 或者 false 就好
+    paper_id 参与会议的paper的id（如果），participants 与会者的信息（考虑到这些信息只需要在展示时使用，
+    能读即可，不想为其建立单独数据库表，希望前端用序列化的json传递过来，格式为：
+        [{'name': <str>, 'gender': <男or女>, 'reservation' /*是否预定住宿*/: <bool>}, ...]  ）
+    pay_voucher 缴费凭证的照片或者pdf文件
+to 前端：
+    json对象，{'message': <str>}, 数据成员'message'表示错误信息，有如下取值：
+    'success', 'invalid uploaded data', 'invalid conference pk', 'invalid paper id'
+    'reduplicate register' 一个用户对于一个会议重复注册
+    'not matching' 论文与会议或用户无关联
+    'wrong time range'  不再可以注册会议的时间范围内
+    'paper not passed'  论文没有通过，还妄图靠论文来参会
+
+url: conference/top10_hot_references/
+method: get
+说明：top10劲的会议
+to 前端：
+    json对象，{'message':'success', 'data': [ 一个对象，如下所示... ] }
+    数组里的对象：{'title':<str>, 'pk':<int> 会议主键, 'organization':<str>,
+    'organizationpk':<int>, 'subject':<str>, 'conference_start': <datetime>}
+    这些属性不够还可以再商量    
+    应该不会有报错的机会
+
+url: conference/num_not_over/
+method: get
+说明：没有结束的会议的数量
+to 前端：
+    {'message':'success', 'data': <int> 数量 }
+    暂时无错可报
+
+url: account/random_6_orgs/
+method: get
+说明:随机返回6个机构名称
+to 前端:
+    {'message':'success', 'data': [<str>, ...]}
+
+
+url: conference/set_modify_due/
+method: post
+说明：设置论文修改后提交的截止日期
+from 前端：
+    'modify_due' 截止时间
+to 前端：
+    {'message':<str>}，message有如下可能取值：
+    'success'
+    'invalid conference pk'  'invalid uploaded data'
+    'timepoints not reasonable' 同 add_conference里的含义
+    'already set' 这个属性已经被设置了
+    'too late'    上传的日期在现在(now)之前
+    'review finished' 评审已经结束了，注册已经开始了
+    'review not finished' 接受投稿还没有结束，评审还没有开始
+
+
+url: conference/submission/<int:id>/submit_after_modification/
+method: post
+说明：修改后的再次提交，url中的id应为第一次提交后的Submission的主键
+from 前端：
+    explain 修改的解释 paper 修改后的文件 name 论文名称 abstract 摘要  authors 作者
+    其中 name 和 abstract 和 authors 若不变，则可以不上传这三项，空字符串也可以
+to 前端：
+    {'message':<str>} message有如下取值
+    'success'
+    'invalid submission pk' 'invalid uploaded data'
+    'not owned' 论文不属于当前登录的用户
+    'not accepting modification' 提交所属的会议并没有在接受修改稿的时间范围内
+    'can't modify twice' 已经改过一次了
+    'need no modification' 无需修改，或已被接受或被拒绝或还没有评审到你
+
+
+url: conference/submission/<int:id>/review/
+method: post
+说明：针对某个提交的评审
+from 前端：
+    单字母的评审建议 state_choice ，P为通过，R为拒绝，M为建议修改
+    state_choice为M时，还要给出修改建议 advice
+    ************新添加***********
+    state_choice为R时，还要给出拒绝理由 advice
+    *****************************
+to 前端：
+    {'message':<str>} 取值如下：
+    success
+    'invalid submission pk'
+    'invalid uploaded data'
+    'not reviewing' 当前会议不在评审时间内
+    'not in modification period' 修改期限已过，给人家评建议修改也没有意义
+    'invalid state choice' 如前所述的state_choice取值不对
+    
+
+url: conference/conference/<int:id>/export_submission_info/
+method: get
+说明：导出提交信息的excel
+to 前端：
+    {'message':<str>, 'data':<str>}
+    data是一个相对url，如果服务器建设顺利，应该能够下载
+    message取值有：
+    'success'  'invalid conference id'
+
+url: conference/conference/<int:id>/export_register_info/
+细节同上
+
+
+url: conference/count_conferences_based_on_subject/
+method: get
+说明: 返回属于某一主题的会议的数量,
+     请求写在url的参数里面
+from 前端：
+    'subject'
+to ：
+    'success'
+    'invalid subject name'
+
+url: conference/count_conferences_for_all_subjects/
+method: get
+说明：返回
+to 前端：
+    {'message': 'success', 'data': {'经济' : <int>, '法律': <int>, ...} }

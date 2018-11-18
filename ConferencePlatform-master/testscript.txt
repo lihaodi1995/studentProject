@@ -1,0 +1,35 @@
+from django.test import Client
+c = Client()
+response = c.post('/account/normal_user_register/', {'username':'852217427@qq.com', 'password':'123', 'confirm_password':'123'})
+
+response = c.post(
+    '/account/organization_user_register/',
+    {
+        'username' : '123@qq.com',
+        'password' : '123',
+        'confirm_password' : '123',
+        'org_name' : 'org_name',
+        'department' : 'department',
+        'contacts' : 'contacts',
+        'phone_number' : 'phone_number',
+        'address' : 'address',
+        'bussiness_license' : fp,
+        'id_card_front' : fp,
+        'id_card_reverse' : fp,
+    }
+)
+
+from django.test import Client
+c = Client()
+c.login(username = '123@qq.com', password = '123')
+c.post('/account/delete_sub_user/', {'sub_user_username':'subuser5@qq.com'})
+
+fp1 = open('/home/elin/file/file1')
+fp2 = open('/home/elin/file/file2')
+fp3 = open('/home/elin/file/file3')
+response = c.post('/account/organization_user_register/',{'username' : '123@qq.com','password' : '123','confirm_password' : '123','org_name' : 'org_name','department' : 'department','contacts' : 'contacts','phone_number' : 'phone_number','address' : 'address','bussiness_license' : fp1,'id_card_front' : fp2,'id_card_reverse' : fp3})
+response = c.post('/account/organization_sub_user_register/',{'username' : 'subuser@qq.com', 'password' :'123', 'confirm_password':'123'})
+response = c.post('/account/login/', {'username':'subuser@qq.com', 'password':'123'})
+
+
+response = c.post('/account/organization_user_register/',{'username' : '123@qq.com','password' : '123','confirm_password' : '123','org_name' : 'org_name','department' : 'department','contacts' : 'contacts','phone_number' : 'phone_number','address' : 'address'})

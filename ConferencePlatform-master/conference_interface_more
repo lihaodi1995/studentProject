@@ -1,0 +1,94 @@
+path:conference/conference/<int:id>/information/
+input:
+    GET
+        id,会议的id
+output:
+    输出会议的全部属性
+    message: 'success'/'invalid conference id'
+    data: { organization:{
+                            'org_id': 注册机构id,
+                            'org_name': 机构名称,
+                            'department':部门名称,
+                            'contacts':联系人,
+                            'phone_number',
+                            'address',
+                            'email',会议主办方邮箱
+                           },
+            title,会议名称
+            subject,所属学科
+            introduction,会议简介
+            soliciting_requirement,投稿要求
+            paper_template,论文模板，返回的是路径/media/xxx，加到ip地址后可访问
+            register_requirement,注册要求
+            accept_start,开始投稿时间
+            accept_due,投稿截止时间
+            modify_due,修改截止日期
+            register_start,注册开始时间
+            register_due,注册结束时间
+            conference_start,会议开始时间
+            conference_due,会议结束时间
+            template_no,会议模板编号
+            venue, 会议的地点}
+
+path:subjects/
+input:
+    GET
+output:
+    输出全部学科
+    message: 'success'/'no subjects'
+    data:  { 'names': [] }
+
+path:conference/activity/<int:id>
+input:
+    GET
+        id,活动的id
+output:
+    输出该活动的全部属性
+    message: 'success'/'invalid activity pk'
+    data: { 'conference_id', 活动所属会议的id,
+            'conference_title',活动所属会议名称
+            'start_time',
+            'end_time',
+            'place',
+            'activity',}
+
+path:conference/register_information/<int:id>
+input:
+    GET
+        id,注册会议信息的id
+output:
+    输出该注册信息的全部属性
+    message: 'success'/'invalid register information pk'
+    data: { 'user_id',用户id
+            'conference_id',会议id'
+            'submission_id',论文提交信息的id
+            'participants', ***也返回对象吧***
+            'pay_voucher',文件路径,返回的是路径/media/xxx，加到ip地址后可访问}
+
+path:conference/submission/<int:id>/
+input:
+    GET
+        id,论文信息的id
+output:
+    输出该提交信息的全部属性
+    message: 'success'/'invalid submission pk'
+    data: { 'submitter_id',
+            'conference_id',
+            'conference_title',
+            'paper': 文件路径,返回的是路径/media/xxx，加到ip地址后可访问
+            'paper_name',
+           ***************新添加***********
+            'paper_old': 文件路径,返回的是路径/media/xxx，加到ip地址后可访问
+            'paper_name_old',论文旧名称
+            没有则返回null,paper永远是最新的版本
+            ********************************
+            'paper_abstract',
+            'authors', 为一json对象（而非字符串），
+            格式详见 conference_interface.txt中conference/conference/<会议的主键id>/paper_submit/里的描述
+            'institute',
+            'submit_time': submission.submit_time,
+            'modification_advice': submission.modification_advice,
+            'modified': submission.modified,
+            'modified_time': submission.modified_time,
+            'modified_explain': submission.modified_explain,
+            'state': submission.state,}

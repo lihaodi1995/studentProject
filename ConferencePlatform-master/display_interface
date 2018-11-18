@@ -1,0 +1,164 @@
+path:display/my_conference/
+input:
+    必须先登录
+    method:GET
+output:
+    输出该单位用户或其子用户的全部会议
+    message: 'success'/'no conference'/'invalid organization user'
+    data: [{
+                'conference_id':xxx,
+                'conference_title':xxx,
+            },{
+                'conference_id':xxx,
+                'conference_title':xxx,
+            }]
+
+path:display/my_submission/
+path:display/my_submission/<str:state>/
+获取用户的提交论文列表,第一个url是获取全部论文，第二个url是根据state获取相应提交状态的论文列表
+state可选参数：S(待审核),P(已通过),M(待修改),R(被拒绝)
+input:
+    必须先登录
+    method:GET
+output:
+    输出该用户的提交论文列表
+    message: 'success'/'invalid request user'
+    data: [{
+                'submission_id': xxx,
+                'paper_name': xxx,
+                'conference_title': 所属会议名称,
+                'state': 提交论文的状态,
+                         有S(待审核),P(已通过),M(待修改),R(被拒绝)四种情况
+            },{
+                'submission_id': xxx,
+                'paper_name': xxx,
+                'conference_title': 所属会议名称,
+                'state': 'S/P/M/R'
+            }]
+
+path:display/conference/<int:id>/papers/
+input:
+    必须先登录
+    id:会议id
+    method:GET
+output:
+    输出一个会议的所有提交论文列表
+    message: 'success'/'no submissions'/'no conference'
+    data: [{
+                'submission_id': xxx,
+                'paper_name': xxx,
+                'paper_url': xxx,
+                'state': xxx,
+                'submitter': xxx,
+                'modification_advice': 修改建议
+                'paper_old': 旧论文的url,
+                'paper_name_old': 旧论文名称,
+            },{
+                'submission_id': xxx,
+                'paper_name': xxx,
+                'paper_url': xxx,
+                'state': xxx,
+                'submitter': xxx,
+                'modification_advice': 修改建议
+                'paper_old': 旧论文的url,
+                'paper_name_old': 旧论文名称,
+            }]
+
+path:display/conference/<int:id>/activities/
+input:
+    必须先登录
+    id:会议id
+    method:GET
+output:
+    输出一个会议的所有活动
+    message: 'success'/'no activities'/'no conference'
+    data: [{
+                'activity_id',
+                'activity_name',活动名称
+                'start_time'
+                'end_time'
+                'place': 活动地点
+            },{
+                'activity_id',
+                'activity_name',活动名称
+                'start_time'
+                'end_time'
+                'place': 活动地点
+            }]
+
+path:display/my_subusers/
+input:
+    必须先登录
+    method:GET
+output:
+    输出该单位用户的全部子用户
+    message: 'success'/'no conference'/'invalid organization user'
+    data: [{
+                'sub_user_id':
+                'sub_username':
+                'sub_password':
+            },{
+                'sub_user_id':
+                'sub_username':
+                'sub_password':
+            }]
+
+path:display/organization/<int:id>/
+input:
+    必须先登录
+    <int:id>为机构用户的id
+    method:GET
+output:
+    输出该id对应机构用户的全部信息
+    message: 'success'/'invalid organization user'
+    data: {
+                'org_id': 机构id
+                'org_name':
+                'is_accepted': 是否通过审核
+                'department': 部门
+                'contacts': 联系人
+                'phone_number':
+                'address': 地址
+                'email': 注册企业账号的邮箱
+                'bussiness_license':营业执照,为url形式，如/media/xxx
+                'id_card_front':身份证正面,同上
+                'id_card_reverse'身份证反面,同上
+          }
+
+path:display/conference/<int:id>/registrations/
+input:
+    获取会议的注册信息列表，必须先登录
+    id:会议id
+    method:GET
+output:
+    输出一个会议的所有注册信息
+    message: 'success'/'invalid conference id'
+    data: [{
+                'registration_id': xxx,
+                'paper_info': (如果有论文提交){'paper_id':xxx, 'paper_name':xxx}
+                'participants': 与会者的信息,格式为：[{'name': <str>, 'gender': <男or女>, 'reservation' /*是否预定住宿*/: <bool>}, ...]
+                'pay_voucher': 支付凭证图片的url,加到ip地址后可访问
+            },{
+                   ...
+            }]
+
+path:display/my_org_info/
+input:
+    必须先登录
+    method:GET
+output:
+    display/org_info/:输出该登录用户(企业用户或企业子用户)的全部信息
+    message: 'success'/'permission error'
+    data: {
+                'org_id': 机构id
+                'org_name': 
+                'is_accepted': 是否通过审核
+                'department': 部门
+                'contacts': 联系人
+                'phone_number': 
+                'address': 地址
+                'email': 注册企业账号的邮箱
+                'bussiness_license':营业执照,为url形式，如/media/xxx
+                'id_card_front':身份证正面,同上
+                'id_card_reverse'身份证反面,同上
+          }

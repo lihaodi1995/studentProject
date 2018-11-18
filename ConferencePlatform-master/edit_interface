@@ -1,0 +1,43 @@
+url: conference/edit_activity/<int:id>/
+根据活动id修改活动信息
+参数:url中id为活动id
+method: post
+from 前端：
+    使用post方法向后端
+    传送数据如下：
+    activity 活动名称，
+    start_time 活动开始时间，
+    end_time 活动结束时间，
+    place 活动地点，
+to 前端：
+    json对象，{'message': <str>}, 数据成员'message'表示错误信息，有如下取值：
+    'success', 'invalid activity id', 'invalid uploaded data'
+    'invalid organization user'(活动所属会议和request的用户不符),
+
+url: conference/edit_conference/<int:id>/
+根据会议id修改会议信息
+参数:url中id为会议id
+method: post
+from 前端：
+    使用post方法向后端
+    传送数据如下：
+    title 会议名称，
+    subject 学科，
+    introduction 简介，
+    soliciting_requirement 投稿要求说明，
+    register_requirement 注册会议要求说明，
+    accept_due 投稿截止时间 (开始投稿时间用当前时间)
+    register_start 开始会议注册时间，
+    register_due 截止
+    conference_start （到场）开会时间，
+    conference_due 闭会时间
+    paper_template  文件，论文的模板
+    activities  序列化的json数组，格式为：
+    [{'start_time':<datetime>, 'end_time':<datetime>, 'place':<str>, 'activity':<str>},{...},]
+    注意：论文的模板和活动若没有更新就不需要上传
+to 前端：
+    json对象，{'message': <str>}, 数据成员'message'表示错误信息，有如下取值：
+    'success', 'invalid uploaded data',
+    'timepoints not reasonable' 那些会议时间点设立不合理
+    'keyerror': 会议活动的字典属性名不正确
+    'unknown subject'，  'invalid conference id'， 'invalid organization user'
